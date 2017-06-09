@@ -1,0 +1,3 @@
+Hi
+This is the 'from file'.
+Its content will be copy to 'to file'.
