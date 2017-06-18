@@ -83,7 +83,44 @@ Tea::prepareRecipe()
 
 ### 模板方法中的Hook
 
-Hook, 俗称“钩子”，它的使用使得模板方法更具弹性。
+Hook, 俗称“钩子”，它的使用使得模板方法更具弹性。什么意思？也就是说之前的模板方法框架之下
+子类可以使得模板方法完成不同的过程，而钩子的实现额外可以控制其中的一些过程是否需要执行。
+下面是简单的示例代码，完成的可以参看`templatemethod_withhook.cpp`。
+
+```
+class CaffeineBeverage
+{
+public:
+        virtual void prepareRecipe()
+        {
+                ...
+                if (customerWantsCondiments())
+                {
+                        addCondiments();
+                }
+        }
+
+        virtual bool customerWantsCondiments()
+        {
+                return true;
+        }
+};
+
+class CoffeeWithHook : public CaffeineBeverage
+{
+public:
+        bool customerWantsCondiments()
+        {
+              return false;                
+        }
+}
+```
+
+测试的时候发现：
+
+- 当基类与派生类当中有相同的方法时，创建出来的子类对象优先使用基类中的方法。
+- 将基类中的该方法声明为virtual之后，创建出来的子类对象会使用子类中的方法。
+
 
 *疑问*
 - 类中的方法包含有virtual等多种类型方法时，如何排列比较好看？
@@ -96,6 +133,7 @@ Hook, 俗称“钩子”，它的使用使得模板方法更具弹性。
 - grinds 磨碎
 - drip 滴水；充满；
 - steep 陡峭；泡；浸
+
 
 *参考*
 
