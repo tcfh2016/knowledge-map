@@ -13,9 +13,7 @@ int main()
   StockObserver *t2 = new StockObserver("Bpp", s);
   std::cout <<"two stock observer were created." <<std::endl;
 
-  std::string str("Boss is coming.");
-  //s->setAction("Boss is coming.");
-  s->setAction(str);
+  s->setAction("Boss is coming.");
   std::cout <<s->getAction() <<std::endl;
   //s->notify();
 

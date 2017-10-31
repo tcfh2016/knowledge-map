@@ -15,7 +15,7 @@ public:
   void attach(StockObserver observer);
   void notify();
 
-  std::string setAction(std::string action)
+  void setAction(std::string action)
   {
     _action = action;
 
