@@ -3,7 +3,7 @@
 
 #include <string>
 #include <list>
-#include "stockobserver.hpp"
+#include "observer.hpp"
 #include <iostream>
 
 class Secretary
@@ -12,12 +12,12 @@ public:
   Secretary(){}
   ~Secretary(){}
 
-  void attach(StockObserver observer);
+  void attach(Observer *observer);
   void notify();
 
   void setAction(std::string action)
   {
-    _action = action;    
+    _action = action;
   }
 
   std::string getAction()
@@ -27,7 +27,7 @@ public:
 
 private:
   std::string _action;
-  std::list<StockObserver> _observers;
+  std::list<Observer *> _observers;
 };
 
 #endif
