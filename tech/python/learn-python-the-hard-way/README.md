@@ -62,9 +62,9 @@
 
 1.学习几个运算符的单词
 	+ plus
-	- minus 
+	- minus
 	/ slash
-	* asterisk 
+	* asterisk
 	% percent
 	< less-than
 	> greater-than
@@ -106,7 +106,7 @@
 
 - lousy　讨厌的；极坏的。
 - get stuck 受骗；遇到困难。
- 
+
 ## Exercise 5: More Variables and Printing
 2016年12月28日18:17:27
 
@@ -118,22 +118,22 @@
 
 在文档里面查询到有多重输出格式:
 
-	d	Signed integer decimal.	
-	i	Signed integer decimal.	
+	d	Signed integer decimal.
+	i	Signed integer decimal.
 	o	Unsigned octal.	(1)
-	u	Unsigned decimal.	
+	u	Unsigned decimal.
 	x	Unsigned hexadecimal (lowercase).	(2)
 	X	Unsigned hexadecimal (uppercase).	(2)
-	e	Floating point exponential format (lowercase).	
-	E	Floating point exponential format (uppercase).	
-	f	Floating point decimal format.	
-	F	Floating point decimal format.	
-	g	Same as "e" if exponent is greater than -4 or less than precision, "f" otherwise.	
-	G	Same as "E" if exponent is greater than -4 or less than precision, "F" otherwise.	
-	c	Single character (accepts integer or single character string).	
+	e	Floating point exponential format (lowercase).
+	E	Floating point exponential format (uppercase).
+	f	Floating point decimal format.
+	F	Floating point decimal format.
+	g	Same as "e" if exponent is greater than -4 or less than precision, "f" otherwise.
+	G	Same as "E" if exponent is greater than -4 or less than precision, "F" otherwise.
+	c	Single character (accepts integer or single character string).
 	r	String (converts any python object using repr()).	(3)
 	s	String (converts any python object using str()).	(4)
-	%	No argument is converted, results in a "%" character in the result.	
+	%	No argument is converted, results in a "%" character in the result.
 
 详细参见参考链接。
 
@@ -343,7 +343,7 @@ pydoc是python的参考文档，一般分布在网络上和本地。Windows上�
 
 Hard coding的解释：
 
-> "Hard coding" means putting some bit of information that should come from the user as a string directly in our source code. 
+> "Hard coding" means putting some bit of information that should come from the user as a string directly in our source code.
 
 编码的时候时常听说魔术字，它们之间的细微关系是怎样的？
 
@@ -513,4 +513,3 @@ Yeah! 这一课不用敲代码哟~
 - anthropologist 人类学家。
 - trucking 货车运输；交易。
 - jungle 丛林；密林。
-
