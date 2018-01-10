@@ -513,3 +513,19 @@ Yeah! 这一课不用敲代码哟~
 - anthropologist 人类学家。
 - trucking 货车运输；交易。
 - jungle 丛林；密林。
+
+*站点:*
+
+- bitbucket.org
+- github.com
+- gitorious.org
+- launchpad.net
+- sourceforge.net
+- freecode.com
+
+## New Start
+2018年1月10日21:17:42
+
+刚对照着代码看了之前的学习笔记和代码，举得有个地方可以改进：在代码当中贴上程序调试的输出，方便之后阅读之后进行脑中验证。
+
+至于在第23课作者建议的阅读代码，我可以去阅读另外一款工具的代码，并且打算这本书阅读完之后将其重写一遍。
