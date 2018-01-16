@@ -13,6 +13,7 @@ parser.add_argument("--verbosity", help="increase output verbosity.")
 # '-v'的指定的action为“store_true”，所以当指定-v的时候，args.verbose的值为True。
 parser.add_argument("-v", "--verbose", help="increase output verbosity.", action="store_true")
 
+
 args = parser.parse_args()
 
 print (args.echo)
