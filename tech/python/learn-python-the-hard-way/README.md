@@ -535,7 +535,7 @@ Yeah! 这一课不用敲代码哟~
 2018年1月15日11:00:52
 不妨将工具代码的阅读笔记作为这一课的作业。
 
-- lte-decoder.py
+#### emil-decoder:script: lte-decoder.py
 
 1.`if __name__ == "__main__":`代表什么意思？
 
@@ -543,3 +543,55 @@ Yeah! 这一课不用敲代码哟~
 序执行时，该变量设置为`__main__`，当它被当做模块引入其他文件中时该变量设置为`模块名称`。
 
 https://stackoverflow.com/questions/419163/what-does-if-name-main-do
+
+2.参数解析模块`argparse`
+
+2018年1月16日10:19:49
+
+`argparse`是Python标准库中用于命令行参数解析的模块，它提供的功能包括：
+
+- 从sys.argv解析出对应的参数内容
+- 提供usage提示 （*提示用户输入指引。*）
+- 提供error提示 （*用户输入错误的参数。*）
+
+参考链接：
+- https://docs.python.org/3/howto/argparse.html#id1
+- https://docs.python.org/3/library/argparse.html#module-argparse
+- https://pymotw.com/2/argparse/
+
+#### emil-decoder:src: config.py
+
+1.`class`的组成形式
+
+如其他支持OOP的编程语言一样，Python中的对象也是对一组数据以及操作这些数据的封装。我们同
+样使用关键字`class`来定义一个类，并由类来完成对象创建的工作。通常一个类包括：
+
+- __init__(self) 函数，在对象创建时调用完成初始化。
+- 对象方法，即class里面定义的函数，按照约定所有的函数的第一个参数是`self`。
+- 数据成员。
+
+
+Python里面有一些特殊方法，比如 `__str__`和`__repr__`，前者用来生成对象的字符串表示，后
+者用来生成对象的官方表示，通常情况下后者与前者的实现相同（因为后者不太实用。《Python编程
+入门》P158）。
+
+https://stackoverflow.com/questions/12448175/confused-about-str-in-python
+
+创建类时，推荐同时编写`__str__`和`__repr__`，它们对于显示对象内容，对于调试非常有帮助。
+
+
+class中的私有变量需要在字符前加上`__`前缀，这样设置之后只能在类的方法里面访问它们，类外
+不能直接访问（访问需要通过 `p._Person.__age`这种方式）。编程时一条实用的方式是先将所有
+对象变量都设置为私有变量，在有充分理由的情况下将其修改为公有的。
+
+class中的设置函数（setter）和获取函数（getter）可以通过特性装饰器来完成。在代码调试了半
+天发现必须使用新的语法才能够让装饰器生效：`class Person(object):`。
+
+https://stackoverflow.com/questions/16502133/python-property-decorator-not-working-why
+
+2.`os.path`的使用
+
+- `os.path.isdir`
+- `os.path.isfile`
+- `os.path.dirname`
+- `os.path.join`
