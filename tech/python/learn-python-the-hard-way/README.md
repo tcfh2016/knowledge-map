@@ -589,6 +589,24 @@ class中的设置函数（setter）和获取函数（getter）可以通过特性
 
 https://stackoverflow.com/questions/16502133/python-property-decorator-not-working-why
 
+2.读写文件
+
+文件是一个命名的比特集合，存储在硬盘、U盘、闪存等辅助存储设备中。文件可以分为文本文件和
+二进制文件两类。
+
+文本文件通常比等价的二进制文件大。需要通过网络发送大型文本文件时通常对其进行压缩来提高传
+输速度和节省磁盘空间。
+
+
+- `os.getcwd()` 返回当前工作目录的名称
+- `os.listdir(p)` 返回一个字符串列表，包含路径p指定的文件夹中所有文件/文件夹的名称。
+- `os.chdir(p)` 将当前工作目录设置为路径p。
+- `os.stat(fname)` 返回有关fname的信息，比如大小、最后一次修改的时间等。
+- `os.path.isfile(p)` 当路径p指向的是一个文件时，返回True，否则返回False。
+- `os.path.isdir(p)` 当路径p指向的是一个文件夹时，返回True，否则返回False。
+- `os.path.join(path, *paths)`  进行路径拼接。
+
+
 2.`os.path`的使用
 
 - `os.path.isdir`
