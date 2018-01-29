@@ -10,7 +10,7 @@ def write_file(name):
 
 # 如上是一个写文件的例子，下面是一个在文件头插入内容的例子。
 
-def insert_title(title, fname='textfilereadtest.txt'):
+def insert_title(title, fname='textfiletest.txt'):
     f = open(fname, 'r+')
     content = f.read()
     content = title + "\n\n" + content
@@ -18,4 +18,4 @@ def insert_title(title, fname='textfilereadtest.txt'):
     f.write(content)
     f.close()
 
-insert_title("Our Story", "textfilereadtest.txt")
+insert_title("Our Story", "textfiletest.txt")
