@@ -18,4 +18,4 @@ def print_file(name):
 #
 # https://www.reddit.com/r/learnpython/comments/3o4f9k/python_3_feature_into_python_27_end/
 
-print_file("test.txt")
+print_file("textfilereadtest.txt")
