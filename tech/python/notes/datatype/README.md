@@ -60,6 +60,8 @@ pets = ('dog', 'cat', 'bird',)   # 创建包含3个元素的元组，最后一�
 - 使用方括号来定义，支持索引和切片。
 - 定义包含单个元素的列表不需要逗号结尾。
 - list.sort()和list.reverse()会就地修改列表，不会制作拷贝。
+- list.extend(anotherlist)类似于 list.append(element)，在末尾添加元素，但前者添加整
+个列表。
 
 列表解析是创建列表的特殊方法：
 
