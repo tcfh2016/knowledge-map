@@ -48,6 +48,19 @@ def age(self, age):
         print ("did not work.")
 ```
 
+# 静态方法
+
+使用装饰器(@staticmethod)来定义静态方法：
+
+```
+class MyClass(object):
+    @staticmethod
+    def the_static_method(x):
+        print x
+
+MyClass.the_static_method(2) # outputs 2
+```
+
 # 私有变量
 
 在变量前面添加两个下划线`__`将其更改为私有变量。
@@ -81,3 +94,7 @@ class Computer(Player):
 
 map(lambda x:x.play(), [Human(), Computer()])
 ```
+
+# 参考阅读
+
+- (Static methods in Python?)[https://stackoverflow.com/questions/735975/static-methods-in-python]
