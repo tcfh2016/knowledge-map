@@ -65,6 +65,21 @@ MyClass.the_static_method(2) # outputs 2
 
 在变量前面添加两个下划线`__`将其更改为私有变量。
 
+
+# 比较大小
+
+如果要比较两个对象值的大小，可以通过重载`__eq__`方法来实现：
+
+```
+class Staff(object):
+    def __init__(self,id,name):
+        self.id=id
+        self.name=name        
+
+    def __eq__(self,other):
+        return self.id==other.id
+```
+
 # inheritance （继承）
 
 继承（inheritance）是 OOP里的一项重要功能，它可以让新类继承已有的类。妥善使用继承可以很
