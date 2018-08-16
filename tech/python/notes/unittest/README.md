@@ -75,6 +75,14 @@ if __name__ == '__main__':
 别为 `containing packages`，即包目录，意味着它里面可以包含其他模块，在执行搜索的时候会
 进一步搜索该目录下的所有文件。
 
+# 问题列表
+
+1. 跨目录测试的时候，执行`python -m unittest discover -v`会执行所有的case，但是如何保
+证执行某个特定的测试文件？
+
+Q：搜索在[Running unittest with typical test directory structure](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure#24266885)找到答案，只要`python -m unittest -v directory_name.test_file_name`即可。
+
+
 # 参考链接
 
 - [Improve Your Python: Understanding Unit Testing](https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/)
