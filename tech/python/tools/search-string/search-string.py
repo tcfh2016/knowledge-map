@@ -39,14 +39,6 @@ def main():
             f = os.path.join(input_filename, filename)
             searchFile(f,output_fp)
 
-    with open(input_filename) as input_content:
-        for line in input_content:
-            for keyword in keywords:
-                if keyword in line:
-                    print (line)
-                    output_fp.write(line)
-                    break
-
     output_fp.close()
 
 main()
