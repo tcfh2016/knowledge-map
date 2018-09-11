@@ -52,7 +52,7 @@ bool isAllCharUnique(const char *str, int length)
       }
     }
   }
-  rturn true;
+  return true;
 }
 ```
 
@@ -61,5 +61,22 @@ bool isAllCharUnique(const char *str, int length)
 先对数组进行排序，然后依次检查相邻的字符是否重复。如下使用STL进行实现。
 
 ```
+bool isAllCharUnique_bySorting(char *str, int length)
+{
+	std::sort(str, str + length);
 
+	char uniq_char = str[0];
+	for (int i = 1; i < length; ++i)
+	{
+		if (uniq_char == str[i])
+		{
+			return false;
+		}
+		else
+		{
+			uniq_char = str[i];
+		}
+	}
+	return true;
+}
 ```
