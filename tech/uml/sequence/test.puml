@@ -1,0 +1,21 @@
+@startuml
+TimeOut -> RoundRobinPreschedule : (function call)
+RoundRobinPreschedule -> EventSchedule : (function call)
+EventSchedule -> scheduleConditionChecker : (function call)
+scheduleConditionChecker -> scheduleConditionChecker: keep the scheduling information in advance.
+scheduleConditionChecker --> EventSchedule : EPreCheck_ResourceAllocFail
+EventScheduler --> RoundRobinPreschedule : EPreCheck_ResourceAllocFail
+
+RoundRobinPreschedule -> RoundRobinPreschedule : match prebooking condition ?
+RoundRobinPreschedule -> resourcePreCheck : (function call)
+resourcePreCheck -> resourcePreCheck : mask dlPrebookNarrowbandUsageModeB\nmask ulPrebookNarrowbandUsageModeB
+
+group C&P (overrulling tried times < R&D overruling max tried times)
+  loop when rrmOverruleHighRepCounter1stTxModeBCatM  >= rdOverruleHighRep1stTxThModeBCatM
+    RoundRobinPreschedule -> RoundRobinPreschedule : match overruling condition ?
+    RoundRobinPreschedule -> overrulingSchedule : (function call)
+    overrulingSchedule -> overrulingSchedule : do another schedule without\nconsidering the PrebookNarrowbandUsage.
+    overrulingSchedule --> RoundRobinPreschedule : EPreCheck_Success
+  end
+end
+@enduml

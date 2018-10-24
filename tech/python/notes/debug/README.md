@@ -28,6 +28,22 @@ logging打印的日志分5个层级：
 - ERROR
 - CRITICAL
 
+今天碰到一个日志的问题，使用单元测试的时候日志模块能够正常的转储日志，但是正常使用命令行
+执行程序却没有日志文件，不知道什么原因。
+
+晚上吃饭的时候想到可能是当前的日志是在__init__里面初始化的，然而这种初始化是否和单元测试
+本身紧密相关呢？
+
+# pdb
+
+调试代码的时候发现添加打印比较麻烦，查找了一下，发现原来使用pdb非常简单。
+
+- import pdb；
+- 添加`pdb.set_trace`作为断点；
+- 执行程序，基本用法类似gdb。
+
+
+
 # 参考
 
 - [How can I check the syntax of Python script without executing it?](https://stackoverflow.com/questions/4284313/how-can-i-check-the-syntax-of-python-script-without-executing-it/8437597)
@@ -35,3 +51,4 @@ logging打印的日志分5个层级：
 - [Python Conquers The Universe](https://pythonconquerstheuniverse.wordpress.com/2009/09/10/debugging-in-python/)
 
 - [Python Logging Tutorial](http://www.patricksoftwareblog.com/python-logging-tutorial/)
+- [Python 程序如何高效地调试？](https://www.zhihu.com/question/21572891)

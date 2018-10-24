@@ -1,0 +1,8 @@
+@startuml
+note as N3
+aggregation.
+end note
+
+Family o-- Person
+
+@enduml

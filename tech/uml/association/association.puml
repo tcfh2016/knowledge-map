@@ -1,0 +1,16 @@
+@startuml
+note as N1
+association
+end note
+
+Employer -- Employee
+
+
+note as N2
+association with direction.
+end note
+
+Modem1 -- Dialler1: >
+Modem2 --> Dialler2
+
+@enduml

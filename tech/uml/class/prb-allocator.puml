@@ -1,0 +1,30 @@
+@startuml
+
+MNarrowbandManager "1" --* "1" MPrbAllocater
+MPrbSet "6" --* "1" MNarrowbandManager
+ResourceInfo "20" --* "1" MPrbSet
+
+class MPrbAllocater{
+  MNarrowbandManager nbManager
+
+  allocate()
+  available()
+  empty()
+  update()
+  clear()
+}
+
+class MPrbSet{
+  insert()
+  overlap()
+  empty()
+  update()
+  clear()
+}
+
+class ResourceInfo{
+  Xsfn start
+  Xsfn end
+}
+
+@enduml
