@@ -1,0 +1,20 @@
+@startuml
+
+Duck <|-- MallardDuck
+Duck <|-- RedheadDuck
+
+class Duck {
+  quack()
+  swim()
+  {abstract} display()
+}
+
+class MallardDuck {
+  display()
+}
+
+class RedheadDuck {
+  display()
+}
+
+@endluml

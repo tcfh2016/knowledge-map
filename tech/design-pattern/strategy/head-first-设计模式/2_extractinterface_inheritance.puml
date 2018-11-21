@@ -1,0 +1,38 @@
+@startuml
+
+Flyable <|-- MallardDuck
+Flyable <|-- ReadheadDuck
+
+Duck <|-- MallardDuck
+Duck <|-- RedheadDuck
+Duck <|-- RubberDuck
+Duck <|-- DecoyDuck
+
+abstract class Flyable{
+ fly()
+}
+
+class Duck {
+  quack()
+  swim()
+  {abstract} display()
+}
+
+class MallardDuck {
+  display()
+  fly()
+}
+
+class RedheadDuck {
+  display()
+  fly()
+}
+
+class RubberDuck {
+  display()
+}
+
+class DecoyDuck {
+  display()
+}
+@endluml

@@ -1,0 +1,32 @@
+@startuml
+
+Duck <|-- MallardDuck
+Duck <|-- RedheadDuck
+Duck <|-- RubberDuck
+Duck <|-- DecoyDuck
+
+class Duck {
+  quack()
+  swim()
+  fly()
+  {abstract} display()
+}
+
+class MallardDuck {
+  display()
+}
+
+class RedheadDuck {
+  display()
+}
+
+class RubberDuck {
+  display()
+  <color:Blue><i>fly() overloaded</i></color>
+}
+
+class DecoyDuck {
+  display()
+  <color:Blue><i>fly() overloaded</i></color>
+}
+@endluml
