@@ -1,0 +1,47 @@
+@startuml
+
+FlyBehavior <|-- FlyWithWings
+FlyBehavior <|-- FlyNoWay
+
+abstract class FlyBehavior{
+ {abstract} fly()
+}
+
+MallardDuck *-- FlyWithWings
+RedheadDuck *-- FlyWithWings
+RubberDuck *-- FlyNoWay
+DecoyDuck *-- FlyNoWay
+
+Duck <|-- MallardDuck
+Duck <|-- RedheadDuck
+Duck <|-- RubberDuck
+Duck <|-- DecoyDuck
+
+
+
+class Duck {
+  quack()
+  swim()
+  {abstract} display()
+}
+
+class MallardDuck {
+  FlyWithWings flyWithWings
+  display()
+}
+
+class RedheadDuck {
+  FlyWithWings flyWithWings
+  display()
+}
+
+class RubberDuck {
+  FlyNoWay flyNoWay
+  display()
+}
+
+class DecoyDuck {
+FlyNoWay flyNoWay
+  display()
+}
+@endluml

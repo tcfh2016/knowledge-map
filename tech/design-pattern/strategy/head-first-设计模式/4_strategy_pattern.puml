@@ -1,31 +1,35 @@
 @startuml
 
-Flyable <|-- MallardDuck
-Flyable <|-- RedheadDuck
+FlyBehavior <|-- FlyWithWings
+FlyBehavior <|-- FlyNoWay
+
+abstract class FlyBehavior{
+ {abstract} fly()
+}
+
+FlyBehavior --* Duck
 
 Duck <|-- MallardDuck
 Duck <|-- RedheadDuck
 Duck <|-- RubberDuck
 Duck <|-- DecoyDuck
 
-abstract class Flyable{
- fly()
-}
-
 class Duck {
+  FlyBehavior flyBehavior
+  setFlyBehavior()
+  fly()
   quack()
   swim()
+
   {abstract} display()
 }
 
 class MallardDuck {
   display()
-  fly()
 }
 
 class RedheadDuck {
   display()
-  fly()
 }
 
 class RubberDuck {
