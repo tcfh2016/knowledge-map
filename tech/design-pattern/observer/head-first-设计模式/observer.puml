@@ -1,0 +1,32 @@
+@startuml
+
+'------------------------------------------------------------------------------'
+Subject "1" o-  "*" Observer
+
+Subject <|-- ConcreatSubject
+Observer <|-- ConcreatObserver
+
+ConcreatSubject - ConcreatObserver
+
+ abstract class Subject {
+   {abstract} registerObserver()
+   {abstract} removeObserver()
+   {abstract} notifyObserver()
+ }
+
+abstract class Observer {
+  {abstract} update()
+}
+
+ class ConcreatSubject {
+  registerObserver()
+  removeObserver()
+  notifyObserver()
+}
+
+class ConcreatObserver {
+  update()
+}
+'------------------------------------------------------------------------------'
+
+@enduml

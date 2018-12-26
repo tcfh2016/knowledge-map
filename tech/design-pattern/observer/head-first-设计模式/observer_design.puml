@@ -1,0 +1,56 @@
+@startuml
+
+'------------------------------------------------------------------------------'
+package ConcreatSubject {
+  class WeatherData
+}
+
+Subject <|--WeatherData
+
+class Subject {
++ registerObserver()
++ removeObserver()
++ notifyObserver()
+}
+
+class WeatherData {
+  + measurementChange()
+
+  - getTemperature()
+  - getHumidity()
+  - getPressure()
+
+  - observerList
+}
+
+Subject <-> Observer
+
+package ConcreatObserver {
+  class ConditionDisplay
+  class StatisticsDisplay
+  class ForecastDisplay
+}
+
+Observer <|--ConditionDisplay
+Observer <|--StatisticsDisplay
+Observer <|--ForecastDisplay
+
+class Observer {
+  + update()
+}
+
+class ConditionDisplay {
+  + update()
+}
+
+class StatisticsDisplay {
+  + update()
+}
+
+class ForecastDisplay {
+  + update()
+}
+
+'------------------------------------------------------------------------------'
+
+@enduml

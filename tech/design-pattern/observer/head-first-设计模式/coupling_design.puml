@@ -1,0 +1,31 @@
+@startuml
+
+'------------------------------------------------------------------------------'
+
+WeatherData *-- ConditionDisplay
+WeatherData *-- StatisticsDisplay
+WeatherData *-- ForecastDisplay
+
+class WeatherData {
+  + measurementChange()
+
+  - getTemperature()
+  - getHumidity()
+  - getPressure()
+}
+
+class ConditionDisplay {
+  + update()
+}
+
+class StatisticsDisplay {
+  + update()
+}
+
+class ForecastDisplay {
+  + update()
+}
+
+'------------------------------------------------------------------------------'
+
+@enduml
