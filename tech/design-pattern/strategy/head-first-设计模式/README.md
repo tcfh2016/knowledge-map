@@ -61,4 +61,5 @@
 
 # 参考
 
-- 《Effective C++》条款 32：确定你的public继承塑模出is-a关系。
+- Scott Meyers，《Effective C++》，电子工业出版社，条款 32：确定你的public继承塑模出is-a关系。
+- Eric Freeman & Elisabeth Freeman，《Head First 设计模式》，中国电力出版社。
