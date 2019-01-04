@@ -1,0 +1,65 @@
+@startuml
+
+Beverage <|-- HouseBlend
+Beverage <|-- DarkRoast
+Beverage <|-- Decaf
+Beverage <|-- Espresso
+Beverage <|-- Decorator
+Beverage <- Decorator
+
+class Beverage {
+  description
+  getDescription()
+  cost()
+}
+
+class HouseBlend {
+  cost()
+}
+
+class DarkRoast {
+  cost()
+}
+
+class Decaf {
+  cost()
+}
+
+class Espresso {
+  cost()
+}
+
+class Decorator {
+  getDescription()
+}
+
+'------------------------------------------------------------------------------'
+Decorator <|-- Milk
+Decorator <|-- Mocha
+Decorator <|-- Soy
+Decorator <|-- Whip
+
+class Milk {
+  Beverage beverage
+  cost()
+  getDescription()
+}
+
+class Mocha {
+  Beverage beverage
+  cost()
+  getDescription()
+}
+
+class Soy {
+  Beverage beverage
+  cost()
+  getDescription()
+}
+
+class Whip {
+  Beverage beverage
+  cost()
+  getDescription()
+}
+@enduml
