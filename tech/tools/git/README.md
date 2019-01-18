@@ -1,5 +1,32 @@
 # Git使用笔记
 
+## 仓库克隆 / git clone
+
+在克隆远程仓库时支持两种连接方式：SSH和HTTPS。
+
+```
+git clone git@XXX.com:lte/remote_repository.git
+git clone https://XXX.com/remote_repository.git
+```
+
+无论哪种方式均需进行用户名、密码验证，你可以通过配置SSH Key来简化验证过程。当连接可用，
+但是验证失败时，会提示如下失败。此时可以通过确认用户名密码是否正确以及添加SSH Key来解决。
+
+```
+Cloning into 'repository'...
+remote: HTTP Basic: Access denied
+fatal: Authentication failed for 'https://XXX.com/lte/repository.git/'
+```
+
+如果当前系统屏蔽了git，那么你可能遇到如下错误：
+
+```
+Cloning into 'repository'...
+fatal: unable to access 'https://XXX.com/lte/repository.git/': Failed to connect to github.com port 443: Timed out
+```
+
+这个时候通常需要给git配置代理。
+
 
 ## 常用操作快速索引
 
