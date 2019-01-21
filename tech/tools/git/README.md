@@ -27,6 +27,9 @@ fatal: unable to access 'https://XXX.com/lte/repository.git/': Failed to connect
 
 这个时候通常需要给git配置代理。
 
+## 获取更新 / git pull
+
+`git pull` 相当于`git fetch`和`git merge FETCH_HEAD`。
 
 ## 常用操作快速索引
 
