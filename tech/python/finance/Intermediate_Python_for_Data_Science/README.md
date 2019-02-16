@@ -9,6 +9,7 @@
 line plot适用于有着递增规律的序列，基本用法为：
 
 ```
+import matplotlib.pyplot as plt
 plt.plot(year, pop)
 plt.show()
 ```
