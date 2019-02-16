@@ -67,12 +67,15 @@ list是一种可以将多个数值组合在一起的复合数据类型，这些�
 列表解析是创建列表的特殊方法：
 
 ```
-example 1:
-[n*n for n in rang(1,11)]
+# example 1:
+[n*n for n in rang(1,11)] # 这种方式可以变形为 l = [n for n in range(1,11)]
 
-example 2:
+# example 2:
 numbers = [-1, 0, 6, -4, -2, 3]
 res = [n for n in numbers if n > 0]
+
+# example 3: 如何生成多个相同元素的列表？
+res = [9] * 8 # 生成8个包含9的列表
 
 ```
 
