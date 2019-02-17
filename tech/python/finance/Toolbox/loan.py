@@ -53,23 +53,28 @@ class Loan(object):
 
         return NP_payment_diff_per_month.tolist()
 
-loan = Loan(1000000, 0.049, 30)
-loan_diff_list = loan.get_diff()
+plt.xlabel('投资收益率 [%]')
+plt.ylabel('金额 [元]')
+plt.title('等额本息在不同房贷利率[3.0%-7.0%]、不同投资收益率[3.0%-9.0%]下相对等额本金的对比')
 
-discount_year_rate_list = [r/1000.0 for r in range(30, 91)]
-discount_month_rate_list = [r/12000.0 for r in range(30, 91)]
+for r in range(30,71):
+    year_rate = r / 1000.0
+    year_rate_label = str(year_rate*100) + "%"
+    loan = Loan(1000000, year_rate, 30)
+    loan_diff_list = loan.get_diff()
+
+    discount_year_rate_list = [r/10.0 for r in range(30, 91)]
+    discount_month_rate_list = [r/12000.0 for r in range(30, 91)]
+
+    NPV_list = [capital.npv(loan_diff_list, v) for v in discount_month_rate_list]
+
+    plt.plot(discount_year_rate_list, NPV_list, color="blue", linestyle="-", label=year_rate_label)
+    #plt.legend(loc='best')
+
+plt.show()
 
 #print("折现率：\n")
 #print(discount_month_rate_list)
 #print("差异值：\n")
 #print(loan_diff_list)
 #print(capital.npv(loan_diff_list, 0.03/12))
-
-NPV_list = [capital.npv(loan_diff_list, v) for v in discount_month_rate_list]
-
-plt.plot(discount_year_rate_list, NPV_list, color="blue", linestyle="-", label="假定折现率")
-plt.legend(loc='upper center', frameon=False)
-plt.xlabel('百分比 [%]')
-plt.ylabel('金额 [元]')
-plt.title('房贷利率4.9%下不同还款方式对比')
-plt.show()
