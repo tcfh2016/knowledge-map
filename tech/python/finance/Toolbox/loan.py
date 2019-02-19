@@ -1,8 +1,43 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import capital
 
-plt.rcParams['font.family']=['FangSong']
+class PaymentMethod():
+    AC   = 1 # average capital
+    ACPI = 2 # average capital plus interest
+
+class MortgageLoan(object):
+    def __init__(self, capital, year_rate, year_periods, payment_method):
+        self._capital = capital
+        self._year_rate = year_rate
+        self._year_periods = year_periods
+        self._month_rate = year_rate / 12
+        self._month_periods = year_periods * 12
+        self._month_periods_list = [k for k in range(1, self._month_periods + 1)]
+        self._payment_method = payment_method
+
+    def _month_payments_AC(self):
+        AC_payment_per_month_list = []
+        AC_capital_per_month = self._capital / self._month_periods
+
+        for k in range(self._month_periods):
+            interest = (self._capital - k * AC_capital_per_month) * self._month_rate
+            AC_payment_per_month_list.append(AC_capital_per_month + interest)
+
+        return AC_payment_per_month_list
+
+    def _month_payments_ACPI(self):
+        ACPI_payment_per_month = (self._capital * self._month_rate * ((1 + self._month_rate)**self._month_periods)) / ((1 + self._month_rate)**self._month_periods - 1)
+        ACPI_payment_per_month_list = [ACPI_payment_per_month] * self._month_periods
+
+        return ACPI_payment_per_month_list
+
+    def get_month_payment_list(self):
+        if (self._payment_method == PaymentMethod.AC):
+            return self._month_payments_AC()
+        elif (self._payment_method == PaymentMethod.ACPI):
+            return self._month_payments_ACPI()
+
+
+
 
 class Loan(object):
     def __init__(self, capital, year_rate, year_periods):
@@ -52,26 +87,6 @@ class Loan(object):
         NP_payment_diff_per_month = NP_AC_payment_per_month_list - NP_ACPI_payment_per_month_list
 
         return NP_payment_diff_per_month.tolist()
-
-plt.xlabel('投资收益率 [%]')
-plt.ylabel('金额 [元]')
-plt.title('等额本息在不同房贷利率[3.0%-7.0%]、不同投资收益率[3.0%-9.0%]下相对等额本金的对比')
-
-for r in range(30,71):
-    year_rate = r / 1000.0
-    year_rate_label = str(year_rate*100) + "%"
-    loan = Loan(1000000, year_rate, 30)
-    loan_diff_list = loan.get_diff()
-
-    discount_year_rate_list = [r/10.0 for r in range(30, 91)]
-    discount_month_rate_list = [r/12000.0 for r in range(30, 91)]
-
-    NPV_list = [capital.npv(loan_diff_list, v) for v in discount_month_rate_list]
-
-    plt.plot(discount_year_rate_list, NPV_list, color="blue", linestyle="-", label=year_rate_label)
-    #plt.legend(loc='best')
-
-plt.show()
 
 #print("折现率：\n")
 #print(discount_month_rate_list)
