@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from ... import capital
-from ... import loan
+import capbuget
+import loan
 
 plt.rcParams['font.family']=['FangSong']
 
@@ -15,14 +15,14 @@ for r in range(30,71):
     #loan = Loan(1000000, year_rate, 30)
     #loan_diff_list = loan.get_diff()
 
-    AC_loan = MortgageLoan(1000000, year_rate, 30, 1)
-    ACPI_loan = MortgageLoan(1000000, year_rate, 30, 2)
+    AC_loan = loan.MortgageLoan(1000000, year_rate, 30, 1)
+    ACPI_loan = loan.MortgageLoan(1000000, year_rate, 30, 2)
     loan_diff_list =  np.array(AC_loan.get_month_payment_list()) - np.array(ACPI_loan.get_month_payment_list())
 
     discount_year_rate_list = [r/10.0 for r in range(30, 91)]
     discount_month_rate_list = [r/12000.0 for r in range(30, 91)]
 
-    NPV_list = [capital.npv(loan_diff_list, v) for v in discount_month_rate_list]
+    NPV_list = [capbuget.npv(loan_diff_list, v) for v in discount_month_rate_list]
 
     plt.plot(discount_year_rate_list, NPV_list, color="blue", linestyle="-", label=year_rate_label)
     #plt.legend(loc='best')

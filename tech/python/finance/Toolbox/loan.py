@@ -14,30 +14,52 @@ class MortgageLoan(object):
         self._month_periods_list = [k for k in range(1, self._month_periods + 1)]
         self._payment_method = payment_method
 
-    def _month_payments_AC(self):
-        AC_payment_per_month_list = []
+        self.AC_capital_per_month_list = [self._capital / self._month_periods] * self._month_periods
+        self.AC_interest_per_month_list = []
+        self.AC_payment_per_month_list = []
+
+        self.ACPI_payment_per_month = (self._capital * self._month_rate * ((1 + self._month_rate)**self._month_periods)) / ((1 + self._month_rate)**self._month_periods - 1)
+        self.ACPI_payment_per_month_list = [self.ACPI_payment_per_month] * self._month_periods
+        self.ACPI_capital_per_month_list = []
+        self.ACPI_interest_per_month_list = []
+
         AC_capital_per_month = self._capital / self._month_periods
+        ACPI_paid_capital = 0
 
         for k in range(self._month_periods):
-            interest = (self._capital - k * AC_capital_per_month) * self._month_rate
-            AC_payment_per_month_list.append(AC_capital_per_month + interest)
+            AC_interest = (self._capital - k * AC_capital_per_month) * self._month_rate
+            self.AC_interest_per_month_list.append(AC_interest)
+            self.AC_payment_per_month_list.append(AC_capital_per_month + AC_interest)
 
-        return AC_payment_per_month_list
+            ACPI_interest = (self._capital - ACPI_paid_capital) * self._month_rate
+            ACPI_capital = self.ACPI_payment_per_month - ACPI_interest
+            self.ACPI_interest_per_month_list.append(ACPI_interest)
+            self.ACPI_capital_per_month_list.append(ACPI_capital)
+            ACPI_paid_capital += (ACPI_capital)
 
-    def _month_payments_ACPI(self):
-        ACPI_payment_per_month = (self._capital * self._month_rate * ((1 + self._month_rate)**self._month_periods)) / ((1 + self._month_rate)**self._month_periods - 1)
-        ACPI_payment_per_month_list = [ACPI_payment_per_month] * self._month_periods
-
-        return ACPI_payment_per_month_list
+    def get_average_month_payment(self):
+        if (self._payment_method == PaymentMethod.AC):
+            return np.mean(self.AC_payment_per_month_list)
+        elif (self._payment_method == PaymentMethod.ACPI):
+            return self.ACPI_payment_per_month
 
     def get_month_payment_list(self):
         if (self._payment_method == PaymentMethod.AC):
-            return self._month_payments_AC()
+            return self.AC_payment_per_month_list
         elif (self._payment_method == PaymentMethod.ACPI):
-            return self._month_payments_ACPI()
+            return self.ACPI_payment_per_month_list
 
+    def get_month_interest_list(self):
+        if (self._payment_method == PaymentMethod.AC):
+            return self.AC_interest_per_month_list
+        elif (self._payment_method == PaymentMethod.ACPI):
+            return self.ACPI_interest_per_month_list
 
-
+    def get_month_capital_list(self):
+        if (self._payment_method == PaymentMethod.AC):
+            return self.AC_capital_per_month_list
+        elif (self._payment_method == PaymentMethod.ACPI):
+            return self.ACPI_capital_per_month_list
 
 class Loan(object):
     def __init__(self, capital, year_rate, year_periods):
