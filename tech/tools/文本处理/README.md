@@ -31,7 +31,7 @@ standard input) matches”，其原因是grep识别其为data文件类型，解�
 
 ```
 sed -i '/demo/d' file_name # 删除file_name文件中包含"demo"字段的所有行。
-sed -i 's/^string_a/string_b/g' file_name # 替换string_a为string_b。
+sed -i 's/^.*string_a/string_b/g' file_name # 替换string_a为string_b。
 sed '/^$/d'      file_name # 删除空行。
 sed "/^\s*$/d"   file_name # 这句代表可以删除文本中的空白行（包括space、tab、enter）
 sed '/^\s.*$/d'  file_name # 这句代表可以删除文本中的空白行（包括space、tab、enter），以及空格键开头的行
