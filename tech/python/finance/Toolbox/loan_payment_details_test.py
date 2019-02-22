@@ -1,8 +1,10 @@
 ###############################################
-# 贷款本金： 100 0000
-# 名义年利率： 4.9%
-# 贷款期限：30年（360个月）
+# 打印出不同还款方式的还款总额及每月明细
+# - 贷款本金： 100 0000
+# - 名义贷款年利率： 3.0% - 7.0%
+# - 贷款期限：30年（360个月）
 ###############################################
+
 import numpy as np
 import matplotlib.pyplot as plt
 import capbuget
@@ -10,37 +12,33 @@ import loan
 
 plt.rcParams['font.family']=['FangSong']
 
+capital = 1000000
 year_rate = 0.049
-month_rate = year_rate / 12
+year = 30
+
+periods = year * 12
+period_rate = year_rate / 12
 
 # 等额本金，average capital = AC
-AC_loan = loan.MortgageLoan(1000000, year_rate, 30, 1)
+AC_loan = loan.MortgageLoan(capital, period_rate, periods, 1)
 AC_payment_per_month_list = AC_loan.get_month_payment_list()
 AC_interest_per_month_list = AC_loan.get_month_interest_list()
 AC_capital_per_month_list = AC_loan.get_month_capital_list()
-
-# 等额本息，average capital plus interest = ACPI
-ACPI_loan = loan.MortgageLoan(1000000, year_rate, 30, 2)
-ACPI_payment_per_month_list = ACPI_loan.get_month_payment_list()
-ACPI_interest_per_month_list = ACPI_loan.get_month_interest_list()
-ACPI_capital_per_month_list = ACPI_loan.get_month_capital_list()
-
-# 计算两种还款方式的差异
-NP_AC_payment_per_month_list = np.array(AC_payment_per_month_list)
-NP_ACPI_payment_per_month_list = np.array(ACPI_payment_per_month_list)
-NP_payment_diff_per_month = NP_AC_payment_per_month_list - NP_ACPI_payment_per_month_list
-
-print("NPV：" + str(capbuget.npv(NP_payment_diff_per_month, month_rate)))
-
 print("[等额本金] 总的利息：" + str(sum(AC_interest_per_month_list)))
 print("[等额本金] 本息合计：" + str(sum(AC_payment_per_month_list)))
 print("[等额本金] 月均还款：" + str(AC_loan.get_average_month_payment()))
 
+# 等额本息，average capital plus interest = ACPI
+ACPI_loan = loan.MortgageLoan(capital, period_rate, periods, 2)
+ACPI_payment_per_month_list = ACPI_loan.get_month_payment_list()
+ACPI_interest_per_month_list = ACPI_loan.get_month_interest_list()
+ACPI_capital_per_month_list = ACPI_loan.get_month_capital_list()
 print("[等额本息] 总的利息：" + str(sum(ACPI_interest_per_month_list)))
 print("[等额本息] 本息合计：" + str(sum(ACPI_payment_per_month_list)))
 print("[等额本息] 月均还款：" + str(ACPI_loan.get_average_month_payment()))
 
-periods_list = AC_loan._month_periods_list
+# 绘图
+periods_list = AC_loan._periods_list
 
 plt.subplot(1,  2,  1)
 plt.plot(periods_list, AC_payment_per_month_list, color="blue", linestyle="-", label="等额本金月还款")
