@@ -1,6 +1,6 @@
 ## Level 4 Unit 2
 
-**Part 1**
+### Part 1
 
 circulatory
 
@@ -37,6 +37,74 @@ vessel
 > a tube in which a body fluid circulates
 > 血管
 
-**Part 2**
-**Part 3**
-**Part 4**
+### Part 2
+
+cathedral
+
+> any large and important church
+> 大教堂
+
+epidemic
+
+> a widespread outbreak of an infectious disease
+> 流行的，传染的；流行病，传染病
+
+ignite
+
+> cause to start burning
+> 点燃；点火
+
+Muslim
+
+> a believer in or follower of Islam
+> 穆斯林；伊斯兰教的
+
+prophet
+
+> an authoritative person who divines the future
+> 先知；预言者
+
+synagogue
+
+> (Judaism) the place of worship for a Jewish congregation
+> 犹太教会堂
+
+wreckage
+
+> the remaining parts of something that has been wrecked
+> 残骸
+
+### Part 3
+
+axis
+
+> a straight line through a body or figure that satisfies certain conditions
+> 轴
+
+courthouse
+
+> a government building that houses the offices of a county government
+> 法院；县政府所在地
+
+drown
+
+> cover completely or make imperceptible
+> 淹没
+
+handcuff
+
+> shackle that consists of a metal loop that can be locked around the wrist; usually used in pairs
+> 给…戴上手铐；限制
+
+inmate
+
+> one of several resident of a dwelling (especially someone confined to a prison or hospital)
+> 同院病人；同狱犯人
+
+proof
+
+> any factual evidence that helps to establish the truth of something
+> 证明；证据
+
+
+### Part 4
