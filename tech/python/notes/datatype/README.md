@@ -69,7 +69,7 @@ list是一种可以将多个数值组合在一起的复合数据类型，这些�
 - list.extend(anotherlist)类似于 list.append(element)，在末尾添加元素，但前者添加整
 个列表。
 
-列表解析是创建列表的特殊方法：
+列表解析(list comprehensions)是创建列表的特殊方法：
 
 ```
 # example 1:
@@ -123,6 +123,11 @@ areas_copy = list(areas)
 
 ```
 
+- 遍历操作（Excursion）
+
+使用`for`语句来遍历列表，Python提供了一种极具扩展性的遍历方式使得你可以不用去管被遍历的
+list中元素的数据类型。
+
 3. 字典
 
 字典类似小型数据库，使用健高效地存储和检索数据。字典中的每个键都被转换为一个数字，即散列
@@ -137,6 +142,8 @@ areas_copy = list(areas)
 ```
 color = {'red':1, 'blue':2, 'green':3}
 ```
+
+相比list, dict是无序而且也无法排序。
 
 4. 集合
 

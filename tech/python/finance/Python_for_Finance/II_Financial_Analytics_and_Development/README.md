@@ -48,18 +48,60 @@ pydt = datetime.strptime(result[0].replace("'", ""),'%m/%d/%Y %H:%M:%S')
 pydt
 ```
 
-4.基本数据结构
+### Basic data structures
 
 数据结构是那些囊括了多个对象的数据类型。Python提供了几个内建的数据类型：
 
-- tuple：包含任意类型的集合，仅提供少量方法。
-- list：包含任意类型的集合，提供较多方法。
-- dict：键-值存储对象。
-- set：无序且唯一的对象集合。
+1.tuple
 
+tuple：包含任意类型的集合，仅提供少量方法。
 
-### Basic data structures
+2.list
+
+list可以包含任意类型的集合，提供较多方法。
+
+在Python里尽可能少地使用循环，尽可能使用列表解析，map/filter/reduce函数，以及lambda。
+
+3.dict
+
+键-值存储对象。
+
+4.set
+
+序且唯一的对象集合。
+
 
 ### NumPy data structures
+
+NumPy是专门为科学、财务领域提供的更加便捷和高效地操作数据的函数库，这些数据通常被组织成
+数组（array）的形式。
+
+比如我们可以使用list简单的组织多维数组，并能够很好的选择某行或者某个元素，但无法选择某列
+的数据。
+
+1.REGULAR NUMBERPY ARRAYS
+
+numpy.ndarray用来专门处理n维数组，它有多个内建方法，以及实现向量化数据操作。
+
+```
+import numpy as np
+a = np.array([0, 0.5, 1.0, 1.5, 2.0])
+
+a.sum()
+a.std()
+a.cumsum()
+
+a ** 2     # 每个元素进行平方
+np.sqrt(a) # 每个元素进行开方
+```
+
+不管是单维还是多维都能够统一操作所有元素，并且能够很好访问单行、单列或者单个数据的数据。
+
+numpy.ndarray 对象的初始化方法有两种：
+
+- 通过已知列表来初始化；
+- 另一种方式是在程序执行时自动生成数据来初始化。
+
+2.STRUCTURED ARRAYS
 
 ### Vectorization of code

@@ -31,6 +31,11 @@ map(lambda x: x*x, [y for y in range(10)])
 map(function_object, iterable1, iterable2,...)
 ```
 
+map函数返回的是map对象，可以将其传递给`list()`或者`set()`来创建对应的对象。
+
+- [Python map()](https://www.programiz.com/python-programming/methods/built-in/map)
+
+
 `filter`的原型如下，它只接受2个参数，目的是将iterable里满足function_object条件的元素
 过滤出来。
 
@@ -39,11 +44,16 @@ filter(function_object, iterable)
 ```
 
 `reduce`是迭代将function_object应用到iterable里，每次对前两个元素进行运用。可以用来实
-现累加运算。
+现累加运算，它仅返回单个值。
 
 ```
 reduce(function_object, iterable)
 ```
+
+不过这个函数在3.2之后的版本被移到了functools模块下，因此在使用前需要使用`from functools
+import reduce`将其导入进来。
+
+- [NameError: name 'reduce' is not defined in Python](https://stackoverflow.com/questions/8689184/nameerror-name-reduce-is-not-defined-in-python)
 
 # 参考
 
