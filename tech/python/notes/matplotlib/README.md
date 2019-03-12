@@ -132,6 +132,10 @@ plt.show()
 
 ## 同一窗口绘制多条线条或者多张图形
 
+plt.subplot(a, b, c)支持三个参数，分别代表numrows, numcols, and fignum，分别用来指定
+一幅图里面有多少个子图，fignum是标记子图的序号，从1开始。这里的numrows/numcols实际上确
+定了子图的布置方式：横向或者纵向。
+
 ```
 plt.subplot(1,  2,  1) # 同一窗口第1副图
 plt.plot(periods_list, AC_payment_per_month_list, color="blue", linestyle="-", label="等额本金月还款")
@@ -152,4 +156,42 @@ plt.ylabel('金额 [元]')
 plt.title('月还款本金 vs 利息')
 ```
 
-[](label="cosine")
+## 柱状图
+
+柱状图有着很多的参数：
+
+```
+plt.hist(x, bins=10, range=None, normed=False, weights=None, cumulative=False,bottom=None, histtype='bar', align='mid', orientation='vertical', rwidth=None,log=False, color=None, label=None, stacked=False, hold=None, **kwargs)
+```
+
+|Parameter|Description|
+|-|-|
+|x|list object(s), ndarray object|
+|bins|Number of bins|
+|range|Lower and upper range of bins|
+|normed|Norming such that integral value is 1|
+|weights|Weights for every value in x|
+|cumulative|Every bin contains the counts of the lower bins|
+|histtype|Options (strings): bar, barstacked, step, stepfilled|
+|align|Options (strings): left, mid, right|
+|orientation|Options (strings): horizontal, vertical|
+|rwidth|Relative width of the bars|
+|log|Log scale|
+|color|Color per data set (array-like)|
+|label|String or sequence of strings for labels|
+|stacked|Stacks multiple data sets|
+
+```
+np.random.seed(2000)
+y = np.random.standard_normal((1000, 2))
+
+plt.hist(y, label=['1st', '2nd'], bins=25)
+
+plt.grid(True) # 添加网格
+plt.legend(loc=0)
+plt.axis('tight') # 调整坐标宽度
+plt.xlabel('value') # 设置x轴标签
+plt.ylabel('frequency') # 设置x轴标签
+plt.title('Histogram') # 设置图形标题
+plt.show()
+```

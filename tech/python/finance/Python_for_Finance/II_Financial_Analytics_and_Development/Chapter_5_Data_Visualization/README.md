@@ -47,3 +47,22 @@ plt.legend(loc=0) # 使用legend, loc设置位置
 
 - 使用两个y坐标轴
 - 绘制子图
+
+3.Other Plot Styles
+
+曲线和原点是金融领域常用图形。matplotlib提供了专用的scatter函数用来绘制分布式原点图形，
+同时还支持[三维的数据的展示](three_dimensional_dataset.py)。
+
+柱状图通常用来展示回报率。
+
+### Financial Plots
+
+matplotlib.finance子库是专门支持金融领域绘图功能。
+
+```
+import matplotlib.finance as mpf
+```
+
+### 3D Plotting
+
+3D绘图在金融领域应用相对较少。
