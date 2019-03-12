@@ -1,4 +1,3 @@
-
 ## Chapter 4. Data Types and Structures
 
 本章主要讲解有关Python的类型与结构。
