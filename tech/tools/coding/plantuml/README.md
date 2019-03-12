@@ -1,5 +1,6 @@
 ## 在ATOM里面安装plantuml插件
 
+
 ### npm与apm
 
 APM全称为 Atom Package Manager，为Atom的包管理器。它推荐使用命令`apm config`而非编辑
@@ -10,6 +11,7 @@ APM是包装了NPM来完成基于Atom的配置，Atom的包安装源自GitHub，
 参考：
 
 - [apm - Atom Package Manager](https://github.com/atom/apm)
+- [npm 模块安装机制简介](http://www.ruanyifeng.com/blog/2016/01/npm-install.html)
 
 
 ### 安装plantuml-viewer
@@ -57,6 +59,77 @@ npm ERR! A complete log of this run can be found in:
 npm ERR!     C:\Users\lianbche\AppData\Roaming\npm-cache\_logs\2019-03-11T07_11_55_788Z-debug.log
 ```
 
+之后尝试设置apm/npm的代理，但依然不成功，因此只能认定该库不再可用。之后下载另一款插件plantuml
+，将apm代理删除，进入目录之后执行`apm install`提示成功。
+
+```
+C:\Users\lianbche\.atom\packages\plantuml  (plantuml@0.1.2)
+λ apm install
+Installing modules done
+```
+
 参考：
 
 - [手动安装Atom的插件Package](https://blog.51cto.com/francis198/1865695)
+
+
+### PlantUml could not generate file
+
+通过命令行安装号PlantUml插件之后测试puml文件提示：
+
+```
+PlantUml could not generate file.
+Please make sure PlantUml can write to location of original file.
+```
+
+搜索之下发现相关问题寥寥，在将github库上所有问题列表阅读完之后也没有找到进一步思路，尤其
+对于其中提到的手动测试的方法觉得关键但不知道怎么操作。
+
+之后直接以关键词"plantuml"搜索发现有本地直接生成的方法。
+
+于是：
+
+1. 下载graphviz，安装并设置环境变量GRAPHVIZ_DOT，指向dot.exe。
+
+https://graphviz.gitlab.io/_pages/Download/Download_windows.html
+
+2. 下载plantuml.jar，这个文件我之前以为需要放到java的lib目录，让它可以直接执行，但测试
+之后依然需要指定目录，因此可以放在其他目录，比如 C:\N-20L6PF1F2MV8-Data\lianbche\Downloads\plantuml-jar-mit-1.2019.3 目录，在其中执行`java -jar plantuml.jar -testdot` 可以测试dot成功：
+
+```
+C:\Users\lianbche
+λ  java -jar plantuml.jar -testdot
+The environment variable GRAPHVIZ_DOT has been set to C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
+Dot executable is C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
+Dot version: dot - graphviz version 2.38.0 (20140413.2041)
+Installation seems OK. File generation OK
+```
+
+使用如下命令生成测试文件：
+
+```
+java -jar plantuml.jar MPsCompMain.plantuml
+```
+
+http://plantuml.com/download
+
+参考：
+
+- [(记录)plantuml安装配置](http://skyao.github.io/2014/12/05/plantuml-installation/)
+- [PlantUML安装和使用](http://blog.javachen.com/2016/02/29/plantuml-install-and-usage.html)
+
+
+### 成功配置plantuml-preview
+
+尝试第三款插件，依然手动安装，即下载安装包，拷贝其到atom的package目录，然后切入插件目录
+并执行`apm install`。然而，测试的时候弹出提示框：
+
+```
+plantuml-preview: plantuml.jar is not a file.
+Verify 'PlantUML Jar' in settings.
+```
+
+因为有了这几天的研究，今天下载了plantuml.jar文件，因此大概知道需要配置一下，于是将对应
+目录填写到如下setting里面的PlantUML Jar的地址栏里，再测试成功。
+
+![](plantuml-preview-setpath.PNG)
