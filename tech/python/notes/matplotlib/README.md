@@ -1,3 +1,7 @@
+## 使用matplotlib画线，本地测试无法找到该模块
+
+使用 `pip3 install matplotlib`先安装。
+
 ## 坐标轴显示支持中文？
 
 使用如下命令打印出matplotlib能够支持的系统字体：
