@@ -108,3 +108,35 @@ proof
 
 
 ### Part 4
+
+convict
+
+> a person serving a sentence in a jail or prison
+> 证明有罪
+
+come up with
+
+> 提出，想出，赶上
+
+evasion
+
+> a statement that is not literally false but that cleverly avoids an unpleasant
+truth
+> 逃避，回避
+
+pneumonia
+
+> respiratory disease characterized by inflammation of the lung parenchyma (excluding
+ the bronchi) with congestion caused by viruses or bacteria or irritants
+> 肺炎
+
+prostitution
+
+> offering sexual intercourse for pay
+> 卖淫，滥用
+
+stroke
+
+> (sports) the act of swinging or striking at a ball with a club or racket or bat
+or cue or hand it took two strokes to get out of the bunker
+> 划，中风
