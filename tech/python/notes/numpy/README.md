@@ -1,5 +1,9 @@
 ## ndarry常用方法
 
+### numpy.round(a, decimals=0, out=None)
+
+统一小数点位数。
+
 ### numpy.cumsum(a, axis=None, dtype=None, out=None)[source]
 
 等价于 numpy.ndarray.cumsum，计算累加和。

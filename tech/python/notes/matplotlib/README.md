@@ -1,3 +1,10 @@
+## %matplotlib inline 的含义
+
+它是IPython里面的一个魔法函数，表示内嵌绘图，并且可以省略掉plt.show()
+
+- [Purpose of “%matplotlib inline”](https://stackoverflow.com/questions/43027980/purpose-of-matplotlib-inline)
+
+
 ## 使用matplotlib画线，本地测试无法找到该模块
 
 使用 `pip3 install matplotlib`先安装。
