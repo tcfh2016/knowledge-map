@@ -1,3 +1,12 @@
+## pandas.io.data 不可用
+
+从0.19.0开始，pandas不再支持pandas.io.data or pandas.io.wb, 替代品为pandas_datareader。
+
+参考：
+
+- [Importing pandas.io.data(https://stackoverflow.com/questions/47972667/importing-pandas-io-data)
+- [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)
+
 ## ModuleNotFoundError: No module named 'pandas' 错误
 
 使用 `pip3 install pandas`先安装。如果提示网络问题，比如：

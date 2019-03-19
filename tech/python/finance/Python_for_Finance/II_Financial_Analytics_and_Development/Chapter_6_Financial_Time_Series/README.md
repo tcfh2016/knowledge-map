@@ -169,3 +169,22 @@ print(groups.size())
 ```
 
 ### Financial Data
+
+诸如google, yahoo的公司免费提供了一些金融数据，通过pandas我们能够很好地从web上获取它们。
+pandas当前支持的数据源有：
+
+- Yahoo! Finance (yahoo)
+- Google Finance (google)
+- St. Louis FED (fred)
+- Kenneth French’s data library (famafrench)
+- World Bank (via pandas.io.wb)
+
+比如我们可以从yahoo上获取德国DAX指数：
+
+```
+import pandas.io.data as web
+
+DAX = web.DataReader(name='^GDAXI', data_source='yahoo',
+                              start='2000-1-1')
+         DAX.info()
+```
