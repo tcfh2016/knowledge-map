@@ -188,3 +188,9 @@ DAX = web.DataReader(name='^GDAXI', data_source='yahoo',
                               start='2000-1-1')
          DAX.info()
 ```
+
+尝试教材中多种获取方式，均为成功，失败原因为链接不稳定，以及网络超时等。
+
+### Regression Analysis
+
+普通最小二乘法回归的例子。
