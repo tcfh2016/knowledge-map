@@ -1,8 +1,47 @@
+# 第5章 软件构建中的设计 / Design in Construction
+
+## 5.1 设计中的挑战 / Design Challenges
+
+### 设计是一个险恶的问题 / Design Is a Wicked Problem
+
+险恶的问题就是那种只有通过解决或部分解决才能被明确的问题。这个看似矛盾的定义其实是在暗示
+说，你必须首先把这个问题“解决”一遍以便能够明确地定义它，然后再次解决该问题，从而形成一个
+可行的方案。
+
+### 设计是个了无章法的过程 / Design Is a Sloppy Process
+
+软件设计的成功应该是组织良好、干净利落的，然而形成这个设计的过程却并非如此清爽。
+
+说设计了无章法，是因为在此过程中你会采取很多错误的步骤，多次误入歧途——你会犯很多的错误。
+事实上，犯错正是设计的关键所在——在设计阶段犯错并加以改正，其代价要比在编码后才发现同样的
+错误并彻底修改低得多。
+
+### 设计是自然而然形成的 / Design Is Emergent
+
+把设计的这些特征综合归纳起来，我们可以说设计是“自然而然形成的”。设计不是在谁的头脑中直接
+跳出来的。它是在不断的设计评估、非正式讨论、写试验代码以及修改试验代码中演化和完善的。
+
+## 5.2 关键的设计概念 / Key Design Concepts
+
+### 软件的首要技术使命：管理复杂度 / Software's Primary Techinical Imperative: Managing Complexity
+
+Brooks认为，两类不同的问题导致软件开发变得困难——本质的问题和偶然的问题。本质的属性是一件
+事物必须具备、如果不具备就不再是该事物的属性。偶然的属性则是指一件事物碰巧具有的属性，有
+没有这些属性都并不影响这件事物本身。
+
+Brooks观察到，软件开发中大部分的偶然性难题在很久以前就已得到解决了，在软件开发剩下的那些
+本质性困难上的进展将会变得相对缓慢。究其原因，是因为从本质上说软件开发就是不断地去发掘错
+综复杂、相互连接的整套概念的所有细节。其本质性的困难来自很多方面：必须去面对复杂、无序的
+现实世界；精确而完整地识别出各种依赖关系与例外情况；设计出完全正确而不是大致正确的解决方
+案；诸如此类。
+
+
 
 # 第7章 高质量的子程序 / High-Quality Routines
 
-子程序（routine）是为实现一个特定的目的而编写的一个可被调用的方法（method）或过程（procedure），例如C++中的函数(function)，Java中的方法（method），或Microsoft Visual Basic中的
-函数过程（function procedure）或子过程（Sub procedure）。
+子程序（routine）是为实现一个特定的目的而编写的一个可被调用的方法（method）或过程（procedure），
+例如C++中的函数(function)，Java中的方法（method），或Microsoft Visual Basic中的函数
+过程（function procedure）或子过程（Sub procedure）。
 
 ## 7.1 创建子程序的正当理由 / Valid Reasons to Create a Routine
 
