@@ -336,6 +336,10 @@ git reset --hard SHA-0
 使用`git blame -L 160, +10 "filename"`来查看谁修改了代码，-L参数是指定开始行和结束行。
 使用`git blame -L10,+1 febdcdfg^ -- "filename"`来blame前一个版本。
 
+## 储藏 / git stash
+
+使用 `git stash`储藏当前修改，用`git stash list`查看所有的储藏，用`git stash apply stasch@{2}`
+来指定应用哪一个储藏，如果不指定默认最近的储藏。
 
 ## 参考
 
