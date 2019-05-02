@@ -42,6 +42,23 @@ Python的模块搜索路径（sys.path）是由四个组件组合而成：
 
 只有在跨目录进行导入时才需要模块搜索路径的设置。
 
+如上第一条搜索规则决定了在 benchmark.py 中导入 strategy模块时不能简单的如C/C++一样使用
+`import strategy`而是需要从工作目录开始搜索，即使用`import src.strategies.strategy as strategy`
+才行。
+
+```
+C:.
+│  line_parser.py
+│
+├─src
+│  │  parser.py
+│  │
+│  ├─strategies
+│  │  │  benchmark.py
+│  │  │  maxrlc.py
+│  │  │  strategy.py
+```
+
 *文件名后缀是可以从import语句中省略的，Python会选择在搜索路径中第一个符合导入文件名的文
 件，它既可以是源代码文件x.py、字节码文件x.pyc、目录x或者其他编译扩展模块。*
 
