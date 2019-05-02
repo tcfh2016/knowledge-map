@@ -25,7 +25,7 @@ Cloning into 'repository'...
 fatal: unable to access 'https://XXX.com/lte/repository.git/': Failed to connect to github.com port 443: Timed out
 ```
 
-这个时候通常需要给git配置代理。
+这个时候通常需要给git配置代理，由于当前并没有对应的仓库存在，因此必须设定全局配置：`> git config --global http.proxy http://222.222.222.222:8080`。
 
 ## 获取更新 / git pull
 
