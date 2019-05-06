@@ -56,7 +56,7 @@ ms = df.join(pd.DataFrame([1, 4, 9, 16],
                           index=['a', 'b', 'c', 'y'],
                           columns=['squares',]))
 
-numbers  floats    names1 names2  squares
+     numbers  floats   names1  names2  squares
 a       10     1.5      Yves     Gu      1.0
 b       20     2.5     Guido     Fe      4.0
 c       30     3.5     Felix     Fr      9.0
@@ -68,7 +68,7 @@ ms = df.join(pd.DataFrame([1, 4, 9, 16],
                              columns=['squares',]),
                              how='outer')
 
-numbers  floats    names1 names2  squares
+     numbers  floats    names1 names2  squares
 a     10.0     1.5      Yves     Gu      1.0
 b     20.0     2.5     Guido     Fe      4.0
 c     30.0     3.5     Felix     Fr      9.0
@@ -114,7 +114,7 @@ df.index = dates
 
 得到如下结果：
 
-       No1       No2       No3       No4
+               No1       No2       No3       No4
 2015-01-31 -0.063067  0.607535  0.913365  0.689960
 2015-02-28  0.108040 -0.370936 -0.456547 -0.711879
 2015-03-31 -0.303201 -0.537440  0.355943  0.390217
@@ -189,8 +189,78 @@ DAX = web.DataReader(name='^GDAXI', data_source='yahoo',
          DAX.info()
 ```
 
-尝试教材中多种获取方式，均为成功，失败原因为链接不稳定，以及网络超时等。
+尝试教材中多种获取方式，均未成功，失败原因为链接不稳定，以及网络超时等。
 
 ### Regression Analysis
 
-普通最小二乘法回归的例子。
+普通最小二乘法回归的例子。原始文件部分显示如下：
+
+```
+Price Indices - EURO Currency
+Date    ;Blue-Chip;Blue-Chip;Broad    ; Broad   ;Ex UK    ;Ex Euro Zone;Blue-Chip; Broad
+        ;  Europe ;Euro-Zone;Europe   ;Euro-Zone;         ;            ; Nordic  ; Nordic
+        ;  SX5P   ;  SX5E   ;SXXP     ;SXXE     ; SXXF    ;    SXXA    ;    DK5F ; DKXF
+31.12.1986;775.00 ;  900.82 ;   82.76 ;   98.58 ;   98.06 ;   69.06 ;  645.26  ;  65.56
+01.01.1987;775.00 ;  900.82 ;   82.76 ;   98.58 ;   98.06 ;   69.06 ;  645.26  ;  65.56
+......
+```
+
+对于原始文件需要进行一些格式上的处理：
+
+```
+import numpy as np
+import pandas as pd
+
+lines = open('./data/es.txt', 'r').readlines()
+lines = [line.replace(' ', '') for line in lines]
+
+# 新建一个文件，并且将原始文件第4行进行完善写入新文件。  
+new_file = open('./data/es50.txt', 'w')
+new_file.writelines('date' + lines[3][:-1] + ';DEL' + lines[3][-1])
+
+# 将原始文件从第5行开始余下行转写入新的文件。
+new_file.writelines(lines[4:])             
+new_file.close()
+
+es = pd.read_csv('./data/es50.txt', index_col=0, parse_dates=True, sep=';', dayfirst=True)
+del es[DEL]
+```
+
+上面的这些处理过程可以通过更为简单的接口调用完成：
+
+```
+cols = ['SX5P', 'SX5E', 'SXXP', 'SXXE', 'SXXF', 'SXXA', 'DK5F', 'DKXF']
+es = pd.read_csv(es_url, index_col=0, parse_dates=True, sep=';', dayfirst=True,       
+                 header=None, skiprows=4, names=cols)
+```
+
+### High-Frequency Data
+
+一个处理高频数据的例子：分析苹果某周的交易数据。
+
+```
+import numpy as np
+import pandas as pd
+import datetime as dt
+from urllib import urlretrieve
+
+url1 = 'http://hopey.netfonds.no/posdump.php?'
+url2 = 'date=%s%s%s&paper=AAPL.O&csv_format=csv'
+url = url1 + url2
+
+year = '2014'
+month = '09'
+days = ['22', '23', '24', '25']
+
+AAPL = pd.DataFrame()
+for day in days:
+AAPL = AAPL.append(pd.read_csv(url % (year, month, day), index_col=0, header=0, parse_dates=True))
+AAPL.columns = ['bid', 'bdepth', 'bdeptht', 'offer', 'odepth', 'odeptht']
+
+AAPL['bid'].plot()
+```
+
+### Conclusions
+
+pandas 是处理金融交易数据非常方便的工具，你或许可以使用NumPy/matplotlib完成相同的功能，
+但pandas能够更快地完成它。另外，pandas还能够从web上直接获取交易数据。
