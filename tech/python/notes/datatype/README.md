@@ -130,6 +130,9 @@ list中元素的数据类型。
 
 - 常见方法
 
+  - len(list) 获取列表的长度。比如计算平均值 sum(list) / len(list),sum()属于内建函数。
+  - min(list)
+  - max(list)
 
 
 3. 字典
