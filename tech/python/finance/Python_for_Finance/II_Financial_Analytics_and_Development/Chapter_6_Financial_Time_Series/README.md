@@ -254,7 +254,7 @@ days = ['22', '23', '24', '25']
 
 AAPL = pd.DataFrame()
 for day in days:
-AAPL = AAPL.append(pd.read_csv(url % (year, month, day), index_col=0, header=0, parse_dates=True))
+  AAPL = AAPL.append(pd.read_csv(url % (year, month, day), index_col=0, header=0, parse_dates=True))
 AAPL.columns = ['bid', 'bdepth', 'bdeptht', 'offer', 'odepth', 'odeptht']
 
 AAPL['bid'].plot()

@@ -1,3 +1,7 @@
+## DataFrame.plot / 画图
+
+pandas 为 DataFrame 提供了专门的绘图函数`plot`，支持多种参数。
+
 ## 将 DataFrame / DataFrameGroupBy 对象写入csv
 
 DataFrame 对象可以直接调用`to_csv()`函数:

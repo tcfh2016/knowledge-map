@@ -1,4 +1,13 @@
-## ndarry常用方法
+## numpy常用方法
+
+
+### [np.allclose(np.array(a), np.array(b))](https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html)
+
+返回两个array是否相等，会逐一比较每个元素，并且允许一定的误差，默认为1e-05。
+
+```
+numpy.allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False)[source]
+```
 
 ### numpy.round(a, decimals=0, out=None)
 
@@ -10,9 +19,6 @@
 
 - 给定a为一维数组时：将当前元素与前一个元素相加再重新写入当前元素。
 - 给定a为二维数组时：通过axis指定累加方向。
-
-
-## random常用方法
 
 ### random.seed(seed=None)
 
