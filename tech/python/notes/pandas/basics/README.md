@@ -34,11 +34,12 @@ df = pd.DataFrame(data)
 1.选择列
 
 直接通过指定列的名称（可以一次性指定多个），比如如上例子里面`df['Name', 'Age']`即选中
-两列。
+两列。通过`df.columns`选中所有列名。
 
 2.选择行
 
-选择行时需要使用`loc`方法，并且选择多行的时候在语法上与列有些不同。
+选择行时需要使用`loc`方法，并且选择多行的时候在语法上与列有些不同。通过`df.index`选中所
+有行名。
 
 ```
 df = pd.DataFrame([10, 20, 30, 40],
@@ -98,9 +99,9 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 - title 放置在图形上方的标题，多个子图时传入列表
 - grid 是否使能网格
 - legend 防止图例： Ture/False/reverse
-- secondary_y 是否使能/为那列数据使用辅坐标轴 boolean/sequence
+- secondary_y，默认False，指定哪些列数据采用辅坐标轴
 
-画出图形时如果觉得周围留空过大，可以通过
+画出图形时如果觉得周围留空过大的问题，查看接口当前不支持通过参数控制图形周围空白的大小。
 
 参考：
 
