@@ -33,7 +33,7 @@ undermine
 > 破坏，逐渐破坏
 > To work against someone means to undermine them, or make them less effective.
 
-**Part 2**
+### Part 2
 
 insult
 
@@ -139,7 +139,7 @@ exaggerate
 > 夸大，夸张
 > He tends to exaggerate the difficulties.
 
-**Part 3**
+### Part 3
 
 apprehensive
 
@@ -222,7 +222,7 @@ vegetarian
 > 素食者
 > The two founders were Ed and Emma Smith, both health-conscious vegetarians.
 
-**Part 4**
+### Part 4
 
 bay
 

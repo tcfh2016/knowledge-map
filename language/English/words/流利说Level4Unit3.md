@@ -36,7 +36,7 @@ yell
 > a loud utterance; often in protest or opposition
 > 大叫大喊
 
-**Part 2**
+### Part 2
 
 admit
 
@@ -74,7 +74,7 @@ possession
 > 拥有，财产
 > Inventory is a detailed list of items in one's possession.
 
-**Part 3**
+### Part 3
 
 bonus
 
@@ -157,7 +157,7 @@ unforeseen
 > 未预见到的，无法预料的
 > An unforeseen consequence is an unexpected result of an action or event.
 
-**Part 4**
+### Part 4
 
 certify
 
