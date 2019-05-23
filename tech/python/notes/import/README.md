@@ -1,3 +1,47 @@
+# 内容索引
+
+- [模块](./module/README.md)
+
+# 常见问题
+
+## import 模块之后为什么无法直接使用模块中的变量 ？
+
+参考如下代码，会出现 `AttributeError: module 'tkinter' has no attribute 'messagebox'`
+的错误。
+
+```
+import time, sys
+if sys.version < '3':
+    import Tkinter
+    #import Tkinter.messagebox
+else:
+    import tkinter
+    #import tkinter.messagebox
+
+window = tkinter.Tk()
+tkinter.messagebox.showwarning()    
+```
+
+为什么`import tkinter`但是无法使用到 tkinter下面的 messagebox属性呢？
+
+1. 第一次错误的认识
+
+在查阅之前的笔记之后，本来以为是因为Python的`import`语句并不同于C里的`#include`，它仅
+仅是搜索该模块，并且编译让后将其存储到`sys.modules`的表里供以后使用，所以这里的`import`
+实际上并没有将`tkinter`的相关变量引入当前作用域。但这无法解释为什么`window = tkinter.Tk()`
+没有报错。
+
+2. 第二次重新的认识
+
+基于如上的疑问，我在StackOverflow上提了一个问题，读了`funie200`的回答之后了解到`tkinter.Tk()`
+是`tkinter`的变量，但`tkinter.messagebox`是`tkinter`里面的模块，因此`messagebox`需要
+再次import。
+
+
+参考：
+
+- [Why do I need to import tkinter.messagebox but don't need to import tkinter.Tk() after importing tkinter?](https://stackoverflow.com/questions/56268474/why-do-i-need-to-import-tkinter-messagebox-but-dont-need-to-import-tkinter-tk/56268994#56268994)
+
 
 ## 如何import上层目录？
 
