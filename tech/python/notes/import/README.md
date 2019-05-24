@@ -37,6 +37,13 @@ tkinter.messagebox.showwarning()
 是`tkinter`的变量，但`tkinter.messagebox`是`tkinter`里面的模块，因此`messagebox`需要
 再次import。
 
+之后认真理解了`Aran-Fey`的回答之后，觉得他回答得真的太好了，细致并且更有深度。他的解释如
+下：
+
+  - 在 import module的时候，如果import的是文件，那么会执行该文件；如果import的是其他模
+  块（目录），那么此时会执行该模块下的 __init__.py 文件。
+  - 这里 messagebox 包括在 tkinter 中，因此import tkinter 那么执行的是其中的__init__.py
+  文件，由于其中已经讲 class `Tk()`的定义导入进来，因此可以直接使用。
 
 参考：
 
