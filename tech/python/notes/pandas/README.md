@@ -6,7 +6,26 @@
 - [绘图](./plot/README.md)
 - [web相关](./web/README.md)
 
+# 学习材料
+
+- [10 Minutes to pandas](http://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html)
+
 # 常见问题
+
+## DataFrame 类型转换
+
+想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单
+维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基
+础上进行转换，使用起来不方便。
+
+*注：调用`to_numeric()`时根据原有数据决定转换为`int64`还是`float64`。*
+
+```
+for col in float_df:    
+    print(pd.to_numeric(float_df[col]))
+```
+
+
 
 ## DataFrame.plot 时中文显示乱码
 

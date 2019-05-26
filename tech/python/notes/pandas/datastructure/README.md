@@ -102,6 +102,7 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 ```
 df.Age
 df['Age']
+df[['Age','Name']] # 注意选取多列和多行时候的不同形式
 ```
 
 一次性指定多个列的名称可以同时选中两列，比如如上例子里面`df['Name', 'Age']`。
@@ -115,8 +116,23 @@ df = pd.DataFrame([10, 20, 30, 40],
                   columns=['numbers'],
                   index=['a', 'b', 'c', 'd'])
 
-print(df.loc['b']) # 通过索引访问元素，之前是df.ix['b']，但已经不推荐使用旧的方法。
+print(df.loc['b'])  # 通过索引访问元素，之前是df.ix['b']，但已经不推荐使用旧的方法。
 print(df.loc[['a', 'b']]) # 索引多个元素。
+print(df['a':'c'])        # 索引'a', 'b', 'c'三行
+print(df[0:1])            # 索引'a'一行数据
+```
+
+- 多行多列
+
+```
+df.loc[:, ['A', 'B']]
+```
+
+- 条件选择
+
+```
+ df[df.A > 0] # 以某列的数据做为标准选择数据
+ df[df > 0]   # 选择 df中大于0的数，其余置为 NaN
 ```
 
 ## DataFrame 修改
@@ -159,6 +175,10 @@ del df['newdata']
 del df.newdata # 会提示错误。
 ```
 
+# 类型转换
+
+
+
 # 操作方法
 
 ## reindex
@@ -172,6 +192,10 @@ obj = Series([4.2, 2.3, -1.3, 5.2], index=['d', 'b', 'c', 'a'])
 obj1 = obj.reindex(['a', 'b', 'c', 'd', 'e'])
 obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'], fill_value=0)
 ```
+
+## map(f)/applymap(f)
+
+map作用于 Series，applymap作用于 DataFrame，表示对每个元素应用函数f。
 
 # NaN (Not a Number)
 
@@ -214,3 +238,4 @@ print(s.dropna())
 - [Python | Pandas DataFrame](https://www.geeksforgeeks.org/python-pandas-dataframe/)
 - [pandas 修改 DataFrame 列名](https://www.cnblogs.com/hhh5460/p/5816774.html)
 - 《利用Python进行数据分析》
+- [object conversion](http://pandas.pydata.org/pandas-docs/stable/getting_started/basics.html#basics-object-conversion)
