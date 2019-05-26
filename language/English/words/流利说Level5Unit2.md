@@ -218,3 +218,7 @@ parliament
 > a legislative assembly in certain countries
 > 议会，国会
 > “The honourable member does not like me, ” he observed once in Parliament.
+
+violet
+
+> 紫色，紫罗兰
