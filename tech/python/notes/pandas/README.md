@@ -1,7 +1,9 @@
 # 笔记索引
 
-- [基本概念](./basics/README.md)
+- [数据结构](./datastructure/README.md)
+- [层次化索引](./hierarchical_index/README.md)
 - [csv处理](./csv/README.md)
+- [绘图](./plot/README.md)
 - [web相关](./web/README.md)
 
 # 常见问题
