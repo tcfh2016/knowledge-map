@@ -25,8 +25,6 @@ for col in float_df:
     print(pd.to_numeric(float_df[col]))
 ```
 
-
-
 ## DataFrame.plot 时中文显示乱码
 
 ![](./basics/plot_chinese_messycode.png)

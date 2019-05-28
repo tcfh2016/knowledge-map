@@ -1,3 +1,23 @@
+## 如何调整横坐标样式以显示更多项目
+
+如下图，怎么调整横坐标标签显示样式，支持更多的显示。
+
+![](low_x_item_number.png)
+
+```
+asset_plot = self.asset_df.plot()
+asset_plot.set_xticks(range(len(self.asset_df.index)))
+asset_plot.set_xticklabels(self.asset_df.index, rotation=90)
+plt.show()
+```
+
+通过`set_xticks`设定所有的tick数，另外通过`set_xticklabels`设定标签的显示样式。
+
+参考：
+
+- [How to plot a pandas multiindex dataFrame with all xticks](https://stackoverflow.com/questions/21281322/how-to-plot-a-pandas-multiindex-dataframe-with-all-xticks)
+- [Matplotlib:: Not Showing all x-axis data frame variable](https://stackoverflow.com/questions/32572419/matplotlib-not-showing-all-x-axis-data-frame-variable?rq=1)
+
 ## DataFrame.plot / 画图
 
 pandas 为 DataFrame 提供了专门的绘图函数`plot`，支持多种参数。
