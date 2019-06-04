@@ -12,6 +12,14 @@
 
 # 常见问题
 
+## DataFrame 输出排版
+
+打印DataFrame输出的格式有些时候并不友好，比如：
+
+![](print_not_aligned.png)
+
+
+
 ## DataFrame 类型转换
 
 想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单

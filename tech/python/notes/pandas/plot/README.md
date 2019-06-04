@@ -1,3 +1,10 @@
+
+## 设置Y轴为百分比样式
+
+参考：
+
+- [Format y axis as percent](https://stackoverflow.com/questions/31357611/format-y-axis-as-percent)
+
 ## 如何调整横坐标样式以显示更多项目
 
 如下图，怎么调整横坐标标签显示样式，支持更多的显示。
