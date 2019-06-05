@@ -100,7 +100,7 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 通过类似字典标记或属性的方式，可以将 DataFrame的列获取为一个 Series。
 
 ```
-df.Age
+df.Age # 看起来似乎不可行。
 df['Age']
 df[['Age','Name']] # 注意选取多列和多行时候的不同形式
 ```
@@ -132,6 +132,7 @@ df.loc[:, ['A', 'B']]
 
 ```
  df[df.A > 0] # 以某列的数据做为标准选择数据
+ df[df['A'] > 0]
  df[df > 0]   # 选择 df中大于0的数，其余置为 NaN
 ```
 

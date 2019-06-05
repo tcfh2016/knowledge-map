@@ -1,5 +1,6 @@
 import src.strategies.benchmark as benchmark
 import src.strategies.maxrlc as maxrlc
+import src.strategies.loadctrl as loadctrl
 
 class Parser(object):
     def __init__(self, opt):
@@ -14,6 +15,8 @@ class Parser(object):
             strategy = maxrlc.MaxRlc()
         elif self.pattern == "benchmark":
             strategy = benchmark.Benchmark()
+        elif self.pattern == "loadctrl":
+            strategy = loadctrl.LoadCtrl()
         else:
             assert 0, "Not support"
 
