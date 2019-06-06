@@ -5,7 +5,20 @@
 
 # 常见问题
 
-1.有关不同对象类型的作用域疑问
+## 190606：默认值的问题
+
+一个变量在还没有确定其类型的时候，初始值应该填写为什么？
+
+最常见的是使用`None`，有时使用`object()`。
+
+
+参考：
+
+- [Initialize parameter of method with default value](https://stackoverflow.com/questions/13075044/initialize-parameter-of-method-with-default-value)
+- [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm)
+
+
+## 190603：有关不同对象类型的作用域疑问
 
 如下的代码为打印 “UnboundLocalError: local variable 'flag' referenced before assignment” 的错误，其原因在于对象flag没有声明为全局变量。然而，其疑问点在于为什么对象
 list没有问题，但是对象flag有问题呢？
