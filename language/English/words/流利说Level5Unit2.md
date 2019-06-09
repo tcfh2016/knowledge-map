@@ -222,3 +222,67 @@ parliament
 violet
 
 > 紫色，紫罗兰
+
+### Part 3
+
+credit
+
+> approval or praise that you give to someone for something they have done
+> 归功于，赞颂；信任
+> He takes all the credit for my work.
+
+claim
+
+> to demand or ask for something because you believe it is your legal right to
+own or to have it
+> 要求，声称
+> These communities were claiming territory and setting up boundaries.
+
+in one's favor
+
+> if something is in someone's favor, it gives them an advantage or helps them
+> 对...有利，支持某人
+> The contract was too much in their favor, so we didn't sign it.
+
+layoff
+
+> an act of making people unemployed because there is no more work left for them
+to do
+> 裁员，解雇
+> When two companies merge there are often many problems, including layoffs.
+
+mummy
+
+> a dead boy that has been preserved by wrapping it in cloth, especially in
+ancient Egypt
+> 木乃伊
+> The Iceman was the oldest mummy ever found.
+
+on short notice
+
+> only a short time before something happens
+> 忽然，急忙
+> Thanks for seeing me on such short notice.
+
+### Part 4
+
+advisor
+
+> a person who gives advice, especially somebody who knows a lot about a particular
+subject
+> 顾问
+> You can be my fashion advisor.
+
+copper
+
+> a chemical element; soft reddish-brown metal used for making electric wires,
+pipes and coins
+> 铜，铜制的
+> The copper ax, a symbol of power and wealth, was left near the body.
+
+occasion
+
+> an important or special event or ceremony
+> 时机，场合
+> I think it's important to dress right, to dress for the occasion and make a
+good impression.
