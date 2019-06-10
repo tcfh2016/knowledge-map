@@ -1,6 +1,3 @@
-
-# [argparse](https://docs.python.org/2/howto/argparse.html)
-
 `argparse`是python标准库内置的命令行解析模块，类似模块功能的还有`getopt`和`optparse`，
 `argparse`基于`optparse`。
 
@@ -26,7 +23,9 @@ parser.parse_args()
 
 上面3句代码提供了最简单的命令行解析功能：仅仅支持对`-h`, `--help`的解析。其他的均会报错。
 
-`python bin2text.py -h`
+执行`python bin2text.py -h`：
+
+```
 >
 >usage: bin2text.py [-h]
 >
@@ -34,30 +33,36 @@ parser.parse_args()
 >
 >  -h, --help  show this help message and exit
 >
-`python bin2text.py foo`
+```
+
+执行`python bin2text.py foo`：
+
+```
 >usage: bin2text.py [-h]
 >
 >bin2text.py: error: unrecognized arguments: foo
+```
 
 ## 位置参数
 
 位置参数是必须要指定的参数，通过 `add_argument`来添加位置参数，并且可以指定帮助信息，以
 及类型（默认为字符串）。如下的示例是添加一个名为`echo`参数，并且在解析时将其当做`int`类
-型来处理。
+型来处理（argparse默认将解析的参数内容都当成字符串类型）。
 
 ```
 parser = argparse.ArgumentParser()
 parser.add_argument("echo", help="echo the string you use here.", type=int)
 ```
 
-位置参数是必须要输入的参数，如果在解析命令的时候没有得到对应的参数内容，那么会提示错误。
+位置参数是必须要输入的参数，并且argparse会根据参数的位置去解析它，如果在解析命令的时候没
+有得到对应的参数内容，那么会提示错误。
 
 ## 可选参数
 
 可选参数的添加需要在参数名称前面添加“-”，该参数后面可以跟上参数值，也可以不跟。同样可以
 指定参数的type, action。
 
-`默认形式：argparse会解析可选参数后面的参数值。`
+1.默认形式：argparse会解析可选参数后面的参数值。
 
 ```
 import argparse
@@ -68,7 +73,7 @@ if args.verbosity:
     print "verbosity turned on"
 ```
 
-`简单形式：argparse不解析可选参数后面的参数值，只根据是否指定了可选参数得到True/False。`
+2.简单形式：argparse不解析可选参数后面的参数值，只根据是否指定了可选参数得到True/False。
 
 ```
 import argparse
@@ -79,6 +84,8 @@ args = parser.parse_args()
 if args.verbose:
    print "verbosity turned on"
 ```
+
+*190610 注：位置参数是通过参数的顺序去推算对应的参数值，而可选参数是显示指定参数值。*
 
 ## 同时使用位置参数和可选参数
 
@@ -115,3 +122,7 @@ parser.add_argument("y", type=int, help="the exponent")
 args = parser.parse_args()
 answer = args.x**args.y
 ```
+
+## 参考
+
+- [argparse](https://docs.python.org/2/howto/argparse.html)

@@ -17,7 +17,7 @@
 
 - os.getcwd() 返回当前工作目录的名称。
 - os.listdir(p) 返回一个字符串列表，包含路径p指定的文件夹下所有的文件和文件夹名称。
-- os.chdir(p) 当当前工作目录切换至p。
+- os.chdir(p) 将当前工作目录切换至p。
 - os.path.isfile(p) 判断当前p是否为文件。
 - os.path.isdir(p) 判断当前p是否为文件夹。
 - os.stat(fname) 返回有关fname的信息。
@@ -35,6 +35,14 @@
 
 文本文件的读取可以按照一行甚至是整个文件内容作为大型字符串的方式读取，而二进制文件的读取
 方式则可以按照每个字节进行。
+
+## 判断文件是否可用
+
+```
+if os.access("myfile", os.R_OK):
+  with open("myfile") as fp:
+    return fp.read()
+```
 
 # 参考阅读
 
