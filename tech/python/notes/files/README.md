@@ -44,6 +44,15 @@ if os.access("myfile", os.R_OK):
     return fp.read()
 ```
 
+## 文件读取
+
+文件的读取支持多种方式，如果要一行一行地扫描一个文本文件，文件迭代器往往是最佳选择：
+
+```
+for line in open('myfile'):
+  print(line, end='')
+```
+
 # 参考阅读
 
 [Miscellaneous operating system interfaces](https://docs.python.org/2.7/library/os.html)
