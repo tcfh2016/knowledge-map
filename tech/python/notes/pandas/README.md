@@ -18,8 +18,6 @@
 
 ![](print_not_aligned.png)
 
-
-
 ## DataFrame 类型转换
 
 想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单
@@ -32,6 +30,8 @@
 for col in float_df:    
     print(pd.to_numeric(float_df[col]))
 ```
+
+通过`print(df.dtypes)`打印DataFrame各列的类型。
 
 ## DataFrame.plot 时中文显示乱码
 
