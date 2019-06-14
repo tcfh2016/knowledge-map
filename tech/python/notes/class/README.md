@@ -101,6 +101,18 @@ class Human(Player):
     pass
 ```
 
+## 2.调用超类的方法
+
+类方法总是可以在一个实例中调用（Python自动把该实例发送给self参数），或者通过类来调用（
+必须手动地传递实例）。
+
+```
+class Manager(Person):
+  def giveRaise(self, percent, bonus=.10):
+    Person.giveRaise(self, percent + bonus)
+```
+
+
 # polymorphism （多态）
 
 python里面的多态比较简单，它会直接根据当前实际的对象去调用对应的方法，比如：
