@@ -123,6 +123,21 @@ args = parser.parse_args()
 answer = args.x**args.y
 ```
 
+## 为一个参数传递多个值
+
+有两种方式：使用`nargs`和`append`action。
+
+```
+parser.add_argument('-l','--list', nargs='+', help='<Required> Set flag', required=True)
+# Use like:
+# python arg.py -l 1234 2345 3456 4567
+
+parser.add_argument('-l','--list', action='append', help='<Required> Set flag', required=True)
+# Use like:
+# python arg.py -l 1234 -l 2345 -l 3456 -l 4567
+```
+
 ## 参考
 
 - [argparse](https://docs.python.org/2/howto/argparse.html)
+- [argparse option for passing a list as option](https://stackoverflow.com/questions/15753701/argparse-option-for-passing-a-list-as-option)
