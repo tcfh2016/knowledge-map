@@ -115,3 +115,61 @@ to your body
 > 心室
 > From the left atrium, the oxygenated blood is pumped into another chamber, the
 left ventricle.
+
+### Part 3
+
+antonym
+
+> a word that means the opposite of another word
+> 反义词
+> The words silly and serious are antonyms because they have opposite meanings.
+
+attainable
+
+> being able to be achieved
+> 可达到的
+> To be realistic means to be possible and attainable.
+
+contrast
+
+> an obvious difference between two or more things
+> 对比
+> In contrast to the US, 10% of Japan's population had less than half of the total
+wealth.
+
+crucial
+
+> extremely important, because it will affect other things
+> 重要的；决定性的
+> Getting that data is crucial for our success.
+
+cruel
+
+> having a desire to cause pain and suffering
+> 残酷的，残忍的；使人痛苦的
+> He can be cruel when he doesn't like someone, so don't expect him to be nice to
+you.
+
+manipulative
+
+> skillful at influencing somebody or forcing somebody to do what you want
+> 巧妙处理的；操纵的
+> To be cruel means to be mean, manipulative and hurtful.
+
+overly
+
+> too; very; excessively
+> 过度地，极度地
+> To be naive means to be overly simple and lacking experience.
+
+pathetic
+
+> useless or not effective in an annoying way
+> 可怜的；悲哀的
+> The ideas in his paper were brilliant, but the quality of his writing was pathetic.
+
+silly
+
+> showing a lack of thought, understanding or judgement
+> 愚蠢的；傻瓜
+> That kind of silly behavior isn't acceptable in our office
