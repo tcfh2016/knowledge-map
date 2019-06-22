@@ -77,12 +77,13 @@ BOM)序列。例如，在UTF-16和UTF-32编码中，BOM指定大尾还是小尾�
 
 ## 1.如何在Python脚本里面确定要处理文件的字符编码标准？
 
-之前决定应该有什么功能来确定要处理文件的编码标准，但实际上并没有非常好的方案，它是需要用
-乎进行输入保证的前提。
+之前决定应该有什么功能来确定要处理文件的编码标准，可以使用`chardet`函数库来完成，先读取
+文件内容，再判断其编码标准。
 
 参考：
 
 - [How to determine the encoding of text?](https://stackoverflow.com/questions/436220/how-to-determine-the-encoding-of-text)
+- [How to convert a file to utf-8 in Python?](https://stackoverflow.com/questions/191359/how-to-convert-a-file-to-utf-8-in-python)
 
 
 # 参考

@@ -53,6 +53,23 @@ for line in open('myfile'):
   print(line, end='')
 ```
 
+# 常见问题
+
+## 1.如何仅读取文件开头或者结尾几行？
+
+有时候调试需要打印文件内容，如果文件内容较多则会刷屏，没有shell里面直接`head`那样的内容，
+可以通过控制打印的行数来控制：
+
+```
+with open("file.txt", 'r') as f:
+  cnt = 0
+  for line in f:
+    cnt += 1
+    if (cnt > 5):
+      break
+    print(line)
+```
+
 # 参考阅读
 
 [Miscellaneous operating system interfaces](https://docs.python.org/2.7/library/os.html)
