@@ -91,49 +91,82 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 
 ## DataFrame 获取
 
-- columns / index 获取
+### columns / index 获取
 
 通过`df.columns`选中所有列名。通过`df.index`选中所有行名。
 
-- 列的获取
+### 列的获取
 
 通过类似字典标记或属性的方式，可以将 DataFrame的列获取为一个 Series。
 
 ```
-df.Age # 看起来似乎不可行。
+df.Age
 df['Age']
 df[['Age','Name']] # 注意选取多列和多行时候的不同形式
 ```
 
 一次性指定多个列的名称可以同时选中两列，比如如上例子里面`df['Name', 'Age']`。
 
-- 行的获取
+### 行的获取
 
-选择行时需要使用`loc`方法，并且选择多行的时候在语法上与列有些不同。
+**1.使用`loc`方法**
+
+使用`loc`方法通常用来进行单行索引，在选择多行时语法上与列有些类似，但要注意与列选择时候
+的区别。
 
 ```
 df = pd.DataFrame([10, 20, 30, 40],
                   columns=['numbers'],
                   index=['a', 'b', 'c', 'd'])
 
-print(df.loc['b'])  # 通过索引访问元素，之前是df.ix['b']，但已经不推荐使用旧的方法。
-print(df.loc[['a', 'b']]) # 索引多个元素。
-print(df['a':'c'])        # 索引'a', 'b', 'c'三行
-print(df[0:1])            # 索引'a'一行数据
+print(df.loc['b'])        # 通过索引访问元素，之前是df.ix['b']，已不推荐使用旧的方法。
+print(df.loc[['a', 'b']]) # 索引'a', 'b'两行。
+print(df['a':'c'])        # 索引'a', 'b', 'c'三行。
+print(df[0:1])            # 索引'a'一行数据。
 ```
 
-- 多行多列
+**2.使用条件选择**
+
+根据列的条件来进行选择，这种方式是pandas所独有的方式。
+
+```
+df[df.A > 0]    # 以某列的数据做为标准选择数据
+df[df['A'] > 0] # 以某列的数据做为标准选择数据
+df[df > 0]      # 选择 df中大于0的数，其余置为 NaN
+```
+
+简单地说，pandas支持df[SeriesOfBollean]来选取行，而实际上SeriesOfBollean的创建可以通
+过简单的df.column > contion来完成。
+
+```
+conditions = []
+for f in df.floats:
+    if f > 3.0:
+        conditions.append(True)
+    else:
+        conditions.append(False)
+print(df[conditions])
+match_condition = pd.Series(conditions, index=df.index)
+print(df[match_condition])
+```
+
+如上的代码与下面这段等价：
+
+```
+print("按条件选择行例3：")
+condition = df.floats > 3.0  # 创建一个bollean 的Series。
+print(df[condition])
+```
+
+参考：
+
+- [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
+
+
+### 多行多列
 
 ```
 df.loc[:, ['A', 'B']]
-```
-
-- 条件选择
-
-```
- df[df.A > 0] # 以某列的数据做为标准选择数据
- df[df['A'] > 0]
- df[df > 0]   # 选择 df中大于0的数，其余置为 NaN
 ```
 
 ## DataFrame 修改
