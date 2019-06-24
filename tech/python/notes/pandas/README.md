@@ -26,6 +26,22 @@
 衍生金融资产(万元)                  0.0        0.0
 ```
 
+学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以
+对这两列的内容进行求与操作来构建这样的series：
+
+```
+filter_condition = [True] * len(self.balance_df[0]['2018-12-31'])
+for i in range(len(self.args.stock)):
+    s = self.args.stock[i]
+    self.multi_stocks_asset_df[s] = self.balance_df[i]['2018-12-31']
+    filter_condition &= self.multi_stocks_asset_df[s] > 0
+
+df_for_plot = self.multi_stocks_asset_df[filter_condition]
+```
+
+参考：
+
+- [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
 
 
 ## 变更某一列内容的展现形式

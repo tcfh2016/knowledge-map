@@ -1,3 +1,29 @@
+# 常见问题
+
+## X轴标签部分隐藏的问题
+
+使用默认的显示方式有些时候无法显示出xlabel的所有内容，比如：
+
+![](xlabel_was_hided.png)
+
+之前尝试解决过一次但是没有成功，这次经过多次搜索在StackOverflow上找到答案，即在`show()`
+之前调用`plt.tight_layout()`，但这样整幅图的效果可能会比较怪异，比如被挤压：
+
+![](tight_layout.png)
+
+
+可以通过以下方法调整：
+
+- 调整 xlabel，避免使用太长、太多的展示。
+- 通过`figsize`调整整幅图的大小。
+- 通过`plt.subplots_adjust`来调整图形显示的边缘设置。
+
+参考：
+
+- [xlabel and ylabel out of plot region, cannot show completely in the figure
+](https://stackoverflow.com/questions/29767386/xlabel-and-ylabel-out-of-plot-region-cannot-show-completely-in-the-figure)
+- [How do you change the size of figures drawn with matplotlib?](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
+
 
 ## 设置Y轴为百分比样式
 
@@ -45,8 +71,24 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 - legend 防止图例： Ture/False/reverse
 - secondary_y，默认False，指定哪些列数据采用辅坐标轴
 
-画出图形时如果觉得周围留空过大的问题，查看接口当前不支持通过参数控制图形周围空白的大小。
+画出图形时如果觉得周围留空过大的问题，在调查`X轴标签部分隐藏的问题`时找到方案，即是通过
+`subplots_adjust`来调整显示，之前一直在针对dataframe的plot接口里面查找，所以才没有找到
+调整方案。
+
+```
+plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.1, bottom=0.22, right=0.96, top=0.96)
+```
+
+另外可以通过`figsize `来设置总的大小。
+
+```
+dp = df_for_plot.plot(figsize=(2,2))
+plt.figure(figsize=(2,2))
+```
 
 参考：
 
 - [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)
+- [xlabel and ylabel out of plot region, cannot show completely in the figure
+](https://stackoverflow.com/questions/29767386/xlabel-and-ylabel-out-of-plot-region-cannot-show-completely-in-the-figure)
+- [How do you change the size of figures drawn with matplotlib?](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
