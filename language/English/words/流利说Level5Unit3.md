@@ -173,3 +173,102 @@ silly
 > showing a lack of thought, understanding or judgement
 > 愚蠢的；傻瓜
 > That kind of silly behavior isn't acceptable in our office
+
+### Part 4
+
+a current of
+
+> a movement of water, air, or electricity in a particular direction
+> 电流
+> The solar wind is a current of charged particles coming as us from the sun.
+
+approximately
+
+> used to show that something is almost, but not completely, accurate or correct
+> 大约，近似地
+> The most recent event happened approximately 41,000 years ago.
+
+catastrophe
+
+> a sudden event that causes many people to suffer
+> 灾难（强调可怕性和灾难性的结局）
+> Otherwise it will be too late to prevent a catastrophe.
+
+consult
+
+> to discuss something with somebody to get their permission for something, or to
+help you make a decision
+> 商量，咨询
+> She's angry because he made an investment without consulting her.
+
+deflect
+
+> to change direction or make something change direction
+> 使转向，使倾斜
+> When the solar wind nears the Earth, the Earth's magnetic field deflects it away.
+
+invader
+
+> an army or a country that enters another country by force
+> 侵略者
+> Once they established permanent boundaries, they had to fight to defend their
+territory from invaders.
+
+outer
+
+> on the outside of something
+> 外面的，外部的
+> Deep inside the Earth is a solid iron core, surrounded by a liquid metal outer
+core.
+
+resume
+
+> to start doing something again after stopping or being interrupted
+> 重新开始
+> We resumed watching the movie as soon as the wireless connection was restored.
+
+reassess
+
+> to think again about something to decide if you need to change your opinion of
+it
+> 再考虑，再评价
+> To reconsider means to reassess or think about something again.
+
+repel
+
+> if two things repel each other, they push each other away with an electrical
+force
+> 击退，抵制，排斥
+> Electric charges attract or repel each other with a force that depends on the
+distance between them.
+
+reversal
+
+> a change of something so that it is the opposite of what it was
+> 逆转，反转
+> The possibility that a field reversal would be an extinction event is very low.
+
+simply
+
+> only
+> 简单地，仅仅
+> That's a really strong word for simply disagreeing.
+
+trivial
+
+> not important or serious; not worth considering
+> 不重要的，琐碎的
+> She spends her time worrying about trivial details, so she wates a lot of time.
+
+up until
+
+> up to the point in time
+> 一直到...为止
+> Up until a couple of hundred years ago, very little was known about this force.
+
+particles
+
+> a tiny piece of anything
+> 微粒
+> Movement of soil particles from one place to another by wind and water is a
+natural phenomenon.
