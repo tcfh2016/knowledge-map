@@ -1,5 +1,9 @@
-## numpy常用方法
+# numpy
 
+NumPy 是一个免费的、如同Matlab一样功能强大的数值计算开发平台。
+
+
+## numpy常用方法
 
 ### [np.allclose(np.array(a), np.array(b))](https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html)
 
