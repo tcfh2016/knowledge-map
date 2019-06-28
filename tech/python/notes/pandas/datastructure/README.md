@@ -69,6 +69,11 @@ DataFrame 是一个二维表式的数据结构，由data(数据)、rows(行)、c
 
 ![](dataframe.png)
 
+## DataFrame所包含的数据类型
+
+DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
+
+- object: 字符串类型。
 
 ## DataFrame创建
 
@@ -189,30 +194,49 @@ df.loc[:, ['A', 'B']]
 
 ## DataFrame 修改
 
-- 修改 index
+### 修改行、列名
 
-直接将DataFrame的index修改为其中的某一列：
+- 修改行名
+
+直接赋值，如下将DataFrame的index修改为其中的某一列：
 
 ```
 min_max_df.index = min_max_df['日期'] # 之前的'日期'列依然存在
 min_max_df = min_max_df.set_index('日期', drop=True) #
-```
-
-*注：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建心的DataFrame。*
-
-
-- 修改行/列名
-
-修改行/列名有两种方式：直接赋值和调用 rename方法：
-
-```
 df.index = [1, 2, 3, 4]
-df.columns = ['price']
-df.rename(columns=lambda x:x.replace('$',''), inplace=True)
-df.rename(columns={'a':'b'}, inplace=True)
 ```
 
-*注：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
+*注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建心的DataFrame。*
+*注2：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
+
+- 修改列名
+
+两种方式：直接赋值和调用 rename方法：
+
+```
+df.columns = ['price'] # 用等长的列表来覆盖之前的列名
+df.rename(columns=lambda x:x.replace('$',''), inplace=True)
+df.rename(columns={'a':'b'}, inplace=True) # 将'a'重命名为'b'，可以支持多列的重命名。
+```
+
+另外在read_csv()的时候可以修改读取数据的列名：
+
+```
+ufo = pd.read_csv(name_file, names=ufo_cols, header=0) # 不指定header，直接使用自
+定义ufo_cols作为列名。
+```
+
+### 添加行、列
+
+- 添加列
+
+在某个DataFrame里面添加一列必须使用`[]`操作符：
+
+```
+df['numbers'] = series
+```
+
+### 修改行、列
 
 - 修改整列
 
@@ -231,7 +255,26 @@ df['newdata'] = val
 df.newdata = val
 ```
 
+### 删除行、列
+
+- 删除行
+
+调用`drop()`:
+
+```
+df.frop([0,1], axis=0, inplace=True) # 删除index为0，1的行。
+```
+
 - 删除列
+
+两种方法：调用`drop()`和使用`del`。
+
+`drop()`函数可以用来删除行和列。
+
+```
+df.drop('column name', axis=1) # 指定axis=1说明删除列。
+df.drop(['city', 'state'], axis=1) # 删除'city'和'state'两列。
+```
 
 删除列时必须通过索引的方式指定，不能通过属性的方式来指定。
 
@@ -241,7 +284,6 @@ del df.newdata # 会提示错误。
 ```
 
 # 类型转换
-
 
 
 # 操作方法

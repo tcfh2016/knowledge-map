@@ -1,5 +1,9 @@
 # 处理csv
 
+## read_table
+
+read_table()与read_csv的区别在于后者默认读取以‘,’作为分隔符的文件，前者需要显示指定分
+隔符。
 
 ## 将 DataFrame / DataFrameGroupBy 对象写入csv
 

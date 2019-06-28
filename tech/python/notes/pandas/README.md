@@ -9,6 +9,21 @@
 # 学习材料
 
 - [10 Minutes to pandas](http://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html)
+- [Data School](https://www.youtube.com/channel/UCnVzApLJE2ljPZSeQylSEyg)
+
+# 常用属性及函数
+
+属性：
+
+- DataFrame.shape ：显示行、列信息。
+- DataFrame.dtypes ：显示行的类型。
+
+方法：
+
+- DataFrame.head() ：默认显示前面5行的数据。
+- DataFrame.describe() ：显示对应数据对应里面“数据列”的统计信息，包括count, min, max...
+- DataFrame.describe(include=['object']) ：显示非数据列的统计信息，包括count, uniq, top, freq
+
 
 # 常见问题
 
