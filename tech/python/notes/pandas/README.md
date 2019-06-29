@@ -54,9 +54,24 @@ for i in range(len(self.args.stock)):
 df_for_plot = self.multi_stocks_asset_df[filter_condition]
 ```
 
+学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即
+便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
+
+```
+df_for_plot = self.multi_stocks_asset_df[condition1 & condition2]
+```
+
+而对于单列多条件的选取，可以使用简便的方式:
+
+```
+movies[(movies.genre=='Crime') | (movies.genre=='Drama') | (movies.genre=='Action')]
+movies[movies.genre.isin(['Crime', 'Drama', 'Action'])]
+```
+
 参考：
 
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
+- [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
 
 
 ## 变更某一列内容的展现形式
