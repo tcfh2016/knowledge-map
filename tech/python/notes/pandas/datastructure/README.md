@@ -288,6 +288,18 @@ del df.newdata # 会提示错误。
 
 # 操作方法
 
+## mean()
+
+通过`axis`参数来控制平均值操作：
+
+```
+drinks.mean(axis=0) # 求取每列的平均值，求值的方向为从上到下
+drinks.mean(axis="index")
+
+drinks.mean(axis=1) # 求取每行的平均值，求值的方向为从左至右
+drinks.mean(axis="columns")
+```
+
 ## sort_values()
 
 对某列的series进行排序：

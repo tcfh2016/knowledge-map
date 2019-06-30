@@ -27,6 +27,19 @@
 
 # 常见问题
 
+## 遍历操作
+
+对于Series, Dataframe的遍历操作如下：
+
+```
+for c in ufo.city:
+  print(c)
+
+for index, row in ufo.interrows():
+  print(index, row.City, row.State) # 打印City, State
+
+```
+
 ## 通过多列的值来进行行选取操作
 
 比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
