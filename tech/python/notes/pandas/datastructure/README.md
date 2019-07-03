@@ -46,21 +46,6 @@ obj[['a', 'd']]
 
 ## Series 修改
 
-### 查找与替换
-
-使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，
-后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将
-名为index的Series的值里包含'(万元)'替换为空。
-
-```
-index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
-```
-
-参考：
-
-- [Update pandas DataFrame with .str.replace() vs .replace()](https://stackoverflow.com/questions/38117016/update-pandas-dataframe-with-str-replace-vs-replace)
-- [pandas.Series.replace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html)
-- [pandas.Series.str¶](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
 
 # DataFrame
 

@@ -27,6 +27,33 @@
 
 # 常见问题
 
+## 替换操作
+
+使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，
+后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将
+名为index的Series的值里包含'(万元)'替换为空。
+
+```
+index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
+```
+
+对DataFrme也是按照同样操作来进行替换，比如对于某列（对应Series）的操作：
+
+```
+df.column_name.str.replace('[', '').replace(']', '') # 将column_name列里的'[]'删除。
+df.column_name.str.replace('[\[\]]', '') # 将column_name列里的'[]'删除，使用正则。
+```
+
+*注：在pandas里面使用字符串的功能，需要通过添加`.str`来完成字符串函数的调用。*
+
+参考：
+
+- [Update pandas DataFrame with .str.replace() vs .replace()](https://stackoverflow.com/questions/38117016/update-pandas-dataframe-with-str-replace-vs-replace)
+- [pandas.Series.replace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html)
+- [pandas.Series.str¶](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
+
+
+
 ## 遍历操作
 
 对于Series, Dataframe的遍历操作如下：
