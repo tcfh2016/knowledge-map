@@ -1,3 +1,0 @@
-# Reading
-
-<Mindmap>。
