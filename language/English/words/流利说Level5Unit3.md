@@ -28,6 +28,8 @@ sarcastic
 > 挖苦的，尖刻的
 > In this case, she's being sarcastic, so she thinks it's a great choice.
 
+attachment
+
 > a strong feeling of love for somebody or something
 > 依恋
 > Desires and attachments to things of any kind can only lead to suffering.

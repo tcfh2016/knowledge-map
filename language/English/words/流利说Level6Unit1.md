@@ -14,7 +14,7 @@ annoyed
 
 > slightly angry
 > 恼怒的，烦闷的；使烦恼，打扰。
-> Annoyed, the villagers returned to the village and back to their  normal activites
+> Annoyed, the villagers returned to the village and back to their normal activities
 
 commodity
 
@@ -153,7 +153,6 @@ scramble
 sometimes with milk and butter
 > 爬，炒（蛋），扰乱（思维）
 > Some forms of life can be ugly to look at but may taste good, like scrambled eggs.
-tinder
 
 shield
 
@@ -179,3 +178,26 @@ spine
 > 脊柱
 > Some of the verves in his spine and legs had been damaged, but everything else
 was okay.
+
+dunes
+
+> 沙丘
+
+trench
+
+> 沟，渠
+
+notched
+
+> notched like a saw with teeth pointing toward the apex（顶点，尖端）
+> 有凹口的，有缺口的，锯齿状的
+
+tinder
+
+> 火绒，易燃物
+
+immense
+
+> unusually great in size or amount or degree or especially extent or scope
+> 巨大的，广大的，无边无际的
+> If we do so, your contribution to our ultimate victory will have been immense.
