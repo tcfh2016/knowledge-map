@@ -1,3 +1,6 @@
+- [grid](./grid/README.md)
+
+
 ## %matplotlib inline 的含义
 
 它是IPython里面的一个魔法函数，表示内嵌绘图，并且可以省略掉plt.show()
