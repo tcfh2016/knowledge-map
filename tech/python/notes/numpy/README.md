@@ -4,6 +4,10 @@ NumPy 是一个免费的、如同Matlab一样功能强大的数值计算开发�
 
 ## numpy常用数组计算函数
 
+### [numpy.zeros(shape, dtype=float, order='C')](https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html)
+
+返回
+
 ### [np.polyval(p, x)(https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html)
 
 假设p是一个长度为N的数组，那么`np.polyval(p, x)`返回如下计算式的值：
