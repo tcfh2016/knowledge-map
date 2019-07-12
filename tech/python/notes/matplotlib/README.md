@@ -7,11 +7,6 @@
 
 - [Purpose of “%matplotlib inline”](https://stackoverflow.com/questions/43027980/purpose-of-matplotlib-inline)
 
-
-## 使用matplotlib画线，本地测试无法找到该模块
-
-使用 `pip3 install matplotlib`先安装。
-
 ## 坐标轴显示乱码(支持中文)？
 
 使用如下命令打印出matplotlib能够支持的系统字体：

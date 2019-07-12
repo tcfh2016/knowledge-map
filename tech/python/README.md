@@ -28,6 +28,25 @@
 - [金融相关]()
   - [《Python for Finance》]()
 
+# 常见问题
+
+## 模块安装
+
+使用matplotlib画线，本地测试无法找到该模块，那么可以使用 `pip3 install matplotlib`先
+安装。
+
+如果在安装过程中提示网络问题，比如使用 `pip3 install pandas`安装时提示：
+
+```
+ Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<pip._vendor.urllib3.connection.VerifiedHTTPSConnection object at 0x0000013C8C6942B0>, 'Connection to pypi.org timed out. (connect timeout=15)')': /simple/pandas/
+```
+
+就可以在安装时使用代理`pip3 --proxy 127.0.0.1:6152 install pandas`。
+
+参考：
+
+- [让 pip 走代理](https://www.logcg.com/archives/1914.html)
+
 # 编码规约
 
 - 当你复制粘贴代码的时候，基本上都会使未来的维护工作倍增。考虑一下：如果最初的版本发生改
