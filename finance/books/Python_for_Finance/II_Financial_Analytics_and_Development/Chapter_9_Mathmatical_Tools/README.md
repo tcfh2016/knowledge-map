@@ -96,7 +96,9 @@ matrix[0, :] = 1
 
 5) Multiple dimensions
 
-最小二乘法回归不需要经过太多修改就能够满足的高阶函数的回归。
+最小二乘法回归不需要经过太多修改就能够满足的多元函数的回归。
 
+发现这个例子里面有错误，比如代码里` fig.colorbar(surf, shrink=0.5, aspect=5)`根本没有
+定义surf。
 
 #### 2 Interpolation
