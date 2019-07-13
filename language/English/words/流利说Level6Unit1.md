@@ -201,3 +201,78 @@ immense
 > unusually great in size or amount or degree or especially extent or scope
 > 巨大的，广大的，无边无际的
 > If we do so, your contribution to our ultimate victory will have been immense.
+
+### Part 2
+
+brutal
+
+> violent and cruel
+> 残忍的
+> To be brutal means to be harsh or cruel.
+
+counter-factual
+
+> connected with what did not happen or what is not the case
+> 反事实的
+> Which condition is counter-factual, or imaginary?
+
+comprehend
+
+> to understand something fully
+> 理解
+> It took officials a whole day to comprehend the scale of the disaster.
+
+craggy
+
+> steep and covered with a lot of rough rocks
+> 崎岖的，峭壁的
+> Its pale light illuminates the cold, craggy landscape.
+
+decontaminate
+
+> to remove harmful substances from a place or thing
+> 净化
+> In the following months, massive efforts were made to decontaminate the area.
+
+evacuation
+
+> an act of moving people from a place of danger to a safer place
+> 疏散，撤离
+> Many former residents returned illegally after the evacuation.
+
+fallout
+
+> the radioactive dust in the air after a nuclear explosion
+> 放射性尘埃
+> Fallout from a nuclear explosion contains radioactive particles carried into atmosphere.
+
+fission
+
+> the process of dividing an atom in order to create energy
+> 裂变
+> The fission reaction accelerated out of control due to a sudden power surge.
+
+insane
+
+> seriously mentally ill
+> 神志不清的，疯狂的
+> To keep sane means to not go insane or crazy.
+
+nostalgic
+
+> feeling happy and also slightly sad when you think about things that happened
+in the past
+> 怀旧的，乡愁的
+> To be nostalgic means to think about and miss past experiences.
+
+precaution
+
+> an action that is done to prevent something unpleasant or dangerous happening
+> 预防，警惕
+> To take precautions means to act to prevent a problem from happening.
+
+thrive
+
+> to become, and continue to be, successful, strong, healthy, etc.
+> 繁荣，兴旺
+> It seems that nature can recover and even thrive where humans cannot.
