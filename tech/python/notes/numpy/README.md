@@ -63,9 +63,14 @@ p[0]*x**(N-1) + p[1]*x**(N-2) + ... + p[N-2]*x + p[N-1]
 array([ 0.08703704, -0.81349206,  1.69312169, -0.03968254])
 ```
 
+注：回归分析是一种统计学上分析数据的方法，目的在于了解两个数据或多个数据之间是否相关，相
+关方向和强度，并建立数学模型以便观察或预测。简单来说，回归分析是建立因变量Y和自变量X之间
+的关系模型。
+
 参考：
 
 - [多项式曲线拟合](https://ww2.mathworks.cn/help/matlab/ref/polyfit.html)
+- [回归分析](https://zh.wikipedia.org/wiki/%E8%BF%B4%E6%AD%B8%E5%88%86%E6%9E%90)
 
 ### [np.sin](https://docs.scipy.org/doc/numpy-1.9.3/reference/generated/numpy.sin.html)
 
