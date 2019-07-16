@@ -168,4 +168,19 @@ matrix[0, :] = 1
 
 ![](maximazation_problem_formulation_min.PNG)
 
-之后通过调用`minimize`来获取最小值。
+之后通过调用`minimize`来获取最小值，得到投资者购买8单位的a证券和2单位的b证券可以获得最大
+值9.7。（代码尚未调试通过）
+
+#### 4 Integration / 积分
+
+Integration在估值和期权定价上非常有用。比如我们要对函数 sin(x) + 0.5*x 在区间[0.5, 9.5]
+进行积分:
+
+![](integration_ex.png)
+
+1) Numerical Integration
+
+integrate 模块提供了专门的数值积分函数，比如quad 来负责自适应正交积分，romberg 负责龙贝
+积分。
+
+2) Integration by Simulation

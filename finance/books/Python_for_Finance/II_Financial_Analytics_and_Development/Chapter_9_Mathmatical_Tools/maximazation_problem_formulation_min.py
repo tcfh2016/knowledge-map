@@ -6,9 +6,7 @@ import scipy.optimize as spo
 
 # function to be minimized
 from math import sqrt
-def Eu(*args):
-    s = args[0]
-    b = args[1]
+def Eu(s, b):    
     return -(0.5 * sqrt(s * 15 + b * 5) + 0.5 * sqrt(s * 5 + b * 12))
 # constraints
 cons = ({'type':'ineq', 'fun':(lambda s,b:100-s*10-b*10)})
