@@ -1,3 +1,11 @@
+# zip()
+
+zip()根据传入的数据返回一系列可以迭代的元组。
+
+参考：
+
+- [Python zip()](https://www.programiz.com/python-programming/methods/built-in/zip)
+
 # type()
 
 显示对应数据的类型。
