@@ -15,66 +15,6 @@
 - 可以直接运行的模块文件往往也叫做脚本（一个顶层程序文件的非正式说法）。
 - 有些人将“模块”这个说法应用于被另一个文件所导入的文件。
 
-## import如何工作
-
-`import x`中的模块名x起到两个作用：首先，识别加载的外部文档，也会变成赋值给被载入模块的
-变量。其次，x定义的对象也会在执行时创建。Python的`import`语句并不同于C里的`#include`，
-因为它并不是把一个文件文本插入到另一个文件，而是一种运行时运算，程序第一次导入指定文件时，
-会执行三个步骤：*(注：使导入指定文件<模块>，而非目录<包>)*
-
-- 搜索：找到模块文件。
-  - Python使用标准模块搜索路径来找到对应模块，因此不需要指定路径和后缀名。
-- 编译：编译成位码（需要时）。
-  - Python会检查文件的时间戳，如果字节码文件比源代码旧那么程序运行时重新编译成字节码；
-  - Python在搜索路径上只发现字节码而没有源代码时就会直接加载字节码；
-  - 只有被导入的文件才会留下字节码文件.pyc，用来提高之后导入的速度；
-  - 顶层文件通常是设计成直接执行，而不是被导入的，但一个文件即作为顶层文件又能被导入也是
-  可能的。
-- 运行：执行模块代码来创建其所定义的对象。
-
-Python把载入的模块存储到`sys.modules`的表中，在导入操作之初便检查该表，如果模块不存在则
-执行上述三个步骤并存储到该表，在下一次导入时便可以直接提取内存中已经加载的模块对象。
-
-## 模块搜索路径
-
-Python的模块搜索路径（sys.path）是由四个组件组合而成：
-
-- 程序的主目录：当你运行一个程序的时候，这个入口是包含程序的顶层脚本文件的目录；当在交互
-模式下工作时，这个入口时当前工作目录。
-- PYTHONPATH目录（如果已经进行了设置）：Python会从左至右搜索PYTHONPATH环境变量设置中列
-出的所有目录，通常在导入文件处于不同目录时需要。
-  - Windows上通过控制面板来设置名称为“PYTHONPATH”的环境变量；
-- 标准库目录：Python会自动搜索标准库模块的安装目录。
-- 任何.pth文件内容（如果存在的话）：Python会把文件每行所列的目录从头至尾添加到模块搜索路
-径列表的最后，类似于PYTHONPATH。
-  - .pth文件通常放置在Python安装目录的顶层或者标准库所在位置的sitepackages子目录。
-
-搜索路径的配置可能随着平台及Python版本不同，如果要查看模块搜索路径的实际配置，可以通过打
-印内置的`sys.path`列表来查看。它是在程序启动时进行配置，自动将顶级文件主目录、任何
-PYTHONPATH、已经创建的任何.pth文件路径的内容以及标准库目录合并。
-
-只有在跨目录进行导入时才需要模块搜索路径的设置。
-
-如上第一条搜索规则决定了在 benchmark.py 中导入 strategy模块时不能简单的如C/C++一样使用
-`import strategy`而是需要从工作目录开始搜索，即使用`import src.strategies.strategy
-as strategy`才行。
-
-```
-C:.
-│  line_parser.py
-│
-├─src
-│  │  parser.py
-│  │
-│  ├─strategies
-│  │  │  benchmark.py
-│  │  │  maxrlc.py
-│  │  │  strategy.py
-```
-
-*文件名后缀是可以从import语句中省略的，Python会选择在搜索路径中第一个符合导入文件名的文
-件，它既可以是源代码文件x.py、字节码文件x.pyc、目录x或者其他编译扩展模块。*
-
 # 编写模块代码
 
 ## 模块的创建
@@ -125,3 +65,92 @@ from imp improt reload
 reload(module)
 ...use module.attributes...
 ```
+
+# 常见问题
+
+## import 模块之后为什么无法直接使用模块中的变量 ？
+
+参考如下代码，会出现 `AttributeError: module 'tkinter' has no attribute 'messagebox'`
+的错误。
+
+```
+import time, sys
+if sys.version < '3':
+    import Tkinter
+    #import Tkinter.messagebox
+else:
+    import tkinter
+    #import tkinter.messagebox
+
+window = tkinter.Tk()
+tkinter.messagebox.showwarning()    
+```
+
+为什么`import tkinter`但是无法使用到 tkinter下面的 messagebox属性呢？
+
+1. 第一次错误的认识
+
+在查阅之前的笔记之后，本来以为是因为Python的`import`语句并不同于C里的`#include`，它仅
+仅是搜索该模块，并且编译让后将其存储到`sys.modules`的表里供以后使用，所以这里的`import`
+实际上并没有将`tkinter`的相关变量引入当前作用域。但这无法解释为什么`window = tkinter.Tk()`
+没有报错。
+
+2. 第二次重新的认识
+
+基于如上的疑问，我在StackOverflow上提了一个问题，读了`funie200`的回答之后了解到`tkinter.Tk()`
+是`tkinter`的变量，但`tkinter.messagebox`是`tkinter`里面的模块，因此`messagebox`需要
+再次import。
+
+之后认真理解了`Aran-Fey`的回答之后，觉得他回答得真的太好了，细致并且更有深度。他的解释如
+下：
+
+  - 在 import module的时候，如果import的是文件，那么会执行该文件；如果import的是其他模
+  块（目录），那么此时会执行该模块下的 __init__.py 文件。
+  - 这里 messagebox 包括在 tkinter 中，因此import tkinter 那么执行的是其中的__init__.py
+  文件，由于其中已经讲 class `Tk()`的定义导入进来，因此可以直接使用。
+
+参考：
+
+- [Why do I need to import tkinter.messagebox but don't need to import tkinter.Tk() after importing tkinter?](https://stackoverflow.com/questions/56268474/why-do-i-need-to-import-tkinter-messagebox-but-dont-need-to-import-tkinter-tk/56268994#56268994)
+
+
+## 如何import上层目录？
+
+比如在tst目录下面的loan_type_compare.py文件引用了上层目录的capital.py和loan.py，那么
+该如何编写import语句：
+
+```
+C:.
+└─Toolbox
+    │  capital.py
+    │  loan.py
+    │  loan_payment.py
+    │  __init__.py
+    │
+    ├─tst
+    │  │  loan_type_compare.py
+    │  │  __init__.py
+```
+
+尝试在tst里面执行loan_type_compare.py文件提示：
+
+```
+λ python loan_type_compare.py
+Traceback (most recent call last):
+  File "loan_type_compare.py", line 3, in <module>
+    from .. import capital
+ValueError: attempted relative import beyond top-level package
+```
+
+这是因为当以tst作为工作目录的时候，Python无法探知当前包的结构，也即是说Python不知道tst
+是存在于一个包结构当中，因此无法访问基于包的父目录。你可以在Tool上级目录通过`import Toolbox.tst.loan_type_compare`
+来执行，但在Toolbox目录执行`tst.loan_type_compare`，或者在tst目录执行`loan_type_compare`
+都会提示相同的错误。
+
+因此，按照模块、包的概念：一般Python程序的组织是以“一个顶层文件+零个或多个支持文件”组成，
+这里的测试文件为顶层文件，应该布置在上层目录。
+
+参考：
+
+- 《Python学习手册》第五部分：模块
+- [beyond top level package error in relative import](https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import)
