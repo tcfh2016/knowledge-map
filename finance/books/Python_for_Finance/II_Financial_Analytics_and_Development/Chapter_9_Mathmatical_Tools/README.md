@@ -184,3 +184,33 @@ integrate 模块提供了专门的数值积分函数，比如quad 来负责自�
 积分。
 
 2) Integration by Simulation
+
+对期权和衍生品的蒙特卡罗模拟展示了通过模拟来进行积分的可能性。
+
+#### 5 Symbolic Computation / 符号计算
+
+前面的章节都在讨论数值计算，这一章节是为符号计算准备的，SymPy是专门为符号计算设立的函数
+库。
+
+1) BASICS
+
+sympy引入了一些列对象，最基本的就是Symbol。SymPy提供了基于LaTex, Unicode和ASCII针对数
+学表达式的渲染，LaTex在IPython Notebook能够得到很好的渲染。下面是一个基于ASCII的例子：
+
+```
+sy.init_printing(pretty_print=False, use_unicode=False)
+print(sy.pretty(sy.sqrt(x) + 0.5))
+```
+
+结果为：
+
+![](symbolic_computation_ex_basic_ascii_pretty.PNG)
+
+2) EQUATIONS
+
+SymPy的一大优势在于解方程，比如它假设你想求取传入表达式等于0的解。比如`sy.solve(x**2-1)`
+的值为`[-1, 1]`，但它不能保证一定能够求取到解。
+
+3) INTEGRATION
+
+SymPy的另一大优势是积分和微分。比如参照以前面数值积分的例子，
