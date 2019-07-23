@@ -38,3 +38,5 @@ print 'my {pet} was {age} years old.'.format (pet='dog', age=2)
 print 'my {pet} was {age:.2f} years old.'.format (pet='dog', age=2)
 print 'my {pet} was {age:.{d}f} years old.'.format (pet='dog', age=2, d=3)
 print 'my {0} was {1} years old.'.format ('dog', 2)
+
+ print "%14s %14.3f %14.3f" % ('size', sta1[0], sta2[0]
