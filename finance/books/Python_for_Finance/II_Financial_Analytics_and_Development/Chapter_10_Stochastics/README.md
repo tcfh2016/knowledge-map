@@ -57,3 +57,42 @@ Monte Carlo simulation (MCS，蒙特卡洛模拟)是金融领域应用最广的�
 参考：
 
 - [Monte Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
+
+### RANDOM VARIABLES
+
+如下Black-Scholes-Merton公式（莫顿定价模型）用来模拟未来指数的走势。
+
+![](Black-Scholes-Merton-formula.PNG)
+
+其中：
+
+- ST 表示未来T时刻的index level。
+- r 固定无风险短期利率。
+- o 固定波动（回报的标准差）。
+- z 符合标准正态分布的随机数。
+
+使用10000个随机数进行模拟，可以得到:
+
+![](simulation_ex_black_scholes_merton.png)
+
+### SCHOTRASTIC PROCESSES
+
+随机过程是一系列随机变量，在模拟某个过程时我们期望能够从反复的随机变量中找到一些相同点，
+然而金融领域随机过程的应用展示了“马尔科夫性质（markov property）”，即明天的值仅与今天
+的状态有关，而与更远的历史数据关联不大。所以这个过程也是“无记忆”的。
+
+1）Geometric Brownian motion / 几何布朗运动
+
+如下给定的随机微分方程（stochastic differential equation，SDE），Zt是标准的布朗运动，
+St是对数正态分布。
+
+![](stochastic_differential_equation.PNG)
+
+如上的公式可以根据欧拉scheme离散化后为如下公式，其中delta-t为固定的离散化间隔，Zt服从标
+准正态分布的随机数。
+
+![](Black-Scholes-Merton-formula-discretized-byEular.PNG)
+
+转换为代码执行结果为：
+
+![](simulation_ex_black_scholes_merton_discretized_byEular.png)
