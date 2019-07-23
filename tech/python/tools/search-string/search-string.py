@@ -6,8 +6,12 @@ print ("File to be splitted: ", argv[1])
 
 # Store all keywords.
 keywords = []
+reverse_match = False
 for i in range(2, len(argv)):
-    keywords.append(argv[i])
+    if argv[i] == '-r':
+        reverse_match = True
+    else:
+        keywords.append(argv[i])
 
 for i in range(0, len(keywords)):
     print ("keyword %s          :  %s" %(i+1, keywords[i]))
@@ -20,14 +24,25 @@ for i in range(0, len(keywords)):
 
 print ("output filename %s" %output_filename)
 
+def matchLine(line):
+    if reverse_match:
+        for keyword in keywords:
+            if keyword in line:
+                return False
+        return True
+    else:
+        for keyword in keywords:
+            if keyword in line:
+                return True
+        return False
+
 # Search file.
 def searchFile(inputFile, outputFile):
     with open(inputFile) as input_content:
         for line in input_content:
-            for keyword in keywords:
-                if keyword in line:
-                    print (line)
-                    outputFile.write(line)
+            if matchLine(line):
+                print (line)
+                outputFile.write(line)
 
 def main():
     output_fp = open(output_filename, 'w')
