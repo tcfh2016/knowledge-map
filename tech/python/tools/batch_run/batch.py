@@ -18,8 +18,8 @@ def parse_args():
 def print_args(args):
     bin_file = os.path.join(os.getcwd(), args.bin)
     dir_name = os.path.join(os.getcwd(), args.directory)
-    print bin_file
-    print dir_name
+    print(bin_file)
+    print(dir_name)
 
 def batch_process_ttitrace(dir):
     for f in os.listdir(dir):
