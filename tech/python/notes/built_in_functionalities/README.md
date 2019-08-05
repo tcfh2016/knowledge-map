@@ -1,3 +1,22 @@
+Python自带了很多内置函数以及函数库，并且你能够很方便的获取帮助。
+
+- 使用`dir(module_name)`列出模块的所有函数。
+- 使用`dir(__builtins__)`查看内置函数清单。
+- 使用`help(function_name)`查看出该函数的文档字符串。
+- 使用`print(module_name.function_name.__doc__)`打印出该函数的文档字符串。
+
+Python里的赋值语句`x = expr`与其他语言里的含义不一样，比如在C/C++里是先为`x`分配内存，
+再将`expr`的值拷贝到`x`的内存。但是在Python里则表示是将 `x`指向`expr`，即先为`expr`的
+值分配空间，再将`x`指向它。所以，Python里的赋值操作不会进行值拷贝，而仅仅改变变量所指向
+的位置。Python自动跟踪所有的值，对于没有任何变量指向的值则将其删除，此即为`垃圾收集`。
+
+理解了如上的概念，便能理解`x = None`的含义是将`x`重置为初始状态。
+
+# 参考阅读
+
+- [The Python Standard Library](https://docs.python.org/2.7/library/index.html)
+- [What is a None value?](https://stackoverflow.com/questions/19473185/what-is-a-none-value#)
+
 # round(x, [, n])
 
 返回浮点数的四舍五入值，n可以指定小数点后面的位数。
