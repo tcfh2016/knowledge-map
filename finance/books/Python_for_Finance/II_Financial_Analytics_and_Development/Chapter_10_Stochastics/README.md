@@ -96,3 +96,42 @@ St是对数正态分布。
 转换为代码执行结果为：
 
 ![](simulation_ex_black_scholes_merton_discretized_byEular.png)
+
+2) Square-root diffusion / 平方根扩散
+
+金融领域内应用的较广的另一种方法是用于评估短期利率或者易变性的均值反转过程，这种方法对应
+常见的模型为“平方根扩散”。
+
+3) Stochastic volatility / 随机波动
+
+Black-Scholes-Merton（莫顿）定价模型的一个假设是波动是常量，但实际上波动不是常量也不是
+确定的，而是随机的。因此，早在1990年金融领域便提出了随机波动模型。
+
+4) Jump diffusion / 跳跃扩散
+
+随机波动和杠杠效应是在市场里面观测到的事实，另外一个重要的事实是资产价格或者波动的跳跃性，
+Merton在1976年使用对数正态强化了其莫顿定价模型。
+
+
+### VARIANCE REDUCTION
+
+## Valuation
+
+蒙特卡洛模拟一种重要的应用是为期权、衍生品以及混合资本工具进行估值。
+
+### EUROPEAN OPTIONS
+
+### AMERICAN OPTIONS
+
+## Risk Measures
+
+随机方法和模拟多应用于风险管理。
+
+### VALUE-AT-RISK
+
+### CREDIT VALUE ADJUSTMENTS
+
+## Conclusions
+
+本章介绍了蒙特卡洛模拟在金融领域的应用的方法和技术，主要针对如何基于不同的分布生成随机数
+并如何处理随机数和随机过程，比如期权估值和风险测量。
