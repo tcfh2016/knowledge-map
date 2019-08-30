@@ -43,3 +43,43 @@ or result, rather than actions or events.
   - express the action or event: 他离开了。
   - “她离开”是一种事件。
   - 不关注时间距离，仅关注状态。
+
+# 句子结构
+
+## 1.主语 + 谓语 + 宾语
+
+- The emissions from vehicles and planes can cause air pollution.
+
+## 2.主语 + 谓语 + 宾语 + 宾语补足语
+
+- Modern technology has allowed rich people to accumulate wealth more easily.
+  - 不定式`to accumulate wealth`作宾语补足语，补充说明宾语的成分。
+- Have an adverse effect on something
+  - 这里面的介词短语`on something`补充说明effect。
+
+## 3.主语 + 谓语 + 间接宾语 + 直接宾语
+
+- Computer technology gives people opportunities to communicate with each other.
+  - `people`为间接宾语，`opportunities`为直接宾语。
+- Offer you a code drink
+- Give her some money
+
+## 4.主语 + 被动语态
+
+- Those serious offenders should be sent to prison.
+
+## 5.主语 + 不及物动词
+
+- The tuition fee has been rising.
+
+## 6.主语 + 系动词 + 表语
+
+- Working long hours has become the norm in companies.
+
+## 7.There be句型
+
+- There are many job applicants competing for limited positions.
+
+## 8.It 句型
+
+- It would be difficult to create a happy, prosperous society.
