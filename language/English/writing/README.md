@@ -6,6 +6,11 @@
 - 劳动力：work force/ labor force/ manpower
 - 城市：cities/ urban areas
 - 生活水平：living standard
+- 前途：prospect
+- 因素：factor/ determinant
+- 性格特点：personality/ character
+- 好处：advantage/ benefit
+- 文盲：illiteracy
 
 ## 动词
 
@@ -16,11 +21,17 @@
 - 参加：join/ attend
 - 忍受：endure
 - 被认为：is widely accepted as/ is considered to be
+- 承认：admit
 - 获得：receive/ accept/ gain
+- 开阔：open/ expand/ broaden
+- 让...能：empowering/ enabling
+- 努力：make a conscious effort
+- 放弃：give up/ drop out of
 
 ## 形容词
 
 - 美丽：beautiful/ spectacular
+- 很多：a considerable number of/ many
 
 ## 副词
 
@@ -28,6 +39,7 @@
 
 - 然而：but/ however/ nevertheless
 - 因为：because of/ due to the fact that
+- 结果、因此：as a consequence
 - ...和...：waste and pollution/ waste as well as pollution.
 - 为了：so as to/ in order to
 
@@ -38,12 +50,16 @@
 - 与此相反：She is quite petite, in constrast with her tall sister.
 - 相比之下：in constrast/ on the one,other hand/ by(in) comparison.
 - 穷人家的孩子：disadvantaged children/ children from poverty family
+- 生活方式：ways of life
+- ...的特点：are known for
 
 ## 动词短语
 
 - 专注：focus on/ concentrate on
+- 重视：put emphasis on
 - 喜欢做：are likely to/ prefer to
 - 不愿做：don't want to/ are not willing to/ are not likely to
+- 免交学费：be exempted from tuition
 - 应对、处理：get rid of/ dispose of/ deal with/ cope with/tackle/ address/ resolve
   - I used weedkiller to get rid of the weeds in the garden.
   - Surely there must be a better way to dispose of nuclear waste?
@@ -95,7 +111,7 @@ cope with意思相近，表示应对某些人或者物。*
 
 ## 谓语 + 宾语
 
-- 产生影响：pose threat to/ have a negative(adverse) impact on/make a difference to
+- 产生影响：pose a threat to/ have a negative(adverse) impact on/make a difference to
   - The anti-smoking campaign had had/made quite an impact on young people.
   - Exercise can make a big difference to your state of health.
   - Drunken drivers pose a serious threat to other road users.
