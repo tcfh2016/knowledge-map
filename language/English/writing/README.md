@@ -16,7 +16,7 @@
 
 - 保护：protect/ preserve
 - 买：buy/ purchase
-- 赞同：endorse/ agree
+- 赞同：endorse/ agree/ support
 - 促进：promote/ benefit/ improve
 - 参加：join/ attend
 - 忍受：endure
@@ -27,17 +27,19 @@
 - 让...能：empowering/ enabling
 - 努力：make a conscious effort
 - 放弃：give up/ drop out of
+- 宣传：disseminate/ promote
 
 ## 形容词
 
 - 美丽：beautiful/ spectacular
 - 很多：a considerable number of/ many
 
+
 ## 副词
 
 ## 连词
 
-- 然而：but/ however/ nevertheless
+- 然而：but/ however/ nevertheless/ meanwhile
 - 因为：because of/ due to the fact that
 - 结果、因此：as a consequence
 - ...和...：waste and pollution/ waste as well as pollution.
@@ -52,6 +54,7 @@
 - 穷人家的孩子：disadvantaged children/ children from poverty family
 - 生活方式：ways of life
 - ...的特点：are known for
+- 如今：in the modern world
 
 ## 动词短语
 
@@ -60,6 +63,7 @@
 - 喜欢做：are likely to/ prefer to
 - 不愿做：don't want to/ are not willing to/ are not likely to
 - 免交学费：be exempted from tuition
+- 带来压力：put sth under pressure/ put pressure on sth
 - 应对、处理：get rid of/ dispose of/ deal with/ cope with/tackle/ address/ resolve
   - I used weedkiller to get rid of the weeds in the garden.
   - Surely there must be a better way to dispose of nuclear waste?
@@ -84,9 +88,14 @@ cope with意思相近，表示应对某些人或者物。*
 - 总而言之：to summarise/ overall/ in conclusion/ finnally
 - 越来越多：more and more/ a growing number of
 
+## 形容词短语
+
+- 痴迷于：be obsessed with
+- 熟悉：be familiar with/ have knowledge about
+
 ## 肯定式
 
-- 认为、觉得：believe/ consider/ suggest/ argue
+- 认为、觉得：agree/ believe/ consider/ suggest/ argue/ support
   - He believes that all children are born with equal intelligence.
   - You've got to consider the time element when planning the whole project.（考虑到）
   - Can you suggest where I could buy a dozen roses?
