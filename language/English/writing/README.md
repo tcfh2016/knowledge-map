@@ -11,6 +11,9 @@
 - 性格特点：personality/ character
 - 好处：advantage/ benefit
 - 文盲：illiteracy
+- 选择：choice/ option
+- 普及：prevalence/ popularization
+- 母语：native language/ mother tongue
 
 ## 动词
 
@@ -21,7 +24,7 @@
 - 参加：join/ attend
 - 忍受：endure
 - 被认为：is widely accepted as/ is considered to be
-- 承认：admit
+- 承认：admit/ identified/ regarded/ recognised/ acknowledged
 - 获得：receive/ accept/ gain
 - 开阔：open/ expand/ broaden
 - 让...能：empowering/ enabling
@@ -33,6 +36,8 @@
 
 - 美丽：beautiful/ spectacular
 - 很多：a considerable number of/ many
+- 较大：considerable
+- 不可缺少的：indispensable
 
 
 ## 副词
@@ -44,6 +49,7 @@
 - 结果、因此：as a consequence
 - ...和...：waste and pollution/ waste as well as pollution.
 - 为了：so as to/ in order to
+- 此外：further more/ besides/ on the other hand/ in addition
 
 # 二、短语/词组
 
@@ -54,16 +60,18 @@
 - 穷人家的孩子：disadvantaged children/ children from poverty family
 - 生活方式：ways of life
 - ...的特点：are known for
-- 如今：in the modern world
+- 如今：in the modern world/ at the present time
 
 ## 动词短语
 
 - 专注：focus on/ concentrate on
 - 重视：put emphasis on
-- 喜欢做：are likely to/ prefer to
+- 喜欢做：are likely to/ prefer to/ instead of
 - 不愿做：don't want to/ are not willing to/ are not likely to
 - 免交学费：be exempted from tuition
 - 带来压力：put sth under pressure/ put pressure on sth
+- 做生意：conduct business/ set up a company
+- 开阔眼界：expand knowledge/ broaden horizons
 - 应对、处理：get rid of/ dispose of/ deal with/ cope with/tackle/ address/ resolve
   - I used weedkiller to get rid of the weeds in the garden.
   - Surely there must be a better way to dispose of nuclear waste?
