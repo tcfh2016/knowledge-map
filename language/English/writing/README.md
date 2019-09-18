@@ -14,6 +14,9 @@
 - 选择：choice/ option
 - 普及：prevalence/ popularization
 - 母语：native language/ mother tongue
+- 幸福：happiness/ well-being
+- 寿命：lifespan/ life expectancy
+
 
 ## 动词
 
@@ -50,6 +53,7 @@
 - ...和...：waste and pollution/ waste as well as pollution.
 - 为了：so as to/ in order to
 - 此外：further more/ besides/ on the other hand/ in addition
+- 除非：unless/ except
 
 # 二、短语/词组
 
