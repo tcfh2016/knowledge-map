@@ -16,6 +16,7 @@
 - 母语：native language/ mother tongue
 - 幸福：happiness/ well-being
 - 寿命：lifespan/ life expectancy
+- 收入：income/ earnings
 
 
 ## 动词
@@ -23,7 +24,7 @@
 - 保护：protect/ preserve
 - 买：buy/ purchase
 - 赞同：endorse/ agree/ support
-- 促进：promote/ benefit/ improve
+- 促进：promote/ benefit/ improve/ sharpen
 - 参加：join/ attend
 - 忍受：endure
 - 被认为：is widely accepted as/ is considered to be
@@ -34,6 +35,9 @@
 - 努力：make a conscious effort
 - 放弃：give up/ drop out of
 - 宣传：disseminate/ promote
+- 解雇：dismiss/ lay off/ fire
+
+
 
 ## 形容词
 
@@ -41,9 +45,13 @@
 - 很多：a considerable number of/ many
 - 较大：considerable
 - 不可缺少的：indispensable
+- 不熟悉：not familiar with/ do not have the knowledge about
+- 由...带来的：arising from
 
 
 ## 副词
+
+- 经常、不断：frequently/ from time to time
 
 ## 连词
 
