@@ -99,7 +99,7 @@ df = pd.read_csv("f500.csv", header = 0)
 
 ```
 import pandas as pd
-df = pd.read_csv("f500.csv", names = ["column0", "column1", "column2", "column3",  
+df = pd.read_csv("f500.csv", names = ["column0", "column1", "column2", "column3",
                                       "column4", "column5", "column6", "column7", "column8", "column9", "column10", "column11", "column12", "column13"])
 ```
 
