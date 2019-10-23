@@ -1,11 +1,29 @@
 - [grid](./grid/README.md)
 
-
 ## %matplotlib inline 的含义
 
 它是IPython里面的一个魔法函数，表示内嵌绘图，并且可以省略掉plt.show()
 
 - [Purpose of “%matplotlib inline”](https://stackoverflow.com/questions/43027980/purpose-of-matplotlib-inline)
+
+## 坐标轴标签上显示负号(minus sign)
+
+matplotlib默认以Unicode的形式来展示“-”，但是当你将有些图示的语系变更之后可能导致无法在
+坐标轴上显示出“-”，比如如下为了在图形中显示中文添加了`matplotlib.rcParams['font.sans-serif'] = ['SimHei']`从而导致无法正常显示"-"：
+
+![](./pyplot/cant_show_minus_sign.PNG)
+
+添加如下代码关闭默认的显示形式之后可以正常显示：
+
+```
+# matplotlib.rcParams['font.sans-serif'] = ['SimHei']
+matplotlib.rcParams['axes.unicode_minus'] = False
+```
+
+![](./pyplot/can_show_minus_sign.PNG)
+
+参考：
+- [Unicode minus](https://matplotlib.org/gallery/api/unicode_minus.html)
 
 ## 坐标轴显示乱码(支持中文)？
 

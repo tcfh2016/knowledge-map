@@ -86,6 +86,22 @@ BOM)序列。例如，在UTF-16和UTF-32编码中，BOM指定大尾还是小尾�
 - [How to determine the encoding of text?](https://stackoverflow.com/questions/436220/how-to-determine-the-encoding-of-text)
 - [How to convert a file to utf-8 in Python?](https://stackoverflow.com/questions/191359/how-to-convert-a-file-to-utf-8-in-python)
 
+## 2.格式转换
+
+将某种格式的文件转换为另一种格式：
+
+```
+f= open(path1, 'r', encoding=coding1)
+content= f.read()
+f.close()
+f= open(path2, 'w', encoding=coding2)
+f.write(content)
+f.close()
+```
+
+参考：
+
+- [Python: Convert File Encoding](http://xahlee.info/python/charset_encoding.html)
 
 # 参考
 
