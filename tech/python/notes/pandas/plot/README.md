@@ -46,6 +46,11 @@ value_plot.legend(value_items.columns)
 
 ## 设置Y轴为百分比样式
 
+```
+vals = ax.get_yticks()
+ax.set_yticklabels(['{:,.2%}'.format(x) for x in vals])
+```
+
 参考：
 
 - [Format y axis as percent](https://stackoverflow.com/questions/31357611/format-y-axis-as-percent)
@@ -72,8 +77,7 @@ plt.show()
 
 ## Subplot
 
-DataFrame.plot()里的`subplots`参数是对每列的数据分开展示，不属于不同DataFrame的展示方
-法。
+DataFrame.plot()里的`subplots`参数是对每列的数据分开展示，不属于不同DataFrame的展示方法。
 
 ```
 import matplotlib.pyplot as plt
@@ -134,9 +138,14 @@ dp = df_for_plot.plot(figsize=(2,2))
 plt.figure(figsize=(2,2))
 ```
 
+```
+ax = df.plot(secondary_y=['A', 'B'])
+ax.right_ax.set_ylabel('AB scale')
+```
+
 参考：
 
-- [pandas.DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)
+- [Visualization](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
 - [xlabel and ylabel out of plot region, cannot show completely in the figure
 ](https://stackoverflow.com/questions/29767386/xlabel-and-ylabel-out-of-plot-region-cannot-show-completely-in-the-figure)
 - [How do you change the size of figures drawn with matplotlib?](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
