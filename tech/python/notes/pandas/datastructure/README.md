@@ -83,6 +83,9 @@ data = {'Name':['Lisha', 'Shelly', 'Greay', 'Leo', 'Marry'],
 df = pd.DataFrame(data)
 ```
 
+*注：在聚宽上测试发现字典的值可以是Series，这样创建出来的DataFrame会自动以Series里面所
+携带的index做为该DataFrame的index。*
+
 - 指定行列名
 
 指定列序列时按照指定顺序进行排列。
@@ -98,6 +101,32 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 - 直接以SQL数据库、CSV、Excel文件做为数据源来创建它们
 
 ## DataFrame 获取
+
+### 获取某行某列的值
+
+- Dataframe.[ ] ; This function also known as indexing operator
+- Dataframe.loc[ ] : This function is used for labels.
+- Dataframe.iloc[ ] : This function is used for positions or integer based
+- Dataframe.ix[] : This function is used for both label and integer based
+
+获取某行某列的值仅仅是获取多行多列的值的简化形式。如上最后一种方法已经过时。
+
+```
+data["Age"] # 选择列名为Age的一列
+data[["Age", "College", "Salary"]] # 选择列名为Age, College, Salary的三列
+
+data.loc["R.J. Hunter"] # 选择行名为R.J. Hunter的一行
+data.loc[["Avery Bradley", "R.J. Hunter"]] # 选择行名为Avery Bradley, R.J. Hunter的三行
+data.loc[["Avery Bradley", "R.J. Hunter"], ["Team", "Number", "Position"]] # 选择两行三列
+
+data.iloc[3] # 选择一行
+data.iloc [[3, 5, 7]] # 选择三行
+data.iloc [[3, 4], [1, 2]] # 选择两行两列
+```
+
+参考：
+
+- [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
 
 ### columns / index 获取
 
