@@ -1,4 +1,4 @@
-# 获取单只股票的历史行情
+# 1. 获取单只股票的历史行情
 
 获取单只股票的基本信息可以使用`get_security_info(code)`，但在这之前必须解决该只股票对
 应的`code`是什么的问题。
@@ -77,10 +77,12 @@ get_price(security, start_date=None, end_date=None, frequency='daily', fields=No
   df = get_price('510300.XSHG', start_date='2014-01-01', end_date='2015-01-31', frequency='daily', fields=['open','close'])
 ```
 
-# 获取单只股票的市盈率
+# 2. 获取单只股票的市盈率
 
 聚宽以查询数据库的方式提供了财务数据接口, 提供了四类财务数据 分别存放到如下四个表中: 市
 值表, 利润表, 现金表, 负债表。
+
+## 获取某天的市盈率
 
 这些财务数据的查询需要调用 get_fundamentals(), 该函数接收Query对象作为参数，Query对象
 保存了你预先设定的查询条件。其他四个表分别以如下对象表示：
@@ -124,8 +126,32 @@ df = get_fundamentals(q, '2015-10-15')
   statDate: 财报统计的季度或者年份, 一个字符串, 有两种格式:
   - 季度: 格式是: 年 + ‘q’ + 季度序号, 例如: ‘2015q1’, ‘2013q4’.
   - 年份: 格式就是年份的数字, 例如: ‘2015’, ‘2016’.
+```
 
+本来想通过指定`statDate = 2018`获取一个季度或者一个年度所有交易日的财务数据，发现这是不
+可能的，因为其解释是获取季报或者年报的财务数据，实际上对应的也是某天截止的数据。
 
+## 获取连续多天的市盈率
+
+基于如上的理解，为了获取一段交易时间内所有交易日的市盈率，必须通过创建时间序列，并将其传
+入get_fundamentals()函数。
+
+对于如何创建时间序列，在研究环境给定的新手教程《Pandas库使用示例》里面有个例子：
+
+```
+dates = pd.date_range('20130101',periods=6) # 从20130101开始的6天时间序列
+```
+
+从中可知pandas的`date_range`方法可以用来完成这项功能，查找资料发现geeksforgeeks的介绍
+更靠谱：
+
+```
+Syntax: pandas.date_range(start=None, end=None, periods=None, freq=None, tz=None, normalize=False, name=None, closed=None, **kwargs)
+
+pd.date_range(start ='1-1-2018', end ='1-05-2018', freq ='5H') # H, 5H...
+pd.date_range(start ='1-1-2018', end ='8-01-2018', freq ='D') # D, 5D...
+pd.date_range(start ='1-1-2018', end ='8-01-2018', freq ='M') # M, 5M...
+pd.date_range(start ='1-1-2018', periods = 13)
 ```
 
 参考：
@@ -133,3 +159,4 @@ df = get_fundamentals(q, '2015-10-15')
 - [获取单季度/年度财务数据](https://www.joinquant.com/help/api/help?name=Stock#%E8%8E%B7%E5%8F%96%E5%8D%95%E5%AD%A3%E5%BA%A6%E5%B9%B4%E5%BA%A6%E8%B4%A2%E5%8A%A1%E6%95%B0%E6%8D%AE)
 - [Query对象的简单使用教程](https://www.joinquant.com/view/community/detail/16411)
 - [Querying](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#querying)
+- [Python | pandas.date_range() method](https://www.geeksforgeeks.org/python-pandas-date_range-method/)
