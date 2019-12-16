@@ -77,6 +77,16 @@ get_price(security, start_date=None, end_date=None, frequency='daily', fields=No
   df = get_price('510300.XSHG', start_date='2014-01-01', end_date='2015-01-31', frequency='daily', fields=['open','close'])
 ```
 
+191216：昨日将研究代码发布在论坛上，没有想到jqz1226回复提到了两个优化点，非常有用：
+
+- 在获取多只股票的股价的时候，可以传入一个list，而不用循环每只股票。此时需要注意调
+用返回的结果：
+  - pandas0.25之前执行 `h=get_price(stock_list, start_date, end_date, 'daily', 'close', panel=True)`返回的是Pannel类型，因此可以直接使用`h[close]`来绘图。
+  - pandas0.25之后返回的结果为dataframe，但多个股票的结果会顺序排列。
+- 通过`list(stocks_df[stocks_df['display_name'].isin(stock_list)].index)`来替代循
+环获取股票名称到股票代码的转换列表。
+
+
 # 2. 获取单只股票的市盈率
 
 聚宽以查询数据库的方式提供了财务数据接口, 提供了四类财务数据 分别存放到如下四个表中: 市
