@@ -21,6 +21,12 @@ source_file = os.path.join(dir, f)
     subprocess.call(command)
 ```
 
+# 执行
+
+```
+python batch.py directory -b tti_trace_parser_wmp.exe
+```
+
 # 参考阅读
 
 - (Calling an external command in Python)[https://stackoverflow.com/questions/89228/calling-an-external-command-in-python]

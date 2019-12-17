@@ -46,6 +46,9 @@ obj[['a', 'd']]
 
 ## Series 修改
 
+## Series 转换为 list
+
+从DataFrame中获取的Series，如何能够转换为list进行处理？
 
 # DataFrame
 
