@@ -8,6 +8,10 @@ stock_list = ['贵州茅台', '五粮液', '洋河股份', '泸州老窖', '古�
 # 查询指定股票名称对应的股票代码，用来调用其他函数获取数据
 stocks_df = get_all_securities()
 stock_code_list = [stocks_df[stocks_df['display_name'] == stock].index.item() for stock in stock_list]
+
+# 经过聚宽论坛jqz1226的提醒，可以使用如下表达式来替代如上的for循环
+# list(stocks_df[stocks_df['display_name'].isin(stock_list)].index)
+
 #print(stock_code_list)
 
 #############################################################################
