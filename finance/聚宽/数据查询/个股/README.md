@@ -86,6 +86,14 @@ get_price(security, start_date=None, end_date=None, frequency='daily', fields=No
 - 通过`list(stocks_df[stocks_df['display_name'].isin(stock_list)].index)`来替代循
 环获取股票名称到股票代码的转换列表。
 
+191218：使用`get_price()`获取股价发现会默认跳过非交易日，skip_paused表示是否跳过不交
+易日期(包括停牌, 未上市或者退市后的日期)，而不是严格的非交易日。
+
+参考：
+
+- [1](https://www.joinquant.com/help/api/help?name=Stock#%E8%8E%B7%E5%8F%96%E8%A1%8C%E6%83%85%E6%95%B0%E6%8D%AE)
+- [2](https://www.joinquant.com/help/api/help?name=api#%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0)
+
 
 # 2. 获取单只股票的市盈率
 

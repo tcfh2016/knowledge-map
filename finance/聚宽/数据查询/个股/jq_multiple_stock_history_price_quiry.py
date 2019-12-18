@@ -20,9 +20,6 @@ stock_code_list = [stocks_df[stocks_df['display_name'] == stock].index.item() fo
 #############################################################################
 start_date = '2018-12-05'
 end_date = '2019-12-05'
-
-start_date = '2018-12-05'
-end_date = '2019-12-05'
 multi_stock_price = get_price(stock_code_list, start_date, end_date, 'daily', 'close', panel=True)
 multi_stock_price['close'].columns = stock_list
 multi_stock_price['close'].plot(figsize = (20, 10), secondary_y = ['贵州茅台'], title = '股价走势对比')
