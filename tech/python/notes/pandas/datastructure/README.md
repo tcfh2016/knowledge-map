@@ -12,20 +12,26 @@ Series是一种类似于一维数组的对象，它由一组数据（各种NumPy
 引。
 
 ```
-obj = Series([4, 7, 0, -3])
+import pandas as pd
+
+obj = pd.Series([4, 7, 0, -3])
 ```
 
 - 指定对各个数据点标记的索引。
 
 ```
-obj = Series([4, 7, 0, -3], index=['d', 'b', 'a', 'c'])
+import pandas as pd
+
+obj = pd.Series([4, 7, 0, -3], index=['d', 'b', 'a', 'c'])
 ```
 
 - 通过字典创建
 
 ```
+import pandas as pd
+
 sdata = {'oli': 1000, 'tae': 2000, 'Oed': 500}
-obj = Series(sdata)
+obj = pd.Series(sdata)
 ```
 
 ## Series 读取
@@ -105,6 +111,9 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 
 ## DataFrame 获取
 
+需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种
+理解方式与C/C++二维数组是不同的。
+
 ### 获取某行某列的值
 
 - Dataframe.[ ] ; This function also known as indexing operator
@@ -151,7 +160,7 @@ df[['Age','Name']] # 注意多列
 
 ### 行的获取
 
-行的选取有三种方式：`loc`方法、切片和条件选择。
+行的选取有三种方式：`loc`方法、切片和布尔索引（Boolean indexing）。
 
 **1.使用`loc`方法**
 
@@ -168,14 +177,14 @@ print(df.loc[['a', 'b']]) # 索引'a', 'b'两行。
 
 **2.使用切片**
 
-切片支持列名称和列序号来确定范围：
+切片支持行名称和行序号来确定范围（*DataFrame仅能用行进行切片*）：
 
 ```
 print(df['a':'c'])        # 索引'a', 'b', 'c'三行。
 print(df[0:1])            # 索引'a'一行数据。
 ```
 
-**3.使用条件选择**
+**3.使用布尔索引**
 
 根据列的条件来进行选择，这种方式是pandas所独有的方式。
 
