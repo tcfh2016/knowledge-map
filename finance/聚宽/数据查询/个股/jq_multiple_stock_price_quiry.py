@@ -25,7 +25,12 @@ multi_stock_price['close'].columns = stock_list
 multi_stock_price['close'].plot(figsize = (20, 10), secondary_y = ['贵州茅台'], title = '股价走势对比')
 
 '''
-# old version
+# 使用数据透视
+df = get_price(stock_code_list, start_date, end_date, 'daily', 'close', panel=False)
+pivot_df = df.pivot(index='time', columns='code', values='close')
+pivot_df.plot(figsize = (20, 10), secondary_y = ['600519.XSHG'], title = '股价走势对比')
+
+# 原始版本
 
 multi_stock_price = {}
 for i in range(len(stock_list)):

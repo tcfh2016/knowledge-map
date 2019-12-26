@@ -204,7 +204,7 @@ list(stocks_df[stocks_df['display_name'].isin(stock_list)].index)
 
 ## 待学习的主题
 
-1.如上提到的使用`get_price()`时传入股票列表所返回的Pandas中的三维数据类型Panel在Pandas 0.20.0
+1.如上提到的使用`get_price()`时传入股票列表所返回的Pandas中的三维数据类型Panel在Pandas 0.25.0
 之后就过时了，所以不建议继续使用。在调用该函数的时候也可以直接设定`panel=Fase`，这个时
 候获取到的结果也是DataFrame，但我们需要将其进行进一步处理来满足需求，这个主题我会在下周
 学习。
