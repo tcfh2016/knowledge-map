@@ -10,5 +10,11 @@ right = pd.DataFrame({'C': ['C0', 'C2', 'C3'],
                       'D': ['D0', 'D2', 'D3']},
                      index=['K0', 'K2', 'K3'])
 
+join = left.join(right)
+print(join)
 
-result = left.join(right)
+join_with_outer = left.join(right, how='outer')
+print(join_with_outer)
+
+join_with_inner = left.join(right, how='inner')
+print(join_with_inner)

@@ -131,3 +131,20 @@ print (s[s.isin([-1, 0, 1])])
 
 除了使用逻辑运算符（| for or, & for and, ~ for not）和比较运算符（>, <, ==）来构建布
 尔向量之外，使用`isin`是另外一种方法。
+
+## query方法
+
+DataFrame自带的`query()`同样可以完成与布尔索引一样的条件选择功能，并且它还支持直接对index
+进行选择。
+
+```
+df_select = df[(df.a < df.b) & (df.b < df.c)]
+print(df_select)
+
+df_query = df.query('(a < b) & (b < c)') # 一样的效果
+print(df_query)
+
+print(df.query('index > 2'))
+```
+
+query方法的好处是结合lambda表达式同时对多个DataFrame作用：`map(lambda frame: frame.query(expr), [df, df2])`。
