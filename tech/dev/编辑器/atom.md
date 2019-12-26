@@ -1,5 +1,13 @@
 # ATOM
 
+## 列模式
+
+使用ctrl + alt + (up/down) 来选取列。
+
+参考：
+
+- https://discuss.atom.io/t/is-column-selection-available-in-atom/48418/3
+
 ## 给ATOM安装IDE
 
 之前一直使用ATOM作为编辑器来编写python代码，但执行时都是另外打开窗口运行。今天突然想想能
