@@ -61,4 +61,55 @@ date
 
 ## 使用stacking/unstacking来塑型
 
+与`pivot()`相关的两个函数是Series和DataFrame都支持的`stack()/unstack()`，它们主要用来
+支持MultiIndex。
+
+1.`stack()`：将列标签"压缩"为行标签。
+
+如果列标签只有单一的index，那么压缩为Series。如果列标签是MultiIndex，那么压缩为DataFrame。
+你也可以选择压缩哪个level，那么这个level列标签堆叠为当前DataFrame的MultiIndex。
+
+比如：
+
+```
+                     A         B
+first second
+bar   one     0.721555 -0.706771
+      two    -1.039575  0.271860
+baz   one    -0.424972  0.567020
+      two     0.276232 -1.087401
+
+如上DataFrame由MultiIndex索引，A, B属于同一level的列标签，在stack之后这一level的所有
+列全部被压缩/stack为MultiIndex的新的level做为last level（之前的last level是second,现
+是一个未命名的last level）。
+
+first  second
+bar    one     A    0.721555
+               B   -0.706771
+       two     A   -1.039575
+               B    0.271860
+baz    one     A   -0.424972
+               B    0.567020
+       two     A    0.276232
+               B   -1.087401
+```
+
+
+2.`unstack()`：将行标签（默认last level）透视为列标签，你可以选择将MultiIndex中的哪一
+层进行透视，可以填写下表（比如0，1..），也可以是名称（比如'first', 'second'...）。
+
+比如：
+
+```
+将如上stack之后的DataFrame的MultiIndex的第0层进行unstack：unstack(0)/unstack('first')：
+
+first          bar       baz
+second
+one    A  0.721555 -0.424972
+       B -0.706771  0.567020
+two    A -1.039575  0.276232
+       B  0.271860 -1.087401
+```
+
+
 ## 使用melt来塑型

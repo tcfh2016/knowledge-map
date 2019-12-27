@@ -261,7 +261,7 @@ min_max_df = min_max_df.set_index('日期', drop=True) #
 df.index = [1, 2, 3, 4]
 ```
 
-*注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建心的DataFrame。*
+*注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建新的DataFrame。*
 *注2：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
 
 - 修改列名
