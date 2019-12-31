@@ -5,3 +5,6 @@
 
 - [索引和选择数据](./indexing_and_selecting_data/README.md)
 - [多重索引](./multiIndex/README.md)
+- [合并](./merge_join_concatenate/README.md)
+- [使用透视表塑型](./reshaping_and_pivot_tables/README.md)
+- [可视化](./visualization/README.md)

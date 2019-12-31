@@ -116,6 +116,9 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 
 ### 获取某行某列的值
 
+*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame
+的columns名称，DataFrame列的index为DataFrame的index*
+
 - Dataframe.[ ] ; This function also known as indexing operator
 - Dataframe.loc[ ] : This function is used for labels.
 - Dataframe.iloc[ ] : This function is used for positions or integer based
@@ -217,6 +220,13 @@ condition = df.floats > 3.0  # 创建一个bollean 的Series。
 print(df[condition])
 ```
 
+对于`datetime.date`类型如何通过布尔索引来进行呢？创建`compare_date = datetime.date(2012, 1, 1)`
+在进行比较，否则提示：
+
+```
+not supported between instances of 'datetime.date' and 'str'
+```
+
 参考：
 
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
@@ -285,7 +295,7 @@ ufo = pd.read_csv(name_file, names=ufo_cols, header=0) # 不指定header，直�
 
 - 添加列
 
-在某个DataFrame里面添加一列必须使用`[]`操作符：
+在某个DataFrame里面添加一列必须使用`[]`操作符，`此时应保证Series和DataFrame具有相同的index`
 
 ```
 df['numbers'] = series
@@ -337,6 +347,9 @@ df.drop(['city', 'state'], axis=1) # 删除'city'和'state'两列。
 del df['newdata']
 del df.newdata # 会提示错误。
 ```
+
+## Dataframe统计
+
 
 # 类型转换
 
