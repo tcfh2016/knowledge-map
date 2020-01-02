@@ -1,0 +1,2 @@
+- [聚宽学习第一周周记](./191221-jq_1st_week_summary.md)
+- [聚宽学习第二周周记](./191228-jq_2nd_week_summary.md)
