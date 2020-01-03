@@ -27,6 +27,42 @@
 
 # 常见问题
 
+## DataFrame排序
+
+如何将如下的数据按照时间顺序颠倒过来？
+
+```
+   code         day  pe_ratio  pb_ratio
+0  601318.XSHG  2019-12-27    9.8284    2.4153
+1  601318.XSHG  2019-12-26    9.7948    2.4071
+2  601318.XSHG  2019-12-25    9.7368    2.3928
+3  601318.XSHG  2019-12-24    9.7982    2.4079
+4  601318.XSHG  2019-12-23    9.7785    2.4031
+```
+
+DataFrame提供了`sort_index()`和`sort_value`分别按照索引和值排序：
+
+```
+df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
+```
+
+## DataFrame更换index
+
+将如下数据的day作为新的index如何处理？
+
+```
+   code         day          pe_ratio  pb_ratio
+4  601318.XSHG  2019-12-23    9.7785    2.4031
+3  601318.XSHG  2019-12-24    9.7982    2.4079
+2  601318.XSHG  2019-12-25    9.7368    2.3928
+1  601318.XSHG  2019-12-26    9.7948    2.4071
+0  601318.XSHG  2019-12-27    9.8284    2.4153
+```
+
+```
+df.set_index('day')
+```
+
 ## 替换操作
 
 使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，
