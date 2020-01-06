@@ -9,3 +9,4 @@
 - [使用透视表塑型](./reshaping_and_pivot_tables/README.md)
 - [可视化](./visualization/README.md)
 - [分组](./group_by/README.md)
+- [时间序列](./time_series/README.md)
