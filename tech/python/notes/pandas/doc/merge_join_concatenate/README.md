@@ -33,6 +33,15 @@ print(concat_with_inner.reindex(df1.index))
 
 ## 合并/merge
 
+Pandas提供高效的类似于数据库join操作的服务函数：`merge()`。
+
+```
+pd.merge(left, right, how='inner', on=None, left_on=None, right_on=None,
+         left_index=False, right_index=False, sort=True,
+         suffixes=('_x', '_y'), copy=True, indicator=False,
+         validate=None)
+```
+
 ### 时间序列
 
 `merge_ordered()`可以用来合并时间序列和其他有序的数据。同时支持`fill_method`参数来对

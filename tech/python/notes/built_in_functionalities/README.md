@@ -17,6 +17,12 @@ Python里的赋值语句`x = expr`与其他语言里的含义不一样，比如�
 - [The Python Standard Library](https://docs.python.org/2.7/library/index.html)
 - [What is a None value?](https://stackoverflow.com/questions/19473185/what-is-a-none-value#)
 
+# isinstance()
+
+使用格式为`isinstance(object, type)`，其中object是某个特定的对象，而type则是一个或者
+多个内建类型或者类。当type为包含多个类型的元组时，只要object属于元组中的某种类型即返回
+True。
+
 # round(x, [, n])
 
 返回浮点数的四舍五入值，n可以指定小数点后面的位数。

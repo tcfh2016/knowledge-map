@@ -13,23 +13,22 @@
 
 # 常用属性及函数
 
-属性：
+## 属性
 
 - DataFrame.shape ：显示行、列信息。
 - DataFrame.dtypes ：显示行的类型。
 
-方法：
+## 方法
 
 - DataFrame.head() ：默认显示前面5行的数据。
 - DataFrame.describe() ：显示对应数据对应里面“数据列”的统计信息，包括count, min, max...
 - DataFrame.describe(include=['object']) ：显示非数据列的统计信息，包括count, uniq, top, freq
 
-
 # 常见问题
 
-## DataFrame排序
+## 一、排序
 
-如何将如下的数据按照时间顺序颠倒过来？
+1.如何将如下的数据按照时间顺序颠倒过来？
 
 ```
    code         day  pe_ratio  pb_ratio
@@ -46,9 +45,9 @@ DataFrame提供了`sort_index()`和`sort_value`分别按照索引和值排序：
 df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
 ```
 
-## DataFrame更换index
+## 二、替换
 
-将如下数据的day作为新的index如何处理？
+1.将如下数据的day作为新的index如何处理？
 
 ```
    code         day          pe_ratio  pb_ratio
@@ -63,7 +62,7 @@ df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
 df.set_index('day')
 ```
 
-## 替换操作
+2.替换操作
 
 使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，
 后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将
@@ -89,8 +88,9 @@ df.column_name.str.replace('[\[\]]', '') # 将column_name列里的'[]'删除，�
 - [pandas.Series.str¶](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
 
 
+## 三、遍历
 
-## 遍历操作
+1.简单遍历
 
 对于Series, Dataframe的遍历操作如下：
 
@@ -103,7 +103,7 @@ for index, row in ufo.interrows():
 
 ```
 
-## 通过多列的值来进行行选取操作
+2.通过多列的值来进行行选取操作
 
 比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
 
@@ -150,7 +150,9 @@ movies[movies.genre.isin(['Crime', 'Drama', 'Action'])]
 - [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
 
 
-## 变更某一列内容的展现形式
+## 四、展现
+
+1.变更某一列内容的展现形式
 
 比如现在有一列"日期"是按照“年-月-日”的形式展示的，现在需要让其展现为“年-月”的形式展示，
 该如何操作？
@@ -165,13 +167,39 @@ df['month_year'] = df['date_column'].dt.to_period('M')
 - [Series.dt ](http://pandas.pydata.org/pandas-docs/stable/reference/series.html#api-series-dt)
 
 
-## DataFrame 输出排版
+2.输出排版
 
 打印DataFrame输出的格式有些时候并不友好，比如：
 
 ![](print_not_aligned.png)
 
-## DataFrame 类型转换
+
+3.DataFrame.plot 时中文显示乱码
+
+![](./basics/plot_chinese_messycode.png)
+
+解决方法为通过`plt.rcParams['font.sans-serif'] = ['SimHei'] `将字体设置为黑体。
+
+参考：
+
+- [python3用matplotlib绘图出现中文乱码的问题](https://www.cnblogs.com/Icarus-suixin/p/10641085.html)
+
+4.print的时候如何显示更多列或者行？
+
+```
+import pandas as pd
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+```
+
+参考：
+
+- [How do I expand the output display to see more columns of a pandas DataFrame?](https://stackoverflow.com/questions/11707586/how-do-i-expand-the-output-display-to-see-more-columns-of-a-pandas-dataframe)
+
+## 五、其他
+
+1.DataFrame 类型转换
 
 想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单
 维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基
@@ -186,17 +214,7 @@ for col in float_df:
 
 通过`print(df.dtypes)`打印DataFrame各列的类型。
 
-## DataFrame.plot 时中文显示乱码
-
-![](./basics/plot_chinese_messycode.png)
-
-解决方法为通过`plt.rcParams['font.sans-serif'] = ['SimHei'] `将字体设置为黑体。
-
-参考：
-
-- [python3用matplotlib绘图出现中文乱码的问题](https://www.cnblogs.com/Icarus-suixin/p/10641085.html)
-
-## pandas.io.data 不可用
+2.pandas.io.data 不可用
 
 从0.19.0开始，pandas不再支持pandas.io.data or pandas.io.wb, 替代品为pandas_datareader。
 

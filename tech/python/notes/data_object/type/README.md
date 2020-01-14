@@ -163,6 +163,7 @@ list中元素的数据类型。
   - len(list) 获取列表的长度。比如计算平均值 sum(list) / len(list),sum()属于内建函数。
   - min(list)
   - max(list)
+  - list.sort() 默认升序的排序操作，可以通过`reverse=True`转换为降序，`key`来指定排序方法。
 
 ## 三、映射
 
