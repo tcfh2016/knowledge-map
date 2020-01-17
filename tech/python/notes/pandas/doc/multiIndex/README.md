@@ -29,4 +29,7 @@ pd.MultiIndex.from_frame(df)
 
 ## 基于多重索引的选择
 
-## 
+通过`xs`并且提供坐标轴参数来选中对应的行，比如`df2.xs('000905', level='SecuCode')`就
+是选择指定level为“SecuCode”，值为“000905”的那些数据。
+
+##
