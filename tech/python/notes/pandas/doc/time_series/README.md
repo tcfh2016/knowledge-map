@@ -1,5 +1,7 @@
 # [Time series / date functionality](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html)
 
+datetime.date(2014, 1, 1)
+
 Pandas提供了很多操作时间序列的功能。比如：
 
 ```
