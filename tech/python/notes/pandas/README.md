@@ -222,3 +222,13 @@ for col in float_df:
 
 - [Importing pandas.io.data(https://stackoverflow.com/questions/47972667/importing-pandas-io-data)
 - [pandas-datareader](https://pandas-datareader.readthedocs.io/en/latest/#)
+
+3.将index转换为list
+
+```
+list(obj.index.values)
+```
+
+参考：
+
+- [Get row-index values of Pandas DataFrame as list?](https://stackoverflow.com/questions/18358938/get-row-index-values-of-pandas-dataframe-as-list)
