@@ -28,3 +28,7 @@ def on_strategy_end(context)
 ```
 
 这个函数会默认调用，可以通过重写这个函数来决定策略执行结束时做什么。
+
+### 统计基金当日的交易量
+
+https://www.joinquant.com/help/api/help?name=fund#%E8%8E%B7%E5%8F%96%E5%8D%95%E6%94%AF%E5%9F%BA%E9%87%91%E6%95%B0%E6%8D%AE
