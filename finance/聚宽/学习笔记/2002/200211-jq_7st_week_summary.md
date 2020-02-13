@@ -32,3 +32,5 @@ def on_strategy_end(context)
 ### 统计基金当日的交易量
 
 https://www.joinquant.com/help/api/help?name=fund#%E8%8E%B7%E5%8F%96%E5%8D%95%E6%94%AF%E5%9F%BA%E9%87%91%E6%95%B0%E6%8D%AE
+
+### 如何获取创业板指数的市盈率？
