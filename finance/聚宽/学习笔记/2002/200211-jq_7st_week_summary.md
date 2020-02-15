@@ -1,7 +1,191 @@
-# 聚宽学习第七周周记：基金定投策略
+# 聚宽学习第七周周记：基于财务数据选股的简单尝试
 
-## 一、`获取处于历史地位的ETF基金`代码解释
+开始在聚宽上花时间学习快两个月了，觉得收益良多，最起码可以很方便验证偶尔冒出的想法。很多数据都是看财报、上财经网站没有办法直接获取到的，但是聚宽上可以很快的获取到。当然这是需要花些时间去学习和实践的，希望宽友们都是理性的实践派，一步一步做出更好的社区，而不仅仅是为了不费力气赚快钱图爽。尽管我现在不是会员，使用的服务都很低级，但希望往后逐渐能够使用一些高级的服务。
 
+本周的周记代码解释部分主要分解[价值研究笔记之获取较高ROA/ROE市场普通股名单](https://www.joinquant.com/view/community/detail/d3df3da54ac78f7f5e0495fb8fdcbe16)里面的策略研究，这是我第一次使用聚宽来进行全网选股，标准还比较粗略。
+
+## 一、`获取较高ROA/ROE市场普通股名单`代码解释
+
+```
+import pandas as pd
+
+def get_stock_name(stock_code):
+    stocks_df = get_all_securities()
+    stock_name = [stocks_df.loc[c, 'display_name'] for c in stock_code]
+    return stock_name
+
+pd.set_option('display.max_columns', 100)
+pd.set_option('display.max_rows', 100)
+
+init_filter_query = query(
+                            valuation.pe_ratio, indicator.code, indicator.roe, indicator.roa,
+                        ).filter(
+                            indicator.roa > 5,
+                            indicator.roe > 10,
+                            valuation.pe_ratio > 0,
+                            income.total_operating_revenue <= 2e10,
+                            income.total_operating_revenue > 1e10
+                        ).order_by(
+                            indicator.roe.desc()
+                        ).limit(
+                            100
+                        )
+
+df = get_fundamentals(init_filter_query, statDate='2018')
+stocks = df['code']
+
+multi_stock_data_query = query(
+                                valuation.pe_ratio, indicator.code, indicator.roe, indicator.roa,
+                            ).filter(
+                                indicator.code.in_(stocks)                                
+                            )
+roe_dict = {}
+roa_dict = {}
+year_list = ['2012', '2013', '2014', '2015', '2016', '2017', '2018']
+for year in year_list:
+    df = get_fundamentals(multi_stock_data_query, statDate=year)
+    df = df.set_index('code')
+    roe_dict[year] = df['roe']
+    roa_dict[year] = df['roa']
+
+roe_df = pd.DataFrame(roe_dict)
+roe_df.index = get_stock_name(roe_df.index)
+print(roe_df)
+
+roa_df = pd.DataFrame(roa_dict)
+roa_df.index = get_stock_name(roa_df.index)
+print(roa_df)
+```
+
+输出结果如下：
+
+```
+# ROA 数据
+
+  2012     2013      2014      2015      2016     2017     2018
+德赛电池  42.0292  45.6301   36.7709   27.5280   24.4718  23.4739  25.4401
+深圳华强  17.1353  23.4449   22.3831   12.6922   11.2260  10.0807  15.4378
+中国长城  -8.0230   1.0715    2.2067   -1.3878    1.2367  12.3040  15.2863
+鄂武商A  18.0024  17.4650   20.4505   20.8006   19.4758  18.7633  13.6118
+万向钱潮   8.8288  14.9370   19.0177   19.0923   19.5368  18.7561  14.0804
+泸州老窖  52.0411  33.9179    8.6760   14.7377   18.0952  19.5248  21.6930
+攀钢钒钛   3.9985   3.6770  -29.7426  -23.2050 -101.0578  22.3341  52.8145
+中信特钢   7.4773   6.6369    8.3031    7.9346    8.1060  10.1889  12.1011
+美锦能源  -6.6148   8.2321    2.0762  -10.8518   10.3246  14.5507  24.2232
+......
+
+# ROE 数据
+ 2012     2013     2014     2015     2016     2017     2018
+德赛电池  10.4086  10.5129   7.7766   7.6278   8.1814   5.6996   6.3939
+深圳华强   5.8560   8.2264  10.5712   7.3072   6.7120   5.8976   8.1577
+中国长城   0.2652  -1.9459  -0.1234  -0.4921   0.5345   2.4832   6.7707
+鄂武商A   5.0216   5.1215   4.5341   4.7944   5.5878   6.9328   5.1334
+万向钱潮   4.3959   6.5947   7.2278   6.8035   7.3400   8.0144   6.3492
+泸州老窖  32.3885  24.1409   7.2556  11.7691  14.5198  15.5671  16.5742
+攀钢钒钛   1.9185   1.6826 -13.5574  -4.4712 -20.0210   9.1558  28.3191
+中信特钢   4.8734   4.6063   5.6260   5.3200   5.3289   6.3561   7.1571
+美锦能源  -3.8911   4.9415   1.1571  -5.1976   5.5847   9.2763  12.7299
+中百集团   2.5571   2.0240   2.0761   0.0383   0.1003   0.9043   5.5498
+......
+```
+
+**代码片段一：**
+
+```
+def get_stock_name(stock_code):
+    stocks_df = get_all_securities()
+    stock_name = [stocks_df.loc[c, 'display_name'] for c in stock_code]
+    return stock_name
+```
+
+这里定义的是一个函数，这个函数的目的是按照给定的股票代码（参数`stock_code`）返回这些股票代码对应的股票名称。之所以要进行这么转换是因为服务器存储股票数据的时候以股票代码作为主要索引，但我们把这些打印出来看的时候代码很难懂，所以才需要转换成中文的股票名称。你可以看到这个函数仅仅在最后打印的时候才调用。
+
+**代码片段二：**
+
+```
+pd.set_option('display.max_columns', 100)
+pd.set_option('display.max_rows', 100)
+```
+
+这两句代码也是为打印服务的，它们的作用是设置打印DataFrame二维数据表时能够展现的最大列（`max_columns`）和最大行（`max_rows`）,最大行的默认值是60，最大列的默认值是20，可以参看[官方文档 Options and settings](https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html)。
+
+比如你看到的下面这种省略号就是因为打印出的内容的行数超过了规定的最大行数，然后多于的被隐藏起来了。
+
+```
+圣农发展  -0.5864  -3.5291   0.4164  -4.7529   6.1012   2.1596  11.1367
+天虹股份   6.4131   6.1543   4.8855   9.5108   3.6536   4.7611   5.7144
+嘉事堂    3.9370   6.2293   8.3544   5.7761   6.1810   5.6614   5.6905
+申通快递   0.8766   0.7571   0.2913   0.0019  26.4799  17.7387  19.8468
+...       ...      ...      ...      ...      ...      ...      ...
+方大炭素   6.5444   2.6178   2.6571   0.1398   0.3517  36.0962  39.8629
+天士力   11.2192  13.1801  12.5392  10.7550   7.4940   7.2547   6.8172
+精达股份   2.8342   3.0622   3.1841   3.0099   5.4698   7.9539   9.0348
+新安股份   2.0343   6.0315   0.8074  -3.2645   1.1020   6.1547  13.0519
+```
+
+**代码片段三：**
+
+```
+init_filter_query = query(
+                            valuation.pe_ratio, indicator.code, indicator.roe, indicator.roa,
+                        ).filter(
+                            indicator.roa > 5,
+                            indicator.roe > 10,
+                            valuation.pe_ratio > 0,
+                            income.total_operating_revenue <= 2e10,
+                            income.total_operating_revenue > 1e10
+                        ).order_by(
+                            indicator.roe.desc()
+                        ).limit(
+                            100
+                        )
+
+df = get_fundamentals(init_filter_query, statDate='2018')
+stocks = df['code']
+```
+
+对于query对象的理解在[周记二](https://www.joinquant.com/view/community/detail/3cc22ef4218363686917d718ba90f4f8)里面有比较详细的介绍。这里创建query对象所包含的条件也即使本次选择普通股应用的条件，包括：
+
+- indicator.roa > 5：总资产收益率（ROA）大于5%。
+- indicator.roe > 10：净资产收益率（ROE）大于10%。
+- valuation.pe_ratio > 0：动态市盈率（PE）大于0。
+- income.total_operating_revenue <= 2e10：营业收入小于或等于20亿。
+- income.total_operating_revenue > 1e10：营业收入大于10亿。
+
+要应用上面这些标准需要查看不同的数据表，比如indicator是[财务指标数据](https://www.joinquant.com/help/api/help?name=JQData#%E8%B4%A2%E5%8A%A1%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE)，里面包含了ROA和ROE等数据。valuation是[市值数据](https://www.joinquant.com/help/api/help?name=JQData#%E5%B8%82%E5%80%BC%E6%95%B0%E6%8D%AE%EF%BC%88%E6%AF%8F%E6%97%A5%E6%9B%B4%E6%96%B0%EF%BC%89)，里面包含了PE等数据。income是[利润表](https://www.joinquant.com/help/api/help?name=Stock#%E5%88%A9%E6%B6%A6%E6%95%B0%E6%8D%AE)，里面包含了营业收入等数据。
+
+
+**代码片段四：**
+
+```
+# 1.3 获取这些股票历年的roe/roa数据
+multi_stock_data_query = query(
+                                valuation.pe_ratio, indicator.code, indicator.roe, indicator.roa,
+                            ).filter(
+                                indicator.code.in_(stocks)                                
+                            )
+
+roe_dict = {}
+roa_dict = {}
+year_list = ['2012', '2013', '2014', '2015', '2016', '2017', '2018']
+for year in year_list:
+    df = get_fundamentals(multi_stock_data_query, statDate=year)
+    df = df.set_index('code')
+    roe_dict[year] = df['roe']
+    roa_dict[year] = df['roa']
+```
+
+**代码片段五：**
+
+```
+roe_df = pd.DataFrame(roe_dict)
+roe_df.index = get_stock_name(roe_df.index)
+print(roe_df)
+
+roa_df = pd.DataFrame(roa_dict)
+roa_df.index = get_stock_name(roa_df.index)
+print(roa_df)
+```
 
 ## 二、上周计划任务
 
