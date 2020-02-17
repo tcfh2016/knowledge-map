@@ -350,6 +350,13 @@ del df.newdata # 会提示错误。
 
 ## Dataframe统计
 
+**1.如何统计DataFrame某列的和？**
+
+`dataframe.sum()`默认对“行”进行求和，即以列为单位求每列对应所有行的和，可以指定坐标轴，
+比如`dataframe.sum(axis=1)`对“列”进行求和，按行为单位求对应所有列的和。
+
+对单一列进行求和可以使用`dataframe['column'].sum()`。
+
 # Panel
 
 Panel是Pandas中的一种三维数据表类型，但在版本0.25.0之后就废弃了。在print Panel类型的时
@@ -377,11 +384,7 @@ Minor_axis axis: 000903 to 000905
 
 - [Python Pandas - Panel](https://www.tutorialspoint.com/python_pandas/python_pandas_panel.htm)
 
-
-# 类型转换
-
-
-# 操作方法
+# 常用函数
 
 ## div()
 
