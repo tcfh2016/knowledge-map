@@ -45,7 +45,11 @@
 
 ### 2.如何获取创业板指数的市盈率？
 
-有点忙，没来得及。
+聚宽“数据字典”中的“指数数据”并不包含市盈率方面的估值信息，想起中证500的估值是聚宽提供的共享函数去从聚源数据里面获取的（详细的介绍见[聚宽学习第五周周记：中证指数共享函数使用更新与策略指标的理解](https://www.joinquant.com/view/community/detail/99a6ea4179cfa056552d3567b3387bc6))，所以尝试着去查看[聚源数据](https://www.joinquant.com/help/data/data?name=jy)。在[指数估值指标 - LC_IndexDerivative](https://www.joinquant.com/help/data/data?name=jy#nodeId=67)页面可以看到：
+
+![](./JQ_index_derivative_.PNG)
+
+其中包含了“PE_TTM（动态市盈率）”。
 
 ### 3.聚宽里企业的年度营业收入增长率如何获得？
 
