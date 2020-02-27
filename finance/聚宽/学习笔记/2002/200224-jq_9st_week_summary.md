@@ -51,6 +51,45 @@
 
 其中包含了“PE_TTM（动态市盈率）”。
 
+```
+# 获取指数估值指标，包括指数总市值、静态市盈率、动态市盈率、市净率、股息率等指标
+#   TotalMV        -- 指数总市值(元)
+#   PE_TTM         -- 动态市盈率
+#   PE_LYR         -- 静态市盈率(LYR)
+#   PB_LF          -- 市净率(LF)
+#   DividendRatio  -- 股息率(%)
+#   PCF_LYR        -- 静态市现率
+#   PCF_TTM        -- 动态市现率
+#   PS_LYR         -- 静态市销率
+#   PS_TTM         -- 动态市销率
+
+def get_index_derivative(code,start_date=None,end_date=None,count=None):
+    if isinstance(code,str):
+        code=[code]
+    code.sort()
+
+    code = [x[:6] for x in code]
+    days = get_trade_days(start_date,end_date,count)
+
+    basic_info_df = jy.run_query(query(
+         jy.SecuMain.InnerCode,jy.SecuMain.SecuCode,jy.SecuMain.ChiName
+        ).filter(
+        jy.SecuMain.SecuCode.in_(code)).order_by(jy.SecuMain.SecuCode))
+    #print(basic_info_df)
+
+    derivative_info_df = jy.run_query(query(
+             jy.LC_IndexDerivative).filter(
+            jy.LC_IndexDerivative.IndexCode.in_(basic_info_df.InnerCode),
+            jy.LC_IndexDerivative.TradingDay.in_(days),
+            ))
+
+    df = pd.merge(basic_info_df, derivative_info_df, left_on='InnerCode',right_on='IndexCode').set_index(['TradingDay','SecuCode'])
+    df.drop(['InnerCode','IndexCode','ID','InsertTime','UpdateTime','JSID'],axis=1,inplace=True)
+    return df
+```
+
+一个问题：这种方式获取的动态市盈率为什么和另外一种方式获取的有些差别呢？
+
 ### 3.聚宽里企业的年度营业收入增长率如何获得？
 
 这是宽友 @freemars 的一个问题：
