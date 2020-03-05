@@ -1,3 +1,5 @@
+
+
 ## 搜索
 
 - [文本搜索 / grep](./grep.md)
@@ -11,3 +13,10 @@
 - [行处理/sed](./sed.md)
 - [列处理/awk](./awk.md)
 - [切分/split](./split.md)
+
+```
+# 搜索文件夹下.hpp包含"getRise()"的文件，并打印行号（-n）
+
+find directory/ -name "*.hpp"|xargs grep -n getRise()
+
+```
