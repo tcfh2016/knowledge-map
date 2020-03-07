@@ -107,7 +107,7 @@ tkinter.messagebox.showwarning()
   - 在 import module的时候，如果import的是文件，那么会执行该文件；如果import的是其他模
   块（目录），那么此时会执行该模块下的 __init__.py 文件。
   - 这里 messagebox 包括在 tkinter 中，因此import tkinter 那么执行的是其中的__init__.py
-  文件，由于其中已经讲 class `Tk()`的定义导入进来，因此可以直接使用。
+  文件，由于其中已经将 class `Tk()`的定义导入进来，因此可以直接使用。
 
 参考：
 
