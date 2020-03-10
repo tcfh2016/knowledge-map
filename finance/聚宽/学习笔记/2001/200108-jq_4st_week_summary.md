@@ -5,7 +5,6 @@
 原版代码见2019年12月24日发布在社区的[价值研究笔记之获取单只指数市盈率和股价变化](https://www.joinquant.com/view/community/detail/86b91e08d858edc519c763b0aa449221)。
 
 ```
-from jqdata import jy
 from jqdata import *
 import pandas as pd
 
@@ -49,9 +48,9 @@ from jqdata import *
 import pandas as pd
 ```
 
-这段代码最后两句在[第三周的周记](https://www.joinquant.com/view/community/detail/dea963ac96739ecd008c52cba3819d0c)里面有过解释，使用`from jqdata import *`的原因在于`get_zz_quote()`中要使用聚宽服务中的`get_trade_days()`，而后者定义在了`jqdata`模块里面。
+这段代码最后两句在[第三周的周记](https://www.joinquant.com/view/community/detail/dea963ac96739ecd008c52cba3819d0c)里面有过解释，使用`from jqdata import *`的原因在于`get_zz_quote()`中要使用聚宽服务中的`get_trade_days()`，而后者定义在了`jqdata`模块里面。源代码里面使用的`jy`服务也包含在`jqdata`模块里。`jy`服务是提供了对聚源数据的访问，聚源数据是恒生提供的[金融数据数据库](http://www.gildata.com/)。
 
-对于第一句的`from jqdata import jy`是因为`get_zz_quote()`中要使用定义在`jqdata`模块里的`jy`服务，`jy`服务是提供了对聚源数据的访问，聚源数据是恒生提供的[金融数据数据库](http://www.gildata.com/)。
+20200310: 感谢@Mr，xc 的提醒，之前在源代码开头的`from jqdata import jy`和`from jqdata import *`重复了，只需要保留后者即可。
 
 **代码片段二：**
 
