@@ -7,14 +7,20 @@
 
 ### 1.查找资料学习有关归一化和对数化的概念。
 
+**归一化**
+
+归一化（英文`Normalization`），意思是将一些事物变得更加正常化或者常规化。但这是一个很宽泛的概念，它在不同的领域有不同的更加细致的含义，常见的应用领域包括科学、数学和统计、计算机科学与技术。我们这里使用到的，或者更具体些，上周学习的@Gyro在[价值低波（中）-- 市盈率研究](https://www.joinquant.com/view/community/detail/328831058b45f5f1080914aaea6e0d09)提到的“归一化”使用的是统计学中的归一化。
+
+归一化是将数据集映射到指定的范围，通常是[0,1]和[-1,1]，用于除去不同维度数据的量纲。最常见的是“Min-Max 归一化”，公式为：(X - Xmin)/(Xmax - Xmin)。@Gyro里面应该就是类似这个思路，之所以说“类似”是因为里面归一化的时候仅仅是取了数据集中第一个记录来作为归一化的分母，但消除量纲的目的还是可以达到的。
 
 参考：
 
-https://en.wikipedia.org/wiki/Normalization
-https://en.wikipedia.org/wiki/Normalization_(statistics)
-
-- [CNN 入门讲解：什么是标准化(Normalization)？](https://zhuanlan.zhihu.com/p/35597976)
+- [Normalization](https://en.wikipedia.org/wiki/Normalization)
 - [ML 入门：归一化、标准化和正则化](https://www.davex.pw/2017/10/07/Normalization-and-Regularization/)
+- [归一化与标准化](https://ssjcoding.github.io/2019/03/27/normalization-and-standardization/)
+- [数据特征的标准化和归一化你了解多少？](http://www.raincent.com/content-10-12066-1.html)
+
+**对数化**
 
 
 
