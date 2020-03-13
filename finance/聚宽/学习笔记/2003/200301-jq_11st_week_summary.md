@@ -30,7 +30,7 @@
 - [数据取对数的意义](https://www.cnblogs.com/zztt/p/3409675.html)
 
 
-### 2.根据@Gyro的这篇文章写作一个简单的策略。
+### 2.根据@Gyro的[价值低波（中）-- 市盈率研究](https://www.joinquant.com/view/community/detail/328831058b45f5f1080914aaea6e0d09)写作一个简单的策略。
 
 ## 三、本周新学内容
 
