@@ -114,6 +114,11 @@ df = pd.DataFrame(data, columns=['Age', 'Name'],
 需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种
 理解方式与C/C++二维数组是不同的。
 
+### 列的遍历
+
+```
+```
+
 ### 获取某行某列的值
 
 *注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame
