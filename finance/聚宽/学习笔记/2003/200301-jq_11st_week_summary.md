@@ -1,18 +1,188 @@
-# 聚宽学习周记十一：
+# 聚宽学习周记十一：沪深300相关指数与一个简单的策略
+
+本周的学习是上周的接续篇，上周是研究@Gyro写作的[价值低波（中）-- 市盈率研究](https://www.joinquant.com/view/community/detail/328831058b45f5f1080914aaea6e0d09)，而本周是在理解原作者的基础之上写作自己的学习策略，同时也阅读了@Gyro的[价值低波（上）--因子加强](https://www.joinquant.com/view/community/detail/3b813a684c2360b412883737dba665d2?type=1)，收获良多。
+
+越来越觉得一种极为有效的学习方法是从模仿开始，不仅仅是模仿其形还要模仿其神，即要完全理解模仿的对象，尽力做到神形合一。再进一步进行再创作对习得的理论、概念进行复习、加深理解。最后再将它们分享出去接收他人的批评和议论，且从中再次梳理自己的理解，这样就差不多了。其实上学时候是从教材里开始模仿，离开学校之后除了书籍之外还要其他各式各样的媒介。这里面一个显见的不同是那个时候是被动的，这个时候是主动的，后者强于前者。
+
+本周笔记包括两部分：
+
+- 基于@Gyro[价值低波（中）-- 市盈率研究](https://www.joinquant.com/view/community/detail/328831058b45f5f1080914aaea6e0d09)里面的策略写了一个自己的练习策略，对我自己写的这个练习策略进行解释。
+- 阅读@Gyro的[价值低波（上）--因子加强](https://www.joinquant.com/view/community/detail/3b813a684c2360b412883737dba665d2?type=1)之后对于沪深300指数相关概念的理解。
 
 ## 一、代码解释
 
-学习的心得：
+本文后面附带了该策略，源码如下：
 
-- 整体的阅读，笔记再理解。知道有哪些东西
-- 模仿，学习，再创作
+```
+from jqdata import *
 
-两个不足：
 
-- 沪深300的市盈率本身在2015年没有超过30
-  - 自己计算
-  - 通过聚源数据获取
-- 再平衡的策略如何将地比例调整到高比例？
+def initialize(context):
+    set_benchmark('000300.XSHG')
+    set_option('use_real_price', True)
+
+    set_order_cost(OrderCost(close_tax=0.001, open_commission=0.0003, close_commission=0.0003, min_commission=5), type='stock')
+    run_monthly(before_market_open, monthday=1, time='before_open', reference_security='000300.XSHG')
+    run_monthly(market_open, monthday=1, time='open', reference_security='000300.XSHG')
+
+    g.underestimate_model = {'510050.XSHG' : 1.0} # 50ETF
+    g.overestimate_model  = {'000012.XSHG' : 0.8, '510050.XSHG' : 0.2} # 国债ETF + 50ETF
+    g.model = {}
+
+def before_market_open(context):
+    log.info('函数运行时间(before_market_open)：'+str(context.current_dt))
+
+    # 计算前一个交易日沪深300指数对应的估值（市盈率）
+    stocks = get_index_stocks('000300.XSHG')
+    df = get_fundamentals(query(
+        valuation.code,
+        valuation.market_cap,
+        valuation.pe_ratio,
+        (valuation.market_cap/valuation.pe_ratio).label('value'),
+    ).filter(
+        valuation.code.in_(list(stocks)),
+    )).dropna()
+
+    g.market_value = df.market_cap.sum()/df.value.sum()
+    if g.market_value > 30:
+        g.model = g.overestimate_model
+    elif g.market_value < 15:
+        g.model = g.underestimate_model
+
+    log.info('沪深300指数市盈率 = '+str(g.market_value))
+
+
+def market_open(context):
+    log.info('函数运行时间(market_open):'+str(context.current_dt))
+
+    sell_list = set(context.portfolio.positions.keys()) - set(g.model.keys())
+    for stock in sell_list:
+        order_target_value(stock, 0)
+
+    # 跟最着账户的总市值执行再平衡策略。
+    for stock in g.model.keys():
+        # 计算“最新模型建议的持有市值”
+        position = g.model[stock] * context.portfolio.total_value
+        # 如果“当前持有该证券的市值” = 0，直接执行买入
+        if not context.portfolio.positions.has_key(stock):
+            order_target_value(stock, position)
+        # 如果“当前持有该证券的市值”与“模型里面建议持有的市值”不匹配，那么执行再平衡。
+        elif abs(context.portfolio.positions[stock].value - position) > 0.2*context.portfolio.total_value:
+            order_target_value(stock, position)
+```
+
+这个策略的效果如下：
+
+![](./hs300_index_strategy.PNG)
+
+看起来还算不错，但实际上这个策略有两个不足的地方：一、代码里面潜藏着问题；二、策略本身的立意上有不足的地方。这两个硬伤放在后面详细介绍，先按照老习惯把代码部分解释一下。
+
+**代码片段一：**
+
+```
+def initialize(context):
+    set_benchmark('000300.XSHG')
+    set_option('use_real_price', True)
+
+    set_order_cost(OrderCost(close_tax=0.001, open_commission=0.0003, close_commission=0.0003, min_commission=5), type='stock')
+    run_monthly(before_market_open, monthday=1, time='before_open', reference_security='000300.XSHG')
+    run_monthly(market_open, monthday=1, time='open', reference_security='000300.XSHG')
+
+    g.underestimate_model = {'510050.XSHG' : 1.0} # 50ETF
+    g.overestimate_model  = {'000012.XSHG' : 0.8, '510050.XSHG' : 0.2} # 国债ETF + 50ETF
+    g.model = {}
+```
+
+`initialize()`这个函数是每个策略必须要有的，它是用来执行策略的初始化工作，在里面要配置策略的基础配置项，比如：
+
+- set_benchmark()：设定策略的对比基准，也就是用来衡量你写作策略的业绩对比对象。
+- set_option()：开启动态复权价格。
+- set_order_cost()：设定交易手续费。
+- run_monthly()：设定策略里面交易函数的运行时间为按月执行。
+
+上面这几个函数都是聚宽提供的服务函数，通常说来都是必须的。后面的全局变量是我自己加的，因为在策略里面会使用到。这里相当于使用了“股债平衡”型策略，当市场低估时100%持有股票，当市场高估时20%持有股票，80%持有国债。至于如何判断市场是高估还是低估，继续往下看。
+
+**代码片段二：**
+
+```
+def before_market_open(context):
+    log.info('函数运行时间(before_market_open)：'+str(context.current_dt))
+
+    # 计算前一个交易日沪深300指数对应的估值（市盈率）
+    stocks = get_index_stocks('000300.XSHG')
+    df = get_fundamentals(query(
+        valuation.code,
+        valuation.market_cap,
+        valuation.pe_ratio,
+        (valuation.market_cap/valuation.pe_ratio).label('value'),
+    ).filter(
+        valuation.code.in_(list(stocks)),
+    )).dropna()
+
+    g.market_value = df.market_cap.sum()/df.value.sum()
+    if g.market_value > 30:
+        g.model = g.overestimate_model
+    elif g.market_value < 15:
+        g.model = g.underestimate_model
+
+    log.info('沪深300指数市盈率 = '+str(g.market_value))
+```
+
+`before_market_open()`这个函数是我们在策略初始化函数`initialize()`里面调用`run_monthly()`配置过的函数，它在每个月的第一个交易日开盘前会被调用。这个函数的名称我们可以随便取。
+
+这个函数里面完成的工作其实就一件事：根据沪深300指数的市盈率来判断当前市场是除于低估还是高估：当市盈率>30那么判断为高估状态，策略模型选择“20%股票80%债券”；当市盈率<15那么判断为低估状态，策略模型选择“100%股票”。（*这里有不足*）
+
+上面代码里面的`get_fundamentals()`以及`query()对象`我在前面周报里面已经多次解释过了，就不再说了哟。
+
+**代码片段三：**
+
+```
+def market_open(context):
+    log.info('函数运行时间(market_open):'+str(context.current_dt))
+
+    sell_list = set(context.portfolio.positions.keys()) - set(g.model.keys())
+    for stock in sell_list:
+        order_target_value(stock, 0)
+
+    # 跟最着账户的总市值执行再平衡策略。
+    for stock in g.model.keys():
+        # 计算“最新模型建议的持有市值”
+        position = g.model[stock] * context.portfolio.total_value
+        # 如果“当前持有该证券的市值” = 0，直接执行买入
+        if not context.portfolio.positions.has_key(stock):
+            order_target_value(stock, position)
+        # 如果“当前持有该证券的市值”与“模型里面建议持有的市值”不匹配，那么执行再平衡。
+        elif abs(context.portfolio.positions[stock].value - position) > 0.2*context.portfolio.total_value:
+            order_target_value(stock, position)
+```
+
+`market_open()`这个函数和上面的`before_market_open()`一样都是通过`run_monthly()`在策略初始化的时候配置的，不同的是这个函数是在每个月第一个交易日开盘后执行，它的名字也可以任意取。
+
+这个函数的工作是根据开盘前已经更新的策略模型来进行具体的交易，主要逻辑（*这里也有个bug*）包括：
+
+- `context.portfolio.positions`保存了当前的持仓情况，而`g.model`则是基于最新的市场估值制定的持仓建议。所以第一步是看要将哪些当前持有的证券删除（这里的`set()`是Python里面的数据结构，两者相减就可以达到这个目的），然后调用`order_target_value()`将找到的证券删除。
+- 解析来就是针对持仓建议的每只证券进行操作：
+  - 如果这是一只新的证券，那么直接买入。
+  - 如果这是一直已持有的证券，那么根据建议策略里面比例进行调整。
+
+这些就是策略的大致过程，介绍得比较简略。下面重点看这个策略里面的不足之处
+
+**不足之处一**
+
+策略里面根据沪深300指数的估值（市盈率）来进行交易，但当将沪深300指数极其市盈率的历史走势画出来之后可以发现除了在2008年左右它的市盈率超过30外，仅十年来都是在20以下的，这也就意味着你的持仓可能意味十多年甚至更长，我想这对于大多数人来说还是有些难度的。所以这是一个理想化的策略。
+
+![](./hs300_index_pe.png)
+
+
+**不足之处二**
+
+交易部分的代码有缺陷，主要是从“100%持股”转换到“20%持股80%持债”的时候可能由于现金不足而失败，根据调试日志发现这可能发生在如下两种情况：
+
+- 100%持股->20%持股80%持债，当循环中的第一只证券是债的时候，由于当前仓位没有多于现金会导致针对债券的买入失败。
+- 20%持股80%持债->100%持股，当循环中的第一只证券是股票的时候，也由于债券没有提前卖出会导致现金不足而使交易失败。
+
+所以需要在进行交易的时候还需要进一步考虑这上面的逻辑缺陷。
+
 
 ## 二、上周计划任务
 
@@ -43,9 +213,10 @@
 
 ### 2.根据@Gyro的[价值低波（中）-- 市盈率研究](https://www.joinquant.com/view/community/detail/328831058b45f5f1080914aaea6e0d09)写作一个简单的策略。
 
-## 三、本周新学内容
+已完成，见代码解释部分。
 
-### 1.沪深300相关指数
+
+## 三、本周新学内容
 
 上周解读了@Gyro的[价值低波（中）-- 市盈率研究](https://www.joinquant.com/view/community/detail/328831058b45f5f1080914aaea6e0d09)，这周顺便看了下上篇：[价值低波（上）--因子加强](https://www.joinquant.com/view/community/detail/3b813a684c2360b412883737dba665d2?type=1)，里面提到了“价值因子、红利因子和低波因子”，对于“因子”这个专业术语本来预定第3周开始学习，但一来觉得这个术语听起来有点高级怕花费太多的时间，二来有在聚宽里学习碰到的其他一些更加低级的问题，所以一直拖到现在，这次算是和“因子”的正面交锋。
 
@@ -85,7 +256,7 @@
 
 而贝塔值的计算类似于协方差系数，但是分母里是Sm(Y)Sm(Y)，即Y的方差，而不是Sm(X)Sm(Y)。这里的原因有两个：一、抵消协方差产生的单位；二、贝塔值的用意是与基准进行对比，方差本身代表了波动，所以用变量X与Y的相关性除上基准Y本身的波动得到的系数可以用来表征与基准之间的波动。不知道这种理解是否正确。（参考：[CNN 入门讲解：什么是标准化(Normalization)？](https://zhuanlan.zhihu.com/p/35597976)）
 
-那么“300高贝”和“300低贝”就分别表示沪深300指数样本股里面按照贝塔值排序的最高100名和最低100名的股票，详细定义可以见[中证高、低贝塔指数系列编制方案](http://www.csindex.com.cn/uploads/indices/detail/files/zh_CN/172_000828_Index_Methodology_cn.pdf?t=1583841038)。我这里把沪深300指数以及300高贝、300低贝的走势画了出来，看得出来低贝太菜啦。
+那么“300高贝”和“300低贝”就分别表示沪深300指数样本股里面按照贝塔值排序的最高100名和最低100名的股票，详细定义可以见[中证高、低贝塔指数系列编制方案](http://www.csindex.com.cn/uploads/indices/detail/files/zh_CN/172_000828_Index_Methodology_cn.pdf?t=1583841038)。我这里把沪深300指数以及300高贝、300低贝的走势画了出来，看得出来高贝太菜啦。
 
 ![](./zz_300_gaobei_dibei.png)
 
@@ -113,7 +284,7 @@
 ![](./zz_300_grow_value.png)
 
 
-注：@Gyro文中的“300低波”我并没有在聚宽的指数名单中找到，但当我把相关指数的趋势图画出来时，肉眼观察觉得文中的“300低波”就是中证指数的“300波动”指数。然而这里的一个疑问是“300波动”指数的编制方案是“将股票按照波动率指标由高到低进行排名，选择排名前100名的股票构成对应指数样本股，然后指数计算时的的权重分配与其历史波动率的倒数成正比。”也就是说“300波动”选择的是沪深300指数中按照波动率排名前100位的样本股，但“300低波”听起来像是选择波动率较低的样本股。
+注：@Gyro文中的“300低波”我并没有在聚宽的指数名单中找到，但当我把相关指数的趋势图画出来时，肉眼观察觉得文中的“300低波”就是中证指数的“300波动”指数。然而这里的一个疑问是“300波动”指数的编制方案是“将股票按照波动率指标由高到低进行排名，选择排名前100名的股票构成对应指数样本股，然后指数计算时的的权重分配与其历史波动率的倒数成正比。”也就是说“300波动”选择的是沪深300指数中按照波动率排名前100位的样本股，但“300低波”听起来像是选择波动率较低的样本股。（*已和@Gyro确认，确实是300波动指数。*）
 
 ![](./zz_300_indexs.png)
 
@@ -125,7 +296,14 @@
 
 ![](./zz_300_index_all_log.png)
 
-### 2.
+
+## 四、下周学习任务
+
+这周接触到不少概念花了不少时间，下周搞轻松点休息一下。
+
+### 1.修改如上策略里面的代码缺陷
+
+### 2.思考如何统计股票的涨停天数
 
 上周想调查一下最近上市的股票的涨停天数具体是怎么样的，我当时的方案是获取最近一段时间上市的股票然后打开交易软件去数有几个涨停，但这样效率很低，并且不同板上市的数据会不一样。所以想着是否可以写个函数帮忙进行统计。
 
@@ -134,6 +312,3 @@ df = get_all_securities()
 df = df[df['start_date'] > dt.date(2020, 2, 1)]
 print(df)
 ```
-
-
-## 四、下周学习任务
