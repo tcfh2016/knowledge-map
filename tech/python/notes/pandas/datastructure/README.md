@@ -1,7 +1,7 @@
 Pandas的两个主要数据结构为 Series 和 DataFrame，它们为大多数应用提供了一种可靠的、易于
 使用的基础。
 
-# Series
+# [Series](https://pandas.pydata.org/pandas-docs/stable/reference/series.html)
 
 Series是一种类似于一维数组的对象，它由一组数据（各种NumPy数据类型）以及一组与之相关的数
 据标签（即索引）组成。
@@ -56,7 +56,16 @@ obj[['a', 'd']]
 
 从DataFrame中获取的Series，如何能够转换为list进行处理？
 
-# DataFrame
+```
+# converting to list
+salary_list = data["Salary"].tolist()
+```
+
+参考：
+
+- [Python | Pandas Series.tolist()](https://www.geeksforgeeks.org/python-pandas-series-tolist/)
+
+# [DataFrame](https://pandas.pydata.org/pandas-docs/stable/reference/frame.html)
 
 DataFrame 是一个二维表式的数据结构，由data(数据)、rows(行)、columns(列)组成，数据基于
 行列进行存储，因此它既有行索引也有列索引，可被看做是由Series组成的字典（共用同一个索引）。
@@ -361,6 +370,27 @@ del df.newdata # 会提示错误。
 比如`dataframe.sum(axis=1)`对“列”进行求和，按行为单位求对应所有列的和。
 
 对单一列进行求和可以使用`dataframe['column'].sum()`。
+
+**2.如何统计DataFrame某列相同值的个数？**
+
+```
+df["category"].value_counts()
+
+df = pd.DataFrame({'a':list('abssbab')})
+df.groupby('a').count()
+
+输出：
+b    3
+a    2
+s    2
+
+
+print (df['col'] == 1).sum()
+```
+
+参考：
+
+- [count the frequency that a value occurs in a dataframe column](https://stackoverflow.com/questions/22391433/count-the-frequency-that-a-value-occurs-in-a-dataframe-column)
 
 # Panel
 
