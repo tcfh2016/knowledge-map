@@ -8,6 +8,9 @@ Pandas提供了很多操作时间序列的功能。比如：
 import datetime
 
 # 根据不同的类型转化为日期格式
+# 1. 字符串格式"1/1/2018", "2018-01-01"
+# 2. numpy.datetime64 类型
+# 3. datetime.datetime 类型
 dti = pd.to_datetime(['1/1/2018', np.datetime64('2018-01-01'), datetime.datetime(2018, 1, 1)])
 
 # 生成时间序列
@@ -17,6 +20,22 @@ dti = pd.date_range('2018-01-01', periods=3, freq='H')
 dti.tz_localize('UTC')
 dti.tz_convert('US/Pacific')
 ```
+
+上面的代码里面出现了三种不同的日期格式：字符串、numpy.datetime64和datetime.datetime类
+型。
+
+- 字符串是一种最简单的表示形式常用来做为日期的输入，但它无法提供基于日期/时间的很多功能，
+比如：
+  - 获取某个月到底有多少天
+  - 2019年3月1日下午1点到2019年3月4日上午2年有多少秒
+  - 1970年1月1日到2008年12月3日有多少个工作日
+- numpy.datetime64是以64位的数据来保存日期，其中包含Y, M, W, D, h, m, s, ms, us。
+
+参考：
+
+- [numpy.datetime64() method](https://www.geeksforgeeks.org/python-numpy-datetime64-method/)
+- [Converting between datetime, Timestamp and datetime64](https://stackoverflow.com/questions/13703720/converting-between-datetime-timestamp-and-datetime64)
+- [NumPy Datetime: How to Work with Dates and Times in Python?](https://blog.finxter.com/how-to-work-with-dates-and-times-in-python/)
 
 ## 概览
 
