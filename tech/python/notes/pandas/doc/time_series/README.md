@@ -24,18 +24,35 @@ dti.tz_convert('US/Pacific')
 上面的代码里面出现了三种不同的日期格式：字符串、numpy.datetime64和datetime.datetime类
 型。
 
-- 字符串是一种最简单的表示形式常用来做为日期的输入，但它无法提供基于日期/时间的很多功能，
-比如：
+- 字符串是一种最简单的表示形式常用来做为日期的输入，因为不同国家使用不同的日期格式，所以
+定义了专门的时间表示标准ISO 8601来统一日期输入，格式为“YYYY-MM-DD hh:mm:ss.ms”或者
+“YYYY-MM-DDThh:mm:ss.ms”(numpy的输出使用后一种格式)。但它无法提供基于日期/时间的很多功
+能，比如：
   - 获取某个月到底有多少天
   - 2019年3月1日下午1点到2019年3月4日上午2年有多少秒
   - 1970年1月1日到2008年12月3日有多少个工作日
-- numpy.datetime64是以64位的数据来保存日期，其中包含Y, M, W, D, h, m, s, ms, us。
+- numpy.datetime64是以64位的数据来保存日期，其中包含Y, M, W, D, h, m, s, ms, us。一
+些常见的日期运算包括：
+  - np.datetime64('2000-11-27') + 2：按天相加的结果为2000-11-29，numpy自动识别日期类
+  型
+  - np.datetime64('2000-11') + 2：按天相加的结果为2001-01，numpy自动识别日期类
+  型
+  - some_date + np.timedelta64(4, 'M') + np.timedelta64(3, 'D')：使用timedelta64
+  对象
+- datetime 是Python内建的日期/时间处理模块，里面包括了date/time/datetime/timedelta/
+tzinfo/timezone六种对象。
+  - data用来处理日期，初始化必须分别传入年、月、日进行初始化
+    - 
+  - time用来处理时钟
+  - datetime是date/time对象的结合体
+  -
 
 参考：
 
 - [numpy.datetime64() method](https://www.geeksforgeeks.org/python-numpy-datetime64-method/)
 - [Converting between datetime, Timestamp and datetime64](https://stackoverflow.com/questions/13703720/converting-between-datetime-timestamp-and-datetime64)
 - [NumPy Datetime: How to Work with Dates and Times in Python?](https://blog.finxter.com/how-to-work-with-dates-and-times-in-python/)
+- [Python datetime module with examples](https://www.geeksforgeeks.org/python-datetime-module-with-examples/)
 
 ## 概览
 
