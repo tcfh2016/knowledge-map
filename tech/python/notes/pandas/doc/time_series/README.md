@@ -1,8 +1,6 @@
 # [Time series / date functionality](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html)
 
-datetime.date(2014, 1, 1)
-
-Pandas提供了很多操作时间序列的功能。比如：
+Pandas基于Numpy的datetime64,timedelta64对象提供了很多操作时间序列的功能。比如：
 
 ```
 import datetime
@@ -13,8 +11,12 @@ import datetime
 # 3. datetime.datetime 类型
 dti = pd.to_datetime(['1/1/2018', np.datetime64('2018-01-01'), datetime.datetime(2018, 1, 1)])
 
-# 生成时间序列
+# 生成时间序列，
 dti = pd.date_range('2018-01-01', periods=3, freq='H')
+# 输出：
+# DatetimeIndex(['2018-01-01 00:00:00', '2018-01-01 01:00:00',
+#                '2018-01-01 02:00:00'],
+#                dtype='datetime64[ns]', freq='H')
 
 # 时区转换
 dti.tz_localize('UTC')
@@ -41,18 +43,21 @@ dti.tz_convert('US/Pacific')
   对象
 - datetime 是Python内建的日期/时间处理模块，里面包括了date/time/datetime/timedelta/
 tzinfo/timezone六种对象。
-  - data用来处理日期，初始化必须分别传入年、月、日进行初始化
-    - 
-  - time用来处理时钟
+  - date用来处理日期，初始化必须分别传入年、月、日进行初始化
+    - today=date.today()/today.year/today.month/today.day
+  - time用来处理时钟，时间的初始化类似也要分别传入时分秒等参数，但它们都是可选的
+    - time=time(12,34,56)/time.hour/time.minute/time.second/time.microsecond
   - datetime是date/time对象的结合体
-  -
+    - now=datetime.now()
+  - timedelta是用来计算日期差距的对象
 
 参考：
 
 - [numpy.datetime64() method](https://www.geeksforgeeks.org/python-numpy-datetime64-method/)
-- [Converting between datetime, Timestamp and datetime64](https://stackoverflow.com/questions/13703720/converting-between-datetime-timestamp-and-datetime64)
 - [NumPy Datetime: How to Work with Dates and Times in Python?](https://blog.finxter.com/how-to-work-with-dates-and-times-in-python/)
 - [Python datetime module with examples](https://www.geeksforgeeks.org/python-datetime-module-with-examples/)
+- [Converting between datetime, Timestamp and datetime64](https://stackoverflow.com/questions/13703720/converting-between-datetime-timestamp-and-datetime64)
+
 
 ## 概览
 
@@ -63,7 +68,32 @@ Pandas提供了四个与时间相关的概念：
 - Time spans，由某个时间点开始且周期性跳跃的时间跨度。
 - Date offsets，相对的时间偏移量，类似于dateutil包中的`dateutil.relativedelta.relativedelta`。
 
-时间序列数据通常做为Series或DataFrame的index使用。
+|Concept|Scalar Class|Array Class|pandas Data Type|Primary Creation Method|
+|-|-|-|-|-|
+|Date times|Timestamp|DatetimeIndex|datetime64[ns] or datetime64[ns,tz]|to_datetime or date_range|
+|Time deltas|Timedelta|TimedeltaIndex|timedelta64[ns]|to_timedelta or timedelta_range|
+|Time spans|Period|PeriodIndex|period[freq]|Period or period_range|
+|Date offsets|DateOffset|None|None|DateOffset|
+
+时间序列数据通常作为Series或DataFrame的index使用。时间为空的时候pandas里面用NaT表示，
+类似于np.nan来表示浮点数值。
+
+## date_range 和 period_range
+
+```
+In [21]: pd.Series(pd.period_range('1/1/2011', freq='M', periods=3))
+Out[21]:
+0    2011-01
+1    2011-02
+2    2011-03
+
+
+In [23]: pd.Series(pd.date_range('1/1/2011', freq='M', periods=3))
+Out[23]:
+0   2011-01-31
+1   2011-02-28
+2   2011-03-31
+```
 
 ## Timestamps vs Time Spans
 
@@ -71,12 +101,21 @@ Timestamps/Time Span都可以用来做为index，前者表示具体的时间点�
 后者表示时间间隔（PeriodIndex类型）。
 
 ```
+time_stamp = pd.Timestamp(datetime.datetime(2012, 5, 1))
+# 2012-05-01 00:00:00
+time_stamp = pd.Timestamp('2012-05-01')
+# 2012-05-01 00:00:00
+
 # 以Timestamp做为index
 dates = [pd.Timestamp('2012-05-01'),
          pd.Timestamp('2012-05-02'),
          pd.Timestamp('2012-05-03')]
 ts = pd.Series(np.random.randn(3), dates)
-
+#2012-05-01   -1.863204
+#2012-05-02    1.337686
+#2012-05-03    0.173678
+# 当timestamp做为pandas的index的时候，Timestamp/Period 类型自动转换为 DatetimeIndex/
+# PeriodIndex 类型，但为啥这个时候不会有时分秒的表示？
 
 # 以Period做为index
 periods = [pd.Period('2012-01'), pd.Period('2012-02'), pd.Period('2012-03')]

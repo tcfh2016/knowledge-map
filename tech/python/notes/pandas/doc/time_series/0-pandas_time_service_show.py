@@ -16,3 +16,6 @@ print('type of datetime.date.today() = %s'% (type(datetime.date.today())))
 print(dti)
 print(type(np.datetime64('2018-01-01')))
 print(type(datetime.datetime(2018, 1, 1)))
+
+time_range = pd.date_range('2018-01-01', periods=3, freq='H')
+print(time_range)
