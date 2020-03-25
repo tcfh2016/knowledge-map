@@ -224,6 +224,8 @@ def initialize(context):
 - `set_option...` 设定复权模式
 - `log....` 设定日志输出级别
 
+这些初始化的工作仅仅在策略开始的时候做一次，和每次开盘前/中/后执行的策略函数是不一样的。
+
 **开盘前的工作**
 
 ```
@@ -250,11 +252,89 @@ def set_slip_fee(context):
         set_commission(PerTrade(buy_cost=0.003, sell_cost=0.004, min_cost=5))
 ```
 
+`before_trading_start()`这个函数是开盘前默认调用的函数，如果需要在每次开盘前做一些配置
+或者计算那么直接写在里面。这里它做的工作包括两部分：设置滑点和手续费。
+
+滑点的介绍可以阅读聚宽API上[滑点部分](https://www.joinquant.com/help/api/help?name=api#%E8%82%A1%E6%81%AF%E7%BA%A2%E5%88%A9%E7%A8%8E%E7%9A%84%E8%AE%A1%E7%AE%97)，滑点主要用来设定真实成交价格与预期价格之间的偏差。如果不设置滑点系统会默认设定百分比滑点` PriceRelatedSlippage(0.00246)`。
+
+这里也按照日期区间设置了不同的交易手续费。交易手续费有下降的趋势，2009年之前设定为千分之三/四，2009年后年前降到千分之二/三，2011年降到千分之一/二，2013年后进一步下降到万分之三。这些手续费对于低频交易影响不大，但高频交易就有不小的影响。
+
+**开盘时的工作**
+
+```
+def handle_data(context, data):
+    # 获得当前时间
+    hour = context.current_dt.hour
+    minute = context.current_dt.minute
+
+    # 每天收盘时调整仓位
+    if hour == g.hour and minute == g.minute:
+        signal = get_signal(context)
+
+        if signal == 'sell_the_stocks':
+            sell_the_stocks(context)
+        elif signal == 'ETF300' or signal == 'ETF500':
+            buy_the_stocks(context,signal)
+
+def get_signal(context):
+
+    #沪深300与中证500的当日收盘价
+    hs300,cp300 = getStockPrice(g.hs, g.lag)
+    zz500,cp500  = getStockPrice(g.zz, g.lag)
+
+    #计算前20日变动
+    hs300increase = (cp300 - hs300) / hs300
+    zz500increase = (cp500 - zz500) / zz500
+
+    hold300 = context.portfolio.positions[g.ETF300].total_amount
+    hold500 = context.portfolio.positions[g.ETF500].total_amount
+
+    if (hs300increase<=0 and hold300>0) or (zz500increase<=0 and hold500>0):
+        return 'sell_the_stocks'
+    elif hs300increase>zz500increase and hs300increase>0 and (hold300==0 and hold500==0):
+        return 'ETF300'
+    elif zz500increase>hs300increase and zz500increase>0 and (hold300==0 and hold500==0):
+        return 'ETF500'
+
+def getStockPrice(stock, interval):
+    h = attribute_history(stock, interval, unit='1d', fields=('close'), skip_paused=True)
+    return (h['close'].values[0],h['close'].values[-1])
+
+def sell_the_stocks(context):
+    for stock in context.portfolio.positions.keys():
+        return (log.info("Selling %s" % stock), order_target_value(stock, 0))
+
+def buy_the_stocks(context,signal):
+    return (log.info("Buying %s"% signal ),order_value(eval('g.%s'% signal), context.portfolio.cash))
+```
+
+`handle_data()`是在开盘后调用，这个策略是按照分钟级别的频率运行，所以我们定义的盘前、盘中和盘后的执行函数都会在每分钟执行。交易执行时函数`handle_data()`的实现上会判断当前的时间，只有在满足`hour == g.hour and minute == g.minute`的时候才会进行仓位调整的尝试。`g.hour`和`g.minute`都是在策略初始化的时候定义好的，翻译过来就是在每个交易日的14点53分尝试调整仓位。
+
+`get_signal()`这个函数用来获取当前的操作指导，这个函数里面的算法包括如下几步：
+
+- 获取沪深300和中证500在20天前的收盘价和今天的收盘价
+- 计算今天的收盘价相比20天前的增幅
+- 获得当前沪深300和中证500指数对应ETF的持仓数量
+- 给出当前操作指导
+  - 如果沪深300/中证500 ETF持仓数量大于0，且它们各自当前的收盘价小于20天前收盘价，那么建议“卖出”
+  - 如果沪深300涨幅大于中证500涨幅，且当前空仓，那么建议买入“沪深300ETF”
+  - 如果中证500涨幅大于沪深300涨幅，且当前空仓，那么建议买入“中证500ETF”
+
+最后是根据操作指导来买卖股票：
+
+- 建议“卖出”，那么卖出当前所有持仓证券
+- 建议“沪深300ETF”，那么用当前持有的现金买入所有沪深300ETF
+- 建议“中证500ETF”，那么用当前持有的现金买入所有中证500ETF
+
 **收盘后的工作**
 
 ```
-
+def after_trading_end(context):
+    return
 ```
+
+`after_trading_end()`是在每次收盘后系统调用的。我们可以说before_trading_start/handle_data/after_trading_end这三个函数是按天/分/tick进行交易需要使用到的，而run_daily/run_weekly/run_monthly是按天/周/月进行交易需要使用的。这两组重合的部分是“按天交易”，这个时候使用哪种就需要在明确它们之间的区别上根据自己的使用习惯和具体场景来选择。
+
 
 ## 二、上周计划任务
 
