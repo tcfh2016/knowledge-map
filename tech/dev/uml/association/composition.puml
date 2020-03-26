@@ -1,8 +1,5 @@
 @startuml
-note as N4
-component.
-end note
 
-Receiver *-- MessageBuffer
+Receiver *- MessageBuffer
 
 @enduml

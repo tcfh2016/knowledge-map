@@ -1,5 +1,5 @@
 @startuml
 
-Family o- Person
+Modem -> Dialler
 
 @enduml
