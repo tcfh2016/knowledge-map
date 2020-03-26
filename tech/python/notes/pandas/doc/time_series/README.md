@@ -58,6 +58,12 @@ tzinfo/timezone六种对象。
 - [Python datetime module with examples](https://www.geeksforgeeks.org/python-datetime-module-with-examples/)
 - [Converting between datetime, Timestamp and datetime64](https://stackoverflow.com/questions/13703720/converting-between-datetime-timestamp-and-datetime64)
 
+在[Converting between datetime, Timestamp and datetime64](https://stackoverflow.com/questions/13703720/converting-between-datetime-timestamp-and-datetime64/46921593#46921593)这里提到了datetime/numpy.datetime64/pd.Timestamp的区别。
+
+- datetime 是Python提供的处理日期/时间的标准库，日期和时间由不同的对象表示。
+- numpy提供的 datatime64/timedelta64对象是不同的库，它支持毫秒级别的精度，并且用同一个
+对象来处理日期/时间。
+- pandas提供的 Timestamp/Timedelta基于numpy提供了更为多样化功能。
 
 ## 概览
 
@@ -124,8 +130,8 @@ ts = pd.Series(np.random.randn(3), periods)
 
 ## 转换为 Timestamps
 
-使用`to_datetime()`可以将Series或者列表转换为 Timestamp，如果仅有一个元素转为的类型为
-Timestamp，如果有多个元素那么返回的类型则为 DatetimeIndex。
+使用`to_datetime()`可以将诸如字符串、epochs或者复合类型的时间对象转换为 dtetime64，如
+果有多个元素那么返回的类型则为 DatetimeIndex。
 
 ```
 # 转换列表
