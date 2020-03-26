@@ -1,0 +1,10 @@
+@startuml
+
+interface Modem
+{
+  + dial(string pno)
+  + hangup()
+  + send(char c)
+  +recv()
+}
+@enduml

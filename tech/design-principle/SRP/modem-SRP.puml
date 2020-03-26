@@ -1,0 +1,19 @@
+@startuml
+
+DataChannel <|.. Modem
+Connection <|.. Modem
+
+interface DataChannel
+{
+  + dial(string pno)
+  + hangup()
+}
+
+interface Connection
+{
+  + send(char c)
+  +recv()
+}
+
+
+@enduml
