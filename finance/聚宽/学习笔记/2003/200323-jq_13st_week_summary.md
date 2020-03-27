@@ -382,3 +382,7 @@ def after_trading_end(context):
 - 从海量的交易数据里提取特征，然后应用数学、计算机科学的算法来提供新的交易参考
 
 ## 四、下周学习任务
+
+如果银行波动比较大，那如何测量某个行业/指数的波动率呢？
+
+https://www.joinquant.com/view/community/detail/b80e9e60d6f39fa6c8e3b4cb3af4a07f?page=1#90895
