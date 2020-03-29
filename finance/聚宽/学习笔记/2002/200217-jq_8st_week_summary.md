@@ -39,7 +39,7 @@ def initialize(context):
     set_option('use_real_price', True)
     log.set_level('order', 'error')
 
-    set_order_cost(OrderCost(close_tax=0.001, open_commission=0.0003, close_commission=0.0003, min_commission=5), type='stock')
+    set_order_cost(OrderCost open_commission=0.0003, close_commission=0.0003, min_commission=5), type='fund')
     run_monthly(before_market_open, 1, time='before_open', reference_security='000300.XSHG')
     run_monthly(market_open, 1, time='open', reference_security='000300.XSHG')
     run_monthly(after_market_close, 1, time='after_close', reference_security='000300.XSHG')
@@ -149,7 +149,7 @@ def initialize(context):
     set_option('use_real_price', True)
     log.set_level('order', 'error')
 
-    set_order_cost(OrderCost(close_tax=0.001, open_commission=0.0003, close_commission=0.0003, min_commission=5), type='stock')
+    set_order_cost(OrderCost open_commission=0.0003, close_commission=0.0003, min_commission=5), type='fund')
     run_monthly(before_market_open, 1, time='before_open', reference_security='000300.XSHG')
     run_monthly(market_open, 1, time='open', reference_security='000300.XSHG')
     run_monthly(after_market_close, 1, time='after_close', reference_security='000300.XSHG')
@@ -171,6 +171,7 @@ def initialize(context):
 - `run_monthly()`设置交易时的执行函数，通过其中的参数`time`来指定对应函数的执行时间，比如这里设置了按照每月开盘前执行、开盘时及开盘后执行，策略的执行时间为每月的第1个交易日。
 - `g.cash_income`是自己创建的列表，用来策略执行完成之后计算内部收益率（IRR）。
 
+需要特别提名的是，最开始发布的周记里面对于手续费的设置是按照`set_order_cost(OrderCost(close_tax=0.001, open_commission=0.0003, close_commission=0.0003, min_commission=5), type='stock')`设定的，特别感谢宽友@黄晨19 在评论里面提我指出，所以才有机会更新这个错误。如上代码里面已经更新为`set_order_cost(OrderCost open_commission=0.0003, close_commission=0.0003, min_commission=5), type='fund')`因为当前操作的是ETF基金所以`type`要设置为"fund"，同时ETF不收取印花税，所以不用设置`close_tax`。
 
 **代码片段三：**
 
