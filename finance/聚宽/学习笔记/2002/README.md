@@ -5,7 +5,7 @@
 
 ## 错误更正
 
-### 1.
+### 1. 股票交易和基金交易手续费是不同的
 
 200329：今天看到[聚宽学习第八周周记：基于中证500ETF的基金定投策略](https://www.joinquant.com/view/community/detail/b46d980deaf0f09cbe8bd5d4fba8147e?page=1#91500)上@黄晨19留言提到：
 

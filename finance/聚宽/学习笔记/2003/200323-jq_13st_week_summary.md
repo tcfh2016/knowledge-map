@@ -1,6 +1,6 @@
 # 聚宽学习周记十三：详解@东南有大树的“ETF二八轮动对冲模型”（上）
 
-@东南有大树写的[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)这篇内容有点多，所以不得不将学习笔记分成多篇。在上篇里面主要是解决这篇文章里面的一些扩展阅读，比如代码解释部分是解析文中引用的聚宽官方的[【量化课堂】斗牛蛋卷二八轮动原版策略实现](https://www.joinquant.com/view/community/detail/9434c4a9c9482c7d1071be947dd3558a?type=1)，后面的周记里面再去学习@东南有大树文章中的研究和策略内容，最后在理解了整篇文章的基础之上尝试写作练习策略。
+@东南有大树写的[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)这篇内容有点多，所以不得不将学习笔记分成多篇。在上篇里面主要是解决这篇文章里面的一些扩展阅读，比如代码解释部分是解析文中引用的聚宽官方的[【量化课堂】斗牛蛋卷二八轮动原版策略实现](https://www.joinquant.com/view/community/detail/9434c4a9c9482c7d1071be947dd3558a?type=1)，后面的周记里面再去学习@东南有大树文章中的研究和策略内容，最后在理解了整篇文章的基础之上尝试练习策略。
 
 
 ## 一、代码解释
@@ -142,9 +142,9 @@ def after_trading_end(context):
     return
 ```
 
-聚宽策略目前来说我写作过两个练习策略，第一个是模拟基金定投的策略（现在回过头去看突然觉得几个月前自己太菜了，因为现在在学的二八轮动等策略毫无疑问是我那种思路上的好几个翻版，要说那个策略的唯一亮点之处就是简单好操作）；第二个是上周基于@Gyro市盈率研究的文章上修改的基于指数的再平衡策略。前一个策略是完全按照聚宽给定的策略模板改写的，后面是在阅读了API稳当之后从无到有写作的。尽管我还是个初学者，但基于当前已经能够感受到学习时已经在产生的变化，对于初学者学习聚宽有个建议。
+聚宽策略目前来说我写过两个练习策略，第一个是模拟基金定投的策略（现在回过头去看突然觉得几个月前自己太菜了，现在学习的二八轮动策略我之前定投思路上的翻版（考虑了轮动）；第二个是上周基于@Gyro市盈率研究的文章上修改的基于指数的再平衡策略。前一个策略是完全按照聚宽给定的策略模板改写的，后面是在阅读了API稳当之后从无到有写作的。
 
-这个建议也就是尽可能比较完整的照着聚宽官方的API文档走几遍，把它提供的大致的服务函数有个印象，这不是一蹴而就的事，要多看几遍。最重要的一定要理解整个策略的执行框架，这是自己写作策略和看懂其他人写的策略的基础。否则，你可能会觉得策略很难理解。理解了策略的框架后，其他的就剩Python知识点了。
+作为一个刚刚完成两个练习策略的初学者，已经能够感受到学习过程中在产生的变化，所以在这里提一下当前的学习心得，它也可以看成是针对初学者的建议。这个心得/建议是尽可能比较完整的照着聚宽官方的API文档走几遍，先了解聚宽提供的服务函数，再理解整个策略的执行框架，这是自己写作策略和看懂其他人写的策略的基础。否则，你可能会觉得策略很难理解。理解了策略的框架后，其他的就剩Python知识点了。这个过程不是一蹴而就的事，要多看多试几遍。
 
 **策略的整体框架**
 
@@ -152,9 +152,9 @@ def after_trading_end(context):
 
 如果你学习过聚宽API中的[策略程序架构](https://www.joinquant.com/help/api/help?name=api#%E7%AD%96%E7%95%A5%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84%E2%99%A6)你会比较清楚策略的组成主要包括两部分：一、初始化函数`initialize()`，它是必须的；二、定时运行系列函数，它们是可选的，但是实际上也是必不可少的。定时运行系列函数又可以分为三类：
 
-- 开盘前执行：before_trading_start
-- 开盘时执行：run_daily/run_weekly/run_monthly/handle_data
-- 收盘后执行：after_trading_end
+- 开盘前执行：before_trading_start - run_daily/run_weekly/run_monthly/
+- 开盘时执行：handle_data - run_daily/run_weekly/run_monthly/
+- 收盘后执行：after_trading_end - run_daily/run_weekly/run_monthly/
 
 基于如上的理解那么我们可以看到上面的策略是由“initialize + before_trading_start + handle_data + after_trading_end” 组成的，也就是“初始化函数 + 开盘前执行函数 + 开盘时执行函数 + 收盘后执行函数”组成。你获取会奇怪为什么这里的开盘时执行函数没有使用`run_daily/run_weekly/run_monthly`而是使用了`handle_data`呢？这要明白它们之间的区别：
 
@@ -163,7 +163,7 @@ def after_trading_end(context):
 - 两者的参数不同，`handle_data`除了传入`context`参数外还可以多传入`data`，表示前一天股票的行情数据。
 - `run_daily/run_weekly/run_monthly`需要手动注册调用函数，但`handle_data`默认直接调用。
 
-所以实际上也可以使用`run_daily`来替代`handle_data`，但相比之下要多写一行代码。
+其他的`before_trading_start`, `after_trading_end`与`run_daily/run_weekly/run_monthly`的关系也类似。所以，如果是按天执行的策略，那么`run_daily`来替代`before_trading_start/handle_data/after_trading_end`，但相比之下要多写一行代码。
 
 **策略初始化**
 
@@ -198,7 +198,7 @@ def set_backtest():
     log.set_level('order', 'error')
 ```
 
-策略初始化我们已经提到过`initialize`这个函数一定是必须的，因为每个策略开始执行前系统会调用这个函数来完成基本的初始化工作。这里的`set_params`,`set_variables`,`set_backtest`这三个函数是辅组函数，或者说是为了代码风格而将功能进行了细分，按照我当前粗糙的写法可能就是下面这样：
+策略初始化我们已经提到过`initialize`这个函数一定是必须的，因为每个策略开始执行前系统会调用这个函数来完成基本的初始化工作。这里的`set_params`,`set_variables`,`set_backtest`这三个函数是自己写的辅助函数，可以随便命名。它们这里主要是为了代码风格而将功能进行了细分，从而使得整体的程序结构更具有层次感。按照我当前粗糙的写法可能会将它们融合为下面这样：
 
 ```
 def initialize(context):
@@ -217,7 +217,7 @@ def initialize(context):
     log.set_level('order', 'error')
 ```
 
-对比之下显然将不同部分分成不同函数看起来层次感好要一些。整个初始化里面完成的任务包括了四部分：
+整个初始化里面完成的任务包括了四部分：
 
 - `set_benchmark...` 设定了业绩参考基准
 - `g....` 设置了全局变量，共之后交易时使用
@@ -252,12 +252,11 @@ def set_slip_fee(context):
         set_commission(PerTrade(buy_cost=0.003, sell_cost=0.004, min_cost=5))
 ```
 
-`before_trading_start()`这个函数是开盘前默认调用的函数，如果需要在每次开盘前做一些配置
-或者计算那么直接写在里面。这里它做的工作包括两部分：设置滑点和手续费。
+`before_trading_start()`这个函数是开盘前默认调用的函数，如果需要在每次开盘前做一些配置或者计算那么直接写在里面。这里它做的工作包括两部分：设置滑点和手续费。
 
 滑点的介绍可以阅读聚宽API上[滑点部分](https://www.joinquant.com/help/api/help?name=api#%E8%82%A1%E6%81%AF%E7%BA%A2%E5%88%A9%E7%A8%8E%E7%9A%84%E8%AE%A1%E7%AE%97)，滑点主要用来设定真实成交价格与预期价格之间的偏差。如果不设置滑点系统会默认设定百分比滑点` PriceRelatedSlippage(0.00246)`。
 
-这里也按照日期区间设置了不同的交易手续费。交易手续费有下降的趋势，2009年之前设定为千分之三/四，2009年后年前降到千分之二/三，2011年降到千分之一/二，2013年后进一步下降到万分之三。这些手续费对于低频交易影响不大，但高频交易就有不小的影响。
+这里也按照日期区间设置了不同的交易手续费。交易手续费有下降的趋势，2009年之前设定为千分之三/四，2009年后年前降到千分之二/三，2011年降到千分之一/二，2013年后进一步下降到万分之三。这些手续费对于低频交易影响不大，但高频交易就有不小的影响。不过`set_commission()`这个函数目前已经废弃了，需要使用新的`set_commission()`来代替。
 
 **开盘时的工作**
 
@@ -340,6 +339,8 @@ def after_trading_end(context):
 
 开始从[聚宽2019年度评选+精选文章合集](https://www.joinquant.com/view/community/detail/5fea4e17fa8ad5eb32b85201375e2669?type=1)选择第2篇文章来学习，这次选择@东南有大树写的[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)。
 
+再阅读了这篇文章之后发现对于二八轮动的概念不是很了解，所以决定先学习其中所引用到的聚宽官方的一篇介绍“二八轮动”的文章：[【量化课堂】斗牛蛋卷二八轮动原版策略实现](https://www.joinquant.com/view/community/detail/9434c4a9c9482c7d1071be947dd3558a?type=1)
+
 
 ## 三、本周新学内容
 
@@ -381,8 +382,13 @@ def after_trading_end(context):
 - 能够通过计算机技术更便利来提高交易的便捷性
 - 从海量的交易数据里提取特征，然后应用数学、计算机科学的算法来提供新的交易参考
 
+当然这只是我当前的理解，需要随着不断的学习进行更新或者确认。
+
+
 ## 四、下周学习任务
 
-如果银行波动比较大，那如何测量某个行业/指数的波动率呢？
+### 1.按照[【量化课堂】斗牛蛋卷二八轮动原版策略实现](https://www.joinquant.com/view/community/detail/9434c4a9c9482c7d1071be947dd3558a?type=1)提到的思路对例子中的策略进行优化和对比。
 
-https://www.joinquant.com/view/community/detail/b80e9e60d6f39fa6c8e3b4cb3af4a07f?page=1#90895
+### 2.理解[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)中讲解的内容。
+
+### 3.偶然在[银行股的配对交易策略研究](https://www.joinquant.com/view/community/detail/b80e9e60d6f39fa6c8e3b4cb3af4a07f?page=1#90895)的评论中发现银行股的波动小，那么如何选择出证券市场波动最大和最小的行业呢？
