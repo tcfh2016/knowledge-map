@@ -29,6 +29,14 @@ whereis grep
 which grep
 ```
 
+查找的时候如果排除特定文件夹：
+
+```
+find . -path ./misc -prune -o -name '*.txt' -print
+find . -type d \( -path dir1 -o -path dir2 -o -path dir3 \) -prune -o -print
+find -name "*.js" -not -path "./directory/*"
+```
+
 参考：
 
 - [Linux的五个查找命令](http://www.ruanyifeng.com/blog/2009/10/5_ways_to_search_for_files_using_the_terminal.html)
