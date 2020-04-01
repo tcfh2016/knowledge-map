@@ -371,6 +371,8 @@ def after_trading_end(context):
 
 这次在读@东南有大树这篇文章时恍然大悟，原来我们可以直接像获取股票[“市值数据”](https://www.joinquant.com/help/api/help?name=Stock#%E5%B8%82%E5%80%BC%E6%95%B0%E6%8D%AE)那样直接获取到指数的市盈率，确实让人眼前一亮：我怎么之前就没有想到呢？！
 
+200401 更新：今早尝试使用市值数据表valuation来获取指数的市盈率发现不成功，才意识到上周自己的说法是不正确的，当时代码没有看完整，其实@东南有大树的方法是和[周记十一](https://www.joinquant.com/view/community/detail/6f4ec5802b1710be8e39248afec64a64)里@Gyro计算指数市盈率的方法一样，通过获取所有成分股的数据来进行计算。
+
 ### 3.量化投资的基本思想
 
 在引用的聚宽官方推出的[【量化课堂】斗牛蛋卷二八轮动原版策略实现](https://www.joinquant.com/view/community/detail/9434c4a9c9482c7d1071be947dd3558a?type=1)里面提到：
