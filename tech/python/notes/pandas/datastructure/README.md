@@ -392,6 +392,15 @@ print (df['col'] == 1).sum()
 
 - [count the frequency that a value occurs in a dataframe column](https://stackoverflow.com/questions/22391433/count-the-frequency-that-a-value-occurs-in-a-dataframe-column)
 
+## DataFrame 输出格式
+
+```
+.dataframe tbody tr th:only-of-type { vertical-align: middle; }
+.dataframe tbody tr th { vertical-align: top; }
+.dataframe thead th { text-align: right; }
+```
+
+
 # Panel
 
 Panel是Pandas中的一种三维数据表类型，但在版本0.25.0之后就废弃了。在print Panel类型的时
@@ -501,7 +510,8 @@ import pandas as pd
 import numpy as np # NaN 在numpy里定义，因此使用NaN需要先import numpy。
 
 s = Series([1, np.NaN, 3.2, np.NaN, 7])
-print(s.dropna())
+print(s.dropna()) # 删除含有NaN的全部行
+print(s.dropna(axis=1)) # 删除含有NaN的全部行
 ```
 
 然而，对于DataFrame调用 dropna的处理更复杂一些，因为它会默认丢弃所有包含缺失值的行。此
