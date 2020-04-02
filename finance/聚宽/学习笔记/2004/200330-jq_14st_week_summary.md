@@ -2,6 +2,47 @@
 
 ## 一、代码解释
 
+本来觉得这一周可以分析[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)里面的策略了，然而并木有。因为我发现要看完文中的研究内容并理解就要花不少时间了，研究中的思路不难懂，难点在于如何使用Python来进行想法的验证和实现。所以，决定这周先将研究部分的代码进行讲解。
+
+**一、计算指数动量**
+
+```
+import numpy as np
+import pandas as pd
+import datetime
+import seaborn as sns
+from jqdata import *
+
+sns.set(font='serif')
+plt.rcParams['axes.unicode_minus'] = False
+
+trade_date = get_trade_days(end_date=datetime.datetime.now(), count=50)
+index_codes = ['000300.XSHG', '000905.XSHG']  # 沪深300，上证500
+start_date = '2013-03-15'
+end_date = trade_date[-2]
+
+'''计算指数的平均市场与市盈率'''
+def func(index):
+    q = query(valuation.code,
+              valuation.market_cap,
+              valuation.pe_ratio).filter(valuation.code.in_(get_index_stocks(index)))
+
+    df = get_fundamentals(q, end_date)
+    return {'market_cap':df['market_cap'].mean(),'pe_ratio':df['pe_ratio'].mean()}
+dict_index = {get_security_info(index).display_name: func(index) for index in index_codes}
+pd.DataFrame(dict_index).T
+
+'''指数的历史价格趋势'''
+dict_close = {get_security_info(code).display_name:\
+              get_price(code, start_date, end_date)['close']\
+              for code in index_codes}
+pd.DataFrame(dict_close).plot()
+```
+
+**二、计算大小盘指数的动量**
+
+```
+```
 
 ## 二、上周计划任务
 
