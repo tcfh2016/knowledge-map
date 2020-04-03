@@ -29,6 +29,7 @@ def func(index):
 
     df = get_fundamentals(q, end_date)
     return {'market_cap':df['market_cap'].mean(),'pe_ratio':df['pe_ratio'].mean()}
+
 dict_index = {get_security_info(index).display_name: func(index) for index in index_codes}
 pd.DataFrame(dict_index).T
 
@@ -39,9 +40,78 @@ dict_close = {get_security_info(code).display_name:\
 pd.DataFrame(dict_close).plot()
 ```
 
+这一节的演示尽管标题为“一、计算指数动量”，但实际上并没有开始计算动量，而是对比了沪深300和中证500指数在市值、市盈率和走势上的不同，这里的市值和市盈率计算的是指数对应的样本股的平均市值和平均市盈率。最后给出了指数因为市值不同在走势上的差异性，也就是“大盘股和小盘股进行轮动”的基本背景。
+
+1. `import`部分
+
+开头的import语句我讲了十来次了，估计再讲就有点过了。这里需要提一下`import seaborn as sns`，这个函数库是用来绘图的。在可视化功能上，Pandas的Series和DataFrame均支持绘图功能，另外还有专门的绘图函数库matplotlib以及以下几种更加强大的专用模块：
+
+- [Altair](https://altair-viz.github.io/)：基于Vega, Vega-Lite的统计可视化Python库。
+- [Bokeh](https://docs.bokeh.org/en/latest/)：为现代浏览器而设的交互式可视化Python库。
+- [seaborn](https://seaborn.pydata.org/)：基于matplotlib的数据可视化Python库。
+
+理解了这个`seaborn`之后，就知道后面的`sns.set(font='serif')`用来设置显示的字体。
+
+后面的`plt.rcParams['axes.unicode_minus'] = False`是用来配置Python默认的绘图函数库Matplot的参数的，这句代码的作用是在绘制的图形上正常显示出负号（`-`）。
+
+参考：
+
+- [plt.rcParams[]](https://www.cnblogs.com/pacino12134/p/9776882.html)
+- [Matplotlib中plt.rcParams用法（设置图像细节）](https://www.cnblogs.com/douzujun/p/10327963.html)
+
+2. 指数成分股的平均市值和市盈率计算
+
+代码中定义的函数`func()`是计算给定指数对应样本股的平均市值和平均市盈率，首先是调用聚宽服务函数`get_fundamentals()`获取指定日期的指数样本股的市值和市盈率，然后再将平均市值和平均市盈率存储为字典类型返回。注意这个函数一定要使用`query对象`，如果忘记了query对象是什么可以回顾[聚宽学习第二周周记：获取多只股票市盈率](https://www.joinquant.com/view/community/detail/3cc22ef4218363686917d718ba90f4f8)，里面有介绍它的概念。
+
+后面的`dict_index = {get_security_info(index).display_name: func(index) for index in index_codes}`是获取多只指数的平均市值和平均市盈率数据，然后存储为字典类型。理解这句代码的要点有两个：一个是字典数据类型；另一个是“解析表达式”，常见的是“列表解析”，而这里使用的是“字典解析”，这种表达式能够很方便地从一个列表来创建一个新的列表（字典解析式）或者新字典（字典解析式）。
+
+3. 指数的走势
+
+这里再一次使用了“字典解析式”，循环遍历存储有不同指数的列表`index_codes`，然后对于里面每个元素都分别调用聚宽服务函数`get_security_info()`和`get_price()`分别映射为字典元素的健和值。
+
+比如，下面是针对字典解析式和非字典解析式的比较，可以看出应用解析式是非常间接的。我想，这也是很多人说python简洁的原因之一，代码末尾不用添加标点符号，一句代码又顶其他语言的N句。爽歪歪~
+
+```
+# 字典解析式代码
+dict_close = {get_security_info(code).display_name:\
+              get_price(code, start_date, end_date)['close']\
+              for code in index_codes}
+
+# 非字典解析式代码
+dict = {}
+for code in index_codes:
+  name = get_security_info(code).display_name
+  price = get_price(code, start_date, end_date)['close']
+  dict[name] = price
+dict_close = dict              
+```
+
 **二、计算大小盘指数的动量**
 
 ```
+'''指数20日前的价格与昨日价格获取'''
+price = {get_security_info(index).display_name:\
+         get_price(index, end_date=trade_date[-2], count=50)['close'].values[[-20, -1]]\
+         for index in index_codes}
+
+'''计算前20日动量'''
+ratio = {key: {'ratio':(value[1] - value[0]) / value[0]} for key, value in price.items()}
+
+'''相关ETF的价格趋势'''
+etf_list = ['510300.XSHG', '510500.XSHG']
+dict_close = {get_security_info(code).display_name:\
+              get_price(code, start_date, end_date)['close']\
+              for code in etf_list}
+
+pd.DataFrame(dict_close).plot()
+plt.show()
+
+```
+
+**三、验证ETF与指数的跟踪误差值**
+
+```
+
 ```
 
 ## 二、上周计划任务
