@@ -105,14 +105,145 @@ dict_close = {get_security_info(code).display_name:\
 
 pd.DataFrame(dict_close).plot()
 plt.show()
-
 ```
+
+在上面理解了字典解析式之后上面这段动量计算的代码就更容易看懂了，不然你看到通篇都是这个“大括号+for循环”可能容易晕菜。
+
+`price = {get_security_info(index).display_name: get_price(index, end_date=trade_date[-2], count=50)['close'].values[[-20, -1]] for index in index_codes}`这句代码里面的字典解析式是为了获取多只指数的数据：键是指数的中文名称，值是指数前1和前20交易日的收盘价。在这里获取收盘价的时候使用了`dataframe['close'].value[[-20,-1]]]`这样堆叠在一起的代码当然是Pandas强大的灵活性所赐，这里面包含有这么几个步骤：
+
+- 首先，`dataframe['close']`是从DataFrame类型的二位数据表里获取`close`这一列数据，它的类型是Series类型。
+- 其次，`dataframe['close'].value[]`是从Series类型里面获取指定的值，要记得Series类型的数据尽管是一维数据类型，但它本身是有索引（index）和值（value)两个属性的。
+- 最后，`dataframe['close'].value[[-20, -1]]`是从Series里面获取倒数第1和倒数第20个数据，-1和-20这里都是值的索引。
+
+得到的price是字典类型，类似“{'沪深300': array([4138.51, 3734.53]), '中证500': array([5763.86, 5147.2])}”，然后基于price再计算动量，也就是前1个交易日相比前20个交易日的涨幅数据，然后依然保存为字典类型，结果类似“{'沪深300': {'动量': -0.09761484205668224}, '中证500': {'动量': -0.1069873314063839}}”。
+
+最后这两句查看沪深300ETF和中证500ETF的走势与前面查看沪深300和中证500指数走势的用法一样。
 
 **三、验证ETF与指数的跟踪误差值**
 
-```
 
 ```
+'''数据相关程度计算'''
+a=[0.6557,0.0357,0.8491,0.9340,0.6787];
+b=[0.7315,0.1100,0.8884,0.9995,0.6959];
+print('计算一\n',mean(multiply((a-mean(a)),(b-mean(b))))/(std(b)*std(a)))
+print('计算二\n', corrcoef(a,b))
+
+'''计算指数之间的相关程度'''
+stock_base = '000300.XSHG'
+index_list = get_all_securities(types=['fund'], date=end_date).index
+func = lambda index_a, index_b: np.corrcoef(get_price(index_a, start_date, end_date)['close'].values,
+                                            get_price(index_b, start_date, end_date)['close'].values
+                                           )[0, 1]
+df_corr = pd.DataFrame({index : {'name':get_security_info(index).display_name,\
+                                 'corrcoef': func(stock_base, index)}\
+                        for index in index_list}).T.dropna()
+df_corr = df_corr.sort_values(by=['corrcoef'], ascending=True).head()
+df_corr
+
+'''正当关指数与ETF趋势对比'''
+compare_codes = (stock_base, df_corr.index[0])
+df_test = pd.DataFrame()
+for index in compare_codes:
+    df_test[get_security_info(index).display_name] = get_price(index, start_date, end_date)['close']
+
+df_test.plot(subplots=True)
+plt.show()
+
+'''找出与ETF负相关程度最高的ETF'''
+def func(code):
+    etfs = get_all_securities(types=['fund'], date=end_date).index
+    func = lambda index_a, index_b: np.corrcoef(get_price(index_a, start_date, end_date)['close'].values, get_price(index_b, start_date, end_date)['close'].values)[0, 1]
+    df_corr = pd.DataFrame({etf : {'corrcoef': func(code, etf)}\
+                            for etf in etfs}).T.dropna()
+    df_corr = df_corr.sort_values(by=['corrcoef'], ascending=True).head()
+    return df_corr.index[0], df_corr.values[0]
+eft_list = map(func, etf_list)
+result = list(eft_list)
+result
+```
+
+1. 数据相关性
+
+衡量数据之间的相关性一个常用的数学名词就是“协方差系数”，这个名词在[聚宽学习周记十一：沪深300相关指数与一个简单的策略](https://www.joinquant.com/view/community/detail/6f4ec5802b1710be8e39248afec64a64)介绍“贝塔值”的时候已经提到过了，摘录解释如下：
+
+> 那么协方差又是什么？前面提到的标准差和方差衡量的是单个变量的波动情况，而协方差是用来衡量两个变量之间的相关性。和上面的方差一样，协方差计算出来的结果也是有单位，并且由于有两个变量，所以它带上了两个变量的单位，这就不利于进行相关性比较了。比如我们想比较班级里面学生的“年龄vs体重”和“身高vs体重”相关性的大小，COV(年龄，体重)结果的单位是岁·千克，COV(身高，体重)结果的单位是米·千克，不好比较。继而引入了“协方差系数”，公式为 COV(X,Y)/Sm(X)Sm(Y)，这样计算出来的结果是不带单位的，便于比较。
+
+所以第一段代码里的`mean(multiply((a-mean(a)),(b-mean(b))))/(std(b)*std(a))`就是手动计算两组变量a和b的相关性（协方差系数），而`corrcoef`函数是使用Python库中的函数来计算协方差矩阵，两者的结果是一样的，只不过后者呈现的数据更丰富，比如它也包含了a与a之间，b与b之间，b与a之间的相关性。
+
+参考：
+
+- [Python 数据相关性分析](https://www.jianshu.com/p/c83dd487df09)
+
+2. 找出与ETF正相关程度最高的ET
+
+其实这里不是像原版代码里面注释的那样计算指数之间的相关程度，而是计算“国内证券所有基金(fund)”的收盘价与沪深300指数的相关性系数，从中找到与沪深300走势最相关的基金。得到了如下结果，也就是可以看到300ETF（基金代码510300）与沪深300指数的走势相关性最好，相关性系数为 0.991915。
+
+```
+             corrcoef    name
+510300.XSHG  0.991915  300ETF
+159919.XSHE  0.990833  300ETF
+160706.XSHE   0.98869   嘉实300
+510180.XSHG  0.987206  180ETF
+160807.XSHE  0.986034   长盛300
+```
+
+这里面的计算过程包括：
+
+- 首先，获取所有基金代码，即`get_all_securities(types=['fund'], date=end_date).index`。
+- 然后，定义一个匿名函数（lambda表达式），这个函数被用来计算相关性系数。
+- 之后，又轮到了“字典解析式”上场，循环计算每个基金与沪深300指数的相关性系数。
+- 最后，根据保存有所有相关性系数的字典创建DataFrame，然后排序选择最前面的几个基金。
+
+需要注意的是上面代码中排序时候的`ascending`应该设置为`False`才能得出正相关性最大的基金列表，代码里面设置为`True`实际上得到的是负相关性最大的基金列表。所以大树兄研究里面的那幅图也是负相关对比。
+
+3. 找出与ETF负相关程度最高的ETF
+
+如果是从ETF里面找到和沪深300指数负相关程度最高的ETF，那么这段代码里面调用`get_all_securities`时传入的type应该是`ETF`。另外其实这段代码实现的功能在前面一段里面已经实现了，结果如下：
+
+```
+             corrcoef    name
+150051.XSHE  -0.77903  沪深300A
+165513.XSHE -0.761222    信诚商品
+162411.XSHE -0.758347    华宝油气
+161815.XSHE -0.748106    银华通胀
+150022.XSHE -0.499745    深成指A
+```
+
+也就是沪深300A基金（证券代码150051）与沪深300相关性最低（负相关性最高，为-0.77903），但这是个分级基金。我们将代码中调用`get_all_securities`时的type从`fund`修改为`etf`，可以得到如下结果：
+
+```
+             corrcoef   name
+159918.XSHE  0.592209  中创400
+510410.XSHG  0.596138  资源ETF
+159915.XSHE  0.651815    创业板
+159920.XSHE  0.692733  恒生ETF
+510170.XSHG  0.733464  商品ETF
+```
+
+
+**四、加入国债指数**
+
+由于本周没有查看[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)里面的策略，所以我使用了自己基于上周学习的“蛋卷二八轮动”里面的策略进行对比：
+
+负动量时空仓执行的回测结果如下：
+
+![](./5-simple-daily-exchange-with-avoidloss-reducefrequency.PNG)
+
+负动量时买入国债指数的回测结果如下：
+
+![](./6-simple-daily-exchange-with-avoidloss-reducefrequency-bond.PNG)
+
+策略里面指数下跌的时候购买的是国债指数`000012.XSHG`，但看2013年1月1日——2016年7月14日这段时间的回测结果它的表现也没有强多少。
+
+**五、使用负相关标的做“对冲”**
+
+上面已经计算过与沪深300指数负相关最大的是沪深300A基金（证券代码150051），所以在负动量出现时购买沪深300A基金，得到的回测结果如下：
+
+![](./7-simple-daily-exchange-with-avoidloss-reducefrequency-corrfund.PNG)
+
+收益确实有所提升。
+
 
 ## 二、上周计划任务
 
@@ -195,13 +326,14 @@ plt.show()
 于是回过头去阅读@江南有大树的这篇[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)的时候，当时觉得挺难理解的内容，现在一下子清晰了许多。大树的目的其实也是看到了“蛋卷二八轮动”在熊市时具有的较大波动，提出了一种新的思路，即通过找到另外与沪深300/中证500走势相反的指数ETF来进行对冲。
 
 
-
 ### 3.偶然在[银行股的配对交易策略研究](https://www.joinquant.com/view/community/detail/b80e9e60d6f39fa6c8e3b4cb3af4a07f?page=1#90895)的评论中发现银行股的波动小，那么如何选择出证券市场波动最大和最小的行业呢？
-
 
 
 ## 三、本周新学内容
 
-
+无。
 
 ## 四、下周学习任务
+
+### 1.完成对[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)里面的策略的解析。
+### 2.偶然在[银行股的配对交易策略研究](https://www.joinquant.com/view/community/detail/b80e9e60d6f39fa6c8e3b4cb3af4a07f?page=1#90895)的评论中发现银行股的波动小，那么如何选择出证券市场波动最大和最小的行业呢？
