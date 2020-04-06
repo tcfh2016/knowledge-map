@@ -326,9 +326,13 @@ False not in ret
 
 本周在执行@东南有大树的策略的时候，发现一个问题：滑点的设置对最终收益的影响不小。比如大树兄的策略里面设置`set_slippage(FixedSlippage(0)) `，也即滑点设置为0，得到的回测结果为：
 
+![](./w15-strategy-in-2nd-reference-fixslippage0.PNG)
 
 我最开始没有设置滑点，从聚宽API文档里面可知如果没有设置滑点，那么系统默认的滑点是`PriceRelatedSlippage(0.00246)`，得到的回测结果为：
 
+![](./w15-strategy-in-2nd-reference-default-fixslippage.PNG)
+
+所以没想到滑点的设置会造成收益相差幅度达到了100%。那么滑点是什么？
 
 滑点用来确定真实的成交价格与下单时预期的价格之间的偏差，有两种类型：
 
