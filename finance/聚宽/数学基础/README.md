@@ -4,3 +4,4 @@
 - [归一化与对数化](./normalization_transformation.md)
 - [平均数](./average.md)
 - [几何布朗运动](./geometric_brownian_motion.md)
+- [分布](./distribution.md)
