@@ -12,26 +12,51 @@ Python里的赋值语句`x = expr`与其他语言里的含义不一样，比如�
 
 理解了如上的概念，便能理解`x = None`的含义是将`x`重置为初始状态。
 
-# 参考阅读
+参考
 
 - [The Python Standard Library](https://docs.python.org/2.7/library/index.html)
 - [What is a None value?](https://stackoverflow.com/questions/19473185/what-is-a-none-value#)
 
-# isinstance()
+# 内置函数
+
+## `range()`
+
+函数`range()`用来生成一系列数字，它常用在循环场景。使用range()的时候可以通过指定三个参数来生成不同的数据集：
+
+- start: 起始值
+- stop: 结束标记，返回的数据集最大值为stop-1
+- step: 步长
+
+```
+# 生成0...stop-1的数据集
+range(stop)
+
+# 生成start, stop-1的数据集
+range(start, stop) takes two arguments.
+
+# 修改默认1的步长为step
+range(start, stop, step) takes three arguments.
+```
+
+参考：
+
+- [Python range() function](https://www.geeksforgeeks.org/python-range-function/)
+
+## `isinstance()`
 
 使用格式为`isinstance(object, type)`，其中object是某个特定的对象，而type则是一个或者
 多个内建类型或者类。当type为包含多个类型的元组时，只要object属于元组中的某种类型即返回
 True。
 
-# round(x, [, n])
+## `round(x, [, n])`
 
 返回浮点数的四舍五入值，n可以指定小数点后面的位数。
 
-# dir()
 
+## `dir()`
 模块文件里通常包含多个变量名，内置的dir函数可以获得模块内部的可用的变量名列表。
 
-# zip()
+## `zip()`
 
 zip()根据传入的数据返回一系列可以迭代的元组。
 
@@ -39,17 +64,19 @@ zip()根据传入的数据返回一系列可以迭代的元组。
 
 - [Python zip()](https://www.programiz.com/python-programming/methods/built-in/zip)
 
-# type()
+## `type()`
 
 显示对应数据的类型。
 
-# eval()
+## `eval()`
 
 内置函数`eval`能够把字符串当作可执行程序代码，可以将字符串转换成对象。但它过于强大，会简
 单地执行Python的任何表达式。如果想存储Python的原生对象，但又无法信赖文件的数据来源，Python
 的标准库pickle模块会是个理想的选择。
 
-# `if __name__ == "__main__"`代表什么意思？
+# 问题清单
+
+## `if __name__ == "__main__"`代表什么意思？
 
 查阅 StackOverFlow，得知`__name__`是每个源代码文件在执行时均有的隐式变量，当它被当做程
 序执行时，该变量设置为`__main__`，当它被当做模块引入其他文件中时该变量设置为`模块名称`。
