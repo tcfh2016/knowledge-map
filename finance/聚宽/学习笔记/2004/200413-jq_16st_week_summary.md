@@ -245,9 +245,27 @@ def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
     return df_result
 ```
 
+这段代码的功能是获取指定指数在特定日期范围的市盈率（PE）和市净率（PB）数据，这段代码里面使用到了两个对我来说是新的知识点，先将它们解释如下：
+
+1. pandas中的`quantile()`
+
+这个函数是用来求取分位数的，分位数是依照概率将样本数据分隔开的那个点，它的输入的一个百分比的概率，输出是和样本数据相同量级的值。举个例子，有10位同学某学期期末取得的英语成绩分别为{60, 70, 87, 56, 35, 64, 28, 84, 89, 65}，我们想找到一个数值A，使得有20%的同学得分小于A，其余80%的同学得分大于A，那么A便是针对20%的分位数。
+
 参考：
 
 - [Python解释数学系列——分位数Quantile](https://www.cnblogs.com/brightyuxl/p/9815780.html)
+- [如何通俗地理解分位数？](https://www.zhihu.com/question/67763556/answer/394626078)
+
+2. 生成器和`yield`
+
+看到这段代码的时候吓了一跳，怎么搞的还能在函数里面定义函数？这是第一次见。
+
+`yield`的作用就是把一个函数变成一个generator，带有`yield`的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，在调用这个函数时会返回一个iterable对象，再次调用时会继续往下遍历。
+
+参考：
+
+- [Python yield 使用浅析](https://www.runoob.com/w3cnote/python-yield-used-analysis.html)
+
 
 ## 二、`index_valuation.py`代码解释
 
