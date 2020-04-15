@@ -28,11 +28,18 @@ def gen_paths(s0, r, sigma, T, M, I):
     paths : ndarry, shape (M + 1, I)
         simulated paths given the parameters
     '''
+    # Create M+1*I array and initilize them to 0
     dt = float(T) / M
     paths = np.zeros((M + 1, I), np.float64)
+    # Initilize the first row to s0.
     paths[0] = s0
     for t in range(1, M + 1):
+        # Create I numbers are standard normal distributed
         rand = np.random.standard_normal(I)
+        print(type(rand))
+        print(rand)
+        print("mean=%f std=%f" % (rand.mean(), rand.std()))
+        # Use Z-Score normalization. converted to standard normal distribution?
         rand = (rand - rand.mean()) / rand.std()
         paths[t] = paths[t - 1] * np.exp((r - 0.5*sigma**2) * dt + sigma * np.sqrt(dt) * rand)
     return paths

@@ -260,11 +260,63 @@ def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
 
 看到这段代码的时候吓了一跳，怎么搞的还能在函数里面定义函数？这是第一次见。
 
-`yield`的作用就是把一个函数变成一个generator，带有`yield`的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，在调用这个函数时会返回一个iterable对象，再次调用时会继续往下遍历。
+`yield`的作用就是把一个函数变成一个generator，带有`yield`的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，在调用这个函数时会返回一个iterable对象，再次调用时会继续往下遍历。简单来说调用生成器函数实际的结果是会返回一个列表。
+
+那么在这段代码里面生成器函数`iter_pe_pb()`的结果是一个保存了对应指数在一段日期内每天的日期、市盈率均值和市净率均值。
 
 参考：
 
 - [Python yield 使用浅析](https://www.runoob.com/w3cnote/python-yield-used-analysis.html)
+
+函数`get_pe_pb()`详细解释如下：
+
+- 首先，定义一个生成器函数`iter_pe_pb()`用来获得一段日期内指数每天的市盈率均值和市净率均值，这里面包括：
+  - 调用`get_trade_days()`获取指定日期的所有交易日。
+  - 循环遍历所有交易日，对于每个交易日，分别有如下操作：
+    - 获取指数对应的所有成分股。
+    - 获取所有成分股的市盈率和市净率数据。
+    - 按照25%，75%过滤市盈率和市净率数据。
+    - 返回（日期，市盈率均值，市净率均值）组成的元组。
+- 其次，将由如上生成器获得的所有元组组合成列表，列表中的元素是集合，集合中的元素又是字典。
+- 最后，用这个列表生成DataFrame类型的二维数据。
+
+
+### 函数`loc_pe_pb()`和`save_pe_pb`
+
+```
+def loc_pe_pb(index_code):
+    '''获取保存在本地的PE/PB数据'''
+    file_name = get_security_info(index_code).display_name +'_pe_pb.csv'
+    if os.path.exists(file_name):
+        df_loc_pe_pb = pd.read_csv(file_name, index_col='date', parse_dates=True)
+
+        return df_loc_pe_pb
+    else:
+        return pd.DataFrame()
+
+
+def save_pe_pb(index_code, df_new, df_old=pd.DataFrame()):
+    '''将数据保存或更新到本地，避免重复生成计算'''
+    file_name = get_security_info(index_code).display_name +'_pe_pb.csv'
+    if len(df_old) <= 0:
+        df_new.to_csv(file_name)
+
+    else:
+        df = df_old.append(df_new)
+        df.to_csv(file_name)
+```
+
+如上这两个函数用来从本地获取数据和存储数据到本地：
+
+- `loc_pe_pb()`：获取本地的数据
+  - 先用`指数中文名称` + `_pe_pb.csv`来拼接出要搜寻的文件名称。
+  - 调用`os.path`搜索本地文件。
+  - 如果搜索到了，使用`read_csv()`读取文件中的内容，并返回。
+  - 如果没有找到，那么返回一个空的DataFrame。
+- `save_pe_pb()`：存储数据到本地
+  - 同样的，先拼接出要存储的文件名称。
+  - 判断这个文件当中是否已有数据，如果没有那么直接使用`to_csv()`写入该文件。
+  - 如果已有数据，那么则调用`append()`将已有文件内容和新的数据合并到一起，再调用`to_csv()`写入所有内容到老的文件中。
 
 
 ## 二、`index_valuation.py`代码解释
