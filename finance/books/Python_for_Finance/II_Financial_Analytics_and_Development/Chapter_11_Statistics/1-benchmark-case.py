@@ -1,5 +1,5 @@
 import numpy as np
-np.random.seed(1000)
+#np.random.seed(1000)
 import scipy.stats as scs
 import statsmodels.api as sm
 import matplotlib as mpl
@@ -36,11 +36,9 @@ def gen_paths(s0, r, sigma, T, M, I):
     for t in range(1, M + 1):
         # Create I numbers are standard normal distributed
         rand = np.random.standard_normal(I)
-        print(type(rand))
-        print(rand)
-        print("mean=%f std=%f" % (rand.mean(), rand.std()))
         # Use Z-Score normalization. converted to standard normal distribution?
         rand = (rand - rand.mean()) / rand.std()
+        # Use Black-Scholes-Merton to simulate the future price.
         paths[t] = paths[t - 1] * np.exp((r - 0.5*sigma**2) * dt + sigma * np.sqrt(dt) * rand)
     return paths
 
@@ -49,5 +47,16 @@ r = 0.05
 sigma = 0.2
 T = 1.0
 M = 50
-I = 5
-gen_paths(s0, r, sigma, T, M, I)
+I = 15
+paths = gen_paths(s0, r, sigma, T, M, I)
+print(type(paths))
+
+'''
+plt.plot(paths[:, :10])
+plt.grid(True)
+plt.xlabel('time steps')
+plt.ylabel('index level')
+plt.show()
+'''
+
+log_returns = np.log(paths[1:], paths[0:-1])
