@@ -67,29 +67,11 @@ def GetPePb(index_code, start_date):
     return loc_pe_pb(index_code)
 
 
-def init(index_base=None):
-    '''
-    初始化数据缓存
-    '''
-    if index_base == None:
-
-        index_base = ['000016.XSHG', '000300.XSHG', '399905.XSHE']  # 上证50，沪深300，中证500
-    dict_index_base = dict()
-
-    '''加载pe/pb'''
-    for index in index_base:
-        index_info = get_security_info(index) # 获取指数相关信息
-        start_date = index_info.start_date  # 上市日期
-        dict_index_base[index] = (GetPePb(index, start_date))  # 加载或重新计算pe/pb
-    return dict
-
-
 def show_quantile(index_code, p, n, data):
     '''
     展示估值图
     '''
     _df = pd.DataFrame()
-
     df = data.copy()
     df.index.name = None
 
@@ -319,6 +301,105 @@ def save_pe_pb(index_code, df_new, df_old=pd.DataFrame()):
   - 如果已有数据，那么则调用`append()`将已有文件内容和新的数据合并到一起，再调用`to_csv()`写入所有内容到老的文件中。
 
 
+### 函数`GetPePb()`
+
+```
+def GetPePb(index_code, start_date):
+    df_old = loc_pe_pb(index_code)  # 判断本地是否有历史数据
+    if len(df_old) <= 0:
+        start_date = start_date  # 给定一个默认的起始时间
+    else:
+
+        start_date = df_old.index[-1]
+    df_new = get_pe_pb(index_code,start_date=start_date)
+    save_pe_pb(index_code, df_new=df_new, df_old=df_old)
+    return loc_pe_pb(index_code)
+```
+
+这个函数是对前面的`get_pe_pb()`，`loc_pe_pb()`，`save_pe_pb()`的综合应用，它完成的功能是完成对指定指数的pe/pb的查询，有如下过程：
+
+- 先装在本地用来存储指数pe/pb的数据文件，并将其中保存数据的最后一个日期做为新的查询日期
+- 调用`get_pe_pb()`查询最新的一段数据
+- 将查询的新数据保存到本地，然后再装载本地的所有数据
+
+### 函数`init()`
+
+需要注意的是init()函数在研究模块里面有两个，我对比了一下，两者的差别只在最后一句`return`语句，根据上下文推断后面一个是正确的，返回保存的估值pe/pb数据，所以我在引用的时候保留了最后的那个init()函数，删除了前面的那个。
+
+```
+def init(index_base=None):
+    '''
+    初始化数据缓存
+    '''
+    if index_base == None:
+        index_base = ['000016.XSHG', '000300.XSHG', '399905.XSHE']  # 上证50，沪深300，中证500
+    dict_index_base = dict()
+
+    '''加载pe/pb'''
+    for index in index_base:
+        index_info = get_security_info(index) # 获取指数相关信息
+        start_date = index_info.start_date  # 上市日期
+        dict_index_base[index] = (GetPePb(index, start_date))  # 加载或重新计算pe/pb
+    return dict_index_base
+```
+
+### 函数`show_quantile()`
+
+```
+def show_quantile(index_code, p, n, data):
+    '''
+    展示估值图
+    '''
+    _df = pd.DataFrame()
+    df = data.copy()
+    df.index.name = None
+
+    # 一、计算当前百分位高度
+    _df[p] = df[p]
+    _df = _df.iloc[-n * 244:]
+    p_high = [_df[p].quantile(i / 10.0) for i in [3, 5, 7]]
+    for p_h, i in zip(p_high, [3, 5, 7]):
+        _df[str(i / 10 * 100)+'%'] = p_h
+
+    # 二、计算历史百分位高度
+    def _func(c):
+        low_p = c[c < c[-1]]
+        value = low_p.shape[0] / c.shape[0]
+        return value
+    _df['history'] = df[p].rolling(n * 244).apply(lambda x: _func(x), raw=True)[-n*244:]
+
+    # 三、计算评估语句
+    low_p = _df[_df[p] < _df[p].iloc[-1]]
+    quantile_now = low_p.shape[0] / _df.shape[0]  # 当前百分位值
+    last_p = _df[p][-1]
+    assessment = ''
+    if 0 <= quantile_now < 0.1:
+        assessment = '超低估'
+    elif 0.1 < quantile_now < 0.3:
+        assessment = '低估'
+    elif 0.3 < quantile_now < 0.4:
+        assessment = '适中偏低'
+    elif 0.4 < quantile_now < 0.6:
+        assessment = '适中'
+    elif 0.6 < quantile_now < 0.7:
+        assessment = '适中偏高'   
+    elif 0.7 < quantile_now < 0.9:
+        assessment = '高估'   
+    elif 0.9 < quantile_now <= 1:
+        assessment = '超高估'   
+
+    title = '{}，当前{}{}，近{}年历史百分位{}，{}'.format(get_security_info(index_code).display_name,
+                                              p, round(last_p, 2), n,
+                                              str(round(quantile_now * 100, 2)) + '%', assessment)
+
+    _df.plot(secondary_y=['history'], figsize=(18, 10), style=['-', '--', '--', '--', 'y-'], title=title)
+```
+
+这个函数是用来给指数估值用的，估值的思路是看当前的市盈率与整个历史区间的市盈率进行对比，看分位数处在什么位置，最后使用图形将它们展示出来。步骤包括：
+
+- 获取指数的pe/pb，然后创建DataFrame并取出近5年的pe数据，并计算出30%，50%和70%的分位数。
+- 
+
 ## 二、`index_valuation.py`代码解释
 
 
@@ -331,7 +412,9 @@ def save_pe_pb(index_code, df_new, df_old=pd.DataFrame()):
 
 ### 1.历史百分位
 
-自己目前在坚持ETF定投，为此还专门在聚宽上按照自己想到的算法来获取当前处于低位的ETF，代码见[价值研究笔记之获取处于历史地位TOP10的ETF基金](https://www.joinquant.com/view/community/detail/b7f2d084d39662b0b21295fe4db25211)，其中的大致思路是计算当前基金累计净值占过去几年最高值的百分比。没有想到，原来这个指标已经有了个专业学名“历史百分位”。
+自己目前在坚持ETF定投，为此还专门在聚宽上按照自己想到的算法来获取当前处于低位的ETF，代码见[价值研究笔记之获取处于历史地位TOP10的ETF基金](https://www.joinquant.com/view/community/detail/b7f2d084d39662b0b21295fe4db25211)，其中的大致思路是计算当前基金累计净值占过去几年最高值的百分比。
+
+我原本以为这个指标就是“历史百分位”，心想怎么这么巧合。但仔细了解之后，发现并不是这样。“历史百分位”指的是按照整个历史日期区间所处的时间长短，比如20%的分位数是56，那么说明指定的日期区间内有20%的时间收盘价是小于56的；如果60%的分位数是89，那么指定的日期区间内有60%的时间收盘价是小于89的。这里的56和89就是相对于20%和60%的分位数。
 
 
 ## 四、下周学习任务
