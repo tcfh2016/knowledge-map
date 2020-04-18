@@ -1,7 +1,10 @@
 # 聚宽学习周记十六：详解@东南有大树的“指数估值自动报表系统”（上）
 
-很巧，按照盈科后进、学以致用的基本学习原则，本周选择了@东南有大树的[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)来学习。
+按照盈科后进、学以致用的学习原则，本周选择了@东南有大树的[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)来学习，因为它的这篇研究拓宽了我对于聚宽服务的使用认识，想想可以将平时的研究用来搭建自己心仪的估值系统，并且能够通过邮件定时提醒，还是很激动的。
 
+不得不说大树兄的Python用得挺骚的，前面学习的他的一篇[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)里面的Python知识都让自己学习了好几天，这一篇又出现了新的知识点，自然也花了不是时间去理解。
+
+对于大树兄这篇研究的学习要分成两部分，先把估值部分的主要代码弄清楚，再来实践如何搭建自己的自动报表系统。
 
 ## 一、研究部分代码解释
 
@@ -231,12 +234,15 @@ def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
 
 1. pandas中的`quantile()`
 
-这个函数是用来求取分位数的，分位数是依照概率将样本数据分隔开的那个点，它的输入的一个百分比的概率，输出是和样本数据相同量级的值。举个例子，有10位同学某学期期末取得的英语成绩分别为{60, 70, 87, 56, 35, 64, 28, 84, 89, 65}，我们想找到一个数值A，使得有20%的同学得分小于A，其余80%的同学得分大于A，那么A便是针对20%的分位数。
+这个函数是用来求取分位数的，分位数是依照概率将样本数据分隔开的那个点，它的输入是一个百分比的概率，输出是和样本数据相同量级的值。比如我们常见的中位数，即是一个二分位数：一个数据集合中的中位数相当于有一半的数比它大，另一半的数比它小。
+
+举个例子，有10位同学某学期期末取得的英语成绩分别为{60, 70, 87, 56, 35, 64, 28, 84, 89, 65}，我们想找到一个数值A，使得有20%的同学得分小于A，其余80%的同学得分大于A，那么A便是针对20%的分位数。
 
 参考：
 
 - [Python解释数学系列——分位数Quantile](https://www.cnblogs.com/brightyuxl/p/9815780.html)
 - [如何通俗地理解分位数？](https://www.zhihu.com/question/67763556/answer/394626078)
+- [四分位数](https://zh.wikipedia.org/wiki/%E5%9B%9B%E5%88%86%E4%BD%8D%E6%95%B0)
 
 2. 生成器和`yield`
 
@@ -343,7 +349,12 @@ def init(index_base=None):
     return dict_index_base
 ```
 
-### 函数`show_quantile()`
+这个函数是数据获取的入口函数，你可以通过调用这个函数来获取指定指数的pe/pb数据，如果不指定任何指数那么它默认获取上证50、沪深300和中证500三个指数自从上市以来每天的pe/pb数据并返回给该函数的调用者。其实从这里就可以知道为什么我们需要`loc_pe_pb()`/`save_pe_pb()`来进行本地化的操作了，因为每次获取数据是"每年的交易日个数 x 年度个数 x 指数个数"量级，还需要考虑聚宽服务本身需要的时间以及调用Python数据运算函数的执行时间，如果不将一些可以重用的数据存储到本地，每次重新去获取效率是比较低的。
+
+
+### 函数`show_quantile()`和`show_quantile2()`
+
+如上获取到多个年度每天的pe/pb数据之后我们需要做什么呢？那就是把它传入到`show_quantile()`/`show_quantile2()`里面进行估值运算。这两个函数的差异是`show_quantile2()`直接提供了近3年、近5年和近7年的估值状况，而`show_quantile()`则需要调用者自己指定最近几年的估值状况。两个函数的功能大体是一样的，这里挑个稍微简单点的`show_quantile()`解说一下。
 
 ```
 def show_quantile(index_code, p, n, data):
@@ -397,15 +408,228 @@ def show_quantile(index_code, p, n, data):
 
 这个函数是用来给指数估值用的，估值的思路是看当前的市盈率与整个历史区间的市盈率进行对比，看分位数处在什么位置，最后使用图形将它们展示出来。步骤包括：
 
-- 获取指数的pe/pb，然后创建DataFrame并取出近5年的pe数据，并计算出30%，50%和70%的分位数。
-- 
+- 获取指数的pe/pb，然后创建DataFrame并取出近n年的pe数据，并计算出30%，50%和70%的分位数。
+- 使用滑动窗口计算历史行情的历史百分位高度。
+  - 这里计算历史百分比高度是通过函数`_func()`来完成的，这个函数实际上传入的是一个保存有pe数据的Series，然后查看过去n年的pe数据小于最近一天的天数所占的比例就是`历史百分位`。
+  - 然后调用pandas.rolling()为计算出相对于每天的近n年的历史百分位数据。
+- 按照上一步相同的计算方法评估前一天指数处在近n年的百分位，并且给予估值标记。
+- 最后一步画出图示。
+
 
 ## 二、`index_valuation.py`代码解释
 
+@东南有大树的[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)里面提供的附件index_valuation.py包括两部分：第一部分也就是前面解释的获取估值数据的内容，还有一部分是构建html内容并发送给用户的流程代码，主要包括：
+
+### 函数`send_message()`和`send_email()`
+
+```
+def send_message():
+
+    html = html_head + get_base() + get_table() + html_foot
+    send_email(html,
+           picture_dict,
+           recieve_list=receive_list,
+           title='估值报表 ' + str(datetime.datetime.now().date()))
+
+def send_email(html, picture, recieve_list=None, title=None):
+   if recieve_list == None:
+       receivers = ['你的收件邮箱']  # xxx.163.com
+   else:
+       receivers = recieve_list
+
+   # 第三方 SMTP 服务
+   mail_host = "smtp.163.com" # SMTP服务器
+   mail_user = "用户名"   # 用户名，也可以是发件箱名称
+   mail_pass = "*******"  # 授权密码，非登录密码
+
+   sender = '发件邮箱' # 发件人邮箱，xxx.163.com
+
+   # 构建message
+   msg = MIMEMultipart()
+   # 添加邮件内容
+   content = MIMEText(html, _subtype='html', _charset='utf8')
+   msg.attach(content)
+   # 构建并添加图像对象
+   for id, pic in picture.items():
+       img = MIMEImage(open(pic, 'rb').read(), _subtype='octet-stream')
+       img.add_header('Content-ID', id)
+       msg.attach(img)
+
+   # 格式
+   msg['From'] = sender
+   msg['To'] = ';'.join(receivers)
+   msg['Subject'] = title
+
+   try:
+       # 发送
+       server = smtplib.SMTP_SSL(mail_host,port=465)
+       server.login(mail_user, mail_pass)
+       server.sendmail(mail_user, receivers, msg.as_string())
+       print('邮件发送成功')
+   except smtplib.SMTPException as ex:
+       print ("Error: 无法发送邮件", ex)
+```
+
+这两个函数是用来完成发送服务的，这里需要把`send_message()`和聚宽提供的专门用来发送自定义消息的`send_message()`区别开来。聚宽提供的这个消息发送函数只能够用来发送微信消息，这里用来发送邮箱的同名函数仅仅刚好同名。
+
+在`send_email()`里面所调用的用来操作邮件相关的Python函数库我这次是第一次接触，目前还不是很熟悉，所以先不能很详细的叙述它们的用法。但这个函数里面的主要内容却是可以从代码里面看得到的：
+
+- 首先，在`send_message()`里面组装好一个html文件，其中包括了四部分：html头、指数的估值、估值表和html尾：
+  - html头：内容放在变量`html_head`里面，包含的是纯html代码，是html格式文件开头部分必须的。
+  - 指数的估值：在函数`get_base()`里面实现，这里面获取了3只主要指数的估值数据。
+  - 估值表：在函数`get_table()`里面实现，这个表格里面衡量了20只指数的估值状态。
+  - html尾：内容放在变量`html_foot`里面，包含的是纯html代码，是html格式文件结束部分必须的。
+- 然后，配置邮件发送的服务，并且把估值时候计算得到的指数的估值图形附加上去。
+- 最后，发送邮件
+
+### 数据获取函数`get_base()`和`get_table()`
+
+```
+def get_base():
+   dic = init()
+   picture_dict = dict()
+   index_info = '<div>'
+   for index, data in dic.items():
+       content = show_quantile(index, 'pe', 5, data)
+       index_info += """
+       <li class="item">
+           <p class="title">
+               {}估值
+           </p>
+           <p class="text">
+               {}
+           </p>
+           <img src="cid:{}" alt="" class="img">
+       </li>
+       """.format(get_security_info(index).display_name,
+                  content,
+                  get_security_info(index).name,
+                  get_security_info(index).name)
+   index_info += '</div>'
+   return index_info
+```
+
+`get_base()`用来获取三只指数（包括'000016.XSHG', '000300.XSHG', '399905.XSHE'即上证50，沪深300，中证500）当前的估值情况，内容包括当前所处在的百分位以及近5年的pe、百分位走势图形，这些数据是调用在前面已经解释过的`show_quantile()`来完成的。这个时候由于要将这些内容在html文件里面展示出来，所以将获取到的数据和一些html元素组合在一起。
+
+```
+def get_table():
+   dic = init(index_code_list)
+   value_dict = dict()
+   for ind, data in dic.items():
+       pe, qe = get_quantile(ind, 'pe', 5, data)
+       pb, qb = get_quantile(ind, 'pb', 5, data)
+       value_dict[ind] = {'pe': pe, 'qe': qe, 'pb': pb, 'qb': qb}
+   df = pd.DataFrame(value_dict).T
+
+   table = """
+   <div>
+   <table>
+   <thead>
+       <tr>
+           <th>指数</th>
+           <th>PE百分位</th>
+           <th>PB百分位</th>
+           <th>ROE</th>
+       </tr>
+   </thead>
+   <tbody>
+   """
+
+   df = df.sort_values(by=['qe', 'qb'])
+   for i in range(df.shape[0]):
+       pe = df.pe[i]
+       pb = df.pb[i]
+       qe = df.qe[i]
+       qb = df.qb[i]
+       roe = pb / pe
+       t_class = ''
+       if 0 <= qe < 0.1:
+           t_class = 'super_low'
+       elif 0.1 < qe < 0.3:
+           t_class = 'low'
+       elif 0.3 < qe < 0.4:
+           t_class = 'low_miden'
+       elif 0.4 < qe < 0.6:
+           t_class = 'miden'
+       elif 0.6 < qe < 0.7:
+           t_class = 'high_miden'   
+       elif 0.7 < qe < 0.9:
+           t_class = 'high'   
+       elif 0.9 < qe <= 1:
+           t_class = 'super_high'
+
+       table += """
+       <tr  class="{}">
+           <td>{}</td>
+           <td>{}</td>
+           <td>{}</td>
+           <td>{}</td>
+       </tr>
+       """.format(t_class,
+                  get_security_info(df.index[i]).display_name,
+                  str(round(qe * 100, 2)) + '%',
+                  str(round(qb * 100, 2)) + '%',
+                  str(round(roe * 100, 2)) + '%')
+
+   table += """          
+   </tbody>
+   </table>
+   </div>
+   """
+
+   describe = """
+   <div class="describe">
+       <table>
+           <thead>
+               <tr>
+                   <th>说明</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr  class="super_low">
+                   <td>超低估</td>
+               </tr>
+               <tr class="low">
+                   <td>低估</td>
+               </tr>
+               <tr class="low_miden">
+                   <td>适中偏低</td>
+               </tr>
+               <tr class="miden">
+                   <td>适中</td>
+               </tr>
+               <tr class="high_miden">
+                   <td>适中偏高</td>
+               </tr>
+               <tr class="high">
+                   <td>高估</td>
+               </tr>
+               <tr class="super_high">
+                   <td>超高估</td>
+               </tr>
+           </tbody>
+       </table>
+   </div>
+   """
+
+   return table + describe
+```
+
+`get_table()`完成的内容是将更多只指数的估值状态以表格的形式展出出来。
+
+```
+['399673.XSHE','399372.XSHE','399373.XSHE','000015.XSHG','000300.XSHG','000010.XSHG', '000016.XSHG','399346.XSHE','399001.XSHE','399016.XSHE','399324.XSHE','399348.XSHE', '399376.XSHE','399377.XSHE','399550.XSHE','399364.XSHE','399374.XSHE','399375.XSHE', '000905.XSHG', '399006.XSHE']
+```
 
 
 ## 二、上周计划任务
 
+开始学习第3篇精选文章：[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)。
+
+目前基本上已经看懂了大致的内容，不过有两个内容不是很熟悉：
+
+- 邮件发送服务的使用。
+- Python与html代码的混合。
 
 
 ## 三、本周新学内容
@@ -419,4 +643,6 @@ def show_quantile(index_code, p, n, data):
 
 ## 四、下周学习任务
 
-- 微信接口？
+### 1. 进一步学习[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)里面自己不熟悉的知识点，并仿照原有代码写作自己的自动报表系统。
+
+### 2. 在理解函数`send_message()`的时候发现聚宽本身定义了这个函数用来发送微信消息，当前自己在进行ETF定投，都是使用聚源数据提供的指数估值来进行决策，受这篇文章的启发其实可以尝试手动计算当前指数的估值，这样每天就可以实时掌握指数的估值状态了。
