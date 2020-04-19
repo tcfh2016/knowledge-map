@@ -1,10 +1,9 @@
 # 聚宽学习周记十六：详解@东南有大树的“指数估值自动报表系统”（上）
 
-按照盈科后进、学以致用的学习原则，本周选择了@东南有大树的[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)来学习，因为它的这篇研究拓宽了我对于聚宽服务的使用认识，想想可以将平时的研究用来搭建自己心仪的估值系统，并且能够通过邮件定时提醒，还是很激动的。
+本周选择了@东南有大树的[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)来学习，原因是它的这篇研究拓宽了我对于聚宽服务的使用认识，想想可以将平时的研究学以致用，并且能够通过邮件定时提醒，还是很激动的。
 
-不得不说大树兄的Python用得挺骚的，前面学习的他的一篇[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)里面的Python知识都让自己学习了好几天，这一篇又出现了新的知识点，自然也花了不是时间去理解。
+不得不说大树兄的Python用得挺骚的，前面学习的他的一篇[用指数战胜指数，ETF二八轮动对冲模型](https://www.joinquant.com/view/community/detail/19490)里面的Python知识都让自己学习了好几天，这篇又出现了更多新的知识点，自然也花了不少时间，但还没有理解透彻。所以对大树兄这篇研究的学习要分成两部分，先把估值部分的主要代码结构弄清楚，再通过改写自动报表系统进一步理解其中的内容。
 
-对于大树兄这篇研究的学习要分成两部分，先把估值部分的主要代码弄清楚，再来实践如何搭建自己的自动报表系统。
 
 ## 一、研究部分代码解释
 
@@ -198,9 +197,8 @@ for index, data in dic.items():
     show_quantile(index, 'pe', 5, data)
 ```
 
-### 函数`get_pe_pb`
 
-这个函数用来获取指数在指定日期区间的pe/pb数据。
+### 代码片段一：函数`get_pe_pb()`
 
 ```
 def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
@@ -230,13 +228,13 @@ def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
     return df_result
 ```
 
-这段代码的功能是获取指定指数在特定日期范围的市盈率（PE）和市净率（PB）数据，这段代码里面使用到了两个对我来说是新的知识点，先将它们解释如下：
+该函数的功能是获取指定指数在特定日期范围的市盈率（PE）和市净率（PB）数据，其中使用到了两个对我来说是新的知识点，先将它们解释如下：
 
 1. pandas中的`quantile()`
 
 这个函数是用来求取分位数的，分位数是依照概率将样本数据分隔开的那个点，它的输入是一个百分比的概率，输出是和样本数据相同量级的值。比如我们常见的中位数，即是一个二分位数：一个数据集合中的中位数相当于有一半的数比它大，另一半的数比它小。
 
-举个例子，有10位同学某学期期末取得的英语成绩分别为{60, 70, 87, 56, 35, 64, 28, 84, 89, 65}，我们想找到一个数值A，使得有20%的同学得分小于A，其余80%的同学得分大于A，那么A便是针对20%的分位数。
+再举个例子，有10位同学在学期末取得的英语成绩分别为{60, 70, 87, 56, 35, 64, 28, 84, 89, 65}，我们想找到一个数值A，使得有20%的同学得分小于A，其余80%的同学得分大于A，那么A便是针对20%的分位数。
 
 参考：
 
@@ -248,7 +246,7 @@ def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
 
 看到这段代码的时候吓了一跳，怎么搞的还能在函数里面定义函数？这是第一次见。
 
-`yield`的作用就是把一个函数变成一个generator，带有`yield`的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，在调用这个函数时会返回一个iterable对象，再次调用时会继续往下遍历。简单来说调用生成器函数实际的结果是会返回一个列表。
+查找一些资料进行学习后，才知道`yield`的作用就是把一个函数变成一个generator（生成器），带有`yield`的函数不再是一个普通函数，Python 解释器会将其视为一个生成器，在调用生成器函数时会返回一个iterable对象，再次调用时会继续往下遍历。简单来说调用生成器函数实际的结果是会返回一个列表。
 
 那么在这段代码里面生成器函数`iter_pe_pb()`的结果是一个保存了对应指数在一段日期内每天的日期、市盈率均值和市净率均值。
 
@@ -256,9 +254,9 @@ def get_pe_pb(index_code, start_date, end_date=datetime.datetime.now().date()):
 
 - [Python yield 使用浅析](https://www.runoob.com/w3cnote/python-yield-used-analysis.html)
 
-函数`get_pe_pb()`详细解释如下：
+理解了上面的分位数函数和生成器函数后，可以将函数`get_pe_pb()`的详细算法解释如下：
 
-- 首先，定义一个生成器函数`iter_pe_pb()`用来获得一段日期内指数每天的市盈率均值和市净率均值，这里面包括：
+- 首先，定义一个生成器函数`iter_pe_pb()`用来获得一段日期内指数每天的市盈率均值和市净率均值，其中包括：
   - 调用`get_trade_days()`获取指定日期的所有交易日。
   - 循环遍历所有交易日，对于每个交易日，分别有如下操作：
     - 获取指数对应的所有成分股。
@@ -294,7 +292,7 @@ def save_pe_pb(index_code, df_new, df_old=pd.DataFrame()):
         df.to_csv(file_name)
 ```
 
-如上这两个函数用来从本地获取数据和存储数据到本地：
+如上这两个函数用来实现估值数据的本地化和取用，主要目的是实现更快的数据获取，以及避免重复从聚宽服务器去查询数据。
 
 - `loc_pe_pb()`：获取本地的数据
   - 先用`指数中文名称` + `_pe_pb.csv`来拼接出要搜寻的文件名称。
@@ -324,9 +322,10 @@ def GetPePb(index_code, start_date):
 
 这个函数是对前面的`get_pe_pb()`，`loc_pe_pb()`，`save_pe_pb()`的综合应用，它完成的功能是完成对指定指数的pe/pb的查询，有如下过程：
 
-- 先装在本地用来存储指数pe/pb的数据文件，并将其中保存数据的最后一个日期做为新的查询日期
+- 先装载本地用来存储指数pe/pb的数据文件，并将其中保存数据的最后一个日期做为新的查询日期
 - 调用`get_pe_pb()`查询最新的一段数据
 - 将查询的新数据保存到本地，然后再装载本地的所有数据
+
 
 ### 函数`init()`
 
@@ -354,7 +353,7 @@ def init(index_base=None):
 
 ### 函数`show_quantile()`和`show_quantile2()`
 
-如上获取到多个年度每天的pe/pb数据之后我们需要做什么呢？那就是把它传入到`show_quantile()`/`show_quantile2()`里面进行估值运算。这两个函数的差异是`show_quantile2()`直接提供了近3年、近5年和近7年的估值状况，而`show_quantile()`则需要调用者自己指定最近几年的估值状况。两个函数的功能大体是一样的，这里挑个稍微简单点的`show_quantile()`解说一下。
+如上获取到多个年度每天的pe/pb数据之后我们需要做什么呢？那就是把它传入到`show_quantile()`/`show_quantile2()`里面进行估值运算。这两个函数的差异是`show_quantile2()`直接提供了近3年、近5年和近7年的估值状况，而`show_quantile()`则需要调用者自己指定最近几年的估值状况。两个函数的功能大体是一样的，这里挑`show_quantile()`进行解释。
 
 ```
 def show_quantile(index_code, p, n, data):
@@ -414,6 +413,10 @@ def show_quantile(index_code, p, n, data):
   - 然后调用pandas.rolling()为计算出相对于每天的近n年的历史百分位数据。
 - 按照上一步相同的计算方法评估前一天指数处在近n年的百分位，并且给予估值标记。
 - 最后一步画出图示。
+
+比如上证指数近5年的估值图示如下：
+
+![](./w16-sz-index-estimation.png)
 
 
 ## 二、`index_valuation.py`代码解释
@@ -475,7 +478,7 @@ def send_email(html, picture, recieve_list=None, title=None):
 在`send_email()`里面所调用的用来操作邮件相关的Python函数库我这次是第一次接触，目前还不是很熟悉，所以先不能很详细的叙述它们的用法。但这个函数里面的主要内容却是可以从代码里面看得到的：
 
 - 首先，在`send_message()`里面组装好一个html文件，其中包括了四部分：html头、指数的估值、估值表和html尾：
-  - html头：内容放在变量`html_head`里面，包含的是纯html代码，是html格式文件开头部分必须的。
+  - html头：内容放在变量`html_head`里面，包含的是纯html代码，是html格式文件开头部分必须的，同时包含了CSS部分，即为各个元素定义不同的样式。
   - 指数的估值：在函数`get_base()`里面实现，这里面获取了3只主要指数的估值数据。
   - 估值表：在函数`get_table()`里面实现，这个表格里面衡量了20只指数的估值状态。
   - html尾：内容放在变量`html_foot`里面，包含的是纯html代码，是html格式文件结束部分必须的。
@@ -615,24 +618,21 @@ def get_table():
    return table + describe
 ```
 
-`get_table()`完成的内容是将更多只指数的估值状态以表格的形式展出出来。
+`get_table()`完成的内容是将更多只指数的估值状态以表格的形式展出出来，总共20支指数，如下：
 
 ```
 ['399673.XSHE','399372.XSHE','399373.XSHE','000015.XSHG','000300.XSHG','000010.XSHG', '000016.XSHG','399346.XSHE','399001.XSHE','399016.XSHE','399324.XSHE','399348.XSHE', '399376.XSHE','399377.XSHE','399550.XSHE','399364.XSHE','399374.XSHE','399375.XSHE', '000905.XSHG', '399006.XSHE']
 ```
 
 
-## 二、上周计划任务
+## 三、上周计划任务
 
 开始学习第3篇精选文章：[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)。
 
-目前基本上已经看懂了大致的内容，不过有两个内容不是很熟悉：
-
-- 邮件发送服务的使用。
-- Python与html代码的混合。
+目前基本上已经看懂了大致的内容，但还没有完全理解，特别是邮件发送服务的使用和Python与html代码的混合操作。
 
 
-## 三、本周新学内容
+## 四、本周新学内容
 
 ### 1.历史百分位
 
@@ -640,9 +640,24 @@ def get_table():
 
 我原本以为这个指标就是“历史百分位”，心想怎么这么巧合。但仔细了解之后，发现并不是这样。“历史百分位”指的是按照整个历史日期区间所处的时间长短，比如20%的分位数是56，那么说明指定的日期区间内有20%的时间收盘价是小于56的；如果60%的分位数是89，那么指定的日期区间内有60%的时间收盘价是小于89的。这里的56和89就是相对于20%和60%的分位数。
 
+### 2.在Python里构建html
 
-## 四、下周学习任务
+这是第一次这么近距离地接触网页编程，也是第一次学习在python里面构建html页面。尽管上学的时候学习过html的网页设计课程，但基本没有编写过成熟的页面。所以刚看到这些代码的时候发现好繁琐，要添加不同的标签来编写网页。
 
-### 1. 进一步学习[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)里面自己不熟悉的知识点，并仿照原有代码写作自己的自动报表系统。
+目前这些html代码还没有完全理解，估计在下周自己尝试依照这篇文章来改写自动报表系统的时候会慢慢熟悉，毕竟动动手有助于理解。
+
+参考：
+
+- [HTML <style> Tag](https://www.w3schools.com/tags/tag_style.asp)
+- [Creating and sending HTML e-mails with python](https://www.spritecloud.com/creating-and-sending-html-e-mails-with-python/)
+- [Python: Flask – Generating a Static HTML Page](https://dzone.com/articles/python-flask-generating-a-static-html-page)
+- [Creating and Viewing HTML Files with Python](https://programminghistorian.org/en/lessons/creating-and-viewing-html-files-with-python)
+
+
+## 五、下周学习任务
+
+
+### 1. 进一步学习[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)里面自己不熟悉的知识点，并仿照原有代码改写自动报表系统。
+
 
 ### 2. 在理解函数`send_message()`的时候发现聚宽本身定义了这个函数用来发送微信消息，当前自己在进行ETF定投，都是使用聚源数据提供的指数估值来进行决策，受这篇文章的启发其实可以尝试手动计算当前指数的估值，这样每天就可以实时掌握指数的估值状态了。
