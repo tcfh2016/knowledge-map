@@ -49,7 +49,7 @@ T = 1.0
 M = 50
 I = 15
 paths = gen_paths(s0, r, sigma, T, M, I)
-print(type(paths))
+print(paths)
 
 '''
 plt.plot(paths[:, :10])
@@ -59,4 +59,5 @@ plt.ylabel('index level')
 plt.show()
 '''
 
-log_returns = np.log(paths[1:], paths[0:-1])
+log_returns = np.log(paths[1:] / paths[0:-1])
+print(log_returns)

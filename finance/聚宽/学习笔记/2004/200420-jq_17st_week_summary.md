@@ -49,17 +49,47 @@ mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
 - to_addrs：接收者邮件地址。可以支持多个。
 - msg：要发送的消息。
 
-邮件的消息`msg`这个时候是难点，我们无法直接发送字符串，而是需要[email.message](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)
+邮件的消息`msg`这个时候是难点，我们无法直接发送字符串，而是需要使用SMTP协议里面定义好的邮件格式。比如我尝试如下这样来发送"hello"字符串，尽管邮件可以发送出去，但是你收到的邮件标题和内容都是空白的：
 
 ```
-from email.message import EmailMessage
+import smtplib
 
 mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
-mail_server.sendmail('lianbch@163.com', 'lianbche@163.com', "hello")
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+mail_server.sendmail('你的163邮箱地址', '接收者邮箱地址', "hello")
 ```
 
+这个原因就是前面提到的"hello"仅仅是一个纯字符串，没有遵循SMTP协议里面定义的邮件格式。这些格式有哪些呢，那就是MIME模块定义的那些消息格式([email.mime](https://docs.python.org/3/library/email.mime.html?highlight=mimetext#email.mime.text.MIMEText))，用来支持不同的邮件格式。比如我们这里选择支持文本类型的`MIMEText`重新编写如上代码：
 
-[email.mime](https://docs.python.org/3/library/email.mime.html?highlight=mimetext#email.mime.text.MIMEText)
+```
+import smtplib
+from email.mime.text import MIMEText
+
+msg = MIMEText('Can you see me?', 'plain', 'utf-8')
+msg['Subject'] = 'Hello world'
+
+mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+mail_server.sendmail('你的163邮箱地址', '接收者邮箱地址', msg.as_string())
+```
+
+这样你就能够接收到标题为“Hello world”，邮件内容为“Can you see me?”的邮件啦。另外还有个发送函数[send_message()](https://docs.python.org/3/library/smtplib.html#smtplib.SMTP.send_message)用来发送邮件，这个函数其实是对sendmail的封装，用起来更加方便。因为你只需要在使用的时候传入一个msg参数就可以了，不同的是这个msg的类型需要用[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)，改写如上代码如下：
+
+```
+import smtplib
+from email.message import EmailMessage
+
+msg = EmailMessage()
+msg['From'] = '你的163邮箱地址'
+msg['To'] = '接收者邮箱地址'
+msg['Subject'] = 'Hello world'
+msg.set_content("There you are!")
+
+mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+mail_server.send_message(msg)
+```
+
 
 参考：
 
