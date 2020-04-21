@@ -90,11 +90,57 @@ mail_server.login('你的163邮箱账号', '你的SMTP授权码')
 mail_server.send_message(msg)
 ```
 
-
 参考：
 
 - [Python SMTP发送邮件](https://www.runoob.com/python/python-email.html)
 - [email — An email and MIME handling package](https://docs.python.org/3/library/email.html)
 - [email: Examples](https://docs.python.org/3/library/email.examples.html)
+
+完成这一步骤之后我决定尝试着发送html网页，于是我先创建了一个最简单的html网页，名称为`display.html`，然后尝试将它的内容读出来再调用`set_content`填充到msg里面，最后发送出去。
+
+```
+import smtplib
+from email.message import EmailMessage
+
+msg = EmailMessage()
+msg['From'] = '你的163邮箱地址'
+msg['To'] = '接收者邮箱地址'
+msg['Subject'] = 'Hello world'
+msg.set_content("There you are!")
+
+mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+with open("display.html") as f:
+    msg.set_content(f.read())
+mail_server.send_message(msg)
+```
+
+然后打开邮件看了一下，吓了一跳，我看到的内容并不是展示出来的html内容，而全是代码。问题出在哪里？
+
+
+仿照官方文档[email: Examples](https://docs.python.org/3/library/email.examples.html)写了个例子，总算成功了：
+
+```
+import smtplib
+from email.message import EmailMessage
+
+msg = EmailMessage()
+msg['From'] = '你的163邮箱地址'
+msg['To'] = '接收者邮箱地址'
+msg['Subject'] = 'Hello world'
+msg.set_content("There you are!")
+
+mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+with open("display.html") as f:
+  msg.add_attachment(f.read(), subtype='html')            
+mail_server.send_message(msg)
+```
+
+将[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)的`add_attachment()`读了几遍似乎逐渐明白了。
+
+- 基于前面的MIME type。
+- 函数send_message的差异，EmailMessage也是对MIME type的封装。
+
 
 ## 四、下周学习任务
