@@ -21,6 +21,8 @@
 
 ### 1.使用Python进行邮件发送
 
+#### 在邮件服务端设置SMTP服务
+
 Python函数库`smtplib`专门用来支持邮件的发送，这个库是基于SMTP（Simple Mail Transfer Protocol，简单邮件传输协议）的封装，发送邮件的过程我们需要创建对应的[SMTP的对象](https://docs.python.org/3/library/smtplib.html#module-smtplib)，用来创建SMTP对象的类定义有如下两种：
 
 ```
@@ -42,6 +44,8 @@ import smtplib
 
 mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
 ```
+
+#### 邮件内容构建
 
 在创建好这个对象之后，我们就可以使用SMTP的`sendmail`函数来进行邮件的发送，该函数声明为`SMTP.sendmail(from_addr, to_addrs, msg, mail_options=(), rcpt_options=())`。但在此之前我们要先准备好对应的参数信息：
 
@@ -73,7 +77,36 @@ mail_server.login('你的163邮箱账号', '你的SMTP授权码')
 mail_server.sendmail('你的163邮箱地址', '接收者邮箱地址', msg.as_string())
 ```
 
-这样你就能够接收到标题为“Hello world”，邮件内容为“Can you see me?”的邮件啦。另外还有个发送函数[send_message()](https://docs.python.org/3/library/smtplib.html#smtplib.SMTP.send_message)用来发送邮件，这个函数其实是对sendmail的封装，用起来更加方便。因为你只需要在使用的时候传入一个msg参数就可以了，不同的是这个msg的类型需要用[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)，改写如上代码如下：
+这样你就能够接收到标题为“Hello world”，邮件内容为“Can you see me?”的邮件啦。在这里我们需要理解一封邮件的内容是有特定的格式的，这些格式是与协议里面定义的。比如我们可以从[email.message: Representing an email message](https://docs.python.org/3/library/email.message.html#module-email.message)里面知道邮件内容的组成可以分为“头部”和“载荷（内容）”两部分，前者用来存储邮件相关属性，比如发送者、接收者之类，后者就是邮件的正文。邮件的正文又可以分为不同的格式，略做草图如下：
+
+![](./w17-email-message-structure.PNG)
+
+所以，从上面这个例子里面我们创建了一个`MIMEText`对象，这个对象对应的就是上图中的第一种，也就是载荷部分携带的是纯文本。但从上面的`email.mime`链接里面其实可以知道用来在邮件里面添加更加多样化的内容，包括：
+
+- MIMEImage：创建`image`类型的对象，传送图片
+- MIMEAudio：创建`audio`类型的对象，传送音频
+- MIMEApplication：创建`application`类型的对象，传送应用
+
+如果我们需要在载荷里面携带多种类型的数据，那么就必须创建`MIMEMultipart`对象，使用它的`attach()`函数将多种类型的数据组装到这个对象，再统一发出。比如@江南有大树的代码就是这么办的：
+
+```
+# 构建message
+msg = MIMEMultipart()
+# 添加邮件内容
+content = MIMEText(html, _subtype='html', _charset='utf8')
+msg.attach(content)
+# 构建并添加图像对象
+for id, pic in picture.items():
+    img = MIMEImage(open(pic, 'rb').read(), _subtype='octet-stream')
+    img.add_header('Content-ID', id)
+    msg.attach(img)
+```
+
+#### 更便捷的方法
+
+由于Python的生态在不断演进，所以很多以前的功能会推陈出新。比如发送邮件的函数除了上面使用的`send_email()`现在有了个[send_message()](https://docs.python.org/3/library/smtplib.html#smtplib.SMTP.send_message)，这个函数其实是对sendmail的封装，但你只需要在使用的时候传入一个msg参数就可以了，使用起来更加方便。
+
+只不过我们使用`send_message()`这个新函数需要传入新的msg的类型：[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)：
 
 ```
 import smtplib
@@ -89,6 +122,9 @@ mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
 mail_server.login('你的163邮箱账号', '你的SMTP授权码')
 mail_server.send_message(msg)
 ```
+
+那这个`EmailMessage`又是什么呢？其实这个对象提供了一些函数可以直接添加多种类型的内容，而不用先创建`MIMEText`, `MIMEImage`或者其他的对象。
+
 
 参考：
 
