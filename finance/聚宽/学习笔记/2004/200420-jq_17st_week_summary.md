@@ -106,7 +106,7 @@ for id, pic in picture.items():
 
 由于Python的生态在不断演进，所以很多以前的功能会推陈出新。比如发送邮件的函数除了上面使用的`send_email()`现在有了个[send_message()](https://docs.python.org/3/library/smtplib.html#smtplib.SMTP.send_message)，这个函数其实是对sendmail的封装，但你只需要在使用的时候传入一个msg参数就可以了，使用起来更加方便。
 
-只不过我们使用`send_message()`这个新函数需要传入新的msg的类型：[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)：
+只不过我们使用`send_message()`这个新函数需要传入新的msg的类型：[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)。那这个`EmailMessage`又是什么呢？其实这个对象提供了一些函数可以直接添加多种类型的内容，而不用先创建`MIMEText`, `MIMEImage`或者其他的对象。比如下面是一个发送邮件正文为纯文本的例子：
 
 ```
 import smtplib
@@ -123,16 +123,7 @@ mail_server.login('你的163邮箱账号', '你的SMTP授权码')
 mail_server.send_message(msg)
 ```
 
-那这个`EmailMessage`又是什么呢？其实这个对象提供了一些函数可以直接添加多种类型的内容，而不用先创建`MIMEText`, `MIMEImage`或者其他的对象。
-
-
-参考：
-
-- [Python SMTP发送邮件](https://www.runoob.com/python/python-email.html)
-- [email — An email and MIME handling package](https://docs.python.org/3/library/email.html)
-- [email: Examples](https://docs.python.org/3/library/email.examples.html)
-
-完成这一步骤之后我决定尝试着发送html网页，于是我先创建了一个最简单的html网页，名称为`display.html`，然后尝试将它的内容读出来再调用`set_content`填充到msg里面，最后发送出去。
+测试成功之后我决定尝试着发送html网页，于是我先创建了一个最简单的html网页，名称为`display.html`，然后尝试将它的内容读出来再调用`set_content`填充到msg里面，最后发送出去。
 
 ```
 import smtplib
@@ -151,32 +142,33 @@ with open("display.html") as f:
 mail_server.send_message(msg)
 ```
 
-然后打开邮件看了一下，吓了一跳，我看到的内容并不是展示出来的html内容，而全是代码。问题出在哪里？
+然后打开邮件看了一下，吓了一跳，我看到的内容并不是展示出来的html内容，而全是代码。问题出在哪里？在网络上进行查找对比之后是因为在`set_context()`的时候没有设置内容格式因此默认当作纯文本格式了，只需要设置`msg.set_content(f.read(), 'html')`就可以。在官方文档[email: Examples](https://docs.python.org/3/library/email.examples.html)的一个例子里面，使用`msg.add_attachment(f.read(), subtype='html')`也是可以成功的。
 
 
-仿照官方文档[email: Examples](https://docs.python.org/3/library/email.examples.html)写了个例子，总算成功了：
+将[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)的`add_attachment()`读了几遍似乎逐渐明白了。`add_attachment()`实际上是对`set_content()`的封装。这种封装关系其实在EmailMessage通过统一接口来操作各种MIME type类似，我们可以对比如下段代码：
 
 ```
-import smtplib
-from email.message import EmailMessage
+msg = MIMEMultipart()
+content = MIMEText(html, _subtype='html', _charset='utf8')
+msg.attach(content)
+for id, pic in picture.items():
+    img = MIMEImage(open(pic, 'rb').read(), _subtype='octet-stream')
+    img.add_header('Content-ID', id)
+    msg.attach(img)
 
 msg = EmailMessage()
-msg['From'] = '你的163邮箱地址'
-msg['To'] = '接收者邮箱地址'
-msg['Subject'] = 'Hello world'
-msg.set_content("There you are!")
-
-mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
-mail_server.login('你的163邮箱账号', '你的SMTP授权码')
-with open("display.html") as f:
-  msg.add_attachment(f.read(), subtype='html')            
-mail_server.send_message(msg)
+msg.add_attachment(html, subtype='html')
+for id, pic in picture.items():
+    msg.add_attachment(open(pic, 'rb').read(), subtype='octet-stream')
 ```
 
-将[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)的`add_attachment()`读了几遍似乎逐渐明白了。
+TODO: TEST
 
-- 基于前面的MIME type。
-- 函数send_message的差异，EmailMessage也是对MIME type的封装。
+参考：
 
+- [Python SMTP发送邮件](https://www.runoob.com/python/python-email.html)
+- [email — An email and MIME handling package](https://docs.python.org/3/library/email.html)
+- [email: Examples](https://docs.python.org/3/library/email.examples.html)
+- [](https://naoketang.com/p/dlr7326xqpog)
 
 ## 四、下周学习任务

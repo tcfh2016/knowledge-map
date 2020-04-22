@@ -5,6 +5,27 @@ import statsmodels.api as sm
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
+
+def print_statistics(array):
+    ''' Prints selected statistics.
+
+    Parameters
+    ==========
+    array: ndarray
+        object to generate statistics on
+    '''
+    sta = scs.describe(array)
+    print("%14s %15s" % ('statistic', 'value'))
+    print(30 * "-")
+    print("%14s %15.5f" % ('size', sta[0]))
+    print("%14s %15.5f" % ('min', sta[1][0]))
+    print("%14s %15.5f" % ('max', sta[1][1]))
+    print("%14s %15.5f" % ('mean', sta[2]))
+    print("%14s %15.5f" % ('std', np.sqrt(sta[3])))
+    print("%14s %15.5f" % ('skew', sta[4]))
+    print("%14s %15.5f" % ('kurtosis', sta[5]))
+
+
 def gen_paths(s0, r, sigma, T, M, I):
     ''' Generates Monte Carlo paths for geometric Brownian motion.
 
@@ -49,7 +70,7 @@ T = 1.0
 M = 50
 I = 15
 paths = gen_paths(s0, r, sigma, T, M, I)
-print(paths)
+print(paths.round(4))
 
 '''
 plt.plot(paths[:, :10])
@@ -60,4 +81,6 @@ plt.show()
 '''
 
 log_returns = np.log(paths[1:] / paths[0:-1])
-print(log_returns)
+print(log_returns.round(4))
+
+print_statistics(log_returns.flatten())
