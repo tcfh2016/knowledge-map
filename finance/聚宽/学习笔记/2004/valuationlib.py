@@ -1,0 +1,147 @@
+import pandas as pd
+from jqdata import *
+
+
+database_path = './database/'
+
+
+def H_V_H(arr):   
+    ''' historic_valuation_height: 计算历史估值高度
+
+    参数
+    ====
+    arr : ndarry类型，此时是一维的估值数据
+
+    返回值
+    ======
+    返回“小于最后一天估值数据的天数”占“总的天数”的百分比
+    '''
+    low = arr[arr < arr[-1]]
+    return(low.shape[0] / arr.shape[0])   
+
+
+def get_valuation_status(quantile):
+    ''' 获取估值状态
+
+    参数
+    ====
+    quantile : 估值所处的百分位
+
+    返回值
+    ======
+    assessment : 估值状态
+    '''
+    assessment = ''
+    if 0 <= quantile < 0.1:
+        assessment = '超低估'
+    elif 0.1 < quantile < 0.3:
+        assessment = '低估'
+    elif 0.3 < quantile < 0.4:
+        assessment = '适中偏低'
+    elif 0.4 < quantile < 0.6:
+        assessment = '适中'
+    elif 0.6 < quantile < 0.7:
+        assessment = '适中偏高'   
+    elif 0.7 < quantile < 0.9:
+        assessment = '高估'   
+    elif 0.9 < quantile <= 1:
+        assessment = '超高估'   
+    
+    return assessment
+
+
+def calc_index_valuation(index_code, start_date, end_date=datetime.datetime.now().date()):
+    '''计算指数的估值数据。
+    
+    参数
+    ====
+    index_code: 指数代码
+    start_date：起始日期
+    end_date  : 结束日期（默认为今天）
+    
+    返回值
+    ======
+    df: DataFrame，包含了指定日期区间每天的pe, pb数据 
+    '''
+    print('\t计算{}自{}到{}的估值数据...'.format(index_code, start_date, end_date))
+    def iter_pe_pb(): # 这是一个生成器函数
+        trade_date = get_trade_days(start_date=start_date, end_date=end_date)   
+
+        for date in trade_date:
+            stocks = get_index_stocks(index_code, date)
+            q = query(valuation.pe_ratio,
+                      valuation.pb_ratio
+                     ).filter(
+                              valuation.pe_ratio != None,
+                              valuation.pb_ratio != None,
+                              valuation.code.in_(stocks))
+            df = get_fundamentals(q, date)            
+            quantile = df.quantile([0.25, 0.75])            
+            df_pe = df.pe_ratio[(df.pe_ratio > quantile.pe_ratio.values[0]) &\
+                                (df.pe_ratio < quantile.pe_ratio.values[1])]
+            df_pb = df.pb_ratio[(df.pb_ratio > quantile.pb_ratio.values[0]) &\
+                                (df.pb_ratio < quantile.pb_ratio.values[1])]            
+            yield date, df_pe.median(), df_pb.median()
+    
+    dict_result = [{'date': value[0], 'pe': value[1], 'pb':value[2]} for value in iter_pe_pb()]    
+    df = pd.DataFrame(dict_result)        
+    df.set_index('date', inplace=True)
+    print('\t计算完成。')
+    return df
+
+
+def load_local_db(index_code):
+    '''从本地导入之前保存在./database目录中的估值数据。
+    
+    参数
+    ====
+    index_code: 指数代码
+    
+    返回值
+    ======
+    df : DataFrame，从本地保存的csv里面导入的估值数据
+    '''
+    file_name = database_path + get_security_info(index_code).display_name + '_pe_pb.csv'
+    if os.path.exists(file_name):
+        df_loc_pe_pb = pd.read_csv(file_name, index_col='date', parse_dates=True)
+        return df_loc_pe_pb
+    else:
+        return pd.DataFrame()
+
+
+def save_to_db(index_code, new, old=pd.DataFrame()):
+    '''将计算得到的估值数据保存到./database目录中的估值数据，提高数据查询效率。
+    
+    参数
+    ====
+    index_code: 指数代码
+    new       : 计算得到的最新一段时间的估值数据
+    old       : 获取之前保存在本地的估值数据
+    '''
+    file_name = database_path + get_security_info(index_code).display_name + '_pe_pb.csv'
+    if len(old) <= 0:
+        new.to_csv(file_name)
+    else:
+        df = old.append(new)
+        df.to_csv(file_name)
+
+
+def get_pe_pb(index_code, start_date):
+    '''获取从某个日期开始的估值pe/pb。
+    
+    参数
+    ====
+    index_code: 指数代码
+    start_date: 起始日期    
+    '''
+    print('开始获取{}的估值数据:'.format(index_code))
+    df_old = load_local_db(index_code)
+    if len(df_old) <= 0:
+        start_date = start_date # 本地没有保存估值数据，从指定的日期开始获取
+        print('\t本地无缓存，需要计算从{}开始的估值数据。'.format(start_date))
+    else:
+        start_date = df_old.index[-1] # 否则，将本地存储估值数据的最后一个日期做为新的起始日期
+        print('\t本地有缓存从{}至{}的数据，需要计算从{}开始的数据。'.format(df_old.index[0], df_old.index[-1], start_date))
+    df_new = calc_index_valuation(index_code, start_date=start_date)
+    save_to_db(index_code, new=df_new, old=df_old)
+    return load_local_db(index_code)
