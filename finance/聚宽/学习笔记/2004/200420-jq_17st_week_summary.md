@@ -430,7 +430,7 @@ send_email(receiver, indexes, 'A股指数估值表')
 ```
 
 
-## 三、上周计划任务
+## 二、上周计划任务
 
 
 ### 1. 进一步学习[指数估值自动报表系统——源代码](https://www.joinquant.com/view/community/detail/20497)里面自己不熟悉的知识点，并仿照原有代码改写自动报表系统。
