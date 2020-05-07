@@ -187,6 +187,19 @@ df.loc[:, ['A', 'B']]
 
 ## DataFrame 查询
 
+### 判断DataFrame是否为空
+
+```
+if df.empty:
+    print('DataFrame is empty!')
+
+len(df.index) == 0    
+```
+
+参考：
+
+- [How to check whether a pandas DataFrame is empty?](https://stackoverflow.com/questions/19828822/how-to-check-whether-a-pandas-dataframe-is-empty)
+
 ### 根据某列的值查询对应的index
 
 因为index是行索引，引起可以借助条件选择的功能选择特定的行，然后再获取结果的index属性：
