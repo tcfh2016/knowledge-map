@@ -63,7 +63,25 @@ def is_only_stock(index):
 def calc_index_valuation(index_code, start_date, end_date=datetime.datetime.now().date() - datetime.timedelta(days=1)):
 ```
 
-4. 重复记录
+4. 滤除空的数据
+
+```
+def get_valuation_table():
+    all_index = list(get_all_securities(['index']).index.values)
+    #valuation_dict = get_index_pe(index_list)
+    #print(all_index)
+    valuation_dict = get_index_pe(all_index)
+    quantile_dict = dict()
+    for ind, val in valuation_dict.items():
+        # 过滤空的DataFrame
+        if (len(val.index) != 0):            
+            pe, pe_quantile = get_latest_quantile(ind, 'pe', 5, val)
+            pb, pb_quantile = get_latest_quantile(ind, 'pb', 5, val)
+            quantile_dict[ind] = {'pe': pe, 'pe_quantile': pe_quantile, 'pb': pb, 'pb_quantile': pb_quantile}
+    df = pd.DataFrame(quantile_dict).T
+```
+
+5. 重复记录
 
 ```
 2020-04-28 00:00:00,1.81915,26.00605
