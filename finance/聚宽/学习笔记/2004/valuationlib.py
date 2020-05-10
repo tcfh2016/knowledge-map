@@ -1,147 +1,284 @@
-import pandas as pd
-from jqdata import *
 
+<!DOCTYPE HTML>
+<html>
 
-database_path = './database/'
+<head>
+    <meta charset="utf-8">
 
-
-def H_V_H(arr):   
-    ''' historic_valuation_height: 计算历史估值高度
-
-    参数
-    ====
-    arr : ndarry类型，此时是一维的估值数据
-
-    返回值
-    ======
-    返回“小于最后一天估值数据的天数”占“总的天数”的百分比
-    '''
-    low = arr[arr < arr[-1]]
-    return(low.shape[0] / arr.shape[0])   
-
-
-def get_valuation_status(quantile):
-    ''' 获取估值状态
-
-    参数
-    ====
-    quantile : 估值所处的百分位
-
-    返回值
-    ======
-    assessment : 估值状态
-    '''
-    assessment = ''
-    if 0 <= quantile < 0.1:
-        assessment = '超低估'
-    elif 0.1 < quantile < 0.3:
-        assessment = '低估'
-    elif 0.3 < quantile < 0.4:
-        assessment = '适中偏低'
-    elif 0.4 < quantile < 0.6:
-        assessment = '适中'
-    elif 0.6 < quantile < 0.7:
-        assessment = '适中偏高'   
-    elif 0.7 < quantile < 0.9:
-        assessment = '高估'   
-    elif 0.9 < quantile <= 1:
-        assessment = '超高估'   
+    <title>valuationlib.py (editing)</title>
+    <link id="favicon" rel="shortcut icon" type="image/x-icon" href="https://cdn.joinquant.com/research/static/base/images/favicon-file.ico?v=e2776a7f45692c839d6eea7d7ff6f3b2">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://cdn.joinquant.com/research/static/components/jquery-ui/themes/smoothness/jquery-ui.min.css?v=9b2c8d3489227115310662a343fce11c" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.joinquant.com/research/static/components/jquery-typeahead/dist/jquery.typeahead.min.css?v=7afb461de36accb1aa133a1710f5bc56" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    return assessment
-
-
-def calc_index_valuation(index_code, start_date, end_date=datetime.datetime.now().date()):
-    '''计算指数的估值数据。
     
-    参数
-    ====
-    index_code: 指数代码
-    start_date：起始日期
-    end_date  : 结束日期（默认为今天）
+<link rel="stylesheet" href="https://cdn.joinquant.com/research/static/components/codemirror/lib/codemirror.css?v=ae81317fa2b3a745892c83985827d41b">
+<link rel="stylesheet" href="https://cdn.joinquant.com/research/static/components/codemirror/addon/dialog/dialog.css?v=c89dce10b44d2882a024e7befc2b63f5">
+
+    <link rel="stylesheet" href="https://cdn.joinquant.com/research/static/style/style.min.css?v=47782e517c98a53adb514cbefb4528f2" type="text/css"/>
     
-    返回值
-    ======
-    df: DataFrame，包含了指定日期区间每天的pe, pb数据 
-    '''
-    print('\t计算{}自{}到{}的估值数据...'.format(index_code, start_date, end_date))
-    def iter_pe_pb(): # 这是一个生成器函数
-        trade_date = get_trade_days(start_date=start_date, end_date=end_date)   
 
-        for date in trade_date:
-            stocks = get_index_stocks(index_code, date)
-            q = query(valuation.pe_ratio,
-                      valuation.pb_ratio
-                     ).filter(
-                              valuation.pe_ratio != None,
-                              valuation.pb_ratio != None,
-                              valuation.code.in_(stocks))
-            df = get_fundamentals(q, date)            
-            quantile = df.quantile([0.25, 0.75])            
-            df_pe = df.pe_ratio[(df.pe_ratio > quantile.pe_ratio.values[0]) &\
-                                (df.pe_ratio < quantile.pe_ratio.values[1])]
-            df_pb = df.pb_ratio[(df.pb_ratio > quantile.pb_ratio.values[0]) &\
-                                (df.pb_ratio < quantile.pb_ratio.values[1])]            
-            yield date, df_pe.median(), df_pb.median()
+    <link rel="stylesheet" href="/user/60474564012/custom/custom.css" type="text/css" />
+    <script src="https://cdn.joinquant.com/research/static/components/es6-promise/promise.min.js?v=f004a16cb856e0ff11781d01ec5ca8fe" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.joinquant.com/research/static/components/preact/index.js?v=00a2fac73c670ce39ac53d26640eb542" type="text/javascript"></script>
+    <script src="https://cdn.joinquant.com/research/static/components/proptypes/index.js?v=c40890eb04df9811fcc4d47e53a29604" type="text/javascript"></script>
+    <script src="https://cdn.joinquant.com/research/static/components/preact-compat/index.js?v=f865e990e65ad27e3a2601d8adb48db1" type="text/javascript"></script>
+    <script src="https://cdn.joinquant.com/research/static/components/requirejs/require.js?v=6da8be361b9ee26c5e721e76c6d4afce" type="text/javascript" charset="utf-8"></script>
+    <script>
+      require.config({
+          
+          urlArgs: "v=20200510192016",
+          
+          baseUrl: 'https://cdn.joinquant.com/research/static/',
+          paths: {
+            'auth/js/main': 'auth/js/main.min',
+            custom : '/user/60474564012/custom',
+            nbextensions : '/user/60474564012/nbextensions',
+            kernelspecs : '/user/60474564012/kernelspecs',
+            underscore : 'components/underscore/underscore-min',
+            backbone : 'components/backbone/backbone-min',
+            jed: 'components/jed/jed',
+            jquery: 'components/jquery/jquery.min',
+            json: 'components/requirejs-plugins/src/json',
+            text: 'components/requirejs-text/text',
+            bootstrap: 'components/bootstrap/js/bootstrap.min',
+            bootstraptour: 'components/bootstrap-tour/build/js/bootstrap-tour.min',
+            'jquery-ui': 'components/jquery-ui/ui/minified/jquery-ui.min',
+            moment: 'components/moment/min/moment-with-locales',
+            codemirror: 'components/codemirror',
+            termjs: 'components/xterm.js/dist/xterm',
+            typeahead: 'components/jquery-typeahead/dist/jquery.typeahead.min',
+          },
+          map: { // for backward compatibility
+              "*": {
+                  "jqueryui": "jquery-ui",
+              }
+          },
+          shim: {
+            typeahead: {
+              deps: ["jquery"],
+              exports: "typeahead"
+            },
+            underscore: {
+              exports: '_'
+            },
+            backbone: {
+              deps: ["underscore", "jquery"],
+              exports: "Backbone"
+            },
+            bootstrap: {
+              deps: ["jquery"],
+              exports: "bootstrap"
+            },
+            bootstraptour: {
+              deps: ["bootstrap"],
+              exports: "Tour"
+            },
+            "jquery-ui": {
+              deps: ["jquery"],
+              exports: "$"
+            }
+          },
+          waitSeconds: 30,
+      });
+
+      require.config({
+          map: {
+              '*':{
+                'contents': 'services/contents',
+              }
+          }
+      });
+
+      // error-catching custom.js shim.
+      define("custom", function (require, exports, module) {
+          try {
+              var custom = require('custom/custom');
+              console.debug('loaded custom.js');
+              return custom;
+          } catch (e) {
+              console.error("error loading custom.js", e);
+              return {};
+          }
+      })
+
+    document.nbjs_translations = {"domain": "nbjs", "locale_data": {"nbjs": {"": {"domain": "nbjs"}}}};
+    </script>
+
     
-    dict_result = [{'date': value[0], 'pe': value[1], 'pb':value[2]} for value in iter_pe_pb()]    
-    df = pd.DataFrame(dict_result)        
-    df.set_index('date', inplace=True)
-    print('\t计算完成。')
-    return df
-
-
-def load_local_db(index_code):
-    '''从本地导入之前保存在./database目录中的估值数据。
     
-    参数
-    ====
-    index_code: 指数代码
+
+</head>
+
+<body class="edit_app "
+ 
+data-base-url="/user/60474564012/"
+data-file-path="IndexValuationReport/valuationlib.py"
+
+  
+ 
+
+dir="ltr">
+
+<noscript>
+    <div id='noscript'>
+      Jupyter Notebook需要的JavaScript.<br>
+      请允许它执行.
+  </div>
+</noscript>
+
+<div id="header">
+  <div id="header-container" class="container">
+  <div id="ipython_notebook" class="nav navbar-brand"><a href="/user/60474564012/tree" title='指示板'>
+      
+<img src='/hub/logo' alt='Jupyter Notebook'/>
+
+  </a></div>
+
+  
+
+<span id="save_widget" class="pull-left save_widget">
+    <span class="filename"></span>
+    <span class="last_modified"></span>
+</span>
+
+
+  
+  
+
+  
+  
+
+    <span id="login_widget">
+      
+        <button id="logout" class="btn btn-sm navbar-btn">注销</button>
+      
+    </span>
+
+  
+
+  
+
+<span>
+    <a href='/hub/home'
+       class='btn btn-default btn-sm navbar-btn pull-right'
+       style='margin-right: 4px; margin-left: 2px;'>
+        Control Panel
+    </a>
+</span>
+
+  
+  </div>
+  <div class="header-bar"></div>
+
+  
+
+<div id="menubar-container" class="container">
+  <div id="menubar">
+    <div id="menus" class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+          <p  class="navbar-text indicator_area">
+          <span id="current-mode" >当前模式</span>
+          </p>
+        <button type="button" class="btn btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <i class="fa fa-bars"></i>
+          <span class="navbar-text">Menu</span>
+        </button>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="notification_area"></li>
+        </ul>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">文件</a>
+              <ul id="file-menu" class="dropdown-menu">
+                <li id="new-file"><a href="#">新建</a></li>
+                <li id="save-file"><a href="#">保存</a></li>
+                <li id="rename-file"><a href="#">重命名</a></li>
+                <li id="download-file"><a href="#">下载</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">编辑</a>
+              <ul id="edit-menu" class="dropdown-menu">
+                <li id="menu-find"><a href="#">查找</a></li>
+                <li id="menu-replace"><a href="#">查找 &amp; 替换</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">快捷键</li>
+                <li id="menu-keymap-default"><a href="#">默认<i class="fa"></i></a></li>
+                <li id="menu-keymap-sublime"><a href="#">Sublime文本<i class="fa"></i></a></li>
+                <li id="menu-keymap-vim"><a href="#">Vim<i class="fa"></i></a></li>
+                <li id="menu-keymap-emacs"><a href="#">emacs<i class="fa"></i></a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">视图</a>
+              <ul id="view-menu" class="dropdown-menu">
+              <li id="toggle_header" title="显示/隐藏 标题和logo">
+              <a href="#">开/关 文档头</a></li>
+              <li id="menu-line-numbers"><a href="#">开/关 行号</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">语言</a>
+              <ul id="mode-menu" class="dropdown-menu">
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lower-header-bar"></div>
+
+
+</div>
+
+<div id="site">
+
+
+<div id="texteditor-backdrop">
+<div id="texteditor-container" class="container"></div>
+</div>
+
+
+</div>
+
+
+
+
+
+
     
-    返回值
-    ======
-    df : DataFrame，从本地保存的csv里面导入的估值数据
-    '''
-    file_name = database_path + get_security_info(index_code).display_name + '_pe_pb.csv'
-    if os.path.exists(file_name):
-        df_loc_pe_pb = pd.read_csv(file_name, index_col='date', parse_dates=True)
-        return df_loc_pe_pb
-    else:
-        return pd.DataFrame()
 
 
-def save_to_db(index_code, new, old=pd.DataFrame()):
-    '''将计算得到的估值数据保存到./database目录中的估值数据，提高数据查询效率。
-    
-    参数
-    ====
-    index_code: 指数代码
-    new       : 计算得到的最新一段时间的估值数据
-    old       : 获取之前保存在本地的估值数据
-    '''
-    file_name = database_path + get_security_info(index_code).display_name + '_pe_pb.csv'
-    if len(old) <= 0:
-        new.to_csv(file_name)
-    else:
-        df = old.append(new)
-        df.to_csv(file_name)
+<script src="https://cdn.joinquant.com/research/static/edit/js/main.min.js?v=69ef7b7a55de6f60611ff3ae94ef5069" type="text/javascript" charset="utf-8"></script>
 
 
-def get_pe_pb(index_code, start_date):
-    '''获取从某个日期开始的估值pe/pb。
-    
-    参数
-    ====
-    index_code: 指数代码
-    start_date: 起始日期    
-    '''
-    print('开始获取{}的估值数据:'.format(index_code))
-    df_old = load_local_db(index_code)
-    if len(df_old) <= 0:
-        start_date = start_date # 本地没有保存估值数据，从指定的日期开始获取
-        print('\t本地无缓存，需要计算从{}开始的估值数据。'.format(start_date))
-    else:
-        start_date = df_old.index[-1] # 否则，将本地存储估值数据的最后一个日期做为新的起始日期
-        print('\t本地有缓存从{}至{}的数据，需要计算从{}开始的数据。'.format(df_old.index[0], df_old.index[-1], start_date))
-    df_new = calc_index_valuation(index_code, start_date=start_date)
-    save_to_db(index_code, new=df_new, old=df_old)
-    return load_local_db(index_code)
+<script type='text/javascript'>
+  function _remove_token_from_url() {
+    if (window.location.search.length <= 1) {
+      return;
+    }
+    var search_parameters = window.location.search.slice(1).split('&');
+    for (var i = 0; i < search_parameters.length; i++) {
+      if (search_parameters[i].split('=')[0] === 'token') {
+        // remote token from search parameters
+        search_parameters.splice(i, 1);
+        var new_search = '';
+        if (search_parameters.length) {
+          new_search = '?' + search_parameters.join('&');
+        }
+        var new_url = window.location.origin + 
+                      window.location.pathname + 
+                      new_search + 
+                      window.location.hash;
+        window.history.replaceState({}, "", new_url);
+        return;
+      }
+    }
+  }
+  _remove_token_from_url();
+</script>
+</body>
+
+</html>
