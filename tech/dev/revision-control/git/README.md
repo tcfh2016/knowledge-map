@@ -56,7 +56,7 @@ fatal: unable to access 'https://XXX.com/lte/repository.git/': Failed to connect
 > git show SHA-1
 > git show --stat SHA-1
 > git show SHA-1:file_name
-> git show SHA-1 -- file_name
+> git show SHA-1 -- file_name (need whole path)
 > git config --list
 ```
 
