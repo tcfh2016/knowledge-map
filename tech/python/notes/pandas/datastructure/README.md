@@ -16,7 +16,7 @@ Pandas的两个主要数据结构为 Series 和 DataFrame，它们为大多数�
 percent_items = percent_items[:].div(percent_items['营业收入(万元)'], axis=0)
 ```
 
-## mean()
+## mean(), median(), min(), max
 
 通过`axis`参数来控制平均值操作：
 
@@ -26,6 +26,12 @@ drinks.mean(axis="index")
 
 drinks.mean(axis=1) # 求取每行的平均值，求值的方向为从左至右
 drinks.mean(axis="columns")
+```
+
+可以指定对应列来求取某列的最大值:
+
+```
+print(df["YY"].max())
 ```
 
 ## sort_values()
@@ -66,7 +72,7 @@ obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'], fill_value=0)
 
 map作用于 Series，applymap作用于 DataFrame，表示对每个元素应用函数f。
 
-# NaN (Not a Number)
+# NaN (Not a Number) 处理
 
 pandas中缺失的数据项会被填写为 NaN，表示缺失或NA值。对于NA的处理包括如下几类：
 
@@ -103,7 +109,15 @@ print(s.dropna(axis=1)) # 删除含有NaN的全部行
   - df.fillna({1:0.5, 2:-1})将对应列的NaN填充为对应的值，用`axis=1`来指示不同的轴。
   - 传入`inplace=True`在现有对象上进行修改。
 
-# 参考
+
+# 其他常见问题
+
+## 如何删除重复的行？
+
+
+
+
+参考
 
 - [Python | Pandas DataFrame](https://www.geeksforgeeks.org/python-pandas-dataframe/)
 - [pandas 修改 DataFrame 列名](https://www.cnblogs.com/hhh5460/p/5816774.html)
