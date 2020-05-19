@@ -3,9 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      th {
+        background-color: Crimson;
+        color: white;
+      }
+      .underestimate {
+        background-color: lightgreen;
+      }
+      .overestimate {
+        background-color: tomato;
+      }
+    </style>
   </head>
   <body>
-    <table style="width:100%">
+    <table style="width: 600px; text-align:right">
       <tr>
         <th>基金代码</th>
         <th>基金名称</th>
@@ -13,12 +25,19 @@
         <th>评估系数①</th>
         <th>评估系数②</th>
       </tr>
-      <tr>
+      <tr class="underestimate">
         <td>159930</td>
         <td>能源ETF</td>
         <td>5.66</td>
         <td>0.40%</td>
         <td>35.11%</td>
+      </tr>
+      <tr class="overestimate">
+        <td>510410</td>
+        <td>资源ETF</td>
+        <td>10.54</td>
+        <td>1.72%</td>
+        <td>44.37%</td>
       </tr>
     </table>
   </body>

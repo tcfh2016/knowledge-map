@@ -6,12 +6,55 @@ HTML页面里面的表格是使用`<table>`标签来定义的，其中的每行�
 
 ## 表格样式
 
+表格的标题使用`caption`标签进行定义。
+
 ### 表格宽度
 
 通过`<table style="width:100%">`指定展示百分比的相对宽度。
 
+### 表格边框
 
-## 跨行/跨列的单元格
+表格默认以无边框的形式展现，如果要指定边框需要使用CSS属性：
+
+```
+table, th, td {
+  border: 1px solid black;
+}
+```
+
+然而单纯使用边框属性的时候看起来会很怪异，因为每个单元格看起来都被双线边框包围着，这个时候我们需要使用collapsed border，在上面的代码里加上`border-collapse: collapse;`。
+
+### 单元格修饰
+
+首先可以使用CSS的padding属性来设定单元格内容与边框之间的空白；其次可以使用text-align属性来对齐单元格内容；还可以使用border-spacing属性来设置单元格之间的空间。
+
+```
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-spacing: 15px;
+}
+```
+
+### 跨行/跨列的单元格
+
+当一个单元格需要跨越多个列时使用`colspan`，而需要跨越多行时使用`rowspan`:
+
+```
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th colspan="2">Telephone</th>
+  </tr>
+  <tr>
+    <th rowspan="2">Telephone:</th>
+    <td>55577854</td>
+  </tr>
+  <tr>
+    <td>55577855</td>
+  </tr>
+</table>
+```
 
 
 参考：
