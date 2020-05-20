@@ -52,6 +52,14 @@ ax.right_ax.set_ylabel('AB scale')
 
 # 常见问题
 
+## pandas保存图片以inch为单位，但网页中以像素为单位，如何处理？
+
+
+
+参考：
+
+- [Specifying and saving a figure with exact size in pixels](https://stackoverflow.com/questions/13714454/specifying-and-saving-a-figure-with-exact-size-in-pixels)
+
 ## 去掉legend中显示的index名称
 
 如果dataframe里面的index名称不为空，这在我们选取dataframe中某列做为index的时候是
