@@ -95,6 +95,23 @@ Out[13]: True
  (20180703150000.0, 271.9, 272.95, 271.3, 123536.0, 33626235700.0)]
 ```
 
+使用`datetime.strptime`来完成字符串到datetime类型的转换。
+
+```
+import pandas as pd
+import datetime as dt
+
+f = 20180702210001.0
+
+fmt = '%Y%m%d%H%M%S.%f'
+time_tuple = dt.datetime.strptime(str(f), fmt)
+```
+
+
+参考：
+
+- [strftime() and strptime() Behavior](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
+
 ## 如何判断Timestamp类型
 
 ```
