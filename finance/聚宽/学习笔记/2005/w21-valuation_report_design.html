@@ -4,25 +4,35 @@
     <meta charset="utf-8">
     <title></title>
     <style media="screen">
+      body {
+        background-color: AliceBlue;
+        width: 900px;
+      }
       header {
-        width: 600px;
         text-align: center;
       }
       section {
-        width: 600px;
         height: 50px;
         text-align: center;
-        background-color: AliceBlue;
+      }
+      article {
+        font-size: 12px;
+        text-align: left;
+        color: blue;
       }
       footer {
-        width: 600px;
         text-align: center;
         padding: 3px;
         background-color: white;
         color: blue;
       }
+      table {
+        width: 900px;
+        text-align:right;
+        border-collapse: collapse;
+      }
       th {
-        background-color: Crimson;
+        background-color: Brown;
         color: white;
       }
       .underestimate {
@@ -32,7 +42,6 @@
         background-color: tomato;
       }
       .valuation_table {
-        width: 600px;
         text-align:right;
       }
     </style>
@@ -42,7 +51,7 @@
       <h3>ETF定投参考</h3>
     </header>
     <div>
-      <table style="width: 600px; text-align:right">
+      <table>
         <tr>
           <th>基金代码</th>
           <th>基金名称</th>
@@ -66,11 +75,21 @@
         </tr>
       </table>
     </div>
-    <section>
+    <article>
+      <p>注1：表格中的“评估系数①”代表“ETF当前累计净值近5年的百分位”，而“评估系数②”代表“ETF当前累计净值相对于自发布日以来累计净值最大值的百分比”。</p>
+      <p>注2：表格中以两个评估系数均小于60%作为“低位”的判断标准，将两个评估系数均大于80%作为处在“高位”的判断标准。此处的“低位”和“高位”的判别仅仅是按照经验来定义的，对于该基金是否高估还是低估可以进一步从基金对应的指数来进行判断。</p>
+      <p>注3：添加星号的是我当前定投的基金。对于它们我会每周更新其对应指数的估值状态。</p>
+    </article>
+    <section> </section>
 
-    </section>
+    <img src="w21-ex-zz500.png" alt="">
+    <section> </section>
+
+    <header>
+      <h3>全网指数估值表</h3>
+    </header>
     <div class="valuation_table">
-      <table style="width: 600px; text-align:right">
+      <table>
         <tr>
           <th>指数代码</th>
           <th>指数名称</th>
