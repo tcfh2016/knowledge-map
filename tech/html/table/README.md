@@ -56,7 +56,30 @@ th, td {
 </table>
 ```
 
-
 参考：
 
 - [HTML Tables](https://www.w3schools.com/html/html_tables.asp)
+
+## 常见问题
+
+### 如何让表格在页面居中？
+
+已知的`text-align: left;`都是让表格里面的文字如何在单元格里面对齐，但如何让表格在页面显示的时候居中呢？
+
+```
+margin-left: auto;
+margin-right: auto;
+```
+
+参考：
+
+- [Center-align a HTML table](https://stackoverflow.com/questions/14073188/center-align-a-html-table)
+
+
+### 如何让其他元素，比如article在页面居中显示呢？
+
+也可以像上面表格那样设置。
+
+参考：
+
+- [Centering an article tag](https://stackoverflow.com/questions/32042449/centering-an-article-tag/32042656)
