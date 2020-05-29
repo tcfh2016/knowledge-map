@@ -44,9 +44,9 @@ T const& max(T const&a, T const&b)
 
 但是，如果我们使用`max('a', 'b')`的时候，那么如上的模板函数会产生出不同于`int max(int, int)`的实例。
 
-## 注意事项
+## 常见问题
 
-1.调用重载函数的时候的结果可能与该重载函数在此时是否可见有关。
+### 1.调用重载函数的时候的结果可能与该重载函数在此时是否可见有关。
 
 ```
 template <typename T>
@@ -67,6 +67,20 @@ int const& max(int const&a, int const&b)
 }
 ```
 
-### 1.
+### 2.编译错误“explicit specialization in non-namespace scope”
+
+编写代码的时候出现这个错误，查找之下可能的原因有两个：
+
+- gcc不允许在class内部进行函数模板的全特化
+- gcc在class内部进行函数模板全特化必须要以class进行特化为前提，这是gcc的一个问题，在C++17之后修复。
+
+我的问题里并不是在模板类里面全特化成员函数，而是普通类。因此，只能按照第一种思路去解决，替代方案是将“函数全特化”修正为“重载函数模板”。
+
+参考：
+
+- [Explicit specialization in non-namespace scope [duplicate]](https://stackoverflow.com/questions/3052579/explicit-specialization-in-non-namespace-scope)
+- [C++ syntax for explicit specialization of a template function in a template class?](https://stackoverflow.com/questions/2097811/c-syntax-for-explicit-specialization-of-a-template-function-in-a-template-clas)
+- [Explicit specialization in non-namespace scope does not compile in GCC](https://stackoverflow.com/questions/49707184/explicit-specialization-in-non-namespace-scope-does-not-compile-in-gcc)
+
 
 ### 2.
