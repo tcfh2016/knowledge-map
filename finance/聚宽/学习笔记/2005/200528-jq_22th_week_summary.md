@@ -1,3 +1,61 @@
+# 聚宽学习周记二二：详解@云帆的“高频因子探索——动量交易”
+
+本周将ETF投资参考日报发布到模拟交易，这样以后就能收到每个交易日之后的ETF还有指数的运行状态了，尽管模拟交易有一定的延时，今天凌晨3点才能拿到前天收盘时候的内容，但这对于ETF定投来说是没有问题的，它本身并不需要频繁的交易，所以是适用的。
+
+上周制定的计划里面，我又要开始学习聚宽社区2019年的精选文章了。由于我在打算着怎么将当前的学习和之前的学习积累起来，所以选择了一篇与交易直接有关的文章，即@云帆的[高频因子探索——动量交易](https://www.joinquant.com/view/community/detail/22472)。脑中所抱有的期望是在接触一些交易上的算法后可以将这段时间对于指数的理解结合起来，这样就可以尝试编写策略了。
+
+## 代码解释
+
+```
+def get_tradeday_list(start, end, frequency=None, count=None):
+    '''
+    获取日期列表
+    input:
+    start:str or datetime,起始时间，与count二选一
+    end:str or datetime，终止时间
+    frequency:
+        str: day,month,quarter,halfyear,默认为day
+        int:间隔天数
+    count:int,与start二选一，默认使用start
+    '''
+    if isinstance(frequency, int):
+        all_trade_days = get_trade_days(start, end)
+        trade_days = all_trade_days[::frequency]
+        days = [datetime.datetime.strftime(i, '%Y-%m-%d') for i in trade_days]
+        return days
+
+    if count != None:
+        df = get_price('000001.XSHG', end_date=end, count=count)
+    else:
+        df = get_price('000001.XSHG', start_date=start, end_date=end)
+    if frequency == None or frequency == 'day':
+        days = df.index
+    else:
+        df['year-month'] = [str(i)[0:7] for i in df.index]
+        if frequency == 'month':
+            days = df.drop_duplicates('year-month').index
+        elif frequency == 'quarter':
+            df['month'] = [str(i)[5:7] for i in df.index]
+            df = df[(df['month'] == '01') | (df['month'] == '04') | (df['month'] == '07') | (df['month'] == '10')]
+            days = df.drop_duplicates('year-month').index
+        elif frequency == 'halfyear':
+            df['month'] = [str(i)[5:7] for i in df.index]
+            df = df[(df['month'] == '01') | (df['month'] == '06')]
+            days = df.drop_duplicates('year-month').index
+    trade_days = [datetime.datetime.strftime(i, '%Y-%m-%d') for i in days]
+    return trade_days
+```
+
+这个函数的目的在于按照不同的频率获取日期列表，它同时支持按照数字的形式和按照单词的形式获取：一、按数字的形式，即按间隔x个交易日；二、按单词的形式，即按天、月、季度、半年。
+
+注意这两种形式的异同，它们两者的相同之处都是基于交易日，而不是单纯的天数。但是，按数字的形式虽然看起来更灵活，但是没有办法按照自然月、季度、半年来获取制定日期，这也是两者需要同时存在的地方。
+
+对于如上代码的理解需要三方面的知识：
+
+- 聚宽提供的服务函数`get_trade_days`的作用，这个我在前面最开始的周记里面每次都讲解，这里不重复了；
+- Python时间服务函数库`datetime`的`strftime`方法的作用。
+- Python数据处理函数库`pandas`里二维数据表DataFrame的基础知识，首先需要知道索引(index)的概念，其次要知道DataFrame的条件选择表达式，还有`drop_duplicates()`。
+
 
 前面两天的测试数据，有误：
 
