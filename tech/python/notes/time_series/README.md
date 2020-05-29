@@ -107,6 +107,15 @@ fmt = '%Y%m%d%H%M%S.%f'
 time_tuple = dt.datetime.strptime(str(f), fmt)
 ```
 
+`strftime(format)`是干啥的？它实际上是`strptime(date_string, format)`的逆运算，用来将一个datetime对象转换为字符串类型，比如：
+
+```
+date = dt.datetime.today().date()
+print(date)
+
+fmt = '%Y%m%d'
+print(date.strftime(fmt))
+```
 
 参考：
 

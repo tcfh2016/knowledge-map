@@ -296,6 +296,22 @@ del df['newdata']
 del df.newdata # 会提示错误。
 ```
 
+4.处理重复行
+
+函数`drop_duplicates()`用来移除重复行，原型如下：
+
+```
+DataFrame.drop_duplicates(subset=None, keep=’first’, inplace=False)
+```
+
+支持三个参数：subset某列或者列名的列表，表示参考那些列来对比重复；keep表示处理重复记录时保存哪一条；inplace表示将修改应用到原来的dataframe里。
+
+参考：
+
+- [pandas.DataFrame.drop_duplicates](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.drop_duplicates.html)
+- [Python | Pandas dataframe.drop_duplicates()](https://www.geeksforgeeks.org/python-pandas-dataframe-drop_duplicates/)
+
+
 ### 修改行、列
 
 1.修改整列
