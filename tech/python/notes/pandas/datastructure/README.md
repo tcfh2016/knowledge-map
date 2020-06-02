@@ -123,3 +123,4 @@ print(s.dropna(axis=1)) # 删除含有NaN的全部行
 - [pandas 修改 DataFrame 列名](https://www.cnblogs.com/hhh5460/p/5816774.html)
 - 《利用Python进行数据分析》
 - [object conversion](http://pandas.pydata.org/pandas-docs/stable/getting_started/basics.html#basics-object-conversion)
+- [Boolean indexing](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#boolean-indexing)
