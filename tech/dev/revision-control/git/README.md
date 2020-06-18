@@ -383,6 +383,14 @@ git reset --hard SHA-0
 假设本地修改在`git commit`之后的提交记录为SHA-1，它前一个提交为SHA-0，那么使用前一个命
 令可以将SHA-1的修改回退到`unstaged`状态。后一个命令会直接删除SHA-1的修改。
 
+如果要更新具体文件：
+
+```
+git reset HEAD -- file_path
+git reset HEAD^ -- file_path
+git checkout -- file_path
+```
+
 - 回退远端分支生效的修改
 
 远端分支已经生效的修改只能通过本地回退，再推送到远端。
@@ -391,6 +399,10 @@ git reset --hard SHA-0
 
 方式二：执行`git rebase -i SHA2`并删除掉SHA1的那次修改（注：SHA2是SHA1的前一个分支），
 再执行`git push`推送到远端。
+
+参考：
+
+- [Hard reset of a single file](https://stackoverflow.com/questions/7147270/hard-reset-of-a-single-file)
 
 
 ## 查阅修改记录 / git blame

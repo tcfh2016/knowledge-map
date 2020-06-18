@@ -1,3 +1,8 @@
+
+
+- [100个gdb小技巧](https://wizardforcel.gitbooks.io/100-gdb-tips/print-source-lines.html)
+- [GDB调试入门指南](https://zhuanlan.zhihu.com/p/74897601)
+
 2018年10月29日10:51:12
 gdb单步调试，发现无法打印当前变量的值，其他代码均能正常查看：
 No symbol "cellParams" in current context
