@@ -6,8 +6,21 @@ Python主要的内置类型可以分为数字、序列、和映射三大类，�
 
 - [数据类型](./type/README.md)
 - [作用域](./scope/README.md)
+- [文件](./file/README.md)
+- [序列](./sequence/README.md)
+- [集合](./set/README.md)
+- [映射](./map/README.md)
+- [自定义类型](./user-defined-type/README.md)
 
 # 常见问题
+
+## 多项赋值
+
+Python里面支持可以同时为多个变量赋值的操作：
+
+```
+x, y = 4, 2
+```
 
 ## 动态类型
 

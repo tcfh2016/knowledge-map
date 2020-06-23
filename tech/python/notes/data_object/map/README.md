@@ -1,4 +1,4 @@
-# 三、映射
+# 映射
 
 主要有字典，支持通过键进行索引。其中的列表和字典是可变的，而数字、字符串、元组是不可变的。
 
@@ -19,8 +19,13 @@
 ```
 color = {'red':1, 'blue':2, 'green':3}
 
+key_list = [1, 2, 3]
+value_list = ['simon', 'john', 'juye']
+mapping = zip(key_list, value_list)
+d = dict(mapping)
+
 color = {}
-color['red'] = 1
+color = dict()
 ```
 
 ## 字典的访问
@@ -74,3 +79,12 @@ for key in ks:
 for key in sorted(D):
   print(key, '=>', D[key])
 ```
+
+## 常见方法
+
+- a = b.copy()
+- a.clear()
+- key_list = a.keys()
+- value_list = a.values()
+- key in dict
+- key not in dict

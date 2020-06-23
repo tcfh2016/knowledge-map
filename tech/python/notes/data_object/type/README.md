@@ -1,4 +1,4 @@
-## 一、数字
+## 数字
 
 包括整数、浮点数、二进制、分数等，支持加法和乘法等操作。
 
@@ -18,3 +18,15 @@ Python提供了很多内置函数来进行类型转换：
   除，后者的策略比较特殊，即圆整到最接近的偶数。
 - 内置函数`hex(I)`、`oct(I)`和`bin(I)`把一个整数转换为对应进制的字符串。
 - 内置函数`int(str, base)`根据指定的进制把字符串转换为一个整数。
+
+
+## bytes
+
+`bytes`类提供了不可变的序列，里面的值必须是介于0~255的整书。但`bytearray`提供了一个可变的序列。常见方法：
+
+- bytes_array.count(byte)
+- bytes_array.index(byte)
+- bytes_array.append(byte)
+- bytes_array.remove(byte)
+- bytes_array.insert(index, byte)
+- bytes_array.pop(byte)
