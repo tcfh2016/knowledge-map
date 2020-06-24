@@ -60,3 +60,15 @@ C:.
 
 *文件名后缀是可以从import语句中省略的，Python会选择在搜索路径中第一个符合导入文件名的文
 件，它既可以是源代码文件x.py、字节码文件x.pyc、目录x或者其他编译扩展模块。*
+
+如果你要import的模块不在搜索路径中，可以将其添加到sys.path里面。或者使用`os.chdir(target_directory)`切换新的工作目录。
+
+```
+import os
+os.environ['PYTHONPATH'] #默认的路径
+
+import sys
+sys.path # Python的搜索路径
+sys.path.append(target_directory)
+
+```

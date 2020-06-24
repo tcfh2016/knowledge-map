@@ -58,7 +58,27 @@ True。
 
 ## `zip()`
 
-zip()根据传入的数据返回一系列可以迭代的元组。
+zip()根据传入的数据返回一系列可以迭代的元组。比如，如下代码将两个列表组合成多个元组，通常用来构造字典数据（`d = dict(zip(keys, values))`）：
+
+```
+keys = range(1, 5)
+values = range(10, 41, 10)
+
+tuple_list = zip(keys, values)
+print(tuple_list)
+print([pair for pair in tuple_list])
+# 输出 [(1, 10), (2, 20), (3, 30), (4, 40)]
+```
+
+同时通过`*zip`可以进行unzip/unpack的操作，比如：
+
+```
+unzip_list = zip(*zip(keys, values))
+print(unzip_list)
+print([pair for pair in unzip_list])
+
+# 输出 [(1, 2, 3, 4), (10, 20, 30, 40)]
+```
 
 参考：
 

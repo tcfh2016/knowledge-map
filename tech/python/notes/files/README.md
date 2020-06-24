@@ -43,7 +43,7 @@ if os.access("myfile", os.R_OK):
     return fp.read()
 ```
 
-## 文件读取
+## 读文件
 
 文件读取可以使用多个方法：
 
@@ -58,8 +58,22 @@ for line in open('myfile'):
   print(line, end='')
 ```
 
-writelines
+## 写文件
 
+```
+lines = (
+  'Line1: xxx',
+  'Line2: xxx'
+  )
+with open('written.txt', mode='w') as out_file:
+  out_file.write('hello')
+
+  out_file.writelines(lines)
+  out_file.flush() # 正式写入
+
+with open('written.txt', mode='a') as out_file:
+  out_file.write('hello')  
+```
 
 
 # 三、常见问题
