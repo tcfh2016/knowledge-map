@@ -1,10 +1,19 @@
-# 笔记索引
+## 数据结构
+
+Pandas的两个主要数据结构为 Series 和 DataFrame，它们为大多数应用提供了一种可靠的、易于
+使用的基础。
 
 - [数据结构](./datastructure/README.md)
-- [层次化索引](./hierarchical_index/README.md)
-- [csv处理](./csv/README.md)
+
+## 绘图
+
 - [绘图](./plot/README.md)
+
+## 其他
+
+- [csv处理](./csv/README.md)
 - [web相关](./web/README.md)
+
 
 # 学习材料
 
@@ -25,6 +34,44 @@
 - DataFrame.describe(include=['object']) ：显示非数据列的统计信息，包括count, uniq, top, freq
 
 # 常见问题
+
+
+# NaN (Not a Number) 处理
+
+pandas中缺失的数据项会被填写为 NaN，表示缺失或NA值。对于NA的处理包括如下几类：
+
+- 使用 isnull()，notnull() 来检查某个值是否为 NA。
+- 使用 fillna(), replace() 和 interpolate() 来替换 DataFrame 里面的所有 NA。
+- 使用 dropna() 将包含有 NA的行和列删除。
+
+## 滤除缺失数据：dropna(criteria)
+
+对于一个 Series, dropna返回一个仅含非空数据和索引值的 Series:
+
+```
+from pandas import Series, DataFrame
+import pandas as pd
+import numpy as np # NaN 在numpy里定义，因此使用NaN需要先import numpy。
+
+s = Series([1, np.NaN, 3.2, np.NaN, 7])
+print(s.dropna()) # 删除含有NaN的全部行
+print(s.dropna(axis=1)) # 删除含有NaN的全部行
+```
+
+然而，对于DataFrame调用 dropna的处理更复杂一些，因为它会默认丢弃所有包含缺失值的行。此
+时有两种调整方法：
+
+  - 传入`how = all`，丢弃全为NA的那些行；
+  - 传入`thresh=3`来设定丢弃的标准，表示行超过多少个NA时丢弃；
+  - 传入参数`axis=1`来指示对于列的操作。
+
+## 填充缺失数据：fillna(new_value)
+
+在大多数情况下，fillna方法是填充缺失数据的主要函数。
+
+  - df.fillna(0)将所有NaN更改为0。
+  - df.fillna({1:0.5, 2:-1})将对应列的NaN填充为对应的值，用`axis=1`来指示不同的轴。
+  - 传入`inplace=True`在现有对象上进行修改。
 
 ## 一、排序
 
@@ -50,49 +97,6 @@ df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
 参考：
 
 - [关于pandas的rank()函数的一点认识](https://zhuanlan.zhihu.com/p/87593543)
-
-
-## 二、替换
-
-1.将如下数据的day作为新的index如何处理？
-
-```
-   code         day          pe_ratio  pb_ratio
-4  601318.XSHG  2019-12-23    9.7785    2.4031
-3  601318.XSHG  2019-12-24    9.7982    2.4079
-2  601318.XSHG  2019-12-25    9.7368    2.3928
-1  601318.XSHG  2019-12-26    9.7948    2.4071
-0  601318.XSHG  2019-12-27    9.8284    2.4153
-```
-
-```
-df.set_index('day')
-```
-
-2.替换操作
-
-使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，
-后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将
-名为index的Series的值里包含'(万元)'替换为空。
-
-```
-index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
-```
-
-对DataFrme也是按照同样操作来进行替换，比如对于某列（对应Series）的操作：
-
-```
-df.column_name.str.replace('[', '').replace(']', '') # 将column_name列里的'[]'删除。
-df.column_name.str.replace('[\[\]]', '') # 将column_name列里的'[]'删除，使用正则。
-```
-
-*注：在pandas里面使用字符串的功能，需要通过添加`.str`来完成字符串函数的调用。*
-
-参考：
-
-- [Update pandas DataFrame with .str.replace() vs .replace()](https://stackoverflow.com/questions/38117016/update-pandas-dataframe-with-str-replace-vs-replace)
-- [pandas.Series.replace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html)
-- [pandas.Series.str¶](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
 
 
 ## 三、遍历

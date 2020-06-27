@@ -1,3 +1,22 @@
+
+## mean(), median(), min(), max()
+
+通过`axis`参数来控制平均值操作：
+
+```
+drinks.mean(axis=0) # 求取每列的平均值，求值的方向为从上到下
+drinks.mean(axis="index")
+
+drinks.mean(axis=1) # 求取每行的平均值，求值的方向为从左至右
+drinks.mean(axis="columns")
+```
+
+可以指定对应列来求取某列的最大值:
+
+```
+print(df["YY"].max())
+```
+
 ## DataFrame统计
 
 **1.如何统计DataFrame某列的和？**

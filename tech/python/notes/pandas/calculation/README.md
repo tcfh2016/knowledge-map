@@ -1,4 +1,42 @@
+# 常用函数
 
+## div()
+
+和NumPy数组一样，DataFrame和Series之间算术运算会以“广播(broadcasting)”的形式进行，且
+默认将Series的索引匹配到DataFrame的列，然后沿着行一直向下广播，也就是说以行为单位求取所
+有行的运算值。
+
+如果要匹配行且在列上进行广播，需要在调用算术运算函数时指定匹配的坐标轴，即 axis=0。
+
+```
+percent_items = percent_items[:].div(percent_items['营业收入(万元)'], axis=0)
+```
+
+## sort_values()
+
+对某列的series进行排序：
+
+```
+movies.title.order # 旧的排序方法，已经弃用。
+
+movies.title.sort_values()
+movies['title'].sort_values() # 默认以升序排列
+movies['title'].sort_values(ascending=False) # 以降序排列
+```
+
+对整个dataframe以某列为标准进行排序：
+
+```
+movies.order('title') # 旧的排序方法，已经弃用。
+
+movies.sort_values('title') # 升序排列，不会更改原有dataframe
+movies.sort_values('title', ascending=False) # 降序排列，不会更改原有dataframe
+movies.sort_values(['content_rating', 'duration']) # 以两列进行排序
+```
+
+## map(f)/applymap(f)
+
+map作用于 Series，applymap作用于 DataFrame，表示对每个元素应用函数f。
 
 ## pct_change()
 
