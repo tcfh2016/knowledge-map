@@ -88,9 +88,16 @@ print(df[condition])
 not supported between instances of 'datetime.date' and 'str'
 ```
 
+在pandas里面如果要使用字符串来过滤特定的行，那么必须要使用`.str`属性才可以：
+
+```
+df = df[df['code'].str.startswith('*ST')]
+```
+
 参考：
 
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
+- [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
 
 
 ### 获取多行多列

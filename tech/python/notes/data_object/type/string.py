@@ -1,6 +1,5 @@
 import re
 
-
 # strip方法
 s = 'http://www.python.org/'
 print(s.strip('htp:/'))

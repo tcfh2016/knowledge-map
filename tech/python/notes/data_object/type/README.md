@@ -30,3 +30,16 @@ Python提供了很多内置函数来进行类型转换：
 - bytes_array.remove(byte)
 - bytes_array.insert(index, byte)
 - bytes_array.pop(byte)
+
+## string
+
+- len(str)
+- min(str)
+- max(str)
+- str.count(ch)
+- str.find(ch)
+- str.startswith(sub_str)
+- str.endswith(sub_str)
+- str.upper()
+- str.lower()
+- str.split(ch)
