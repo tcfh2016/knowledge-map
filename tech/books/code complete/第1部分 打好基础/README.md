@@ -1,3 +1,13 @@
+## 章节信息
+
+- 第1章 欢迎进入软件构建的世界
+- 第2章 用隐喻来更充分地理解软件开发
+- 第3章 三思而后行：前期准备
+- 第4章 关键的“构建”决策
+
+## 阅读总结
+
+
 # 第1章 欢迎进入软件构建的世界 / Welcome to Software Construction
 
 ## 1.1 什么是软件构建 / What Is Software Construction
