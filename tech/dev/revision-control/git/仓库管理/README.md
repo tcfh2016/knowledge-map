@@ -1,43 +1,29 @@
-# Git使用笔记
+## 仓库克隆 / git clone
 
-
-## 常用操作快速索引
-
-- 编辑相关
+在克隆远程仓库时支持两种连接方式：SSH和HTTPS。
 
 ```
-> git checkout
-> git add
-> git add -u
-> git commit
-> git commit --amend
-> git reset
-> git rebase
-> git push
+git clone git@XXX.com:lte/remote_repository.git
+git clone https://XXX.com/remote_repository.git
 ```
 
-- 查看相关
+无论哪种方式均需进行用户名、密码验证，你可以通过配置SSH Key来简化验证过程。当连接可用，
+但是验证失败时，会提示如下失败。此时可以通过确认用户名密码是否正确以及添加SSH Key来解决。
 
 ```
-> git branch -vv
-> git status
-> git status -s
-> git diff
-> git show SHA-1
-> git show --stat SHA-1
-> git show SHA-1:file_name
-> git show SHA-1 -- file_name (need whole path)
-> git config --list
+Cloning into 'repository'...
+remote: HTTP Basic: Access denied
+fatal: Authentication failed for 'https://XXX.com/lte/repository.git/'
 ```
 
-- 其他
+如果当前系统屏蔽了git，那么你可能遇到如下错误：
 
 ```
-> git branch -m "old_branch_name" "new_branch_name"
+Cloning into 'repository'...
+fatal: unable to access 'https://XXX.com/lte/repository.git/': Failed to connect to github.com port 443: Timed out
 ```
 
-
-
+这个时候通常需要给git配置代理，由于当前并没有对应的仓库存在，因此必须设定全局配置：`> git config --global http.proxy http://222.222.222.222:8080`。
 
 
 ## 设置代理 / config proxy
@@ -180,126 +166,3 @@ git fetch new_remote_name trunk:remotes/new_remote_name/trunk
 
 如上的操作分为两步：首先，添加名称为`new_remote_name`的远端仓库，该仓库与目录`/home/lianbche/fddmac
 `关联；其次，将远端仓库的`trunk`分支与本地仓库`trunk`关联。
-
-
-## 远端分支与本地分支 / git branch
-
-在将一个远端仓库克隆到本地的时候，我们便拥有了同一个仓库的两份数据。一个仓库可以拥有多个
-分支，但在仓库最开始创建的时候仅有一个分支，并且默认远端分支名称为`origin`，本地分支默认
-名称为`master`。
-
-### 查看当前的分支使用如下命令
-
-```
-> git branch
-```
-
-如果要查看当前分支对应的远程分支用`git branch -vv`，即只需要加上`-vv`参数即可。
-
-### 将本地分支的改动推送到远端分支
-
-```
-> git push "remote branch" "local branch"
-```
-
-如果觉得每次都执行分支名称过于繁琐，那么可以通过`git push -u origin mater`来设定便捷记
-忆：在使用了`-u`参数之后，以后只需要键入`git push`即默认执行`git push -u origin mater`。
-
-
-### -f/--force
-
-下面的命令是什么含义？
-
-```
-git checkout -b adaptation/psint origin/adaptation/psint
-git checkout -b tmp
-git branch -f adaptation/psint 1548a61fb4cfe6a3ec1350a5ae79025bf2785cf1
-git rebase --onto tmp dd7b07ec357ced96a813471e75e7941e9671db5f~1 adaptation/psint -i
-```
-
-先基于远端分支创建本地分支，创建临时分支，再将本地分支reset到对应的SHA。这里之所以要创建
-临时分支是因为无法对当前分支进行force update。
-
-参考：
-
-- [Checkout a New Branch or Reset a Branch to a Start Point](https://guide.freecodecamp.org/git/git-checkout/)
-
-## 变基 / git rebase
-
-### onto
-
-将 client 中的修改合并到主分支并发布，但不合并 server 中的修改，因为它们还需要经过更全
-面的测试：`$ git rebase --onto master server client`。
-
-```
-git rebase --onto 672287559f8c9fc0de5d2c226669ddaf2380240b origin/trunk -i
-```
-
-参考：
-
-- [3.6 Git 分支 - 变基](https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA)
-
-
-## 取消修改 / undo
-
-我们将“已经生效”分为如下三种情况：一，执行`git add`之后暂存的修改；二，执行`git commit`
-之后在本地分支生效的修改；三，执行`git push`已经在远端分支生效的修改。
-
-- 回退`git add`暂存的修改
-
-```
-git reset "file or directory"
-```
-
-通常来说，已经改动但是没有执行`git add`的文件处于“unstaged”状态，执行`git add`之后便处
-于"staged"状态。因此，这里的前一个命令是将"staged"状态的文件回退到"unstaged"状态，处于
-“unstaged”状态的文件可以直接通过`git checkout`来还原。
-
-如果是add了新的文件，那么这个时候取消需要执行`git rm -r --cached "file_name"`。
-
-- 回退本地分支生效的修改
-
-```
-git reset SHA-0
-git reset --hard SHA-0
-```
-
-假设本地修改在`git commit`之后的提交记录为SHA-1，它前一个提交为SHA-0，那么使用前一个命
-令可以将SHA-1的修改回退到`unstaged`状态。后一个命令会直接删除SHA-1的修改。
-
-如果要更新具体文件：
-
-```
-git reset HEAD -- file_path
-git reset HEAD^ -- file_path
-git checkout -- file_path
-```
-
-- 回退远端分支生效的修改
-
-远端分支已经生效的修改只能通过本地回退，再推送到远端。
-
-方式一：执行`git revert SHA1`在本地回退修改，再执行`git push`推送到远端。
-
-方式二：执行`git rebase -i SHA2`并删除掉SHA1的那次修改（注：SHA2是SHA1的前一个分支），
-再执行`git push`推送到远端。
-
-参考：
-
-- [Hard reset of a single file](https://stackoverflow.com/questions/7147270/hard-reset-of-a-single-file)
-
-
-## 查阅修改记录 / git blame
-
-使用`git blame -L 160, +10 "filename"`来查看谁修改了代码，-L参数是指定开始行和结束行。
-使用`git blame -L10,+1 febdcdfg^ -- "filename"`来blame前一个版本。
-
-## 储藏 / git stash
-
-使用 `git stash`储藏当前修改，用`git stash list`查看所有的储藏，用`git stash apply stasch@{2}`
-来指定应用哪一个储藏，如果不指定默认最近的储藏。
-
-## 参考
-
-- [透過rebase -i, reset, revert還原某個commit的方法](http://rubyist.marsz.tw/blog/2012-01-17/git-reset-and-revert-to-rollback-commit/)
-- [Git blame — prior commits?](https://stackoverflow.com/questions/5098256/git-blame-prior-commits)
