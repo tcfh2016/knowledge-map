@@ -94,6 +94,23 @@ not supported between instances of 'datetime.date' and 'str'
 df = df[df['code'].str.startswith('*ST')]
 ```
 
+如果我们想选取所有列均匹配某种条件的所有行的数据，参考[](https://stackoverflow.com/questions/32731498/how-to-select-cells-greater-than-a-value-in-a-multi-index-pandas-dataframe)可以找到方案，即使用`.all(axis=1)`：
+
+```
+In [9]: df
+Out[9]:
+   A  B  C
+0  1  2  3
+1  3  4  5
+2  3  1  4
+3  1  2  1
+
+In [11]: df[(df <= 2).all(axis=1)]
+Out[11]:
+   A  B  C
+3  1  2  1
+```
+
 参考：
 
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
