@@ -24,6 +24,15 @@ df = pd.DataFrame(data)
 *注：在聚宽上测试发现字典的值可以是Series，这样创建出来的DataFrame会自动以Series里面所
 携带的index做为该DataFrame的index。*
 
+在使用字典来创建dataframe的时候有一个隐藏条件，也既是它默认字典的key-value为dataframe的列，也即是key为dataframe的column名，这个时候字典的value里面的元素个数要>1。否则会出现"ValueError: If using all scalar values, you must pass an index"这样的错误。
+
+这个问题在[Constructing pandas DataFrame from values in variables gives “ValueError: If using all scalar values, you must pass an index”](https://stackoverflow.com/questions/17839973/constructing-pandas-dataframe-from-values-in-variables-gives-valueerror-if-usi)里面有讨论，而解决方法是可以先创建Series，再转换为dataframe。
+
+```
+data = {'a': 1, 'b': 2}
+pd.Series(data).to_frame()
+```
+
 
 ### 3.直接以SQL数据库、CSV、Excel文件做为数据源来创建它们
 

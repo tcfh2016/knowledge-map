@@ -39,3 +39,12 @@ obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'], fill_value=0)
 ```
 df.set_index('day')
 ```
+
+## 获取索引为 list
+
+在[Get row-index values of Pandas DataFrame as list? [duplicate]](https://stackoverflow.com/questions/18358938/get-row-index-values-of-pandas-dataframe-as-list)找到了答案：
+
+```
+df.index.values.tolist() #ndarray
+list(df.index.values)
+```
