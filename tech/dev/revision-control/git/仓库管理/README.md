@@ -49,17 +49,33 @@ fatal: unable to access 'https://XXX.com/lte/repository.git/': Failed to connect
 以及`git commit`等操作都是针对“local repository”，要让远端的同步这些修改那么就要用到
 `git push`操作。
 
-- 查看`remote repository`
+**添加**
+
+执行git clone命令的时候会自动添加远端仓库，我们可以使用`git remote add <shortname> <url>`手动添加。添加的远端仓库时不仅支持URL还支持相同服务器的目录寻址，比如：
 
 ```
-> git remote -v
+git remote add new_remote_name /home/lianbche/fddmac
+git fetch new_remote_name trunk:remotes/new_remote_name/trunk
 ```
 
-- 添加`remote repository`
+如上的操作第一步添加名称为`new_remote_name`的远端仓库，该仓库关联的是相同服务器的目录`/home/lianbche/fddmac`。第二步是将远端仓库的`trunk`分支与本地仓库`trunk`分支关联（*注意“仓库”和“分支”是不同的*）。
+
 
 ```
-> git add "repository address"
+git remote rename pb paul
+git remote remove paul
 ```
+
+**查看**
+
+查看remote repository可以结合下面两个命令使用即可，第一个命令查看所有的remote，第二个是查看某个remote的详细信息。
+
+```
+git remote -v
+git remove show <remote>
+```
+
+- [](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
 
 ## 原始仓库、远端仓库与本地仓库 / git fork
 
@@ -154,15 +170,3 @@ Original contents retained as /home/lianbche/.ssh/known_hosts.old
 
 - [ssh-keygen 维基百科](https://zh.wikipedia.org/wiki/Ssh-keygen)
 - [ssh-keygen OpenBSD](http://man.openbsd.org/OpenBSD-current/man1/ssh-keygen.1#NAME)
-
-## 添加远端仓库
-
-在添加远端仓库时不仅支持URL还支持相同服务器的目录寻址，比如：
-
-```
-git remote add new_remote_name /home/lianbche/fddmac
-git fetch new_remote_name trunk:remotes/new_remote_name/trunk
-```
-
-如上的操作分为两步：首先，添加名称为`new_remote_name`的远端仓库，该仓库与目录`/home/lianbche/fddmac
-`关联；其次，将远端仓库的`trunk`分支与本地仓库`trunk`关联。
