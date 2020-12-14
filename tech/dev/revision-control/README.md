@@ -28,3 +28,5 @@
         name = xxx
         email = xxx@gmail.com
 ```
+
+参考：[what does this message mean? more than one branch.<name>.remote](https://stackoverflow.com/questions/6667244/what-does-this-message-mean-more-than-one-branch-name-remote)
