@@ -152,6 +152,8 @@ git checkout -- file_path
 
 ## 查阅修改 / git diff
 
+1）两个版本之间的修改
+
 先从一个简单的例子开始，比如我们想查看两个版本之前的修改，但是只想查看修改涉及到的文件列表：
 
 ```
@@ -176,6 +178,11 @@ git log --pretty=%h-%ad-%s SHA-OLD SHA-NEW --name-only path_from_curr_directory 
 
 参考：https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2#log_options
 
+2）某个commit的修改
+
+```
+git show SHA-1 -- path
+```
 
 ## 查阅修改记录 / git blame
 
