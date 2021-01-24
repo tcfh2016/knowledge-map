@@ -22,6 +22,8 @@ df[['Age','Name']] # 注意多列
 
 一次性指定多个列的名称可以同时选中两列，比如如上例子里面`df['Name', 'Age']`。
 
+那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。
+
 ### 获取行
 
 行的选取有三种方式：`loc`方法、切片和布尔索引（Boolean indexing）。

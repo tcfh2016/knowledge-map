@@ -34,3 +34,36 @@ class Manager(Person):
   def giveRaise(self, percent, bonus=.10):
     Person.giveRaise(self, percent + bonus)
 ```
+
+### 3.如何获取超类中的数据成员？
+
+当前代码里面使用了一个基本的设计模式，需要在子类中访问父类的数据成员。其实可以向在访问子类成员一样访问父类成员，比如如下代码：
+
+```
+class Person(object):
+    def __init__(self):
+        self.name = "{} {}".format("First","Last")
+
+class Employee(Person):
+    def introduce(self):
+        print("Hi! My name is {}".format(self.name))
+```
+
+但是如果我需要在子类和父类里面都使用
+
+```
+class Car(object):
+    condition = "new"
+
+    def __init__(self, model, color, mpg):
+        self.model = model
+        self.color = color
+        self.mpg   = mpg
+
+class ElectricCar(Car):
+    def __init__(self, battery_type, model, color, mpg):
+        self.battery_type=battery_type
+        super(ElectricCar, self).__init__(model, color, mpg)
+```
+
+- [](https://stackoverflow.com/questions/19205916/how-to-call-base-classs-init-method-from-the-child-class)
