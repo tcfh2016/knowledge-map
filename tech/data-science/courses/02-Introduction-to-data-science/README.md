@@ -48,3 +48,39 @@ us_2014 = us_df.loc[us_df['A'] == 2014, :]
 us_2014_sorted = us_2014.sort_values('B', ascending = False)
 us_2014_sorted.iloc[0:5]
 ```
+
+### 6. 探索性数据分析（Exploratory Data Analysis, EDA）
+
+在开始探索性数据分析之前需要知道要分析的数据类型，通常有三种类型的数据：Nominal data（名义数据）、Ordinal data（序数数据）、Numerical data（数值数据）：
+
+- Nominal data
+  - political party
+  - computer operating system
+  - gender
+  - languages spoken
+- Ordinal data
+  - clothing size
+  - level of education
+  - yelp rating
+- Numerical data
+  - Height
+  - Weight
+  - Price
+  - Distance
+  - Blood pressure
+
+### 7.数据清洗
+
+数据清洗是检查并纠正数据集里面损坏或者不正确的记录，它可能比较耗时但很重要。其包括的项目可能包括丢失的值、格式、结构、复杂的值、单位转换、量度的解释。
+
+在进行数据清洗之前需要了解数据集里面是否有丢失的值，这些丢失的值是否被填写过了，哪些数据是人输入的。检查丢失的值可以通过`df.isnull()`来查看整体情况，再用`df.isnull().any(axis = 1)`查看哪些行存在缺失数据，之后用`df[missing_rows]`可以查看有缺失数据所在行的所有数据。
+
+### 8.数据可视化
+
+Python里面进行数据可视化常用的函数库有matplotlib, seaborn。在展示定性数据的时候通常使用条形图，展示定量数据常用直方图、离散图。
+
+### 9.推理
+
+统计推理是使用数据分析得到潜在的概率分布，比如选举预测和测试分数预测。可能运用到的统计方法包括假设检验和置信区间。
+
+数据收集往往不是很可靠，所以要先使用假设检验来判断数据是随机扰动还是反映了真实现象。
