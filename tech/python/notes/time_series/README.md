@@ -59,6 +59,18 @@ now = datetime(year, month, day)
 
 # 常见问题
 
+## 如何计算两个日期之间相差的天数？
+
+```
+import datetime
+
+date = datetime.date(2020, 1, 1)
+today = datetime.date.today()
+diff =  today - date
+
+print(diff.days)
+```
+
 ## 如何获得今天的日期 ？
 
 获取日期需要使用日期对象`date`，可以通过`datetime.date.today()`获得今天的日期。注意，

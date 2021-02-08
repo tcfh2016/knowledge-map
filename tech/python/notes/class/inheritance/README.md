@@ -49,7 +49,7 @@ class Employee(Person):
         print("Hi! My name is {}".format(self.name))
 ```
 
-但是如果我需要在子类和父类里面都使用
+但是如果我需要在子类和父类里面都使用：
 
 ```
 class Car(object):
