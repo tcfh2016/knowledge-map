@@ -6,3 +6,5 @@
 参考：
 
 - [](https://vi.stackexchange.com/questions/93/is-there-a-way-to-count-the-number-of-occurrences-of-a-word-in-a-file)
+
+## 在窗口打开其他文件
