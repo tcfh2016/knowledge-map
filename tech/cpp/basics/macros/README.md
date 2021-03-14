@@ -4,7 +4,7 @@
 
 - #if: `#if constant-expression newline`
 - #ifdef: `#ifdef identifier newline`
-- #ifndef: `#ifdef identifier newline`
+- #ifndef: `#ifndef identifier newline`
 - #else: `#else newline`
 - #elif: `#elif constant-expression newline`
 - #endif: `#endif newline`
