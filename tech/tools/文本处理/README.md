@@ -20,3 +20,7 @@
 find directory/ -name "*.hpp"|xargs grep -n getRise()
 
 ```
+
+find directory/ -name "CCSEarlyConfig.xml"|xargs grep -n "<tag name="ccs.service.aamem.hpdmpool.id" type="u32">26</tag>"
+
+<tag name="ccs.service.aamem.hpdmpool.id" type="u32">26</tag>
