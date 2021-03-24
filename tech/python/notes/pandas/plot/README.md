@@ -1,4 +1,4 @@
-# DataFrame.plot / 画图
+## DataFrame.plot / 画图
 
 pandas 为 DataFrame 提供了专门的绘图函数`plot`，支持多种参数。
 
@@ -50,134 +50,16 @@ ax.right_ax.set_ylabel('AB scale')
 
 使用其中的`title`参数。
 
-# 常见问题
+## 常见问题
 
-## pandas保存图片以inch为单位，但网页中以像素为单位，如何处理？
+- [x轴显示](./x_axis/README.md)
+- [y轴显示](./y_axis/README.md)
+- [legend显示](./legend/README.md)
+- [subplot问题](./sub_plot/README.md)
 
 
+### pandas保存图片以inch为单位，但网页中以像素为单位，如何处理？
 
 参考：
 
 - [Specifying and saving a figure with exact size in pixels](https://stackoverflow.com/questions/13714454/specifying-and-saving-a-figure-with-exact-size-in-pixels)
-
-## 去掉legend中显示的index名称
-
-如果dataframe里面的index名称不为空，这在我们选取dataframe中某列做为index的时候是
-很常见的，但在画图时该index的名称也会展示出来。
-
-![](legend_shown_index_name.PNG)
-
-一种方法是在画图的时候指定显示的legend来提代默认的展示规则（展示dataframe中所有列名）
-
-```
-value_plot.legend(value_items.columns)
-```
-
-![](legend_shown_index_name_correct.PNG)
-
-参考：
-
-- [Modify the legend of pandas bar plot](https://stackoverflow.com/questions/33149428/modify-the-legend-of-pandas-bar-plot)
-
-## X轴标签部分隐藏的问题
-
-使用默认的显示方式有些时候无法显示出xlabel的所有内容，比如：
-
-![](xlabel_was_hided.png)
-
-之前尝试解决过一次但是没有成功，这次经过多次搜索在StackOverflow上找到答案，即在`show()`
-之前调用`plt.tight_layout()`，但这样整幅图的效果可能会比较怪异，比如被挤压：
-
-![](tight_layout.png)
-
-
-可以通过以下方法调整：
-
-- 调整 xlabel，避免使用太长、太多的展示。
-- 通过`figsize`调整整幅图的大小。
-- 通过`plt.subplots_adjust`来调整图形显示的边缘设置。
-
-画出图形时如果觉得周围留空过大的问题，也可以通过`subplots_adjust`来调整显示，之前一直在
-针对dataframe的plot接口里面查找，没有找到调整方案。
-
-```
-plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.1, bottom=0.22, right=0.96, top=0.96)
-```
-
-参考：
-
-- [xlabel and ylabel out of plot region, cannot show completely in the figure
-](https://stackoverflow.com/questions/29767386/xlabel-and-ylabel-out-of-plot-region-cannot-show-completely-in-the-figure)
-- [How do you change the size of figures drawn with matplotlib?](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
-
-
-## 设置Y轴为百分比样式
-
-```
-vals = ax.get_yticks()
-ax.set_yticklabels(['{:,.2%}'.format(x) for x in vals])
-```
-
-参考：
-
-- [Format y axis as percent](https://stackoverflow.com/questions/31357611/format-y-axis-as-percent)
-
-## 如何调整横坐标样式以显示更多项目
-
-如下图，怎么调整横坐标标签显示样式，支持更多的显示。
-
-![](low_x_item_number.png)
-
-```
-asset_plot = self.asset_df.plot()
-asset_plot.set_xticks(range(len(self.asset_df.index)))
-asset_plot.set_xticklabels(self.asset_df.index, rotation=90)
-plt.show()
-```
-
-通过`set_xticks`设定所有的tick数，另外通过`set_xticklabels`设定标签的显示样式。
-
-参考：
-
-- [How to plot a pandas multiindex dataFrame with all xticks](https://stackoverflow.com/questions/21281322/how-to-plot-a-pandas-multiindex-dataframe-with-all-xticks)
-- [Matplotlib:: Not Showing all x-axis data frame variable](https://stackoverflow.com/questions/32572419/matplotlib-not-showing-all-x-axis-data-frame-variable?rq=1)
-
-## Subplot
-
-DataFrame.plot()里的`subplots`参数是对每列的数据分开展示，不属于不同DataFrame的展示方法。
-
-```
-import matplotlib.pyplot as plt
-
-fig, axes = plt.subplots(nrows=2, ncols=2)
-
-df1.plot(ax=axes[0,0])
-df2.plot(ax=axes[0,1])
-...
-```
-
-如果仅绘制1X2, 或者2X1的子图，那么索引ax的方式不一样：
-
-```
-fig, axes = plt.subplots(nrows=1, ncols=2)
-
-df1.plot(ax=axes[0])
-df2.plot(ax=axes[1])
-```
-
-参考：
-
-- [How can I plot separate Pandas DataFrames as subplots?](https://stackoverflow.com/questions/22483588/how-can-i-plot-separate-pandas-dataframes-as-subplots)
-- [Stuffing a pandas DataFrame.plot into a matplotlib subplot](https://stackoverflow.com/questions/21962508/stuffing-a-pandas-dataframe-plot-into-a-matplotlib-subplot/21967899#21967899)
-
-# 3D 绘图
-
-3D绘图的时候分别将三个坐标轴的数据传给绘图函数，比如plot3D(), scatter3D,plot_trisurf()。
-
-根据[matplotlib 3d scatter plot date](https://stackoverflow.com/questions/42677160/matplotlib-3d-scatter-plot-date)这篇问答看起来3D在绘图的时候对于日期的格式需要进行特别的处理，即只能够通过label的形式附加上去。
-
-参考：
-
-- [Three-Dimensional Plotting in Matplotlib](https://jakevdp.github.io/PythonDataScienceHandbook/04.12-three-dimensional-plotting.html)
-- [3D 数据](https://morvanzhou.github.io/tutorials/data-manipulation/plt/3-5-3d/)
-- [An easy introduction to 3D plotting with Matplotlib](https://towardsdatascience.com/an-easy-introduction-to-3d-plotting-with-matplotlib-801561999725)
