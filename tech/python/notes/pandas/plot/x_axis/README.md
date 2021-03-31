@@ -30,6 +30,19 @@ ax.set_xticklabels(df['statDate'])
 
 ![](./xaxis_with_ticks.png)
 
+但实际上上面的图还有瑕疵，因为坐标轴上的tick label仅仅显示了`2014-12-31`到`2019-12-31`，漏掉了`2013-12-31`，并且位置偏移得也不对。
+
+尝试添加了`ax.set_xticks(xticks)`才纠正过来，不知道什么原因。
+
+```
+ax = df.plot(figsize=(20, 10), x='statDate', kind='line')
+xticks = range(0, len(df.index), 1)
+ax.set_xticks(xticks)
+ax.set_xticklabels(df['statDate'])
+```
+
+![](./xaxislabel_with_ticks.png)
+
 ### X轴标签部分隐藏的问题
 
 使用默认的显示方式有些时候无法显示出xlabel的所有内容，比如：
