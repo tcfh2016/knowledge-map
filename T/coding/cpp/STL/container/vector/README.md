@@ -36,7 +36,6 @@ vector<int> deck = { 0, 1, 2, 3, 4, 5 }; //基于初始化列表创建（C++11�
 - c.size() 当前元素个数
 - c.max_size() 最大可能的元素个数
 - c.capacity() 不进行内存重分配下最大的元素个数
-- c.reserve() 预留容量
 - c[idx]/c.at(idx) 后者提供范围检查，超出时抛出`out_of_range`异常
 - c.front()/c.back() 第一个/最后一个元素
 
@@ -44,9 +43,17 @@ vector<int> deck = { 0, 1, 2, 3, 4, 5 }; //基于初始化列表创建（C++11�
 ### *修改*
 
 - c = c2/rv/initlist 赋值，调用构造器
+- c.reserve() 预留容量
+- c.resize(num) 改变当前元素个数，如果新增了元素那么调用默认构造器进行初始化
 - c.assign(n, elem)/c.assign(beg, end)/c.assign(initlist) 赋值，调用构造器
 - c.push_back(elem)/c.emplace_back(args...) 后面是C++11新接口，不需要进行elem拷贝所以更高效
 
+
+### vector<bool>
+
+`vector<bool>`尝试着从节省内存空间的角度来实现bool类型的vector，它为每位bool使用1个bit，而不像常规的1个byte。不过，由于C++最小的寻址单位是1个byte，所以这种实现在操作引用和迭代器上会有着种种限制。
+
+如果你仅仅需要使用固定大小的bit位，那么使用`bitset`就够了。
 
 ## Q&A
 
@@ -58,3 +65,7 @@ std::vector并没有std::array自带的`fill()`函数，但是我们可以直接
 template< class ForwardIt, class T >
 void fill( ForwardIt first, ForwardIt last, const T& value );
 ```
+
+2. 将vector当作C风格数组一样使用
+
+一个比较重要的一点是用`v.data()`来替代vector的首地址。
