@@ -14,6 +14,6 @@ for_each(coll.begin(), coll.end(), square)
 // after c++11
 for (auto &elem : coll)
 {
-  elem = elem *elem
+  elem = elem *elem;
 }
 ```

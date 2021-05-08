@@ -65,3 +65,14 @@ class Container
   Mocker mocker;
 }
 ```
+
+## Q&A
+
+1. 为什么`explict`构造器无法在初始化列表里面进行初始化？
+
+```
+```
+
+参考：
+
+- [Explicit constructor and initialization with std::initializer_list](https://stackoverflow.com/questions/30142484/explicit-constructor-and-initialization-with-stdinitializer-list)
