@@ -29,7 +29,6 @@ vector<int> deck({ 0, 1, 2, 3, 4, 5 }); //基于初始化列表创建（C++11）
 vector<int> deck = { 0, 1, 2, 3, 4, 5 }; //基于初始化列表创建（C++11）
 ```
 
-
 ### *读取*
 
 - c.empty()
@@ -46,8 +45,16 @@ vector<int> deck = { 0, 1, 2, 3, 4, 5 }; //基于初始化列表创建（C++11�
 - c.reserve() 预留容量
 - c.resize(num) 改变当前元素个数，如果新增了元素那么调用默认构造器进行初始化
 - c.assign(n, elem)/c.assign(beg, end)/c.assign(initlist) 赋值，调用构造器
-- c.push_back(elem)/c.emplace_back(args...) 后面是C++11新接口，不需要进行elem拷贝所以更高效
 
+
+### *插入或删除*
+
+- c.push_back(elem)/c.emplace_back(args...) 后面是C++11新接口，不需要进行elem拷贝所以更高效
+- c.erase(pos) 删除pos指向的元素并返回该元素下一个元素的位置
+
+在vector中插入或者删除元素A均会影响指向元素A后面所有元素的引用、指针或者迭代器，如果插入时不甚导致内存重分配那么所有元素的引用、指针或者迭代器均会失效。
+
+另外，vector不提供针对特定元素值的删除操作，所以你通常需要结合算法来完成该种删除。
 
 ### vector<bool>
 
