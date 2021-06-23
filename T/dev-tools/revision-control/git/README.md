@@ -38,6 +38,12 @@
 
 ## 常见问题
 
+### remove untracked files
+
+本地的git仓库有时候因为编译会产生出一些untracked文件，怎么快速删除这些文件呢？
+
+使用`git clean -f`会移除所在目录下untrack的文件，但不包括目录，可以先用`git clean -n`查看哪些文件会被移除。
+
 ### Filename too long
 
 在切换分支的时候提示下面错误，原因在于Windows下面对文件名的长度有限制，配置`git config core.longpaths true`之后即可。
