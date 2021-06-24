@@ -1,6 +1,3 @@
-# 函数模板
-
-
 ## 定义模板函数
 
 函数模板提供了一种函数行为，该函数行为可以用多种不同的类型进行调用。定义的函数模板不会被编译成单个处理任何类型的函数，而是根据调用的实际情况产生出多个不同的函数（实体）。这里面用具体类型代替模板的过程成为“实例化(instantiation)”。
@@ -20,7 +17,7 @@ inline T const& max(T const& a, T const& b)
 
 模板函数使用的时候通常直接像普通函数一样调用即可，比如`max(1,2)`，此时编译器会根据调用时候实参的类型构造对应的函数示例。
 
-也可以直接指定特定的类型来显示地实例化函数模板，比如`max<double>(1.2, 2)`。
+也可以直接指定特定的类型来显示地实例化函数模板，比如`max<double>(1.2, 2)`，这样会对模板参数类型进行显示转换。*关键字：显示实例化*
 
 
 ## 重载函数模板
@@ -81,6 +78,3 @@ int const& max(int const&a, int const&b)
 - [Explicit specialization in non-namespace scope [duplicate]](https://stackoverflow.com/questions/3052579/explicit-specialization-in-non-namespace-scope)
 - [C++ syntax for explicit specialization of a template function in a template class?](https://stackoverflow.com/questions/2097811/c-syntax-for-explicit-specialization-of-a-template-function-in-a-template-clas)
 - [Explicit specialization in non-namespace scope does not compile in GCC](https://stackoverflow.com/questions/49707184/explicit-specialization-in-non-namespace-scope-does-not-compile-in-gcc)
-
-
-### 2.
