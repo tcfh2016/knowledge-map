@@ -45,6 +45,18 @@ T const& max(T const&a, T const&b)
 需要留意的是模板不允许自动类型转换，而普通函数则可以。如果我们使用`max('a', 42.7)`，因为这里分别传递了char和double类型，所以会调用非模板函数。
 
 
+## 非类型模板参数
+
+可以为函数模板定义非类型参数：
+
+```
+template<typename T, int VAL>
+T addValue(T const& x)
+{
+  return x + VAL;
+}
+```
+
 ## 常见问题
 
 ### 1.调用重载函数的时候的结果可能与该重载函数在此时是否可见有关。

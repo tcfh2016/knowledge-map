@@ -94,3 +94,16 @@ class Stack
 ```
 
 既可以`Stack<int> intStack`，又可以`Stack<double, std::deque<double>> doubleStack`。
+
+
+## 非类型模板参数
+
+模板参数不局限于类型，也可以将普通值作为模板参数。在使用的时候可以通过`Stack<int, 20> int20Stack;`来进行实例化。
+
+```
+template <typename T, int MAXSIZE>
+class Stack
+{
+  T elems[MAXSIZE];
+}
+```
