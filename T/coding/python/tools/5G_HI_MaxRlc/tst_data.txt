@@ -1,0 +1,5 @@
+receiver=0x12311104 cellId=1
+Control|benchmark info : EMStart 103798366,EMPreStart 103798556,EMPreEnd 103803043,EMSchStart 103803100,EMSchEnd 103807290,EMPostStart 103807331,EMPostEnd 103808452,total 10086,hasSib1 0,hasSibx 0,hascatmue 0
+xsfn=9250 ueCounter=0 ueSchCounter=0 prebookCounter=0 prebookSkipCounter=0 overruleCounter=0
+Control|benchmark info : EMStart 105027140,EMPreStart 105027324,EMPreEnd 105031587,EMSchStart 105031644,EMSchEnd 105035634,EMPostStart 105035675,EMPostEnd 105036567,total 9427,hasSib1 0,hasSibx 0,hascatmue 0
+xsfn=9251 ueCounter=0 ueSchCounter=0 prebookCounter=0 prebookSkipCounter=0 overruleCounter=0
