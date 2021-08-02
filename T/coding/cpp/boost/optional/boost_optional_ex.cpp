@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <boost/optional.hpp>
 
 boost::optional<int> convert(const std::string& text)
@@ -17,5 +18,6 @@ boost::optional<int> convert(const std::string& text)
 
 int main()
 {
+  std::cout <<"hello world." <<std::endl;
   return 0;
 }
