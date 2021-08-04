@@ -43,3 +43,13 @@ sysinfo.cpp:93:21: error: 'std::thread' has not been declared
 
 
 在cpp目录下面执行`g++ .\boost_optional_ex.cpp -o boost -I "C:\Program Files\boost\include\boost-1_75"`可以正常编译。不过配置ATOM还没有成功。
+
+之后解决了问题，原来在配置路径的时候有问题，正确的配置：`-IC:\boost\include\boost-1_75`
+
+![](./include-path-config-right.png)
+
+想当然错误的配置：`-I"C:\boost\include\boost-1_75"`
+
+![](./include-path-config-wrong.png.jpg)
+
+*需要注意的是对于空格可能会报错，比如`C:\Program Files\boost\include`这样也会有问题，还没有找到解决方法。*
