@@ -28,8 +28,7 @@ class Dialler
 
 ### npm与apm
 
-APM全称为 Atom Package Manager，为Atom的包管理器。它推荐使用命令`apm config`而非编辑
-~/.atom/.apmrc文件的形式来配置Atom。
+APM全称为 Atom Package Manager，为Atom的包管理器。它推荐使用命令`apm config`而非编辑~/.atom/.apmrc文件的形式来配置Atom。
 
 APM是包装了NPM来完成基于Atom的配置，Atom的包安装源自GitHub，而非npmjs.com。
 
@@ -84,8 +83,7 @@ npm ERR! A complete log of this run can be found in:
 npm ERR!     C:\Users\lianbche\AppData\Roaming\npm-cache\_logs\2019-03-11T07_11_55_788Z-debug.log
 ```
 
-之后尝试设置apm/npm的代理，但依然不成功，因此只能认定该库不再可用。之后下载另一款插件plantuml
-，将apm代理删除，进入目录之后执行`apm install`提示成功。
+之后尝试设置apm/npm的代理，但依然不成功，因此只能认定该库不再可用。之后下载另一款插件plantuml，将apm代理删除，进入目录之后执行`apm install`提示成功。
 
 ```
 C:\Users\lianbche\.atom\packages\plantuml  (plantuml@0.1.2)
@@ -100,17 +98,14 @@ Installing modules done
 
 ### PlantUml could not generate file
 
-通过命令行安装号PlantUml插件之后测试puml文件提示：
+通过命令行安装好PlantUml插件之后测试puml文件提示：
 
 ```
 PlantUml could not generate file.
 Please make sure PlantUml can write to location of original file.
 ```
 
-搜索之下发现相关问题寥寥，在将github库上所有问题列表阅读完之后也没有找到进一步思路，尤其
-对于其中提到的手动测试的方法觉得关键但不知道怎么操作。
-
-之后直接以关键词"plantuml"搜索发现有本地直接生成的方法。
+搜索之下发现相关问题寥寥，在将github库上所有问题列表阅读完之后也没有找到进一步思路，尤其对于其中提到的手动测试的方法觉得关键但不知道怎么操作。之后直接以关键词"plantuml"搜索发现有本地直接生成的方法。
 
 于是：
 
@@ -158,3 +153,5 @@ Verify 'PlantUML Jar' in settings.
 目录填写到如下setting里面的PlantUML Jar的地址栏里，再测试成功。
 
 ![](plantuml-preview-setpath.PNG)
+
+210816：最近一段时间没有使用plantuml，今天突然要画类图的时候再次碰到同样的提示，跑到`C:\Program Files (x86)\Java\jre1.8.0_201\lib\`看了一下，发现没有plantuml.jar这个文件。于是跑到[plantuml](http://plantuml.com/download)上去下载了这个文件，在拷贝到之前的`C:\Program Files (x86)\Java\jre1.8.0_201\lib\plantuml.jar`目录时才发现原来是因为java升级的关系，之前的"jre1.8.0_201"已经更换为“jre1.8.0_301”，所以路径和文件都变更了。
