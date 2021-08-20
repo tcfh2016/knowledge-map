@@ -1,0 +1,39 @@
+## crontab
+
+`cron`是linux系统里面的任务调度器，可以用来创建一些周期性执行的任务。在linux系统里面由`crond`这个服务来负责这些例程工作。这个服务即负责系统本身的例行性工作，也可以提供用户添加新的例行性工作（通过`crontab`命令）。
+
+由于安全考虑，系统提供了`/etc/cron.allow`和`/etc/cron.deny`两个名单来提供对于用户的控制，只需要在其中添加用户名就可以允许或者拒绝对应用户使用crond服务。不同的用户使用了crontab之后改用户的执行任务都记录到`/var/spool/cron/username`里面，而crond服务执行的每项工作会记录到`/var/log/cron`里面。
+
+### 开始之前
+
+在设置任务之前我们需要先确保`crond`这个服务是否已经开启，这个时候可以通过`systemctl status crond`命令来查看服务的状态，当然还可以通过`systemctl enable crond`/`systemctl restart crond`来开启或者重启该项服务。
+
+```
+[lianb]$ systemctl status crond
+● crond.service - Command Scheduler
+   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2021-08-06 08:10:28 CST; 2 weeks 0 days ago
+ Main PID: 2207 (crond)
+   CGroup: /system.slice/crond.service
+           └─2207 /usr/sbin/crond -n
+[lianb]$
+
+```
+
+### 设置任务
+
+`crontab`的语法为`crontab [-u username] [-l|-e|-r]`，对应参数：
+
+- `-u` ：用来帮其他用户建立/移除crontab任务，仅root可用
+- `-e` ：编辑crontab的工作内容
+- `-l` ：查阅crontab的工作内容
+- `-r` ：移除所有的crontab内容，移除一项通过`-e`去编辑
+
+
+### 查看日志
+
+
+参考：
+
+- [第十五章、例行性工作排程(crontab)](http://linux.vbird.org/linux_basic/0430cron.php)
+- [How to enable logging for cron on Linux](https://www.techrepublic.com/article/how-to-enable-logging-for-cron-on-linux/)
