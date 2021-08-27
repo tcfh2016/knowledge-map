@@ -29,8 +29,12 @@
 - `-l` ：查阅crontab的工作内容
 - `-r` ：移除所有的crontab内容，移除一项通过`-e`去编辑
 
+`crontab -e`这个命令是针对用户设计的，它编辑的执行文件在`/usr/bin/crontab`，同时为每位用户创建对应的文件放在`/var/spool/cron`。而linux系统里面的系统性例行性工作对应的执行文件在`/etc/crontab`，系统默认每分钟去读取`/etc/crontab`和`/var/spool/cron`里面文件内容。
+
 
 ### 查看日志
+
+crontab针对每位用户会创建一个日志，存在于`/var/spool/mail`或者`/var/mail`。
 
 
 参考：
