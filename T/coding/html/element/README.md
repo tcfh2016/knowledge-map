@@ -1,4 +1,4 @@
-# Block or Inline
+## Block or Inline
 
 每个HTML元素的显示属性要么属于“块状级”，要么是“行内级”。
 
@@ -12,20 +12,20 @@
 - <blockquote>
 - <canvas>
 - <dd>
-- [<div>](./div.md)
+- [<div>](./div/README.md)
 - <dl>
 - <dt>
 - <fieldset>
 - <figcaption>
 - <figure>
-- [<footer>](./footer.md)
+- [<footer>](./footer/README.md)
 - <form>
 - <h1>-<h6>
-- [<header>](./header.md)
+- [<header>](./header/README.md)
 - <hr>
 - <li>
 - <main>
-- [<nav>](./nav.md)
+- [<nav>](./nav/README.md)
 - <noscript>
 - <ol>
 - <p>

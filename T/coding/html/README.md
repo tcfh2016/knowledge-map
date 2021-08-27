@@ -1,4 +1,4 @@
-# HTML
+## HTML
 
 HTML，全称“Hyper Text Markup Language”，是用来制作网页的标准标记语言。HTML由一系列由特定标签组成的元素构成，这些元素组成了整个网页的结构，也决定了浏览器以何种形式来展示它。
 
