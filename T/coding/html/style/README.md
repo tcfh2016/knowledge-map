@@ -60,4 +60,4 @@ CSS有三种使用方式：
 - 在<head>部分使用<style>元素。*注：<style>元素和元素里面的style属性是不一样的。*
 - 使用外部的CSS文件。
 
-详见[CSS](./css.md)
+详见[CSS](./css/README.md)
