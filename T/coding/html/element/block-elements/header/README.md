@@ -1,6 +1,6 @@
-# header
+## header
 
-header元素用来定义一些介绍性的内容，通常包括：
+`<header>`元素是HTML5里面引入，使用在`<body>`开头用来定义一些介绍性的内容，通常包括：
 
 - 一个或多个heading元素
 - Logo/icon
