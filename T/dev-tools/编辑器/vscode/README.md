@@ -28,3 +28,20 @@
 参考：
 
 - [Search features in Visual Studio Code](https://dev.to/codevault/search-features-in-visual-studio-code-2a0c)
+
+## Q&A
+
+1）Windows上链接linux服务器显示“Bad owner or permissions”
+
+在Windows上链接linux有如下错误提示：
+
+```
+PS C:\Users\lianbche> ssh lianbche@hzling105.china.nsn-net.net
+Bad owner or permissions on C:\\Users\\lianbche/.ssh/config
+```
+
+[解决方案](https://github.com/cmderdev/cmder/issues/1763)为修改文件的权限，在属性里面进行设置：`Properties -> Security -> Advanced -> Disable Inheritance -> Remove all inherited permissions from this object`。
+
+上一步设置之后会解决“Bad owner or permissions on”的问题，可以使用powershell直接ssh连接linux服务器，但是在vscode里面会提示新的错误：“EPERM: operation not permitted”，也就是在VsCode里面无法使用ssh连接服务器，其实答案也在上面解决方案的连接里面。
+
+因为上一步“Disable Inheritance”的设置将config文件的所有权限清楚，导致VsCode无法正常使用Windows自带的openssh，解决方案是给文件分配自己可以操作的权限。
