@@ -1,40 +1,24 @@
 ## HTML
 
-HTML，全称“Hyper Text Markup Language”，是用来制作网页的标准标记语言。HTML由一系列由特定标签组成的元素构成，这些元素组成了整个网页的结构，也决定了浏览器以何种形式来展示它。
 
-## 基本语法
+## Q&A
 
-### tag / 标签
+1.outlook 对于html的支持似乎不是很好
 
-HTML标签用来定义组成网页的元素的名字，浏览器会根据这些标签来渲染展示它们的效果。标签的使用语法如下：
+今天调试comments日报，发现当使用两个div来布局的时候Outlook无法渲染第二个div里面的元素，在Firefox上面测试是可以的。当我将两个div合并为一个的时候outlook可以正常渲染。
 
-```
-<标签名称>元素内容</标签名称>
-```
+在下面的第一篇参考文章（2019年）里面提到了Outlook HTML邮件在当时仅仅支持使用`<table>`来布局的情况：
 
-### HTML 网页结构
+> HTML emails have always been developed using <table> elements, and only <table> elements. Until now. The fact is, only Microsoft Outlook requires you to use tables for HTML structure; all other email and webmail clients support the use of <div>s for this purpose.
 
-一个最简单的HTML网页的结构如下：
+在第二篇参考文章里面也有下面的建议：
 
-```
-<html>
-  <head>
-    <title>Page title</title>
-  </head>
-  <body>
-    <h1>This is a heading</h1>
-    <p>This is a paragraph.</p>
-    <p>This is another paragraph.</p>
-  </body>
-</html>
-```
+> If you want to successfully design a functional email, you’re going to have to design it like you’re living in 1999. In other words, you’re going to have to use table tags instead of div tags.
+>
+> The simple fact is this: Coding for the web is not the same as coding for HTML emails. An email is a space of approximately 600px and you have to include a lot of information in that small amount of space. It’s a fixed-width layout, whereas webpages offer more freedom.
 
-它由三部分组成：
 
-- html元素，最基本的元素。
-- head元素，包含html文件的元信息。除了已经提到的标题，还可以通过`<meta charset="UTF-8">`指定编码方式。
-- body元素，包含可以展示的具体内容。
+参考：
 
-由于HTML更迭了好多版本，目前需要使用`<!DOCTYPE> `来声明文档的html类型，以便于网页能够正常的展示。比如使用`<!DOCTYPE html>`便是指定了网页支持html5。
-
-## 其他知识点
+- [Developing HTML Emails Using Divs and “Ghost Tables”](https://webdesign.tutsplus.com/tutorials/html-email-using-ghost-tables--cms-32551)
+- [Ask a Designer: Tables or Divs for Email?](https://www.campaignmonitor.com/blog/email-marketing/ask-a-designer-tables-or-divs-for-email/)

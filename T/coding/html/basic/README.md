@@ -1,3 +1,13 @@
+## HTML
+
+HTML，全称“Hyper Text Markup Language”，是用来制作网页的标准标记语言。HTML由一系列由特定标签组成的元素构成，这些元素组成了整个网页的结构，也决定了浏览器以何种形式来展示它。
+
+HTML标签用来定义组成网页的元素的名字，浏览器会根据这些标签来渲染展示它们的效果。标签的使用语法如下：
+
+```
+<标签名称>元素内容</标签名称>
+```
+
 ## HTML 基础
 
 HTML使用不同的标签来定义组成HTML网页的各种元素，这些元素同时拥有多种属性来丰富它的展示形式，比如：
@@ -11,6 +21,32 @@ HTML使用不同的标签来定义组成HTML网页的各种元素，这些元素
 
 可以使用`<!-- Write your comments here -->`来添加注释，支持多行注释。
 
+## HTML 网页结构
+
+一个最简单的HTML网页的结构如下：
+
+```
+<html>
+  <head>
+    <title>Page title</title>
+  </head>
+  <body>
+    <h1>This is a heading</h1>
+    <p>This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+  </body>
+</html>
+```
+
+它由三部分组成：
+
+- html元素，最基本的元素。
+- head元素，包含html文件的元信息。除了已经提到的标题，还可以通过`<meta charset="UTF-8">`指定编码方式。
+- body元素，包含可以展示的具体内容。
+
+由于HTML更迭了好多版本，目前需要使用`<!DOCTYPE> `来声明文档的html类型，以便于网页能够正常的展示。比如使用`<!DOCTYPE html>`便是指定了网页支持html5。
+
+
 ## 标题
 
 使用标签<h1>~<h6>来定义标题。标题是重要的因为搜索引擎使用标题来索引网页的结构和内容。不要对正文中的文本使用标题的标签。
@@ -20,6 +56,14 @@ HTML使用不同的标签来定义组成HTML网页的各种元素，这些元素
 ```
 <h1 style="font-size:60px;">Heading 1</h1>
 ```
+
+## body
+
+当设定了body为固定的size的时候，可以使用`body{ margin:0 auto; }`来将它居中显示。
+
+参考：
+
+- [How to align entire html body to the center?](https://stackoverflow.com/questions/6464592/how-to-align-entire-html-body-to-the-center/29166036)
 
 ## 段落
 
