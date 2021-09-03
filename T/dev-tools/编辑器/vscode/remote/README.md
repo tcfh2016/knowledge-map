@@ -1,5 +1,17 @@
 ## 远程开发
 
+## SSH远程开发和WSL（Windows Subsystem for Linux）开发
+
+这两天使用VSCODE用SSH连接远端服务器进行开发，在阅读了解的过程中一直不明白用SSH远端开发和WSL有什么区别，感觉上是一样的啊？
+
+在阅读了[WSL + VS Code Remote真香](https://juejin.cn/post/6844904021216460808)和[Remote Development with VS Code](https://code.visualstudio.com/blogs/2019/05/02/remote-development)之后有些理解了WSL相当于在Windows下面创建了虚拟机进行开发，即在Windows下面构建了Linux的开发环境。也就是：
+
+- Remote-WSL：在Windows上面虚拟出Linux环境进行开发
+- Remote-SSH: 连接到远端服务器进行开发
+- Remote-Container：连接Docker容器进行开发
+
+所以，我当前仅仅需要一个Remote-SSH就够了。
+
 
 ## 使用ssh登录远程服务器进行开发
 
