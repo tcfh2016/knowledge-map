@@ -1,12 +1,12 @@
 @startuml
 
 '------------------------------------------------------------------------------'
-Subject "1" o-  "*" Observer
+Subject "1" -  "*" Observer
 
-Subject <|-- ConcreatSubject
-Observer <|-- ConcreatObserver
+Subject <|.. ConcreatSubject
+Observer <|.. ConcreatObserver
 
-ConcreatSubject - ConcreatObserver
+ConcreatSubject o- ConcreatObserver
 
  abstract class Subject {
    {abstract} registerObserver()
