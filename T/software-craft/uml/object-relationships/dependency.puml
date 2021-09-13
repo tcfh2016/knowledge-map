@@ -1,0 +1,5 @@
+@startuml
+
+"Supplier" <.. "Client"
+
+@enduml

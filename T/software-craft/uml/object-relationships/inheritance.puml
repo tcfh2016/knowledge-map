@@ -1,0 +1,5 @@
+@startuml
+
+"Fixed Account" <|-- "Back Account"
+
+@enduml
