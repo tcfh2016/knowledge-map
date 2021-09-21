@@ -1,65 +1,41 @@
 @startuml
 
-Beverage <|-- HouseBlend
-Beverage <|-- DarkRoast
-Beverage <|-- Decaf
-Beverage <|-- Espresso
-Beverage <|-- Decorator
-Beverage <- Decorator
-
-class Beverage {
-  description
-  getDescription()
-  cost()
+class Component {
+  methodA()
+  methodB()
 }
 
-class HouseBlend {
-  cost()
-}
+Component <|-- ConcreteComponent
+Component <|-- Decorator
+Component <-- Decorator
 
-class DarkRoast {
-  cost()
-}
-
-class Decaf {
-  cost()
-}
-
-class Espresso {
-  cost()
+class ConcreteComponent {
+  methodA()
+  methodB()
 }
 
 class Decorator {
-  getDescription()
+  methodA()
+  methodB()
 }
 
-'------------------------------------------------------------------------------'
-Decorator <|-- Milk
-Decorator <|-- Mocha
-Decorator <|-- Soy
-Decorator <|-- Whip
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
 
-class Milk {
-  Beverage beverage
-  cost()
-  getDescription()
+class ConcreteDecoratorA {
+  Component wrappedObj
+
+  methodA()
+  methodB()
+  newBehavior()
 }
 
-class Mocha {
-  Beverage beverage
-  cost()
-  getDescription()
+class ConcreteDecoratorB {
+  Component wrappedObj
+  Object newState
+
+  methodA()
+  methodB()
 }
 
-class Soy {
-  Beverage beverage
-  cost()
-  getDescription()
-}
-
-class Whip {
-  Beverage beverage
-  cost()
-  getDescription()
-}
 @enduml
