@@ -39,3 +39,19 @@ lianbche@ip_address's password:
 其他参考：
 
 - [Remote development over SSH](https://code.visualstudio.com/docs/remote/ssh-tutorial)
+
+## Q&A
+
+1）安装远程插件失败后如何进行手动安装？
+
+今天尝试通过远端开发来调试脚本，在浏览Python代码的时候VSCODE提示remote安装Python插件，尝试安装的时候发现timeout并提示手动安装。
+
+点击提示链接下载了一个名称为“ms-python.python-2021.9.1246542782.vsix”的插件文件。然后在插件说明上面查找链接并找到了[Install from a VSIX](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix)，这似乎就是我想要的手动安装指南。上面提供了下面几种安装方式：
+
+- 在插件菜单选项里使用“Install from VSIX”命令
+- 或者直接在Command Palette上使用“Extensions: Install from VSIX”命令
+- 也可以直接使用VS CODE的“--install-extension”命令：`code --install-extension myextension.vsix`
+
+![](./install_from_VSIX.PNG)
+
+然后定位到下载的vsix文件，安装即可。
