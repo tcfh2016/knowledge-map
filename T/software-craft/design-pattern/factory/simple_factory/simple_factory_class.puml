@@ -1,0 +1,23 @@
+@startuml
+
+class CustomerClass{
+
+}
+
+CustomerClass -> OperationFactory
+
+class OperationFactory{
+  getOperation()
+}
+
+class Operation{
+  calculate()
+}
+
+OperationFactory -> Operation
+Operation <|-- Add
+Operation <|-- Sub
+Operation <|-- Mul
+Operation <|-- Div
+
+@enduml
