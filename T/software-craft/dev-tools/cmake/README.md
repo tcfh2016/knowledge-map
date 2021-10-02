@@ -6,6 +6,11 @@ CMake让开发者可以编写一种与平台无关的CMakeLists.txt来定制工�
 
 - [CMake 入门实战](https://www.hahack.com/codes/cmake/)
 
+示例：
+
+- 单cpp文件示例：`knowledge-map\T\software-craft\dev-tools\cmake\demo`
+- 单cpp文件多hpp文件示例：`knowledge-map\T\software-craft\design-pattern\factory\factory_method\src`
+
 
 ## CMake的安装
 

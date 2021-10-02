@@ -3,9 +3,11 @@
 - [用ATOM编写Python](./atom-python/README.md)
 - [用ATOM编写C++](./atom-cpp/README.md)
 
-## 列模式
 
-使用ctrl + alt + (up/down) 来选取列。
+## 快捷键
+
+列模式：使用ctrl + alt + (up/down) 来选取列。
+
 
 参考：
 

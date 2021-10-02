@@ -1,4 +1,4 @@
-# 单一职责原则（SRP: Single Responsibility Principle）
+## 单一职责原则（SRP: Single Responsibility Principle）
 
 定义：就一个类而言，应该仅有一个引起它变化的原因。如果我们能够想到多于一个动机去改变一个类，那么这个类就具有多于一个的职责。
 
