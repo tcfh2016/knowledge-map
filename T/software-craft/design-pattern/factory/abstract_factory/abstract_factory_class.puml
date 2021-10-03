@@ -1,26 +1,51 @@
 @startuml
 
-class creator {
-  factoryMethod()
-  anOperation()
-}
-
-creator <|-- ConcreteCreator
-
-class ConcreteCreator {
-  factoryMethod()
-}
-
-class Product {
+class Client {
 
 }
 
-Product <|-- ConcreteProduct
+class AbstractFactory {
+  {abstract} CreateProductA()
+  {abstract} CreateProductB()
+}
 
-class ConcreteProduct {
+Client -> AbstractFactory
+
+class ConcreteFactory1 {
+  CreateProductA()
+  CreateProductB()
+}
+class ConcreteFactory2 {
+  CreateProductA()
+  CreateProductB()
+}
+
+AbstractFactory <|.. ConcreteFactory1
+AbstractFactory <|.. ConcreteFactory2
+
+' Product Series
+
+class AbstractProductA {
 
 }
 
-ConcreteCreator -> ConcreteProduct
+AbstractProductA <|.. ProductA1
+AbstractProductA <|.. ProductA2
+
+class AbstractProductB {
+
+}
+
+AbstractProductB <|.. ProductB1
+AbstractProductB <|.. ProductB2
+
+ConcreteFactory1 --> ProductA1
+ConcreteFactory1 --> ProductB1
+
+ConcreteFactory2 --> ProductA2
+ConcreteFactory2 --> ProductB2
+
+Client --> AbstractProductA
+Client --> AbstractProductB
 
 @enduml
