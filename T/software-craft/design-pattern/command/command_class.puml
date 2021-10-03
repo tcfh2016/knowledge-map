@@ -1,7 +1,39 @@
 @startuml
 
-class Command {
+'command classes
+
+abstract Command {
+  execute()
+  undo()
+}
+
+class ConcreteCommand {
+  execute()
+  undo()
+}
+
+class Receiver {
+  action()
+}
+
+Command <|.. ConcreteCommand
+Receiver <- ConcreteCommand
+
+'invoker vs command'
+
+class Invoker {
+  setCommand()
+}
+
+Invoker -> Command
+
+'client'
+
+class Client {
 
 }
+
+Client --> Receiver
+Client --> ConcreteCommand
 
 @enduml
