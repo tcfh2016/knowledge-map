@@ -61,4 +61,11 @@ CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
 
 2）怎样设定默认的make工具
 
-在Windows下安装的cmake默认选择的是nmake工具，所以如果使用了MinGW来完成编译，每次执行的之后必须添加`-G "MinGW Makefiles"`选项。是否可以默认设定
+在Windows下安装的cmake默认选择的是nmake工具，所以如果使用了MinGW来完成编译，每次执行的之后必须添加`-G "MinGW Makefiles"`选项。是否可以默认设定？
+
+在[Setting Default Generators](https://discourse.cmake.org/t/setting-default-generators/1315)查询到generator是用户主动输入的，不是软件的开发者，所以没有办法在工程里面去设置。
+
+在[cmake: Selecting a generator within CMakeLists.txt](https://stackoverflow.com/questions/11269833/cmake-selecting-a-generator-within-cmakelists-txt)讨论中似乎可以通过设置`CMAKE_GENERATOR`来达到目的，这种方式无法通过在CMakeLists.txt里面去设置（因为太迟了）。有一种非官方的方法：
+
+- step 1: 在root目录创建名称为"PreLoad.cmake"的文件
+- step 2: 添加`set (CMAKE_GENERATOR "MinGW Makefiles" CACHE INTERNAL "" FORCE)`的设置
