@@ -1,0 +1,3 @@
+C:/Users/lianbche/Git/knowledge-map/T/software-craft/design-pattern/command/remote_control/CMakeFiles/edit_cache.dir
+C:/Users/lianbche/Git/knowledge-map/T/software-craft/design-pattern/command/remote_control/CMakeFiles/main.dir
+C:/Users/lianbche/Git/knowledge-map/T/software-craft/design-pattern/command/remote_control/CMakeFiles/rebuild_cache.dir
