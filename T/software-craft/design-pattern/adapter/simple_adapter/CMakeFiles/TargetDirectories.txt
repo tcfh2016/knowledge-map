@@ -1,0 +1,3 @@
+C:/Users/lianbche/Git/knowledge-map/T/software-craft/design-pattern/adapter/simple_adapter/CMakeFiles/edit_cache.dir
+C:/Users/lianbche/Git/knowledge-map/T/software-craft/design-pattern/adapter/simple_adapter/CMakeFiles/main.dir
+C:/Users/lianbche/Git/knowledge-map/T/software-craft/design-pattern/adapter/simple_adapter/CMakeFiles/rebuild_cache.dir
