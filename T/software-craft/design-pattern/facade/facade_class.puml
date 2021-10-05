@@ -1,0 +1,19 @@
+@startuml
+
+class Facade
+
+Client -> Facade
+
+class A
+class B
+class C
+class D
+
+Facade -- A
+Facade -- B
+B -- C
+Facade -- C
+Facade -- D
+
+
+@enduml
