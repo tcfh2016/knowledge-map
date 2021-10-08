@@ -3,7 +3,7 @@
 for循环在C++11的时候引入了可以遍历给定区间、数组或者容器所有元素的新形式，基本语法如下：
 
 ```
-for (decl : coll) {
+for (auto decl : coll) {
   statement
 }
 ```
