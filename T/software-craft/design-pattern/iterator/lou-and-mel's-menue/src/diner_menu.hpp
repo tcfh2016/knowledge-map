@@ -1,9 +1,11 @@
 #pragma once
+#include <iostream>
 #include <array>
 #include <string>
-#include "menue_item.hpp"
+#include "menu_item.hpp"
 
 class DinerMenu {
+public:
   static const int MAX_ITEMS = 6;
 
 public:
@@ -19,11 +21,15 @@ public:
       std::cout <<"Sorry, menue is full!" <<std::endl;
     }
     else {
-      menueItem[numberOfItems++] = MenuItem(name, description, vegetarian, price);
+      menuItems[numberOfItems++] = new MenuItem(name, description, vegetarian, price);
     }
+  }
+
+  std::array<MenuItem*, MAX_ITEMS>& getMenuItems() {
+    return menuItems;
   }
 
 private:
   int numberOfItems{0};
-  std::array<MenuItem, MAX_ITEMS>;
+  std::array<MenuItem*, MAX_ITEMS> menuItems;
 };
