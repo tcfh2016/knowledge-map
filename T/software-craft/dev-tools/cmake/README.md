@@ -69,3 +69,13 @@ CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
 
 - step 1: 在root目录创建名称为"PreLoad.cmake"的文件
 - step 2: 添加`set (CMAKE_GENERATOR "MinGW Makefiles" CACHE INTERNAL "" FORCE)`的设置
+
+3）提示“CMake was unable to find a build program corresponding to "MinGW Makefiles"”
+
+在另外一台电脑上安装了mingw, cmake，键入`cmake ./src -g "MinGW Makefiles"`的时候出现了如上错误。这个问题是因为安装mingw的时候没有携带make模块的缘故。在[CMake Error: CMake was unable to find a build program corresponding to "MinGW Makefiles"](https://stackoverflow.com/questions/45150172/cmake-error-cmake-was-unable-to-find-a-build-program-corresponding-to-mingw-ma)有更详细的说明，于是尝试安装：
+
+![](./install-mingw-make.png)
+
+安装完了在目录里可以看到多了一个mingw32-make.exe文件。然后拷贝一份并命名为make就可以了。
+
+![](./done-install-mingw-make.png)
