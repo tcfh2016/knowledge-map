@@ -12,6 +12,11 @@
 
 ### 快捷键
 
+1）编辑
+
+列编辑：shift + alt + 鼠标
+control + shift + alt + 方向键
+
 代码阅读：
 
 - `ctrl + left`: 定义跳转
@@ -20,7 +25,6 @@
 - `ctrl + shift + o`: 本文件符号搜索
 - `ctrl + p`：搜索文件
 - `ctrl + shift + F`: 全局搜索字符串
-
 
 - `alt + left`：后退
 - `alt + right`：前进
