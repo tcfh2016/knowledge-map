@@ -4,9 +4,35 @@
 #include <string>
 #include "menu_item.hpp"
 
+//class DinerMenuIterator;
+
 class DinerMenu {
 public:
   static const int MAX_ITEMS = 6;
+
+  class DinerMenuIterator : public Iterator {
+  public:
+    DinerMenuIterator(std::array<MenuItem*, DinerMenu::MAX_ITEMS>& menuItems):
+      _menuItems(menuItems),
+      _curPosition(0) {
+    }
+
+    bool hasNext() {
+      if (_curPosition >= DinerMenu::MAX_ITEMS) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
+
+    MenuItem& next() {
+      return *_menuItems[_curPosition++];
+    }
+  private:
+    std::array<MenuItem*, DinerMenu::MAX_ITEMS>& _menuItems;
+    int _curPosition;
+  };
 
 public:
   DinerMenu() {
@@ -27,6 +53,10 @@ public:
 
   std::array<MenuItem*, MAX_ITEMS>& getMenuItems() {
     return menuItems;
+  }
+
+  Iterator* createIterator() {
+    return new DinerMenuIterator(menuItems);
   }
 
 private:

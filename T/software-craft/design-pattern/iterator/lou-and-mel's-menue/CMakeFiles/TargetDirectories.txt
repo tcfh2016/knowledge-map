@@ -1,3 +1,0 @@
-C:/Users/lianb/OneDrive/repos/knowledge-map/T/software-craft/design-pattern/iterator/lou-and-mel's-menue/CMakeFiles/edit_cache.dir
-C:/Users/lianb/OneDrive/repos/knowledge-map/T/software-craft/design-pattern/iterator/lou-and-mel's-menue/CMakeFiles/main.dir
-C:/Users/lianb/OneDrive/repos/knowledge-map/T/software-craft/design-pattern/iterator/lou-and-mel's-menue/CMakeFiles/rebuild_cache.dir

@@ -35,3 +35,9 @@ private:
   bool _vegetarian;
   double _price;
 };
+
+class Iterator {
+public:
+  virtual bool hasNext() = 0;
+  virtual MenuItem& next() = 0;
+};
