@@ -9,6 +9,8 @@ POD的全称为“Plain Old Data”，指的是那些可以用memcpy, memset等�
 
 > POD describes types that use no special C++ feature. For example, every ordinary C structure is POD.
 
+它的要点在于内存布局相较于C struct类型没有大的变化，因此可以使用memcpy, memset来进行操作。C++11里面的标准提到只要增减构造器不影响内存布局和性能的class也可以是POD。
+
 参考：
 
 - [PODs (generalized)](http://www.stroustrup.com/C++11FAQ.html#PODs)
