@@ -1,24 +1,17 @@
 ## 1 背景
 
-这篇笔记是根据StackOverflow上面的[一个问题](http://stackoverflow.com/questions/28002/regular-cast-vs-static-cast-vs-dynamic-cast/1255015#1255015)整理而成，
-主要针对C++中四种类型转换操作进行举例说明。
+这篇笔记是根据StackOverflow上面的[一个问题](http://stackoverflow.com/questions/28002/regular-cast-vs-static-cast-vs-dynamic-cast/1255015#1255015)整理而成，主要针对C++中四种类型转换操作进行举例说明。
 
-C++中新引入`static_cast`, `dynamic_cast`, `reinterpret_cast`，和`const_cast`四种新
-的类型转换操作符。相较于它们，不少程序员更乐于去使用C-like的类型转
-换，因为它强大且编写起来又简单。C-Like类型转换操作的语法有如下的两种形式：
+C++中新引入`static_cast`, `dynamic_cast`, `reinterpret_cast`，和`const_cast`四种新的类型转换操作符。相较于它们，不少程序员更乐于去使用C-like的类型转换，因为它强大且编写起来又简单。C-Like类型转换操作的语法有如下的两种形式：
 
 - (new-type) expression
 - new-type (expression)
 
-通常说来，C-Like类型转换操作符可以完全替用`static_cast`和`reinterpret_cast`，那另外两
-种类型又有什么不同呢？一起来看看。
+通常说来，C-Like类型转换操作符可以完全替用`static_cast`和`reinterpret_cast`，那另外两种类型又有什么不同呢？一起来看看。
 
 ## 2 static_cast vs dynamic_cast
 
-之所以把`static_cast`与`dynamic_cast`两兄弟放在一起是因为它们两者对比起来更容易记得住。
-首先，从名称上面它们就有语义相对的关系，一“静”一“动”。另外，在功能上面也在一定程度上体现
-了这一对比的特性，如dynamic_cast的Run-time Checking，static_cast在编译时增加的类型检
-测。简单而言：
+之所以把`static_cast`与`dynamic_cast`两兄弟放在一起是因为它们两者对比起来更容易记得住。首先，从名称上面它们就有语义相对的关系，一“静”一“动”。另外，在功能上面也在一定程度上体现了这一对比的特性，如dynamic_cast的Run-time Checking，static_cast在编译时增加的类型检测。简单而言：
 
 - static_cast： 1）完成基础数据类型，2）同一个继承体系中类型的转换
 - dynamic_cast：使用多态的场景，增加了一层对真实调用对象类型的检查
@@ -34,11 +27,9 @@ int *p = (int *)&c;    // 4 个字节（32bit platform）
 
 *p = 5;                // 内存踩脏
 int *q = static_cast<int *>(&c); // 使用static_cast可在编译阶段将该错误检查出来。
-
 ```
 
-对于自定义类型的处理，相比C-Like而言，它也多了一层保护，也就是它不支持在不属于同一继承体
-系的类型之间进行转换。但是C-Like就可以办到，看下面这个例子：
+对于自定义类型的处理，相比C-Like而言，它也多了一层保护，也就是它不支持在不属于同一继承体系的类型之间进行转换。但是C-Like就可以办到，看下面这个例子：
 
 ```
 #include <iostream>
@@ -89,18 +80,11 @@ int main()
 
 ### 2.2 static_cast对于自定义类型的转换
 
-上面这个小例子简单对比了`static_cast`与 C-Like在针对不同继承体系的类之间表现的差异性，
-现在先把范围缩小到同一继承体系当中的类型转换。（注：这里所说的类型一般是针对类的指针或者
-类的引用）
+上面这个小例子简单对比了`static_cast`与 C-Like在针对不同继承体系的类之间表现的差异性，现在先把范围缩小到同一继承体系当中的类型转换。（注：这里所说的类型一般是针对类的指针或者类的引用）
 
-`static_cast`针对同一继承体系的类之间的转换，它既可以进行upcast也可以进行downcast。一
-般来说，在进行upcast时是没有问题的，毕竟子类当中一定包含有父类的相关操作集合，所以通过转
-换之后的指针或者引用来操作对应的对象，其行为上是可以保证没问题。这和使用`static_cast`与
-使用C-Like或者直接隐式转换效果一样（当然，其结果是否符合程序员本身的预期与当时的设计有关
-系）。
+`static_cast`针对同一继承体系的类之间的转换，它既可以进行upcast也可以进行downcast。一般来说，在进行upcast时是没有问题的，毕竟子类当中一定包含有父类的相关操作集合，所以通过转换之后的指针或者引用来操作对应的对象，其行为上是可以保证没问题。这和使用`static_cast`与使用C-Like或者直接隐式转换效果一样（当然，其结果是否符合程序员本身的预期与当时的设计有关系）。
 
-需要注意的是，使用`static_cast`进行 downcast应该避免，因为它可以顺利逃过编译器的法眼，
-但在运行时却会爆发未定义的问题：
+需要注意的是，使用`static_cast`进行 downcast应该避免，因为它可以顺利逃过编译器的法眼，但在运行时却会爆发未定义的问题：
 
 ```
 #include <iostream>
@@ -152,16 +136,15 @@ private:
 };
 
 int main()
-{      
+{
   B *ptrB = new B;
   ptrB->printSum();
   //打印结果：sum = 4
-  A *ptrA = static_cast<A *>(ptrB);   
+  A *ptrA = static_cast<A *>(ptrB);
   ptrA->printA();
   ptrA->printSum();
   //打印结果：sum = 2
   //在进行upcast的时候，指针指向的对象的行为与指针的类型相关。
-
 
   ptrA = new A;
   ptrA->printSum();
@@ -196,13 +179,9 @@ int main()
 }
 ```
 
-如上，`static_cast`在对同一继承体系的类之间进行downcast时的表现，与C-Like针对分属不同
-继承体系的类之间进行转换时的表现一样，将是未定义的。所以，应该尽可能避免使用`static_cast`
-执行downcast转换，更准确的说，应该尽可能避免对集成体系的类对应的指针或者引用进行downcast
-转换。
+如上，`static_cast`在对同一继承体系的类之间进行downcast时的表现，与C-Like针对分属不同继承体系的类之间进行转换时的表现一样，将是未定义的。所以，应该尽可能避免使用`static_cast`执行downcast转换，更准确的说，应该尽可能避免对集成体系的类对应的指针或者引用进行downcast转换。
 
-既然这样，那是不是在软件开发过程当中就不会存在 downcast的这种情况了呢？实际上不是的。一
-般来说，进行downcast的时候一般是在虚继承的场景当中，这个时候dynamic_cast就上场了。
+既然这样，那是不是在软件开发过程当中就不会存在 downcast的这种情况了呢？实际上不是的。一般来说，进行downcast的时候一般是在虚继承的场景当中，这个时候dynamic_cast就上场了。
 
 ### 2.3 dynamic_cast
 
@@ -211,8 +190,7 @@ int main()
 - downcast时转换的类之间存在着“虚继承”的关系
 - 转换之后的类型与其指向的实际类型要相符合
 
-`dynamic_cast`对于upcast与`static_cast`的效果是一样的，然而因为`dynamic_cast`依赖于
-RTTI，所以在性能上面相比`static_cast`略低。
+`dynamic_cast`对于upcast与`static_cast`的效果是一样的，然而因为`dynamic_cast`依赖于RTTI，所以在性能上面相比`static_cast`略低。
 
 ```
 #include <iostream>
@@ -276,14 +254,11 @@ int main()
 }
 ```
 
-从这个例子可以看出，在虚继承场景下，能够使用`dynamic_cast`的地方一定可以使用`static_cast`，
-然而dynamic_cast却有着更严格的要求，以便帮助程序员编写出更加严谨的代码。只不过，它在性能
-上面多了一部分开销。
+从这个例子可以看出，在虚继承场景下，能够使用`dynamic_cast`的地方一定可以使用`static_cast`，然而dynamic_cast却有着更严格的要求，以便帮助程序员编写出更加严谨的代码。只不过，它在性能上面多了一部分开销。
 
 ## 3 reinterpret_cast
 
-`reinterpret_cast`是最危险的一种cast，之所以说它最危险，是因为它的表现和C-Like一般强大，
-稍微不注意就会出现错误。它一般在一些low-level的转换或者位操作当中运用。
+`reinterpret_cast`是最危险的一种cast，之所以说它最危险，是因为它的表现和C-Like一般强大，稍微不注意就会出现错误。它一般在一些low-level的转换或者位操作当中运用。
 
 ```
 #include <iostream>
@@ -381,30 +356,23 @@ print(nonConst); // 正常
 ```
 
 不过，在使用`const_cast`的时候应该要注意，如果没有必要尽量不要去修改它的值：
-```c++
+
+```
 const int myConst = 15;
 int *nonConst = const_cast<int *>(&myConst);
 
 *nonConst = 10;
 // 如果该变量存放在read-only内存区当中，在运行时可能会出现错误。
-
 ```
 
 ## 5 小结
 
-在`C++`当中对于大部分数据类型而言，使用C-Like的类型转换已经完全够用了。然而，不少人一直
-在倡导进行显式数据类型转换的时候尽可能地使用`C++`规定的类型转换操作。我想这里面大概有两
-方面的原因：
+在`C++`当中对于大部分数据类型而言，使用C-Like的类型转换已经完全够用了。然而，不少人一直在倡导进行显式数据类型转换的时候尽可能地使用`C++`规定的类型转换操作。我想这里面大概有两方面的原因：
 
 - 第一种，`C++`是一门“新”的编程语言，应该学会用它本身的思想来解决编程方面的问题；
-- 第二种，尽管C-Like转换操作能力强大，但如果将其任意使用，会产生不少在编译期间隐藏，却在
-运行时候神出鬼没。这些问题使得软件的行为极不清晰。
+- 第二种，尽管C-Like转换操作能力强大，但如果将其任意使用，会产生不少在编译期间隐藏，却在运行时候神出鬼没。这些问题使得软件的行为极不清晰。
 
-如此，C++ 当中引出了其他四种类型转换方式，用来更加安全的完成一些场合的类型转换操作。比如
-使用 `reinterpret_cast`的时候会表示你确定无疑的想使用 C-Like的类型转换；在使用 `static_cast`
-的时候想要确保转换的对象基本兼容，比如无法将`char *`转换为`int *`，无法在不同继承体系类
-的指针或引用之间进行转换；而使用`dynamic_cast`的时候是要对虚继承下的类执行downcast转换，
-并且已经明了当前性能已经不是主要的影响因素...
+如此，C++ 当中引出了其他四种类型转换方式，用来更加安全的完成一些场合的类型转换操作。比如使用 `reinterpret_cast`的时候会表示你确定无疑的想使用 C-Like的类型转换；在使用 `static_cast`的时候想要确保转换的对象基本兼容，比如无法将`char *`转换为`int *`，无法在不同继承体系类的指针或引用之间进行转换；而使用`dynamic_cast`的时候是要对虚继承下的类执行downcast转换，并且已经明了当前性能已经不是主要的影响因素...
 
 回答一下前文提到的问题。可以这么说，对于`const_cast`, `static_cast`, `reinterpret_cast`和`dynamic_cast`所能够完成的所有转换，C-Like也可以完成。但是，C-Like转换却没有`static_cast`, `dynamic_cast`分别提供的编译时类型检测和运行时类型检测。
 

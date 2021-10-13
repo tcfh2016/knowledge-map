@@ -14,7 +14,7 @@ class_name (const class_name &) = delete; // 禁止拷贝构造器的默认生�
 
 ### [Move构造器](https://en.cppreference.com/w/cpp/language/move_constructor)
 
-移动构造器是c++11的新生事物，在geeksforgeeks网站上有篇[文章](https://www.geeksforgeeks.org/move-constructors-in-c-with-examples/)为此有很详细的说明，之所以有这个Move构造器是为了优化构造器的多次调用以及Copy构造器对于内存的深拷贝。
+移动构造器是c++11的新生事物，在geeksforgeeks网站上有篇[文章](https://www.geeksforgeeks.org/move-constructors-in-c-with-examples/)对此有详细的说明，之所以有这个Move构造器是为了优化构造器的多次调用以及Copy构造器对于内存的深拷贝。
 
 简单来说，Move构造器的使用会减少构造器调用次数（避免多次创建临时对象），同时在Move构造器内部也不是像Copy构造器那样执行对象之间的深度拷贝，对于构造器中涉及到内存的拷贝，Move构造器所做的工作仅仅是将指针指向老的对象，同时将老对象指针置为无效值。
 
@@ -26,9 +26,11 @@ class_name (const class_name &&) = default;
 class_name (const class_name &&) = delete;
 ```
 
+
 ## error: member access into incomplete type
 
 - [https://stackoverflow.com/questions/19962812/error-member-access-into-incomplete-type-forward-declaration-of](https://stackoverflow.com/questions/19962812/error-member-access-into-incomplete-type-forward-declaration-of)
+
 
 ## 类定义里面无法创建对象进行初始化
 
@@ -70,6 +72,17 @@ class Container
 
 1）子类中初始化父类中的成员变量
 
-```
+子类的构造函数里面需要显示的调用父类的构造函数，比如：
 
+```
+class B : public A {
+public:
+  B():A(),other_member(0) {}
+}
+
+template<typename T>
+class B : public A<T> {
+  public:
+    B():A<T>(),other_member(0) {}
+}
 ```
