@@ -1,0 +1,25 @@
+@startuml
+
+class Content {
+  + request()
+}
+
+abstract State {
+  + {abstract} handle()
+}
+
+Content -> State
+
+class ConcreteStateA {
+  handle()
+}
+
+class ConcreteStateB {
+  handle()
+}
+
+State <|-- ConcreteStateA
+State <|-- ConcreteStateB
+
+
+@enduml
