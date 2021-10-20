@@ -1,0 +1,24 @@
+@startuml
+
+class Client {
+
+}
+
+abstract Subject {
+
+}
+
+Client -> Subject
+
+class ConcreteSubject {
+
+}
+
+class Proxy {
+
+}
+
+Subject <|-- ConcreteSubject
+Subject <|-- Proxy
+ConcreteSubject <- Proxy
+@enduml
