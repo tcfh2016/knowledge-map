@@ -58,7 +58,7 @@ void inorderTraversal(BinTreeNode<T> *root) {
   }
   std::stack<T> s;
   while (root != nullptr or not s.empty()) {
-    // 节点不为空
+    // 将当前节点所有左节点全部入栈
     while (root != nullptr) {
       s.push(root);
       root = root->leftNode;
@@ -71,10 +71,6 @@ void inorderTraversal(BinTreeNode<T> *root) {
       root = node.right;
     }
   }
-  if (root->le) {}
-  inorderTraversal(root->leftNode);
-  std::cout <<root->data <<std::endl;
-  inorderTraversal(root->rightNode);
 }
 
 // 后序遍历，递归
