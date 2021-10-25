@@ -51,3 +51,20 @@ public:
     }
 };
 ```
+
+```
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> accessed_elem;
+        for (auto i = 0; i < nums.size(); ++i) {
+            auto diff = target - nums[i];
+            if (accessed_elem.count(diff)) {
+                return {accessed_elem[diff], i};                
+            }
+            accessed_elem[nums[i]] = i;            
+        }
+        return {};
+    }
+};
+```
