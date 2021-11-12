@@ -33,3 +33,7 @@ tar -xvjf glibc.tar.bz2 -C target_directory
 - -f, --file=ARCHIVE: use archive file or device ARCHIVE（*注：制定包文件名。*）
 
 ## zip/unzip
+
+加压到指定目录：
+
+unzip -d ./python_package_jack python_package_jack.zip
