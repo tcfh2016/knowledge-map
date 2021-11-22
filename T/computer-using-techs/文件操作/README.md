@@ -47,6 +47,17 @@ find . -name "*.txt" | xargs grep -i "text_pattern"
 - [Linux的五个查找命令](http://www.ruanyifeng.com/blog/2009/10/5_ways_to_search_for_files_using_the_terminal.html)
 
 
+## Windows 下面的zip包里面搜索文件
+
+使用`7z l compressed.tar namefile -r`似乎只能够找到压缩包里面目录包含的文件，但是没有办法查找zip里面的zip文件。
+
+
+
+参考：
+
+- [How do I search the content of 7-Zip archives (.7z)?](https://superuser.com/questions/326737/how-do-i-search-the-content-of-7-zip-archives-7z)
+
+
 ## 查看文件被什么进程占用
 
 ```
