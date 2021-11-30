@@ -16,7 +16,7 @@ int findShortestPos(string& s, int start, char c) {
       for (int i = start, j = start; i < s.length() || j >= 0; ++i, --j) {
           if (i < s.length() and s[i] == c) {
                   return i - start;
-              }
+          }
 
           if (j >= 0 and s[j] == c) {
               return start - j;
