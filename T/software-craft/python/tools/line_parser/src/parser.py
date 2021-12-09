@@ -1,6 +1,7 @@
 import src.strategies.benchmark as benchmark
 import src.strategies.maxrlc as maxrlc
 import src.strategies.loadctrl as loadctrl
+import src.strategies.poll_expire as poll_expire
 
 class Parser(object):
     def __init__(self, opt):
@@ -17,6 +18,8 @@ class Parser(object):
             strategy = benchmark.Benchmark()
         elif self.pattern == "loadctrl":
             strategy = loadctrl.LoadCtrl()
+        elif self.pattern == "poll_expire":
+            strategy = poll_expire.PollExpire()
         else:
             assert 0, "Not support"
 
