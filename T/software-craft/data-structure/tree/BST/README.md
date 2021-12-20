@@ -124,7 +124,7 @@ struct node* minValueNode(struct node* node)
 
 ## 删除
 
-BST的删除需要考虑三种情况：
+BST的删除需要考虑三种情况： 
 
 - 删除的是叶子节点
 - 删除的节点仅有单个子节点
