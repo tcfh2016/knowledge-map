@@ -170,3 +170,16 @@ Original contents retained as /home/lianbche/.ssh/known_hosts.old
 
 - [ssh-keygen 维基百科](https://zh.wikipedia.org/wiki/Ssh-keygen)
 - [ssh-keygen OpenBSD](http://man.openbsd.org/OpenBSD-current/man1/ssh-keygen.1#NAME)
+
+## 如何基于本地已有的文件创建新的仓库
+
+首先在github/gitlab上面创建一个新的仓库，然后会有提示命令：
+
+```
+cd existing_folder
+git init
+git remote add origin git@bhgitlab.ext.net.nokia.com:lianbche/sg08scriptrepo.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+```
