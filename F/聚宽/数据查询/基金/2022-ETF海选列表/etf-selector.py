@@ -113,7 +113,8 @@ class EtfSelector(object):
                              '510800.XSHG', '510850.XSHG', '512100.XSHG', '512260.XSHG',
                              '512270.XSHG', '512500.XSHG', '512510.XSHG', '512910.XSHG',
                              '513030.XSHG', '513050.XSHG', '513100.XSHG', '513500.XSHG',
-                             '513520.XSHG', '513600.XSHG', '513900.XSHG']
+                             '513520.XSHG', '513600.XSHG', '513900.XSHG', '515800.XSHG',
+                             '515810.XSHG']
 
 
     def get_precheck_list(self):
@@ -124,7 +125,7 @@ class EtfSelector(object):
         DataFrame: 包含符合条件ETF的DataFrame
         '''
         etf = get_all_securities(['etf'])
-        return etf[(etf['start_date'] < dt.date(2021,1,1)) & (etf['end_date'] > dt.date.today())]
+        return etf[(etf['start_date'] < dt.date(2020,1,1)) & (etf['end_date'] > dt.date.today())]
 
 
     def get_volumn_perday(self, etf):
@@ -185,7 +186,7 @@ class EtfSelector(object):
         2. 最新累计净值的历史百分位
         '''
         acc_value = get_extras('acc_net_value', etf, start_date=start, end_date=end, df=True)
-        acc_value['acc_history'] = acc_value[etf].rolling(1 * 244).apply(lambda x: Utility.calc_historic_height(x), raw=True)
+        acc_value['acc_history'] = acc_value[etf].rolling(2 * 244).apply(lambda x: Utility.calc_historic_height(x), raw=True)
 
         return ((acc_value[etf][-1] - acc_value[etf].min()) / (acc_value[etf].max() - acc_value[etf].min()), acc_value['acc_history'][-1])
 
@@ -203,7 +204,7 @@ class EtfSelector(object):
         1. 低位：两个指标均小于60%
         2. 高位：两个指标均大于80%
         '''
-        if (ind1 < 0.60 and ind2 < 0.60):
+        if (ind1 < 0.50 and ind2 < 0.50):
             return "low"
 
         if (ind1 > 0.80 and ind2 > 0.80):
@@ -292,6 +293,12 @@ class HtmlReporter(object):
               .img {
                 width: 900px;
               }
+              .low {
+                background-color: lightgreen;
+              }
+              .high {
+                background-color: tomato;
+              }
             </style>
           </head>
           <body>
@@ -304,10 +311,10 @@ class HtmlReporter(object):
         </html>
         '''
 
-    def construct_ETF_list(self, etf):
+    def construct_ETF_list(self, etf, series):
         etf_table = """
         <header>
-            <h3>ETF海选列表</h3>
+            <h3>ETF海选列表-{}</h3>
         </header>
         <div>
             <table>
@@ -318,7 +325,7 @@ class HtmlReporter(object):
                 <th>时间百分位</th>
                 <th>数值百分位</th>
               </tr>
-        """
+        """.format(series)
 
         for i in range(etf.shape[0]):
             indicator1 = etf.time_quantile[i]
@@ -342,10 +349,6 @@ class HtmlReporter(object):
 
         etf_table += """
         </table>
-        <article>
-          <p>注1：当前根据经验将数值百分位和时间百分位均小于60%作为“运行在历史低位”的判断标准，均大于80%作为“运行在历史在高位”的判断标准。对于该基金是否高估还是低估需要进一步从基金对应的指数来进行判断。</p>
-          <p>注2：下面的图示展示的是正在定投的ETF对应指数的估值状态。</p>
-        </article>
         </div>
         <section> </section>
         """
@@ -362,13 +365,11 @@ class HtmlReporter(object):
 
         # 获取etf列表，[0]为宽基数据，[1]为其他数据
         etfs = self._ETF_selector.select_etf()
-        print(etfs[0])
-        print(etfs[1])
 
         # 填充邮件正文
         html = self._head \
-               + self.construct_ETF_list(etfs[0]) \
-               + self.construct_ETF_list(etfs[1]) \
+               + self.construct_ETF_list(etfs[0], '宽基') \
+               + self.construct_ETF_list(etfs[1], '其他') \
                + self._tail
         msg.add_attachment(html, subtype='html')
 
@@ -386,4 +387,4 @@ reporter = HtmlReporter(date)
 
 sender = 'lianbch@163.com'
 receiver = ['lianbch@163.com']
-reporter.send_email(sender, receiver)
+reporter.send_email(sender, receiver)            
