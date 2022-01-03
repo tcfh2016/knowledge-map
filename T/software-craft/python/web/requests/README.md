@@ -10,7 +10,7 @@ requests 是基于Python的第三方HTTP库，用来请求网络资源。
 
 最简单的使用就是如`r = requests.get('https://api.github.com/events')`，不过这里的返回结果是一个对象，它包含了比较多的信息。
 
-如果返回时
+当我们获得了整个页面的内容之后，还需要进一步解析，而这些解析工作就可以使用其他的python库来完成，比如`Beautiful Soup`。
 
 参考：
 
