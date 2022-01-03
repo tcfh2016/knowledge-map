@@ -1,6 +1,20 @@
-# rquests
+## rquests
 
 requests 是基于Python的第三方HTTP库，用来请求网络资源。
+
+## 安装
+
+如果提示“ModuleNotFoundError: No module named 'requests'”，那么执行`pip install requests`安装该模块即可。
+
+## 使用
+
+最简单的使用就是如`r = requests.get('https://api.github.com/events')`，不过这里的返回结果是一个对象，它包含了比较多的信息。
+
+如果返回时
+
+参考：
+
+- [Requests: 让 HTTP 服务人类](https://docs.python-requests.org/zh_CN/latest/)
 
 ## 代理
 
