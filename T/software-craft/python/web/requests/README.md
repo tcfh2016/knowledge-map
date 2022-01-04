@@ -18,10 +18,7 @@ requests 是基于Python的第三方HTTP库，用来请求网络资源。
 
 ## 代理
 
-配置代理有两种方法：
-
-- 为任意请求提供proxies参数
-- 通过环境变量设定HTTP_PROXY和HTTPS_PROXY配置代理
+配置代理有两种方法：一、为任意请求提供proxies参数；二、通过环境变量设定HTTP_PROXY和HTTPS_PROXY配置代理。
 
 ```
 # 方式一
