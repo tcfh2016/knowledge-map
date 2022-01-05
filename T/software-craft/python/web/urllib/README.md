@@ -1,3 +1,20 @@
+## urllib
+
+与`requests`是什么关系？
+
+## 安装
+
+在working pc上面安装的时候提示“No matching distribution found for urllib”错误：
+
+```
+ERROR: Could not find a version that satisfies the requirement urllib (from versions: none)
+
+ERROR: No matching distribution found for urllib
+```
+
+查找[Cannot import urllib in Python](https://stackoverflow.com/questions/40050630/cannot-import-urllib-in-python)之后才发现`urllib`是标准的python库，本身不需要再额外安装，直接使用就好了。
+
+
 ## urlretrieve 的作用
 
 urlretrieve()方法直接将远程数据下载到本地：

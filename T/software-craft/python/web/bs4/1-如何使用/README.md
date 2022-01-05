@@ -13,3 +13,15 @@ soup = BeautifulSoup(open("index.html"))
 ```
 print(soup.a.prettify()) # 以及直接保存
 ```
+
+如果仅仅想获取某个tag的文本，那么使用[get_text()](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#get-text)即可：
+
+```
+markup = '<a href="http://example.com/">\nI linked to <i>example.com</i>\n</a>'
+soup = BeautifulSoup(markup)
+
+soup.get_text()
+u'\nI linked to example.com\n'
+soup.i.get_text()
+u'example.com'
+```
