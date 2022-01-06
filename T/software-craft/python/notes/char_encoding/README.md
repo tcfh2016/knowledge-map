@@ -103,6 +103,11 @@ f.close()
 
 - [Python: Convert File Encoding](http://xahlee.info/python/charset_encoding.html)
 
-# 参考
+## 3. 将格式保存为UTF-8-BOM格式，以便Windows系统下面的office软件能够正常显示中文
+
+在保存为UTF-8的时候指定的字符集参数为`utf-8`，但是对于带BOM的并不是`utf-8-bom`，而是在[Python中如何将文件保存为utf-8（带BOM）的格式](https://segmentfault.com/q/1010000002493464)里面提示的'utf_8_sig'。
+
+
+## 参考
 
 - 《Python学习手册》
