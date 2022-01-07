@@ -5,6 +5,8 @@ df = pd.DataFrame([10, 20, 30, 40],
                   columns=['numbers'],
                   index=['a', 'b', 'c', 'd'])
 
+print(df[])
+
 df['floats'] = (1.5, 2.5, 3.5, 4.5)
 df['names1'] = ('Yves', 'Guido', 'Felix', 'Francesc')
 df['names2'] = pd.DataFrame(['Yv', 'Gu', 'Fe', 'Fr'],

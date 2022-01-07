@@ -1,7 +1,6 @@
 ## 访问DataFrame
 
-需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种
-理解方式与C/C++二维数组是不同的。
+需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种理解方式与C/C++二维数组是不同的。
 
 ### 获取行列名
 
@@ -10,9 +9,7 @@
 
 ### 获取列
 
-通过类似字典标记或属性的方式，可以将 DataFrame的列获取为一个 Series。多列的选取需要指
-定多个列的名称，切片默认用来选取多行，因此想要在多列选取的时候使用切片必须采用`混合索引/
-同时选择行和列`的方式，即`obj.ix[val1,val2]`，在val2里使用切片。
+通过类似字典标记或属性的方式，可以将 DataFrame的列获取为一个 Series。多列的选取需要指定多个列的名称，切片默认用来选取多行，因此想要在多列选取的时候使用切片必须采用`混合索引/同时选择行和列`的方式，即`obj.ix[val1,val2]`，在val2里使用切片。
 
 ```
 df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成，比如‘start time’就无法工作了。
@@ -60,8 +57,7 @@ df[df['A'] > 0] # 以某列的数据做为标准选择数据
 df[df > 0]      # 选择 df中大于0的数，其余置为 NaN
 ```
 
-简单地说，pandas支持df[SeriesOfBollean]来选取行，而实际上SeriesOfBollean的创建可以通
-过简单的df.column > contion来完成。
+简单地说，pandas支持df[SeriesOfBollean]来选取行，而实际上SeriesOfBollean的创建可以通过简单的df.column > contion来完成。
 
 ```
 conditions = []
@@ -83,8 +79,7 @@ condition = df.floats > 3.0  # 创建一个bollean 的Series。
 print(df[condition])
 ```
 
-对于`datetime.date`类型如何通过布尔索引来进行呢？创建`compare_date = datetime.date(2012, 1, 1)`
-在进行比较，否则提示：
+对于`datetime.date`类型如何通过布尔索引来进行呢？创建`compare_date = datetime.date(2012, 1, 1)`在进行比较，否则提示：
 
 ```
 not supported between instances of 'datetime.date' and 'str'
@@ -127,8 +122,7 @@ df.loc[:, ['A', 'B']]
 
 ### 获取某行某列的值
 
-*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame
-的columns名称，DataFrame列的index为DataFrame的index*
+*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
 
 - Dataframe.[ ] ; This function also known as indexing operator
 - Dataframe.loc[ ] : This function is used for labels.
@@ -154,6 +148,26 @@ data.iloc [[3, 4], [1, 2]] # 选择两行两列
 
 - [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
 
+## DataFrame遍历
+
+查看[How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)知道看起来简单的方案，但是效率似乎比较低。
+
+```
+df = pd.DataFrame({'c1': [10, 11, 12], 'c2': [100, 110, 120]})
+
+for index, row in df.iterrows():
+    print(row['c1'], row['c2'])
+```
+
+好在[](https://www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/)这里有其他方案：
+
+```
+for ind in df.index:
+     print(df['Name'][ind], df['Stream'][ind])
+
+for i in range(len(df)) :
+  print(df.loc[i, "Name"], df.loc[i, "Age"])
+```
 
 ## DataFrame 查询
 
