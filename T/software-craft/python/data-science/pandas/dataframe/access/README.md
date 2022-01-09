@@ -108,6 +108,12 @@ Out[11]:
 3  1  2  1
 ```
 
+*注：在选择之后Index是不会更新的，如果需要迭代读取每个数值，那么就需要重新reset_index来重新索引。*
+
+```
+sales_data.reset_index(drop = True)
+```
+
 参考：
 
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
