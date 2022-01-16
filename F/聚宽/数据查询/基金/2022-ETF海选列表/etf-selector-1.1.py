@@ -112,9 +112,8 @@ class EtfSelector(object):
                              '510590.XSHG', '510600.XSHG', '510680.XSHG', '510710.XSHG',
                              '510800.XSHG', '510850.XSHG', '512100.XSHG', '512260.XSHG',
                              '512270.XSHG', '512500.XSHG', '512510.XSHG', '512910.XSHG',
-                             '513030.XSHG', '513050.XSHG', '513100.XSHG', '513500.XSHG',
-                             '513520.XSHG', '513600.XSHG', '513900.XSHG', '515800.XSHG',
-                             '515810.XSHG']
+                             '513030.XSHG', '513100.XSHG', '513500.XSHG', '513520.XSHG',
+                             '513600.XSHG', '513900.XSHG', '515800.XSHG', '515810.XSHG']
 
 
     def get_precheck_list(self):
@@ -186,6 +185,7 @@ class EtfSelector(object):
         2. 最新累计净值的历史百分位
         '''
         acc_value = get_extras('acc_net_value', etf, start_date=start, end_date=end, df=True)
+        acc_value = acc_value.dropna()
         acc_value['acc_history'] = acc_value[etf].rolling(2 * 244).apply(lambda x: Utility.calc_historic_height(x), raw=True)
 
         return ((acc_value[etf][-1] - acc_value[etf].min()) / (acc_value[etf].max() - acc_value[etf].min()), acc_value['acc_history'][-1])
