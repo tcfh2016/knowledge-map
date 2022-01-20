@@ -1,3 +1,1 @@
-# Reading
-
-<Mindmap>。
+## 人物

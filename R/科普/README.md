@@ -1,3 +1,1 @@
-# Reading
-
-<Mindmap>。
+## 科普
