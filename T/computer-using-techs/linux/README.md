@@ -1,5 +1,14 @@
 ## 常用命令
 
+## 搜索命令
+
+在特定目录下搜索文本中的关键字，使用`grep -rnw '/path/to/somewhere/' -e 'pattern'`，其中的`-r`代表递归搜索，`-n`代表显示行号，`-w`表示全字匹配。
+
+
+参考：
+
+- [How do I find all files containing specific text on Linux?](https://stackoverflow.com/questions/16956810/how-do-i-find-all-files-containing-specific-text-on-linux)
+
 ## 查看文件
 
 如何使用`ll`按照时间排序？

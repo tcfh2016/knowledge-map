@@ -1,4 +1,3 @@
-
 ## 获取更新 / git pull
 
 `git pull` 相当于`git fetch`和`git merge FETCH_HEAD`。
@@ -45,3 +44,13 @@ git rebase --onto tmp dd7b07ec357ced96a813471e75e7941e9671db5f~1 adaptation/psin
 参考：
 
 - [Checkout a New Branch or Reset a Branch to a Start Point](https://guide.freecodecamp.org/git/git-checkout/)
+
+## 删除分支
+
+删除某个分支的命令很简单，使用`git branch -D branchname`即可，但如果我想一次性删除多个分支呢？可以使用`git branch -D $(git branch | grep 3.2*)`，或者"git branch -D `git branch | grep -E '^3\.2\..*'`"。
+
+
+参考：
+
+- [git branch](https://git-scm.com/docs/git-branch)
+- [Can you delete multiple branches in one command with Git?](https://stackoverflow.com/questions/3670355/can-you-delete-multiple-branches-in-one-command-with-git/3670479)
