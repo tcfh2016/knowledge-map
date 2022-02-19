@@ -1,6 +1,6 @@
 ## 简单网络爬虫：从蛋卷基金爬取指数估值数据（下）
 
-> 简单网络爬虫的学习笔记内容简介：1）学习如何从蛋卷基金爬取估值数据；2）将爬取的数据保存为本地可以查看的csv格式的数据，并将其部署为定时邮件任务，每天自动发送。
+> 简单网络爬虫的学习笔记内容包括两部分：上）学习如何从蛋卷基金爬取估值数据；下）将爬取的数据保存为本地可以查看的csv格式的数据，并将其部署为定时邮件任务，每天自动发送。
 
 上篇笔记里面已经介绍了如何从蛋卷基金上爬取估值数据，通过几行代码我们可以得到如下格式的数据：
 
@@ -106,6 +106,14 @@ df.to_csv("index_evaluation.csv", encoding='utf_8_sig')
 比如，我花了38元在腾讯云上购买了一年的云服务器，只需要登录上去，使用`crontab`简单配置一下即可：
 
 ```
+
+30 19 * * * python /home/tcfh2016/index-evaluation/src/main.py
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+
 ```
 
 总体上来说，这次简单爬虫的练习看起来确实很简单，爬取数据只用了少数几行代码。但其中涉及到了一些WEB相关的概念以及Python库，对于新人来说，就需要花些时间学习，整个下来还是要捣鼓一两天的时间的。
