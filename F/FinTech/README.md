@@ -12,9 +12,7 @@
 - [Intermediate Python for Data Science](https://campus.datacamp.com/courses/intermediate-python-for-data-science/)
 - [学习笔记](Intermediate_Python_for_Data_Science/README.md)
 
-这篇文章余下部分介绍了交易策略的概念，以及如何搭建金融数据平台，同时结合了一些应用示例，
-不过基本都是与DataCamp上的课程营销结合起来的。当前自己只想快速入门，搞定自己笔记里面的
-一些建议的金融计算，因此暂不深入。
+这篇文章余下部分介绍了交易策略的概念，以及如何搭建金融数据平台，同时结合了一些应用示例，不过基本都是与DataCamp上的课程营销结合起来的。当前自己只想快速入门，搞定自己笔记里面的一些建议的金融计算，因此暂不深入。
 
 
 ### [2. Python and Finance - Power up Your Spreadsheets](https://www.toptal.com/finance/financial-modeling/python-and-finance)
@@ -26,5 +24,4 @@
 - Python语法简单，并且与英文文本类似，能够更容易让人集中在业务逻辑的编写上。
 - Python包含有适用于各行各业的工具库。
 
-读到一半需要注册，因此决定先用现在学习到的基本的数据处理、绘图来尝试完成自己的笔记，如果
-不行就直接参考《Python for Finance》。
+读到一半需要注册，因此决定先用现在学习到的基本的数据处理、绘图来尝试完成自己的笔记，如果不行就直接参考《Python for Finance》。
