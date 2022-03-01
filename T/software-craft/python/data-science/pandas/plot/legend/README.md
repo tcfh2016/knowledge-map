@@ -1,9 +1,13 @@
-## legend显示问题
+## 如何显示负号？
+
+使用`matplotlib`的时候可能导致语系变更导致无法正常显示负号，所以可以通过设置`matplotlib.rcParams['axes.unicode_minus'] = False`来调整，但是如果使用了dataframe自带的plot函数也出现这样的问题呢？
+
+
+
 
 ### 去掉legend中显示的index名称
 
-如果dataframe里面的index名称不为空，这在我们选取dataframe中某列做为index的时候是
-很常见的，但在画图时该index的名称也会展示出来。
+如果dataframe里面的index名称不为空，这在我们选取dataframe中某列做为index的时候是很常见的，但在画图时该index的名称也会展示出来。
 
 ![](legend_shown_index_name.PNG)
 

@@ -1,21 +1,16 @@
 # 层次化索引
 
-层次化索引使你可以在一个轴上拥有多个（两个以上）索引级别，让你能够以低纬度形式处理高维度
-数据。
+层次化索引使你可以在一个轴上拥有多个（两个以上）索引级别，让你能够以低纬度形式处理高维度数据。
 
 ## DataFrame的列
 
-DataFrame的 set_index方法会将其一个或多个列转换为索引，并创建一个新的 DataFrame。默认
-情况下那些列会从 DataFrame中移除，但也可以将其保留下来。
+DataFrame的 set_index方法会将其一个或多个列转换为索引，并创建一个新的 DataFrame。默认情况下那些列会从 DataFrame中移除，但也可以将其保留下来。
 
-reset_index方法的作用与 set_index相反，层次化索引被转话为具体列，新的索引默认以0~N的整
-数索引替代。
+reset_index方法的作用与 set_index相反，层次化索引被转话为具体列，新的索引默认以0~N的整数索引替代。
 
 ## reindex
 
-DataFrame 最初的数据与创建时指定的 index顺序密切相关，通过 reindex方法可以进行重新排列。
-在使用 reindex()方法时可以指定一些额外选项，比如 fill_value=0 表示对于其中的 NaN的值全
-填写为 0。
+DataFrame 最初的数据与创建时指定的 index顺序密切相关，通过 reindex方法可以进行重新排列。在使用 reindex()方法时可以指定一些额外选项，比如 fill_value=0 表示对于其中的 NaN的值全填写为 0。
 
 ```
 obj = Series([4.2, 2.3, -1.3, 5.2], index=['d', 'b', 'c', 'a'])

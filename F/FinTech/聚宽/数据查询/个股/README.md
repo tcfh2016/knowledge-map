@@ -78,15 +78,12 @@ get_price(security, start_date=None, end_date=None, frequency='daily', fields=No
 
 191216：昨日将研究代码发布在论坛上，没有想到jqz1226回复提到了两个优化点，非常有用：
 
-- 在获取多只股票的股价的时候，可以传入一个list，而不用循环每只股票。此时需要注意调
-用返回的结果：
+- 在获取多只股票的股价的时候，可以传入一个list，而不用循环每只股票。此时需要注意调用返回的结果：
   - pandas0.25之前执行 `h=get_price(stock_list, start_date, end_date, 'daily', 'close', panel=True)`返回的是Pannel类型，因此可以直接使用`h[close]`来绘图。
   - pandas0.25之后返回的结果为dataframe，但多个股票的结果会顺序排列。
-- 通过`list(stocks_df[stocks_df['display_name'].isin(stock_list)].index)`来替代循
-环获取股票名称到股票代码的转换列表。
+- 通过`list(stocks_df[stocks_df['display_name'].isin(stock_list)].index)`来替代循环获取股票名称到股票代码的转换列表。
 
-191218：使用`get_price()`获取股价发现会默认跳过非交易日，skip_paused表示是否跳过不交
-易日期(包括停牌, 未上市或者退市后的日期)，而不是严格的非交易日。
+191218：使用`get_price()`获取股价发现会默认跳过非交易日，skip_paused表示是否跳过不交易日期(包括停牌, 未上市或者退市后的日期)，而不是严格的非交易日。
 
 参考：
 
@@ -96,13 +93,11 @@ get_price(security, start_date=None, end_date=None, frequency='daily', fields=No
 
 # 2. 获取单只股票的市盈率
 
-聚宽以查询数据库的方式提供了财务数据接口, 提供了四类财务数据 分别存放到如下四个表中: 市
-值表, 利润表, 现金表, 负债表。
+聚宽以查询数据库的方式提供了财务数据接口, 提供了四类财务数据 分别存放到如下四个表中: 市值表, 利润表, 现金表, 负债表。
 
 ## 获取某天的市盈率
 
-这些财务数据的查询需要调用 get_fundamentals(), 该函数接收Query对象作为参数，Query对象
-保存了你预先设定的查询条件。其他四个表分别以如下对象表示：
+这些财务数据的查询需要调用 get_fundamentals(), 该函数接收Query对象作为参数，Query对象保存了你预先设定的查询条件。其他四个表分别以如下对象表示：
 
 - valuation，市值表
 - income，利润表
@@ -145,13 +140,11 @@ df = get_fundamentals(q, '2015-10-15')
   - 年份: 格式就是年份的数字, 例如: ‘2015’, ‘2016’.
 ```
 
-本来想通过指定`statDate = 2018`获取一个季度或者一个年度所有交易日的财务数据，发现这是不
-可能的，因为其解释是获取季报或者年报的财务数据，实际上对应的也是某天截止的数据。
+本来想通过指定`statDate = 2018`获取一个季度或者一个年度所有交易日的财务数据，发现这是不可能的，因为其解释是获取季报或者年报的财务数据，实际上对应的也是某天截止的数据。
 
 ## 获取连续多天的市盈率
 
-基于如上的理解，为了获取一段交易时间内所有交易日的市盈率，必须通过创建时间序列，并将其传
-入get_fundamentals()函数。
+基于如上的理解，为了获取一段交易时间内所有交易日的市盈率，必须通过创建时间序列，并将其传入get_fundamentals()函数。
 
 对于如何创建时间序列，在研究环境给定的新手教程《Pandas库使用示例》里面有个例子：
 
@@ -159,8 +152,7 @@ df = get_fundamentals(q, '2015-10-15')
 dates = pd.date_range('20130101',periods=6) # 从20130101开始的6天时间序列
 ```
 
-从中可知pandas的`date_range`方法可以用来完成这项功能，查找资料发现geeksforgeeks的介绍
-更靠谱：
+从中可知pandas的`date_range`方法可以用来完成这项功能，查找资料发现geeksforgeeks的介绍更靠谱：
 
 ```
 Syntax: pandas.date_range(start=None, end=None, periods=None, freq=None, tz=None, normalize=False, name=None, closed=None, **kwargs)
