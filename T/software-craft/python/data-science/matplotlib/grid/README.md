@@ -4,8 +4,7 @@
 
 ![](default_grid.png)
 
-如果想要设定网格的样式，可以通过`plt.rc('grid', linestyle="--", color='black')`来设
-置，需要注意的是该语句需要放置在`plt.plot()`之前，放置在后面没有效果。
+如果想要设定网格的样式，可以通过`plt.rc('grid', linestyle="--", color='black')`来设置，需要注意的是该语句需要放置在`plt.plot()`之前，放置在后面没有效果。
 
 ![](change_grid_color.png)
 
