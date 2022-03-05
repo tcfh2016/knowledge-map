@@ -1,7 +1,6 @@
 ## 数据结构
 
-Pandas的两个主要数据结构为 Series 和 DataFrame，它们为大多数应用提供了一种可靠的、易于
-使用的基础。
+Pandas的两个主要数据结构为 Series 和 DataFrame，它们为大多数应用提供了一种可靠的、易于使用的基础。
 
 - [数据结构](./datastructure/README.md)
 
@@ -58,8 +57,7 @@ print(s.dropna()) # 删除含有NaN的全部行
 print(s.dropna(axis=1)) # 删除含有NaN的全部行
 ```
 
-然而，对于DataFrame调用 dropna的处理更复杂一些，因为它会默认丢弃所有包含缺失值的行。此
-时有两种调整方法：
+然而，对于DataFrame调用 dropna的处理更复杂一些，因为它会默认丢弃所有包含缺失值的行。此时有两种调整方法：
 
   - 传入`how = all`，丢弃全为NA的那些行；
   - 传入`thresh=3`来设定丢弃的标准，表示行超过多少个NA时丢弃；
@@ -128,8 +126,7 @@ for index, row in ufo.interrows():
 衍生金融资产(万元)                  0.0        0.0
 ```
 
-学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以
-对这两列的内容进行求与操作来构建这样的series：
+学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以对这两列的内容进行求与操作来构建这样的series：
 
 ```
 filter_condition = [True] * len(self.balance_df[0]['2018-12-31'])
@@ -141,8 +138,7 @@ for i in range(len(self.args.stock)):
 df_for_plot = self.multi_stocks_asset_df[filter_condition]
 ```
 
-学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即
-便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
+学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
 
 ```
 df_for_plot = self.multi_stocks_asset_df[condition1 & condition2]
@@ -165,8 +161,7 @@ movies[movies.genre.isin(['Crime', 'Drama', 'Action'])]
 
 1.变更某一列内容的展现形式
 
-比如现在有一列"日期"是按照“年-月-日”的形式展示的，现在需要让其展现为“年-月”的形式展示，
-该如何操作？
+比如现在有一列"日期"是按照“年-月-日”的形式展示的，现在需要让其展现为“年-月”的形式展示，该如何操作？
 
 ```
 df['month_year'] = df['date_column'].dt.to_period('M')
@@ -206,8 +201,7 @@ pd.set_option('display.width', 1000)
 
 5.print的时候数值太大无法全部展示？
 
-比如下面的time，其实暗含了日期和时间，但是由于是float格式默认按照科学计数法显示了，如何
-将其全部显示出来？
+比如下面的time，其实暗含了日期和时间，但是由于是float格式默认按照科学计数法显示了，如何将其全部显示出来？
 
 ```
            time  current   high    low       volume         money
@@ -217,8 +211,7 @@ pd.set_option('display.width', 1000)
 0  2.020022e+13    2.054  2.087  2.052  572403776.0  1.184645e+09
 ```
 
-可以通过`pd.set_option('display.float_format', lambda x: '%.2f' % x)`取消默认的科学
-计数法，另外可以通过`pd.set_option(‘precision’, n)`显示小数点。
+可以通过`pd.set_option('display.float_format', lambda x: '%.2f' % x)`取消默认的科学计数法，另外可以通过`pd.set_option(‘precision’, n)`显示小数点。
 
 参考：
 

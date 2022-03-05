@@ -2,9 +2,7 @@
 
 包括整数、浮点数、二进制、分数等，支持加法和乘法等操作。
 
-整数，包括 `+ - * / ** % //`六种算术运算。Python对整数的长度没有限制。浮点，所有适用整
-数的算术运算均适合浮点类型，然而浮点数存在上限和下限，且可能产生溢出。基于这一点考虑通常
-优先考虑整数。decimal模块可用于控制浮点数的操作。
+整数，包括 `+ - * / ** % //`六种算术运算。Python对整数的长度没有限制。浮点，所有适用整数的算术运算均适合浮点类型，然而浮点数存在上限和下限，且可能产生溢出。基于这一点考虑通常优先考虑整数。decimal模块可用于控制浮点数的操作。
 
 Python携带的`math`函数库提供了常用的数据处理函数。
 
@@ -30,16 +28,3 @@ Python提供了很多内置函数来进行类型转换：
 - bytes_array.remove(byte)
 - bytes_array.insert(index, byte)
 - bytes_array.pop(byte)
-
-## string
-
-- len(str)
-- min(str)
-- max(str)
-- str.count(ch)
-- str.find(ch)
-- str.startswith(sub_str)
-- str.endswith(sub_str)
-- str.upper()
-- str.lower()
-- str.split(ch)
