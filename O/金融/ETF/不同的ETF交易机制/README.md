@@ -1,6 +1,5 @@
-##
+## 不同的ETF交易机制
 
-近期留意到中概互联ETF的折价问题，
 
 首先要理解ETF交易的本质，购买某只ETF实际上等同于一次性购买了多只股票。这里面能够很容易看出买卖ETF有一个交易费用上的优势，因为如果你要一次性购买多只股票那么你需要分别为每次交易付手续费，但是通过ETF来购买只需要付一次手续费。但是，有一个容易被忽略的潜在问题，那就是谁去购买ETF对应的一揽子股票？
 
@@ -18,16 +17,23 @@
 
 ETF投资者并不直接和ETF发行方打交道。对于已有的ETF份额来说，像股票投资一样投资者之间相互交易。
 
+## 美股市场
 
+- AP
+- Market maker
+- ETF issuer
+- iNAV
 
+## A股市场
 
-## 理解净值和交易价格
-
-ETF在交易方式上却有着和股票一样的特色，共同基金的买卖价格是投资资产的净值，是每个交易日更新一次，但ETF的交易价格并不是对应的资产净值，而是和股票交易价格一样，因为投资者相互之间的竞价每时每刻都在更新。
-
-## 投资者应该如何选择
-
+- ETF发行人
+- 做市商
+- 投资者
+- iPOV
 
 ## 参考
 
-- [](./https://www.blackrock.com/au/intermediaries/ishares/authorized-participants-and-market-makers)
+- [Authorised participants and market makers – Part 1](https://www.blackrock.com/au/intermediaries/ishares/authorized-participants-and-market-makers)
+- [ETF做市商：从沪深300ETF真正起步](https://www.yicai.com/news/2253683.html)
+- [Understanding iNAV](https://www.etf.com/etf-education-center/etf-basics/understanding-inav)
+- [什么是IOPV](https://www.jisilu.cn/question/442501)

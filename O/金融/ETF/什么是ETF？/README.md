@@ -71,8 +71,6 @@ ETF的运行涉及到两级市场：一级市场（primary market）和二级市
 - [全球 ETF 行业发展年度报告（2020）](https://www.szse.cn/aboutus/research/research/report/P020210210499227370235.pdf)
 - [什麼是造市商(造市者)？為什麼需要造市？做市商如何盈利？](https://rich01.com/what-is-market-maker/)
 - [ETF投资指南：ETF的结构和买卖机制（专）](https://zhuanlan.zhihu.com/p/23214834)
-- [ETF做市商：从沪深300ETF真正起步](https://www.yicai.com/news/2253683.html)
-- [Authorised participants and market makers – Part 1](https://www.blackrock.com/au/intermediaries/ishares/authorized-participants-and-market-makers)
 - [How ETFs work](https://www.vanguard.com.hk/documents/etf-how-etfs-work-en.pdf)
 - [2020 年度上交所基金做市商发展报告](http://etf.sse.com.cn/fundtrends/a/20210210/346f51d77d2df4e87f2869d94e387a07.pdf)
 - [首批增强型ETF获批...](http://finance.ce.cn/jjpd/jjpdgd/202111/16/t20211116_37089015.shtml)
