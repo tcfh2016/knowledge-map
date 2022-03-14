@@ -24,6 +24,12 @@ ETF投资者并不直接和ETF发行方打交道。对于已有的ETF份额来�
 - ETF issuer
 - iNAV
 
+NAV(net asset value，资产净值)，每天收盘后更新一次。对于每个交易日在不停交易的ETF而言，资产净值的更新频率显得太慢了。
+
+为了给交易ETF的投资者提供及时的参考信息，发明了iNAV(intraday net asset value，日内资产净值)，这个日内资产净值会在交易日内随着ETF对应的一揽子股票的涨跌而更新，通常是每15秒更新一次。
+
+交易价格，投资者在二级市场交易时产生的价格。
+
 ## A股市场
 
 - ETF发行人
@@ -37,3 +43,4 @@ ETF投资者并不直接和ETF发行方打交道。对于已有的ETF份额来�
 - [ETF做市商：从沪深300ETF真正起步](https://www.yicai.com/news/2253683.html)
 - [Understanding iNAV](https://www.etf.com/etf-education-center/etf-basics/understanding-inav)
 - [什么是IOPV](https://www.jisilu.cn/question/442501)
+- [Understanding iNAV](https://www.etf.com/etf-education-center/etf-basics/understanding-inav)
