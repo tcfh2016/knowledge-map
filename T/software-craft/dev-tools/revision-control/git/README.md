@@ -38,6 +38,22 @@
 
 ## 常见问题
 
+### fatal: index file corrupt
+
+昨天在git add之后电脑没有电关机了，今天重新开机执行`git status`命令出现了如下错误：
+
+```
+PS> git status -s
+error: bad signature
+fatal: index file corrupt
+```
+
+解决方法，是先删除`.git\index`，然后`git reset`即可。
+
+参考：
+
+- [How to resolve "Error: bad index – Fatal: index file corrupt" when using Git](https://stackoverflow.com/questions/1115854/how-to-resolve-error-bad-index-fatal-index-file-corrupt-when-using-git)
+
 ### remove untracked files
 
 本地的git仓库有时候因为编译会产生出一些untracked文件，怎么快速删除这些文件呢？
