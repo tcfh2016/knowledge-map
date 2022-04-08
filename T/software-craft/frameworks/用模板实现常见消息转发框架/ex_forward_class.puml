@@ -1,0 +1,34 @@
+@startuml
+
+MsgForward *-- Forward
+
+class MsgForward {
+  Forward_msgId1 forwardMsgId1
+  Forward_msgId2 forwardMsgId2
+  Forward_msgId3 forwardMsgId3
+  + handle()
+}
+
+class Forward {
+  + {abstract} handle()
+  - forwardToA()
+  - forwardToB()
+  - ...()...
+}
+
+Forward <|-- Forward_msgId1
+class Forward_msgId1{
+  + handle()
+}
+
+Forward <|-- Forward_msgId2
+class Forward_msgId2{
+  + handle()
+}
+
+Forward <|-- Forward_msgId3
+class Forward_msgId3{
+  + handle()
+}
+
+@enduml

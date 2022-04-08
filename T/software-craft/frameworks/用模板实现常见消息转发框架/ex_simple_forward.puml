@@ -1,0 +1,10 @@
+@startuml
+
+class MsgForward {
+  + handle()
+  - forwardMsgId1()
+  - forwardMsgId2()
+  - ...()...
+}
+
+@enduml

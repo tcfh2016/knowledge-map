@@ -1,0 +1,23 @@
+@startuml
+
+class "Forward<T>" as Forward_t
+TemplateForward *-- Forward
+
+class TemplateForward {
+  Forward_t forward
+  + handle()
+}
+
+class Forward_t {
+  + handle()
+  - forwardToA()
+  - forwardToB()
+  - ...()...
+}
+
+Forward_t <|-- Forward_t_msgId1
+Forward_t <|-- Forward_t_msgId2
+Forward_t <|-- Forward_t_msgId3
+
+
+@enduml
