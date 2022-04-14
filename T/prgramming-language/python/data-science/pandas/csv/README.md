@@ -32,8 +32,7 @@ DataFrame 对象可以直接调用`to_csv()`函数:
 df.to_csv(file_name, sep='\t', encoding='utf-8')
 ```
 
-DataFrameGroupBy 对象没有`to_csv()`函数，常见的使用是调用min()/sum()等接口返回 group
-里面的某个值，如此组成新的 DataFrame 对象。
+DataFrameGroupBy 对象没有`to_csv()`函数，常见的使用是调用min()/sum()等接口返回 group里面的某个值，如此组成新的 DataFrame 对象。
 
 ```
 month_groups.min().reset_index().to_csv("000898_month_min.csv", sep=',', encoding='gb2312')
