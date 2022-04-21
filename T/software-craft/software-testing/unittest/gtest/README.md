@@ -3,6 +3,14 @@
 
 ## 常见问题
 
+测试特定的值：
+
+```
+EXPECT_CALL(
+        *ptr,
+        function(::testing::An<msg&>(), 20));
+```
+
 ### 1."Uninteresting mock function call"错误
 
 据网络上查找到的资料，这个信息的出现是因为“你已经定义了mock函数”，但是没有“为它指定expectation”所以在调用到这个mock函数的时候就进行默认处理，但是这个信息会打印出来。
