@@ -1,5 +1,14 @@
 ## 常用命令
 
+查看当前的linux系统版本信息：
+
+- `uname -a`：查看内核版本信息
+- `cat /etc/os-release`：查看release信息
+- `hostnamectl`：查看系统hostname及相关设置
+
+参考：[How to check os version in Linux command line](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
+
+
 ## 搜索命令
 
 在特定目录下搜索文本中的关键字，使用`grep -rnw '/path/to/somewhere/' -e 'pattern'`，其中的`-r`代表递归搜索，`-n`代表显示行号，`-w`表示全字匹配。
