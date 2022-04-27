@@ -1,32 +1,24 @@
-# plantuml 使用经验
+## 升级问题
 
-## plantuml 用法
+### 升级本机Java之后出现 "plantuml.jar is not a file"
 
-### 类图与序列图的冲突
-
-使用plantUML绘图的时候如果使用如下代码可能无法达到目的，因为会默认按照时序图的样式展示：
+升级了Java之后在使用plantuml-preview插件生成图形时碰到如下提示：
 
 ```
-Modem -> Dialler
+plantuml-preview: C:\Program Files (x86)\Java\jre1.8.0_301\lib\plantuml.jar is not a file.
 ```
 
-![](./conflict_sequence_view.png)
+去该路径查看了一下，原来升级之后该目录已经无效，被`C:\Program Files (x86)\Java\jre1.8.0_331\lib`替换，而原目录里面的plantuml.jar也不见了，所以需要重新下载放到升级后的jre1.8.0_331的目录里。
 
-此时可以直接通过声明类的方式来显示指定需要的是类图。
+plantuml.jar可以从http://plantuml.com/download下载，有多个版本。将下载的文件放到升级后的新目录之后，再回到ATOM的Plantuml Preview插件里把PlantUML Jar的路径更新为`C:\Program Files (x86)\Java\jre1.8.0_331\lib\plantuml.jar`，就可以了。
 
-```
-Modem -> Dialler
-
-class Modem
-class Dialler
-```
-
-![](./conflict_class_view.png)
+当然plantuml.jar也有版本，所以我最近一次更新之后发现里面图形的样式也更新了。
 
 
-## 在ATOM里面安装plantuml插件
 
-### npm与apm
+## 安装PlantUml
+
+### 1. npm与apm
 
 APM全称为 Atom Package Manager，为Atom的包管理器。它推荐使用命令`apm config`而非编辑~/.atom/.apmrc文件的形式来配置Atom。
 
@@ -38,7 +30,52 @@ APM是包装了NPM来完成基于Atom的配置，Atom的包安装源自GitHub，
 - [npm 模块安装机制简介](http://www.ruanyifeng.com/blog/2016/01/npm-install.html)
 
 
-### 安装plantuml-viewer
+
+### 2.PlantUml could not generate file
+
+通过命令行安装好PlantUml插件之后测试puml文件提示：
+
+```
+PlantUml could not generate file.
+Please make sure PlantUml can write to location of original file.
+```
+
+搜索之下发现相关问题寥寥，在将github库上所有问题列表阅读完之后也没有找到进一步思路，尤其对于其中提到的手动测试的方法觉得关键但不知道怎么操作。之后直接以关键词"plantuml"搜索发现有本地直接生成的方法。
+
+于是：
+
+1. 下载graphviz，安装并设置环境变量GRAPHVIZ_DOT，指向dot.exe。
+
+https://graphviz.gitlab.io/_pages/Download/Download_windows.html
+
+2. 下载plantuml.jar，这个文件我之前以为需要放到java的lib目录，让它可以直接执行，但测试
+之后依然需要指定目录，因此可以放在其他目录，比如 C:\N-20L6PF1F2MV8-Data\lianbche\Downloads\plantuml-jar-mit-1.2019.3 目录，在其中执行`java -jar plantuml.jar -testdot` 可以测试dot成功：
+
+```
+C:\Users\lianbche
+λ  java -jar plantuml.jar -testdot
+The environment variable GRAPHVIZ_DOT has been set to C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
+Dot executable is C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
+Dot version: dot - graphviz version 2.38.0 (20140413.2041)
+Installation seems OK. File generation OK
+```
+
+使用如下命令生成测试文件：
+
+```
+java -jar plantuml.jar MPsCompMain.plantuml
+```
+
+plantuml.jar可以从http://plantuml.com/download下载，有多个版本。
+
+参考：
+
+- [(记录)plantuml安装配置](http://skyao.github.io/2014/12/05/plantuml-installation/)
+- [PlantUML安装和使用](http://blog.javachen.com/2016/02/29/plantuml-install-and-usage.html)
+
+
+
+## 安装plantuml-viewer
 
 一直安装不成功，失败日志显示是网络问题。
 
@@ -96,53 +133,9 @@ Installing modules done
 - [手动安装Atom的插件Package](https://blog.51cto.com/francis198/1865695)
 
 
-### PlantUml could not generate file
+## 配置plantuml-preview
 
-通过命令行安装好PlantUml插件之后测试puml文件提示：
-
-```
-PlantUml could not generate file.
-Please make sure PlantUml can write to location of original file.
-```
-
-搜索之下发现相关问题寥寥，在将github库上所有问题列表阅读完之后也没有找到进一步思路，尤其对于其中提到的手动测试的方法觉得关键但不知道怎么操作。之后直接以关键词"plantuml"搜索发现有本地直接生成的方法。
-
-于是：
-
-1. 下载graphviz，安装并设置环境变量GRAPHVIZ_DOT，指向dot.exe。
-
-https://graphviz.gitlab.io/_pages/Download/Download_windows.html
-
-2. 下载plantuml.jar，这个文件我之前以为需要放到java的lib目录，让它可以直接执行，但测试
-之后依然需要指定目录，因此可以放在其他目录，比如 C:\N-20L6PF1F2MV8-Data\lianbche\Downloads\plantuml-jar-mit-1.2019.3 目录，在其中执行`java -jar plantuml.jar -testdot` 可以测试dot成功：
-
-```
-C:\Users\lianbche
-λ  java -jar plantuml.jar -testdot
-The environment variable GRAPHVIZ_DOT has been set to C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
-Dot executable is C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
-Dot version: dot - graphviz version 2.38.0 (20140413.2041)
-Installation seems OK. File generation OK
-```
-
-使用如下命令生成测试文件：
-
-```
-java -jar plantuml.jar MPsCompMain.plantuml
-```
-
-http://plantuml.com/download
-
-参考：
-
-- [(记录)plantuml安装配置](http://skyao.github.io/2014/12/05/plantuml-installation/)
-- [PlantUML安装和使用](http://blog.javachen.com/2016/02/29/plantuml-install-and-usage.html)
-
-
-### 成功配置plantuml-preview
-
-尝试第三款插件，依然手动安装，即下载安装包，拷贝其到atom的package目录，然后切入插件目录
-并执行`apm install`。然而，测试的时候弹出提示框：
+尝试第三款插件，依然手动安装，即下载安装包，拷贝其到atom的package目录，然后切入插件目录并执行`apm install`。然而，测试的时候弹出提示框：
 
 ```
 plantuml-preview: plantuml.jar is not a file.
