@@ -1,0 +1,25 @@
+## Data flow in data science process
+
+- Raw data collection
+  - Define purpose of data collection
+  - Ask right questions and define business problem
+  - Understand the domain
+  - Establish process for data collection
+  - Define rules that will support this process
+  - Regularly check its execution
+- Data parsing
+  - Typically collected data is unstructured (web pages, emails, documents, PDFs), understand documents
+  - Define extract rules
+- Data preparation
+  - Exploration, reduction, corruption detection, reconstruction, validation
+  - Deploy various sanity check rules in data flow process
+- Integration and transformation
+  - Data stored in source dependent databases need to be combined
+  - By using cloudified ELT approach (extract, load, transform)
+- Data models and algorithms
+  - Utilize data science by finding hidden patterns and unobvious insights
+  - Select analytical techniques
+  - Build models, validate model and analyze model result and make conclusions  
+- Visualization and reporting
+  - Interpret and summarize model results for story communication to others
+- Decision
