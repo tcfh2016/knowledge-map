@@ -1,4 +1,17 @@
-# Git使用笔记
+## 设置代理 / config proxy
+
+这个操作之前用过，但现在基本上国内可以自由访问，使用得也少。为git设定代理使用如下命令：
+
+```
+> git config --global http.proxy http://222.222.222.222:8080
+> git config --global https.proxy https://222.222.222.222:8080
+> git config --global --unset http.proxy
+> git config --global --unset  https.proxy
+```
+
+后面两条命令是取消代理设置。
+
+*注：需要同时设置http, https。*
 
 
 ## 常用操作快速索引
