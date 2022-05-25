@@ -1,8 +1,14 @@
 ## map
 
-map根据键访问为空会怎么样？比如"myMap[x]"中x的键不存在？
+查找某个key是否存在的常用方法是使用`count()`和`find()`，区别在于返回值不同：
 
 ```
-c.count(key)
-c.find(key)
+c.count(key) // 返回匹配的元素个数
+c.find(key) // 返回迭代器
 ```
+
+## Q&A
+
+- map根据键访问为空会怎么样？比如"myMap[x]"中x的键不存在？
+
+传统访问键值的方式是`c[key]`，c++引入了`c.at[key]`，前者如果不存在会直接创建新的键值对，而后者则会抛出`out_of_range`异常。
