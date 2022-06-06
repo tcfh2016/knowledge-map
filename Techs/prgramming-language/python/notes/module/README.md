@@ -56,6 +56,13 @@ reload(module)
 
 ## 常见问题
 
+### 如何import没有安装的模块
+
+```
+import sys
+sys.path.append('/home/lianbche/python_package_jack')
+```
+
 ### import 模块之后为什么无法直接使用模块中的变量 ？
 
 参考如下代码，会出现 `AttributeError: module 'tkinter' has no attribute 'messagebox'`
