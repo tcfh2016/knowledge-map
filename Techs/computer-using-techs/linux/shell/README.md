@@ -1,5 +1,7 @@
 Shell常见命令。
 
+
+
 ## 如何实现快速查找和替换
 
 使用`grep -rnw . -e 'MAX_NUM_PRACH_PREAMBLE_PROCESSABLE'`完成递归查找。
@@ -16,8 +18,7 @@ grep -rl matchstring somedir/ | xargs sed -i 's/string1/string2/g'
 
 ## source
 
-`source`命令用来在当前shell里面（当前进程）执行该脚本，不同于使用`sh script.sh`会在新
-的子进程里面执行脚本的方式。
+`source`命令用来在当前shell里面（当前进程）执行该脚本，不同于使用`sh script.sh`会在新的子进程里面执行脚本的方式。
 
 参考：
 
