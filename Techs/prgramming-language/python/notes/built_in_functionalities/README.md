@@ -5,10 +5,7 @@ Python自带了很多内置函数以及函数库，并且你能够很方便的�
 - 使用`help(function_name)`查看出该函数的文档字符串。
 - 使用`print(module_name.function_name.__doc__)`打印出该函数的文档字符串。
 
-Python里的赋值语句`x = expr`与其他语言里的含义不一样，比如在C/C++里是先为`x`分配内存，
-再将`expr`的值拷贝到`x`的内存。但是在Python里则表示是将 `x`指向`expr`，即先为`expr`的
-值分配空间，再将`x`指向它。所以，Python里的赋值操作不会进行值拷贝，而仅仅改变变量所指向
-的位置。Python自动跟踪所有的值，对于没有任何变量指向的值则将其删除，此即为`垃圾收集`。
+Python里的赋值语句`x = expr`与其他语言里的含义不一样，比如在C/C++里是先为`x`分配内存，再将`expr`的值拷贝到`x`的内存。但是在Python里则表示是将 `x`指向`expr`，即先为`expr`的值分配空间，再将`x`指向它。所以，Python里的赋值操作不会进行值拷贝，而仅仅改变变量所指向的位置。Python自动跟踪所有的值，对于没有任何变量指向的值则将其删除，此即为`垃圾收集`。
 
 理解了如上的概念，便能理解`x = None`的含义是将`x`重置为初始状态。
 
@@ -18,29 +15,6 @@ Python里的赋值语句`x = expr`与其他语言里的含义不一样，比如�
 - [What is a None value?](https://stackoverflow.com/questions/19473185/what-is-a-none-value#)
 
 # 内置函数
-
-## `range()`
-
-函数`range()`用来生成一系列数字，它常用在循环场景。使用range()的时候可以通过指定三个参数来生成不同的数据集：
-
-- start: 起始值
-- stop: 结束标记，返回的数据集最大值为stop-1
-- step: 步长
-
-```
-# 生成0...stop-1的数据集
-range(stop)
-
-# 生成start, stop-1的数据集
-range(start, stop) takes two arguments.
-
-# 修改默认1的步长为step
-range(start, stop, step) takes three arguments.
-```
-
-参考：
-
-- [Python range() function](https://www.geeksforgeeks.org/python-range-function/)
 
 ## `isinstance()`
 
