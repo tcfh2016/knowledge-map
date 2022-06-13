@@ -1,0 +1,139 @@
+<html>
+<a id="C4"></a>
+Encapsulation type: Ethernet (1)
+<p>
+Using arbitrary objects as messages
+In the preceding sections and examples, it has been assumed that the message passed when logging the event is a string. However, this is not the only possibility. You can pass an arbitrary object as a message, and its __str__() method will be called when the logging system needs to convert it to a string representation. In fact, if you want to, you can avoid computing a string representation altogether - for example, the SocketHandler emits an event by pickling it and sending it over the wire.
+
+Optimization
+Formatting of message arguments is deferred until it cannot be avoided. However, computing the arguments passed to the logging method can also be expensive, and you may want to avoid doing it if the logger will just throw away your event. To decide what to do, you can call the isEnabledFor() method which takes a level argument and returns true if the event would be created by the Logger for that level of call. You can write code like this:
+</p>
+<h2 id="C5">Chapter 5</h2>
+Arrival Time: Jun 14, 2021 10:59:24.280503393 Central Summer Time
+[Time shift for this packet: 0.000000000 seconds]
+Epoch Time: 1623686364.280503393 seconds
+<p>
+Using arbitrary objects as messages
+In the preceding sections and examples, it has been assumed that the message passed when logging the event is a string. However, this is not the only possibility. You can pass an arbitrary object as a message, and its __str__() method will be called when the logging system needs to convert it to a string representation. In fact, if you want to, you can avoid computing a string representation altogether - for example, the SocketHandler emits an event by pickling it and sending it over the wire.
+
+Optimization
+Formatting of message arguments is deferred until it cannot be avoided. However, computing the arguments passed to the logging method can also be expensive, and you may want to avoid doing it if the logger will just throw away your event. To decide what to do, you can call the isEnabledFor() method which takes a level argument and returns true if the event would be created by the Logger for that level of call. You can write code like this:
+</p>
+<h2 id="C6">Chapter 6</h2>
+<p>
+Using arbitrary objects as messages
+In the preceding sections and examples, it has been assumed that the message passed when logging the event is a string. However, this is not the only possibility. You can pass an arbitrary object as a message, and its __str__() method will be called when the logging system needs to convert it to a string representation. In fact, if you want to, you can avoid computing a string representation altogether - for example, the SocketHandler emits an event by pickling it and sending it over the wire.
+
+Optimization
+Formatting of message arguments is deferred until it cannot be avoided. However, computing the arguments passed to the logging method can also be expensive, and you may want to avoid doing it if the logger will just throw away your event. To decide what to do, you can call the isEnabledFor() method which takes a level argument and returns true if the event would be created by the Logger for that level of call. You can write code like this:
+</p>
+[Time delta from previous captured frame: 0.020977468 seconds]
+[Time delta from previous displayed frame: 0.020977468 seconds]
+[Time since reference or first frame: 227.594846719 seconds]
+Frame Number: 64
+Frame Length: 834 bytes (6672 bits)
+Capture Length: 834 bytes (6672 bits)
+<h2 id="C7">Chapter 7</h2>
+[Frame is marked: False]
+[Frame is ignored: False]
+<p>
+Ethernet II, Src: NokiaSol_94:f7:12 (c0:41:21:94:f7:12), Dst: Dell_df:fd:c2 (8c:04:ba:df:fd:c2)
+Destination: Dell_df:fd:c2 (8c:04:ba:df:fd:c2)
+Address: Dell_df:fd:c2 (8c:04:ba:df:fd:c2)
+.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+Source: NokiaSol_94:f7:12 (c0:41:21:94:f7:12)
+Address: NokiaSol_94:f7:12 (c0:41:21:94:f7:12)
+.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+Type: 802.1Q Virtual LAN (0x8100)
+802.1Q Virtual LAN, PRI: 5, DEI: 0, ID: 2013
+101. .... .... .... = Priority: Voice, < 10ms latency and jitter (5)
+...0 .... .... .... = DEI: Ineligible
+.... 0111 1101 1101 = ID: 2013
+Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 10.48.47.84, Dst: 10.48.142.135
+0100 .... = Version: 4
+.... 0101 = Header Length: 20 bytes (5)
+Differentiated Services Field: 0xba (DSCP: EF PHB, ECN: ECT(0))
+1011 10.. = Differentiated Services Codepoint: Expedited Forwarding (46)
+.... ..10 = Explicit Congestion Notification: ECN-Capable Transport codepoint '10' (2)
+Total Length: 816
+Identification: 0x86cd (34509)
+Flags: 0x00
+0... .... = Reserved bit: Not set
+.0.. .... = Don't fragment: Not set
+..0. .... = More fragments: Not set
+Fragment Offset: 0
+Time to Live: 63
+Protocol: SCTP (132)
+Header Checksum: 0x1e88 [validation disabled]
+[Header checksum status: Unverified]
+Source Address: 10.48.47.84
+Destination Address: 10.48.142.135
+Stream Control Transmission Protocol, Src Port: 38412 (38412), Dst Port: 38412 (38412)
+Source port: 38412
+Destination port: 38412
+Verification tag: 0x5eb237f9
+[Association index: 65535]
+Checksum: 0x48a92f2b [unverified]
+[Checksum Status: Unverified]
+SACK chunk (Cumulative TSN: 747014432, a_rwnd: 2097152, gaps: 0, duplicate TSNs: 0)
+Chunk type: SACK (3)
+  0... .... = Bit: Stop processing of the packet
+  .0.. .... = Bit: Do not report
+Chunk flags: 0x00>
+</p>
+<h2 id="C8">Chapter 8</h2>
+[Frame is marked: False]
+[Frame is ignored: False]
+<p>
+Ethernet II, Src: NokiaSol_94:f7:12 (c0:41:21:94:f7:12), Dst: Dell_df:fd:c2 (8c:04:ba:df:fd:c2)
+Destination: Dell_df:fd:c2 (8c:04:ba:df:fd:c2)
+Address: Dell_df:fd:c2 (8c:04:ba:df:fd:c2)
+.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+Source: NokiaSol_94:f7:12 (c0:41:21:94:f7:12)
+Address: NokiaSol_94:f7:12 (c0:41:21:94:f7:12)
+.... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+.... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+Type: 802.1Q Virtual LAN (0x8100)
+802.1Q Virtual LAN, PRI: 5, DEI: 0, ID: 2013
+101. .... .... .... = Priority: Voice, < 10ms latency and jitter (5)
+...0 .... .... .... = DEI: Ineligible
+.... 0111 1101 1101 = ID: 2013
+Type: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 10.48.47.84, Dst: 10.48.142.135
+0100 .... = Version: 4
+.... 0101 = Header Length: 20 bytes (5)
+Differentiated Services Field: 0xba (DSCP: EF PHB, ECN: ECT(0))
+1011 10.. = Differentiated Services Codepoint: Expedited Forwarding (46)
+.... ..10 = Explicit Congestion Notification: ECN-Capable Transport codepoint '10' (2)
+Total Length: 816
+Identification: 0x86cd (34509)
+Flags: 0x00
+0... .... = Reserved bit: Not set
+.0.. .... = Don't fragment: Not set
+..0. .... = More fragments: Not set
+Fragment Offset: 0
+Time to Live: 63
+Protocol: SCTP (132)
+Header Checksum: 0x1e88 [validation disabled]
+[Header checksum status: Unverified]
+Source Address: 10.48.47.84
+Destination Address: 10.48.142.135
+Stream Control Transmission Protocol, Src Port: 38412 (38412), Dst Port: 38412 (38412)
+Source port: 38412
+Destination port: 38412
+Verification tag: 0x5eb237f9
+[Association index: 65535]
+Checksum: 0x48a92f2b [unverified]
+[Checksum Status: Unverified]
+SACK chunk (Cumulative TSN: 747014432, a_rwnd: 2097152, gaps: 0, duplicate TSNs: 0)
+Chunk type: SACK (3)
+  0... .... = Bit: Stop processing of the packet
+  .0.. .... = Bit: Do not report
+Chunk flags: 0x00>
+</p>
+<a href="#C4">Jump to Chapter 4</a>  <!-- 链接至本页的书签 -->
+</html>
