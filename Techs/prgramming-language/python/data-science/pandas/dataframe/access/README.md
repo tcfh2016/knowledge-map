@@ -1,13 +1,11 @@
-## 访问DataFrame
-
 需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种理解方式与C/C++二维数组是不同的。
 
-### 获取行列名
+## 获取行列名
 
 通过`df.columns`选中所有列名。通过`df.index`选中所有行名。
 
 
-### 获取列
+## 获取列
 
 通过类似字典标记或属性的方式，可以将 DataFrame的列获取为一个 Series。多列的选取需要指定多个列的名称，切片默认用来选取多行，因此想要在多列选取的时候使用切片必须采用`混合索引/同时选择行和列`的方式，即`obj.ix[val1,val2]`，在val2里使用切片。
 
@@ -21,7 +19,7 @@ df[['Age','Name']] # 注意多列
 
 那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。
 
-### 获取行
+## 获取行
 
 行的选取有三种方式：`loc`方法、切片和布尔索引（Boolean indexing）。
 
@@ -120,13 +118,13 @@ sales_data.reset_index(drop = True)
 - [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
 
 
-### 获取多行多列
+## 获取多行多列
 
 ```
 df.loc[:, ['A', 'B']]
 ```
 
-### 获取某行某列的值
+## 获取某行某列的值
 
 *注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
 
@@ -156,6 +154,61 @@ data.iloc [[3, 4], [1, 2]] # 选择两行两列
 
 ## DataFrame遍历
 
+
+## 三、遍历
+
+1.简单遍历
+
+对于Series, Dataframe的遍历操作如下：
+
+```
+for c in ufo.city:
+  print(c)
+
+for index, row in ufo.interrows():
+  print(index, row.City, row.State) # 打印City, State
+
+```
+
+2.通过多列的值来进行行选取操作
+
+比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
+
+```
+                               002352     600233
+报告日期
+货币资金(万元)               1613112.0   406144.0
+结算备付金(万元)                   0.0        0.0
+拆出资金(万元)                     0.0        0.0
+交易性金融资产(万元)               1444.0       79.0
+衍生金融资产(万元)                  0.0        0.0
+```
+
+学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以对这两列的内容进行求与操作来构建这样的series：
+
+```
+filter_condition = [True] * len(self.balance_df[0]['2018-12-31'])
+for i in range(len(self.args.stock)):
+    s = self.args.stock[i]
+    self.multi_stocks_asset_df[s] = self.balance_df[i]['2018-12-31']
+    filter_condition &= self.multi_stocks_asset_df[s] > 0
+
+df_for_plot = self.multi_stocks_asset_df[filter_condition]
+```
+
+学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
+
+```
+df_for_plot = self.multi_stocks_asset_df[condition1 & condition2]
+```
+
+而对于单列多条件的选取，可以使用简便的方式:
+
+```
+movies[(movies.genre=='Crime') | (movies.genre=='Drama') | (movies.genre=='Action')]
+movies[movies.genre.isin(['Crime', 'Drama', 'Action'])]
+```
+
 查看[How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)知道看起来简单的方案，但是效率似乎比较低。
 
 ```
@@ -165,7 +218,7 @@ for index, row in df.iterrows():
     print(row['c1'], row['c2'])
 ```
 
-好在[](https://www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/)这里有其他方案：
+好在[Different ways to iterate over rows in Pandas Dataframe](https://www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/)这里有其他方案：
 
 ```
 for ind in df.index:
@@ -174,6 +227,14 @@ for ind in df.index:
 for i in range(len(df)) :
   print(df.loc[i, "Name"], df.loc[i, "Age"])
 ```
+
+
+参考：
+
+- [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
+- [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
+
+
 
 ## DataFrame 查询
 

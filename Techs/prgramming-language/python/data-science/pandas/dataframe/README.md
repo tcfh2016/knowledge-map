@@ -6,9 +6,16 @@ DataFrame 是一个二维表式的数据结构，由data(数据)、rows(行)、c
 
 DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
 
-- object: 字符串类型。
 
+## 属性
 
-## 索引
+- DataFrame.shape ：显示行、列信息。
+- DataFrame.dtypes ：显示行的类型。
 
-- [层次化索引](./hierarchical_index/README.md)
+*使用`len(df)`所打印出来的是df具有的行个数。*
+
+## 方法
+
+- DataFrame.head() ：默认显示前面5行的数据。
+- DataFrame.describe() ：显示对应数据对应里面“数据列”的统计信息，包括count, min, max...
+- DataFrame.describe(include=['object']) ：显示非数据列的统计信息，包括count, uniq, top, freq

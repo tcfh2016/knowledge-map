@@ -1,6 +1,4 @@
-## 修改DataFrame
-
-### 修改行名
+## 修改行名
 
 直接赋值，如下将DataFrame的index修改为其中的某一列：
 
@@ -21,7 +19,7 @@ df.index = [1, 2, 3, 4]
 
 - [Remove index name in pandas](https://stackoverflow.com/questions/29765548/remove-index-name-in-pandas)
 
-### 修改列名
+## 修改列名
 
 两种方式：直接赋值和调用 rename方法：
 
@@ -38,7 +36,7 @@ ufo = pd.read_csv(name_file, names=ufo_cols, header=0) # 不指定header，直�
 定义ufo_cols作为列名。
 ```
 
-### 增/删行
+## 增/删行
 
 在某个DataFrame里面添加一列必须使用`[]`操作符，`此时应保证Series和DataFrame具有相同的index`
 
@@ -52,7 +50,7 @@ df['numbers'] = series
 df.frop([0,1], axis=0, inplace=True) # 删除index为0，1的行。
 ```
 
-### 增/删列
+## 增/删列
 
 两种方法：调用`drop()`和使用`del`。
 
@@ -70,7 +68,7 @@ del df['newdata']
 del df.newdata # 会提示错误。
 ```
 
-### 处理重复行
+## 处理重复行
 
 函数`drop_duplicates()`用来移除重复行，原型如下：
 
@@ -86,7 +84,7 @@ DataFrame.drop_duplicates(subset=None, keep=’first’, inplace=False)
 - [Python | Pandas dataframe.drop_duplicates()](https://www.geeksforgeeks.org/python-pandas-dataframe-drop_duplicates/)
 
 
-### 修改行、列
+## 修改行、列
 
 修改整列直接通过赋值的方式修改（添加）：
 
@@ -103,11 +101,9 @@ df['newdata'] = val
 df.newdata = val
 ```
 
-### 替换
+## 替换
 
-使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，
-后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将
-名为index的Series的值里包含'(万元)'替换为空。
+使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将名为index的Series的值里包含'(万元)'替换为空。
 
 ```
 index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
@@ -160,3 +156,29 @@ for column in pivot.columns:
 - [pandas.Series.replace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html)
 - [pandas.Series.str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
 - [How to replace negative numbers in Pandas Data Frame by zero](https://stackoverflow.com/questions/27759084/how-to-replace-negative-numbers-in-pandas-data-frame-by-zero)
+
+
+## 排序
+
+1.如何将如下的数据按照时间顺序颠倒过来？
+
+```
+   code         day  pe_ratio  pb_ratio
+0  601318.XSHG  2019-12-27    9.8284    2.4153
+1  601318.XSHG  2019-12-26    9.7948    2.4071
+2  601318.XSHG  2019-12-25    9.7368    2.3928
+3  601318.XSHG  2019-12-24    9.7982    2.4079
+4  601318.XSHG  2019-12-23    9.7785    2.4031
+```
+
+DataFrame提供了`sort_index()`和`sort_value`分别按照索引和值排序：
+
+```
+df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
+```
+
+2.`rank()`
+
+参考：
+
+- [关于pandas的rank()函数的一点认识](https://zhuanlan.zhihu.com/p/87593543)
