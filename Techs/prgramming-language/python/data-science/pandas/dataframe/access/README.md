@@ -17,7 +17,7 @@ df[['Age','Name']] # 注意多列
 
 一次性指定多个列的名称可以同时选中两列，比如如上例子里面`df['Name', 'Age']`。
 
-那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。
+*那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。*
 
 ## 获取行
 
@@ -87,7 +87,11 @@ not supported between instances of 'datetime.date' and 'str'
 
 ```
 df = df[df['code'].str.startswith('*ST')]
+df = df[df['code'].str.find('500') != -1]
 ```
+
+如何附加多个条件？使用逻辑表达式即可。如`df = df[df['code'].str.startswith('*ST') & df['code'].str.find('500') != -1]`。
+
 
 如果我们想选取所有列均匹配某种条件的所有行的数据，参考[](https://stackoverflow.com/questions/32731498/how-to-select-cells-greater-than-a-value-in-a-multi-index-pandas-dataframe)可以找到方案，即使用`.all(axis=1)`：
 
