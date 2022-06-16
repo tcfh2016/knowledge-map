@@ -54,3 +54,14 @@ git rebase --onto tmp dd7b07ec357ced96a813471e75e7941e9671db5f~1 adaptation/psin
 
 - [git branch](https://git-scm.com/docs/git-branch)
 - [Can you delete multiple branches in one command with Git?](https://stackoverflow.com/questions/3670355/can-you-delete-multiple-branches-in-one-command-with-git/3670479)
+
+## Q&A
+
+- 新初始化的仓库，提交的时候提示错误
+
+```
+error: src refspec main does not match any
+error: failed to push some refs to ...
+```
+
+在[](https://stackoverflow.com/questions/4181861/message-src-refspec-master-does-not-match-any-when-pushing-commits-in-git)中提到先用`git push origin HEAD:main`可以解决。
