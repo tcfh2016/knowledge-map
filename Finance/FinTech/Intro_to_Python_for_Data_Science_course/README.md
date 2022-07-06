@@ -1,20 +1,5 @@
 ## [Intro to Python for Data Science course](https://www.datacamp.com/courses/intro-to-python-for-data-science)
 
-### 1.Python Basics
-
-- Python as a calculator
-
-Python支持基本的运算操作，除了基本的加减乘除外，`**`代表指数运算，`%`为取余操作。
-
-- Variable
-
-四种常见的类型:int, float, str, bool。使用`type()`去打印对应变量的类型。
-
-字符串类型(str)在拼接自定义提示信息的时候非常有用，只是你无法将其他类型与字符串使用`+`直
-接拼接起来，这个时候需要进行类型转换：使用`str()`来将其他类型转换为字符串类型。类似的转
-换函数包括`int()`, `float()`, `bool()`。
-
-Python里面的字符串操作比较多样化，比如` ("Hey " * 2)`会将"Hey"重复两次。
 
 ### 2.Python Lists
 
