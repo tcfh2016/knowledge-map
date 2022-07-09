@@ -1,3 +1,0 @@
-Aha.
-I will re-write this file and output the content
-Last line, bye.
