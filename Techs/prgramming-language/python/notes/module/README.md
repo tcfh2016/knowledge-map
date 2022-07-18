@@ -58,6 +58,8 @@ reload(module)
 
 ### 如何import没有安装的模块
 
+比如你需要在.py文件中import pandas，但是当前pandas并没有安装，但是在某个目录有可以使用的pandas模块，是否有办法直接使用它？
+
 ```
 import sys
 sys.path.append('/home/lianbche/python_package_jack')
