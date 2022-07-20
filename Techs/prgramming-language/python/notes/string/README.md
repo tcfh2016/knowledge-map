@@ -45,7 +45,10 @@
 - 其他函数，如s.count(c), s.join(sequence)。
 - 转换工具，如int("42"), str(42), float("1.5")。
 
-
+```
+txt = "Hello, welcome to my world."
+if (-1 == txt) # not find
+```
 
 # 字符串修改
 
