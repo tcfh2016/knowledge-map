@@ -18,7 +18,6 @@ Patrick Mevzek
 特别需要知道如果需要发送带有附件的邮件，那么这种邮件的格式需要是`multipart/mixed`。
 
 
-
 ## 添加简单的csv
 
 在调用`sendmail`之前需要首先先完成邮件的组装，比如下面通过shell命令先用已有的html作为邮件的body，同时还需要生成附件（*注：这种附件无法直接attach上来，必须调用其他的命令来完成attach过程*）。
@@ -82,7 +81,6 @@ export ATTACH="output.zip"
  echo '---q1w2e3r4t5--'
 ) | /usr/sbin/sendmail -t
 ```
-
 
 
 参考：
