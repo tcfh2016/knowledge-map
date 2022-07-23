@@ -9,42 +9,6 @@
 
 - [第十一章、认识与学习 BASH](http://cn.linux.vbird.org/linux_basic/0320bash.php#alias_history)
 
-## 搜索文件
-
-```
-# 指定当前目录的搜索深度。
-find . -maxdepth 3 -name "*core"
-
-#搜索当前目录所有以my开头的文件名，并显示详细信息。
-find . -name 'my*' -ls
-
-#搜索用户目录下所有以m开头的文件，相比find它查找目录数据库 /var/lib/locatedb。
-locate ~/m
-
-#所搜grep，仅搜索程序名。
-whereis grep
-
-#在PATH指定的路径中搜索。
-which grep
-```
-
-查找的时候如果排除特定文件夹：
-
-```
-find . -path ./misc -prune -o -name '*.txt' -print
-find . -type d \( -path dir1 -o -path dir2 -o -path dir3 \) -prune -o -print
-find -name "*.js" -not -path "./directory/*"
-```
-
-find . -name "*.txt" | xargs grep -i "text_pattern"
-
-
-
-
-参考：
-
-- [Linux的五个查找命令](http://www.ruanyifeng.com/blog/2009/10/5_ways_to_search_for_files_using_the_terminal.html)
-
 
 ## 查看文件被什么进程占用
 
@@ -65,40 +29,33 @@ fuser file_name
 [root@localhost ~]# ll -rt
 ```
 
+## 统计/wc
 
-## 搜索命令
-
-在特定目录下搜索文本中的关键字，使用`grep -rnw '/path/to/somewhere/' -e 'pattern'`，其中的`-r`代表递归搜索，`-n`代表显示行号，`-w`表示全字匹配。
-
-
-参考：
-
-- [How do I find all files containing specific text on Linux?](https://stackoverflow.com/questions/16956810/how-do-i-find-all-files-containing-specific-text-on-linux)
-
-
-## 搜索
-
-- [文本搜索 / grep](./grep.md)
-
-## 统计
-
-- [统计/wc](./wc.md)
-
-## 操纵
-
-- [行处理/sed](./sed.md)
-- [列处理/awk](./awk.md)
-- [切分/split](./split.md)
+统计文件的行数。
 
 ```
-# 搜索文件夹下.hpp包含"getRise()"的文件，并打印行号（-n）
+wc -l file_name  # 统计file_name的行数。
+ls -a | wc -l    # 灵活用法：查看目录a中的文件个数。
+```
+参数：
 
-find directory/ -name "*.hpp"|xargs grep -n getRise()
+- -c, --bytes: print the byte counts
+- -m, --chars: print the character counts
+- -l, --lines: print the newline counts
+- -w, --words: print the word counts      
 
--path ./uplane/sdkuplane -prune -o
+## 切分/split
+
+切分文件。
 
 ```
+split -b 15m error.log         # 以15M的大小分隔，生成文件名xaa,xab
+split -b 15 error.log mylog -d # 以15字节大小分隔，生成文件名mylog01, mylog02
+cat xaa  xab > large.log       # 还原分隔的文件
+```
 
-find directory/ -name "CCSEarlyConfig.xml"|xargs grep -n "<tag name="ccs.service.aamem.hpdmpool.id" type="u32">26</tag>"
+参数：
 
-<tag name="ccs.service.aamem.hpdmpool.id" type="u32">26</tag>
+- -b, --bytes=SIZE: put SIZE bytes per output file      
+- -l, --lines=NUMBER: put NUMBER lines per output file
+- -d, --numeric-suffixes: use numeric suffixes instead of alphabetic

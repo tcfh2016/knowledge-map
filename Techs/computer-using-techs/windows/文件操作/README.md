@@ -1,6 +1,3 @@
-
-
-
 ## Windows 下面的zip包里面搜索文件
 
 使用`7z l compressed.tar namefile -r`似乎只能够找到压缩包里面目录包含的文件，但是没有办法查找zip里面的zip文件。
