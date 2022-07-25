@@ -1,24 +1,40 @@
-## sendmail
+## 什么是sendmail
 
-正常情况下可以使用Python生成.html，然后使用`/usr/sbin/sendmail -t < generated.html`来发送html，但如果这个时候我需要添加一个附件呢？
+`sendmail`是一种MTA，可以理解为邮件服务器程序，一些细节可以参考[这里](../README.md)。
 
-两个基本概念需要知道：
-
-1. sendmail的角色
-
-首先有个概念需要明确，这个概念在[How can I add an attachment with Sendmail (limited options)?](https://unix.stackexchange.com/questions/409523/how-can-i-add-an-attachment-with-sendmail-limited-options)里面提到：
+在[How can I add an attachment with Sendmail (limited options)?](https://unix.stackexchange.com/questions/409523/how-can-i-add-an-attachment-with-sendmail-limited-options)里面提到：
 
 > sendmail is not the program to use to create the email, you need something else like mail or mutt to format the email correctly (including encoding the attachment in it) before feeding it to sendmail for delivery. They serve difference purposes: sendmail is an MTA to Transmit emails where mail/mutt are MUAs, that is Mail User Agent to build or view emails. –
 Patrick Mevzek
 
-简单来说，使用`sendmail`来发送邮件，你需要首先将邮件组织好。
+简单来说，使用`sendmail`来发送邮件，你需要首先将邮件组织好。那么邮件的组织通常对应着两种情况：
 
-2. mail的结构
+1）将邮件标题、邮件正文编写在同一个文件，使用`/usr/sbin/sendmail -t < generated.html`直接发送。
+2）将邮件标题和邮件正文分开，在发送的时候再进行组装。这种情况常见于需要给邮件添加附件的情况。
 
-特别需要知道如果需要发送带有附件的邮件，那么这种邮件的格式需要是`multipart/mixed`。
+## sendmail的简单用法
 
+```
+#!/usr/bin/ksh
+
+export MAILTO="xxx"
+export SUBJECT="Mail Subject"
+export BODY="/tmp/email_body.html"
+(
+ echo "To: $MAILTO"
+ echo "Subject: $SUBJECT"
+ echo "MIME-Version: 1.0"
+ echo "Content-Type: text/html"
+ echo "Content-Disposition: inline"
+ cat $BODY
+) | /usr/sbin/sendmail $MAILTO
+```
 
 ## 添加简单的csv
+
+正常情况下可以使用Python生成.html，然后使用`/usr/sbin/sendmail -t < generated.html`来发送html，但如果这个时候我需要添加一个附件呢？
+
+特别需要知道如果需要发送带有附件的邮件，那么这种邮件的格式(`Content-Type`)需要是`multipart/mixed`。
 
 在调用`sendmail`之前需要首先先完成邮件的组装，比如下面通过shell命令先用已有的html作为邮件的body，同时还需要生成附件（*注：这种附件无法直接attach上来，必须调用其他的命令来完成attach过程*）。
 
