@@ -46,9 +46,7 @@ HTML引用元素包括`<q>`,`<blockquote>`,`<abbr>`,`<address>`,`<cite>`和`<bdo
 - <cite>定义著作的标题，通常显示为斜体。
 - <bdo>双向复写，内容中的字母会从右至左显示。
 
-## 颜色
 
-HTML的颜色可以通过颜色名字，或者直接通过RGB,HEX,HSL,RGBA,HSLA的值来指定。HTML支持的标准色彩名称共有[140种](https://www.w3schools.com/colors/colors_names.asp)。
 
 ## CSS
 
