@@ -15,6 +15,7 @@ ${var:offset:-length} #取从offset开始，到倒数length字符之间的字符
 echo ${#str:0:-1} #abce
 ```
 
+或参考[Shell脚本编程之字符串切片](https://www.cnblogs.com/haona_li/p/10334057.html)。
 
 ## shell脚本里面读出文件内容
 

@@ -1,6 +1,12 @@
 ## [curl](https://curl.se/)
 
-curl用来下载文件。
+curl用来下载文件。[这里](https://curl.se/docs/manual.html)有最简单的用法：
+
+```
+curl https://www.example.com/ #下载主页
+curl ftp://ftp.funet.fi/README #下载README文件
+curl -o thatpage.html http://www.example.com/ #下载文件并存储为另一个指定文件名
+```
 
 ## Q&A
 
