@@ -1,7 +1,6 @@
 ## Beautiful Soup 4
 
-Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库,它能够通过你喜欢的转换器
-实现惯用的文档导航、查找、修改文档的方式。BS支出如下四种解析器：
+Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库,它能够通过你喜欢的转换器实现惯用的文档导航、查找、修改文档的方式。BS支出如下四种解析器：
 
 - Python标准库：`BeautifulSoup(markup, "html.parser")`
 - lxml HTML 解析器：`BeautifulSoup(markup, "lxml")`

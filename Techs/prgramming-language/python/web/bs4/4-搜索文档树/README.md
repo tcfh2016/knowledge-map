@@ -19,6 +19,7 @@ soup.find_all('b') # 查找所有的<b>标签：[<b>The Dormouse's story</b>]
 soup.find_all(["a", "b"]) # 查找所有的<a><b>标签
 ```
 
+调用`find_all`返回的类型是`'bs4.element.Tag'`，如果要获取
 
 ### 正则表达式搜索
 
