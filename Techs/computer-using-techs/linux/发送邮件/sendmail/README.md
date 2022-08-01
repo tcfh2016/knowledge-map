@@ -103,3 +103,21 @@ export ATTACH="output.zip"
 
 - [sendmail with attachments](https://www.unix.com/shell-programming-and-scripting/118534-sendmail-attachments.html)
 - [Sendmail Attachment](https://unix.stackexchange.com/questions/223636/sendmail-attachment)
+
+## 收件人列表被截断的问题
+
+我在使用`sendmail`发送邮件的时候，使用`cc="a@BB.com;b@BB.com...`定义了一个比较长的收件人列表，结果邮件发送之后看到收件人的列表被截断了：
+
+- 数了下收件人列表的字符，刚好254个，超过254个字符的其他收件人地址被截掉
+- 不过，即便outlook里面没有显示被截断收件人的地址信息，他们仍然收到了邮件
+
+google了许久，对于`254个字符`只找到了RFC里面在定义收件人地址标准时候的一些历史故事，正式的[rfc5321](https://www.rfc-editor.org/rfc/rfc5321#section-4.5.3)里面定义的是64+256=320，但在[3696](https://www.rfc-editor.org/errata_search.php?rfc=3696&eid=1690)又重新定义为254。
+
+但是这个仅仅是单个收件人的长度，不过实际上发现尽管outlook里面显示收件人截取了，实际上被截取的那些收件人也能正常收到邮件，只是outlook上面收件人列表没有展示出来。所以，这个问题应该是outlook在整个收件人列表上应用了254个字符的限制。
+
+在参考文章里面VBA里面，实际上也有这个问题，不过可以通过创建收件人数组的方式来解决。在sendmail上目前没有找到类似的方法。
+
+参考：
+
+- [VBA 调用 Lotus 发送邮件的收件人长度问题](https://zhiqiang.org/coding/lotus-vba-recepient-no-longer-than-256.html)
+- [What is the maximum length of a valid email address?](https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address)
