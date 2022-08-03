@@ -1,28 +1,10 @@
-# 处理csv
+## 处理csv
 
-## 读取csv 调用`to_numeric()`出现`ValueError: Unable to parse string " " at position 0`错误
-
-读取lrb000898.csv, zcfzb000898.csv进行数据清洗、转换没有问题，但读取xjllb000898.csv
-的时候出现错误:
-
-```
-File "C:\Users\lianbche\AppData\Local\Programs\Python\Python37\lib\site-packages\pandas\core\tools\numeric.py", line 135, in to_numeric
-  coerce_numeric=coerce_numeric)
-File "pandas\_libs\lib.pyx", line 1925, in pandas._libs.lib.maybe_convert_numeric
-ValueError: Unable to parse string " " at position 0
-```
-
-调试发现多转换了一列，查看原始文件发现在xjllb000898.csv每行末多了一个空行，因此问题出在
-转换空行时的错误。
-
-参考：
-
-- [pandas.to_numeric - find out which string it was unable to parse](https://stackoverflow.com/questions/40790031/pandas-to-numeric-find-out-which-string-it-was-unable-to-parse)
 
 ## read_table
 
-read_table()与read_csv的区别在于后者默认读取以‘,’作为分隔符的文件，前者需要显示指定分
-隔符。
+read_table()与read_csv的区别在于后者默认读取以‘,’作为分隔符的文件，前者需要显示指定分隔符。
+
 
 ## 将 DataFrame / DataFrameGroupBy 对象写入csv
 
@@ -45,8 +27,7 @@ month_groups.min().reset_index().to_csv("000898_month_min.csv", sep=',', encodin
 
 ## pandas.read_csv 删除行或列
 
-从DataFrame删除行时需要使用drop函数，删除对应行需要指定index并且axis设定为“0”，删除列
-时需要指定列名且axis设定为“1”。
+从DataFrame删除行时需要使用drop函数，删除对应行需要指定index并且axis设定为“0”，删除列时需要指定列名且axis设定为“1”。
 
 ```
 data = data.drop([0,1,2], axis=0)
@@ -81,15 +62,12 @@ groups = df.groupby(["年", "月"])
 - [python pandas extract year from datetime](https://stackoverflow.com/questions/30405413/python-pandas-extract-year-from-datetime-dfyear-dfdate-year-is-not)
 - [Python: Datetime to season](https://stackoverflow.com/questions/44124436/python-datetime-to-season)
 
+
 ## pandas.read_csv
 
-read_csv可以直接用来读取csv文件，且可以通过不同的参数来完成多样化的操作。第一次尝试读取
-时出现“UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc8 in position 0: invalid continuation byte”的错误。
+read_csv可以直接用来读取csv文件，且可以通过不同的参数来完成多样化的操作。第一次尝试读取时出现“UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc8 in position 0: invalid continuation byte”的错误。
 
-在StackOverflow上查找到答案，如上的错误提示是reas_csv默认以'utf-8'的编码方式去读取数据，
-发现原始文档的编码不匹配，于是指定`encoding="ISO-8859-1"`之后就能够成功读取了，但却发现
-在打印窗口上的中文不能正常显示，查找[Encodings and Unicode]()之后修改`encoding="gb2312"`
-之后可以正常读取和显示。
+在StackOverflow上查找到答案，如上的错误提示是reas_csv默认以'utf-8'的编码方式去读取数据，发现原始文档的编码不匹配，于是指定`encoding="ISO-8859-1"`之后就能够成功读取了，但却发现在打印窗口上的中文不能正常显示，查找[Encodings and Unicode]()之后修改`encoding="gb2312"`之后可以正常读取和显示。
 
 参数详解：
 
