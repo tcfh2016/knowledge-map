@@ -30,3 +30,18 @@ switch_to_alert()
 #将等待时间设定为10秒，10秒没有找到那么超时。
 element = WebDriverWait(driver, 10).until(lambda x: x.find_element_by_id(“someId”))
 ```
+
+## options参数
+
+options参数用来配置浏览器启动时的属性：
+
+- 设置 chrome 二进制文件位置 (binary_location)
+- 添加启动参数 (add_argument)，`options.add_argument('--headless')`是让浏览器不提供可视化页面
+- 添加扩展应用 (add_extension, add_encoded_extension)
+- 添加实验性质的设置参数 (add_experimental_option)
+- 设置调试器地址 (debugger_address)
+
+参考：
+
+- [python+selenium+Chrome options参数](https://www.cnblogs.com/guapitomjoy/p/12150416.html)
+- [Class: Selenium::WebDriver::Firefox::Options](https://www.selenium.dev/selenium/docs/api/rb/Selenium/WebDriver/Firefox/Options.html)

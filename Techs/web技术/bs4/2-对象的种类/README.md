@@ -1,7 +1,6 @@
 ## 对象的种类
 
-Beautiful Soup将复杂HTML文档转换成一个复杂的树形结构,每个节点都是Python对象,所有对象可
-以归纳为4种: Tag , NavigableString , BeautifulSoup , Comment。
+Beautiful Soup将复杂HTML文档转换成一个复杂的树形结构,每个节点都是Python对象,所有对象可以归纳为4种: Tag , NavigableString , BeautifulSoup , Comment。
 
 ### BeautifulSoup
 
@@ -24,7 +23,8 @@ t['class'] # 对象的attribute class, 值为'boldest'
 t.attrs    # 对象的所有attribute
 ```
 
-*tag的.contents属性可以讲该tag的子节点以列表的形式输出。*
+*tag的.contents属性可以将该tag的子节点以列表的形式输出。*
+
 
 ### Name
 

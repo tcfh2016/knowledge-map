@@ -1,4 +1,4 @@
-## 搜索文档树
+## [搜索文档树](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id27)
 
 通过点取属性的方式只能获得当前名字的第一个tag:要得到所有的<a>标签,或是通过名字得到比一个tag更多的内容的时候,就需要用到 Searching the tree 中描述的方法,比如: find_all()。find_all()搜索所有tag及其子节点并判断是否符合过滤器的条件。
 
@@ -19,7 +19,8 @@ soup.find_all('b') # 查找所有的<b>标签：[<b>The Dormouse's story</b>]
 soup.find_all(["a", "b"]) # 查找所有的<a><b>标签
 ```
 
-调用`find_all`返回的类型是`'bs4.element.Tag'`，如果要获取
+调用`find_all`返回的类型是`'bs4.element.Tag'`。如果要获取
+
 
 ### 正则表达式搜索
 
@@ -44,3 +45,5 @@ find_all( name , attrs , recursive , string , **kwargs )
 data_soup.find_all(attrs={"data-foo": "value"})
 # [<div data-foo="value">foo!</div>]
 ```
+
+使用时还可以使用[`limit`参数](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#limit)，用来控制返回结果的数量，比如`soup.find_all("a", limit=2)`。
