@@ -14,6 +14,8 @@ Python里的任何类型都被视作object，可以使用 `type(t)`命令来查�
 - [映射](./map/README.md)
 - [自定义类型](./user-defined-type/README.md)
 
+其中的列表和字典是可变的，而数字、字符串、元组是不可变的。
+
 ## 常见问题
 
 ## 多项赋值
