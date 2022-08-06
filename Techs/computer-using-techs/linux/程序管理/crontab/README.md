@@ -35,7 +35,9 @@
 
 ## 查看日志
 
-crontab针对每位用户会创建一个日志，存在于`/var/spool/mail`或者`/var/mail`。
+crontab的相关日志有两份：1）针对每位用户会创建一个日志，存在于`/var/spool/mail`或者`/var/mail`。2）然后在`/var/log/cron`有cron本身的执行日志。
+
+
 
 
 参考：
