@@ -1,3 +1,7 @@
+## 注释
+
+单行用`#`，多行用`''`。参考[Way to create multiline comments in Bash?](https://stackoverflow.com/questions/43158140/way-to-create-multiline-comments-in-bash)。
+
 ## 字符串切片
 
 在[这里](https://blog.csdn.net/rockstics/article/details/116917653)有一篇有关字符串切片的文章：
