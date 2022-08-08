@@ -41,6 +41,8 @@
 if os.access("myfile", os.R_OK):
   with open("myfile") as fp:
     return fp.read()
+
+os.path.isdir('new_folder')
 ```
 
 ## 读文件
@@ -72,9 +74,15 @@ with open('written.txt', mode='w') as out_file:
   out_file.flush() # 正式写入
 
 with open('written.txt', mode='a') as out_file:
-  out_file.write('hello')  
+  out_file.write('hello')
+
+
 ```
 
+参考：
+
+- [How do I check if directory exists in Python?](https://stackoverflow.com/questions/8933237/how-do-i-check-if-directory-exists-in-python)
+- [Create a directory in Python](https://www.geeksforgeeks.org/create-a-directory-in-python/)
 
 ## 三、常见问题
 
@@ -102,4 +110,5 @@ with open("file.txt", 'r') as f:
 
 ## 参考阅读
 
-[Miscellaneous operating system interfaces](https://docs.python.org/2.7/library/os.html)
+- [Miscellaneous operating system interfaces](https://docs.python.org/2.7/library/os.html)
+- [How do I check if directory exists in Python?](https://stackoverflow.com/questions/8933237/how-do-i-check-if-directory-exists-in-python)

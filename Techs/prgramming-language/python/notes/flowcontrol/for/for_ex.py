@@ -17,3 +17,10 @@ for x in gen:
 print("4. using filter")
 for x in filter(lambda x:x not in set2, set1):
     print(x)
+
+list = []
+list.append([1,1])
+print(list)
+for e in list:
+    e.append(2)
+print(list)
