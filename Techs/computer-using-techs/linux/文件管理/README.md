@@ -1,3 +1,11 @@
+## 查看文件格式
+
+```
+[lianb]$ file delete_all.sh
+delete_all.sh: Bourne-Again shell script, ASCII text executable
+```
+如果是Windows下的文件，后面会带有`with CRLF line terminators`。之后就可以使用`dos2unix`或者`unix2dos`来进行格式的转换了。
+
 ## 清空文件
 
 对于`/var`目录的一些文件无法删除，比如这个目录下面有账户对应的`/var/spool/mail/lianb`，没用办法使用`rm`去删除，但可以使用`> /var/spool/mail/lianb`将其清空。
