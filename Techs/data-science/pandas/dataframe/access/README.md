@@ -1,5 +1,39 @@
 需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种理解方式与C/C++二维数组是不同的。
 
+
+## 获取行列对应的值
+
+*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
+
+- Dataframe.[ ] ; This function also known as indexing operator
+- Dataframe.loc[ ] : This function is used for labels.
+- Dataframe.iloc[ ] : This function is used for positions or integer based
+- Dataframe.ix[] : This function is used for both label and integer based
+
+获取某行某列的值仅仅是获取多行多列的值的简化形式。如上最后一种方法已经过时。
+
+```
+df['a'].iloc[0]
+
+data["Age"] # 选择列名为Age的一列
+data[["Age", "College", "Salary"]] # 选择列名为Age, College, Salary的三列
+
+data.loc["R.J. Hunter"] # 选择行名为R.J. Hunter的一行
+data.loc[["Avery Bradley", "R.J. Hunter"]] # 选择行名为Avery Bradley, R.J. Hunter的三行
+data.loc[["Avery Bradley", "R.J. Hunter"], ["Team", "Number", "Position"]] # 选择两行三列
+
+data.iloc[3] # 选择一行
+data.iloc [[3, 5, 7]] # 选择三行
+data.iloc [[3, 4], [1, 2]] # 选择两行两列
+
+df.loc[:, ['A', 'B']]
+```
+
+参考：
+
+- [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
+- [](https://stackoverflow.com/questions/28754603/indexing-pandas-data-frames-integer-rows-named-columns)
+
 ## 获取行列名
 
 通过`df.columns`选中所有列名。通过`df.index`选中所有行名。
@@ -121,40 +155,6 @@ sales_data.reset_index(drop = True)
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
 - [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
 
-
-## 获取多行多列
-
-```
-df.loc[:, ['A', 'B']]
-```
-
-## 获取某行某列的值
-
-*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
-
-- Dataframe.[ ] ; This function also known as indexing operator
-- Dataframe.loc[ ] : This function is used for labels.
-- Dataframe.iloc[ ] : This function is used for positions or integer based
-- Dataframe.ix[] : This function is used for both label and integer based
-
-获取某行某列的值仅仅是获取多行多列的值的简化形式。如上最后一种方法已经过时。
-
-```
-data["Age"] # 选择列名为Age的一列
-data[["Age", "College", "Salary"]] # 选择列名为Age, College, Salary的三列
-
-data.loc["R.J. Hunter"] # 选择行名为R.J. Hunter的一行
-data.loc[["Avery Bradley", "R.J. Hunter"]] # 选择行名为Avery Bradley, R.J. Hunter的三行
-data.loc[["Avery Bradley", "R.J. Hunter"], ["Team", "Number", "Position"]] # 选择两行三列
-
-data.iloc[3] # 选择一行
-data.iloc [[3, 5, 7]] # 选择三行
-data.iloc [[3, 4], [1, 2]] # 选择两行两列
-```
-
-参考：
-
-- [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
 
 ## DataFrame遍历
 

@@ -21,8 +21,7 @@ data = {'Name':['Lisha', 'Shelly', 'Greay', 'Leo', 'Marry'],
 df = pd.DataFrame(data)
 ```
 
-*注：在聚宽上测试发现字典的值可以是Series，这样创建出来的DataFrame会自动以Series里面所
-携带的index做为该DataFrame的index。*
+*注：在聚宽上测试发现字典的值可以是Series，这样创建出来的DataFrame会自动以Series里面所携带的index做为该DataFrame的index。*
 
 在使用字典来创建dataframe的时候有一个隐藏条件，也既是它默认字典的key-value为dataframe的列，也即是key为dataframe的column名，这个时候字典的value里面的元素个数要>1。否则会出现"ValueError: If using all scalar values, you must pass an index"这样的错误。
 
