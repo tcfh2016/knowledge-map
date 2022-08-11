@@ -76,11 +76,9 @@ patch < changes.patch
 
 ## 修改提交人信息 / amend author
 
-当你发现在当前仓库commit的修改使用了你不想使用的committer信息时，你可以通过三个步骤来修
-改它。
+当你发现在当前仓库commit的修改使用了你不想使用的committer信息时，你可以通过三个步骤来修改它。
 
-Step1：使用`git rebase -i SHA1`将修改的commit囊括进来，这里SHA1需要指定你需要修正的那
-条commit的前一条。
+Step1：使用`git rebase -i SHA1`将修改的commit囊括进来，这里SHA1需要指定你需要修正的那条commit的前一条。
 
 Step2：修改弹出的编辑框内的你需要修改的那条记录前的`pick`为`edit`，保存并退出。
 
@@ -113,9 +111,7 @@ git rebase --onto 672287559f8c9fc0de5d2c226669ddaf2380240b origin/trunk -i
 git reset "file or directory"
 ```
 
-通常来说，已经改动但是没有执行`git add`的文件处于“unstaged”状态，执行`git add`之后便处
-于"staged"状态。因此，这里的前一个命令是将"staged"状态的文件回退到"unstaged"状态，处于
-“unstaged”状态的文件可以直接通过`git checkout`来还原。
+通常来说，已经改动但是没有执行`git add`的文件处于“unstaged”状态，执行`git add`之后便处于"staged"状态。因此，这里的前一个命令是将"staged"状态的文件回退到"unstaged"状态，处于“unstaged”状态的文件可以直接通过`git checkout`来还原。
 
 如果是add了新的文件，那么这个时候取消需要执行`git rm -r --cached "file_name"`。
 
