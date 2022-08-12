@@ -3,6 +3,21 @@
 
 ## 获取行列对应的值
 
+1）单元格选取
+
+```
+# 行索引为数字，列索引为字符串
+df.iloc[0]['col']
+df['col'].iloc[0] #更快
+
+# 行、列索引均为字符串
+df.loc['row_name']['col_name']
+```
+
+怎么判断一个单元格是否存在呢？直接通过字符串索引去找：`row in df.index.values and col in df.columns.values`。
+
+
+
 *注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
 
 - Dataframe.[ ] ; This function also known as indexing operator
@@ -10,10 +25,11 @@
 - Dataframe.iloc[ ] : This function is used for positions or integer based
 - Dataframe.ix[] : This function is used for both label and integer based
 
+2）块选取
+
 获取某行某列的值仅仅是获取多行多列的值的简化形式。如上最后一种方法已经过时。
 
 ```
-df['a'].iloc[0]
 
 data["Age"] # 选择列名为Age的一列
 data[["Age", "College", "Salary"]] # 选择列名为Age, College, Salary的三列

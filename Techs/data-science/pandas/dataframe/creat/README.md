@@ -32,6 +32,12 @@ data = {'a': 1, 'b': 2}
 pd.Series(data).to_frame()
 ```
 
+如果我要将字典的键作为index, 值作为column呢？
+
+```
+df=pd.DataFrame(dict.items(), columns=['Case', 'First Fail Build'])
+df.set_index('Case', inplace=True)
+```
 
 ### 3.直接以SQL数据库、CSV、Excel文件做为数据源来创建它们
 
