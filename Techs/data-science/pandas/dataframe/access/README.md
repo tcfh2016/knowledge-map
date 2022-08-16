@@ -54,6 +54,9 @@ df.loc[:, ['A', 'B']]
 
 通过`df.columns`选中所有列名。通过`df.index`选中所有行名。
 
+*怎样获取对应行号的名字*
+
+list(df.index)：https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame
 
 ## 获取列
 
