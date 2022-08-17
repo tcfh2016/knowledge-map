@@ -5,7 +5,11 @@ df = pd.DataFrame([10, 20, 30, 40],
                   columns=['numbers'],
                   index=['a', 'b', 'c', 'd'])
 
-print(df[])
+print(df)
+print("df.index:{}".format(df.index))
+print("type of (df.index):{}".format(type(df.index)))
+print("df.columns:{}".format(df.columns))
+print("type of (df.columns):{}".format(type(df.columns)))
 
 df['floats'] = (1.5, 2.5, 3.5, 4.5)
 df['names1'] = ('Yves', 'Guido', 'Felix', 'Francesc')

@@ -52,11 +52,16 @@ df.loc[:, ['A', 'B']]
 
 ## 获取行列名
 
-通过`df.columns`选中所有列名。通过`df.index`选中所有行名。
+通过`df.columns`选中所有列名。通过`df.index`选中所有行名，但获取出来的并不是列表，而是Index对象，定义为`pandas.core.indexes.base.Index`。如果想要将它们提取为列表，那么就需要手动转换，如`list(df.index)`。
 
-*怎样获取对应行号的名字*
+Q1: 怎样获取数值索引对应行的名字？
 
-list(df.index)：https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame
+答：只需要将对应索引的行都选出来，选出来的这部分实际上是一个新的dataframe，所以就可以通过它的index得到其行名称，如`list(df.iloc[[0, 1, 3]].index)`表示先选择出第0，1，3行然后将其index转换为list。
+
+参考：
+
+- [How do I get the name of the rows from the index of a data frame?](https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame)
+
 
 ## 获取列
 
