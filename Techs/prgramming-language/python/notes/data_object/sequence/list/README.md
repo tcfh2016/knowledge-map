@@ -1,38 +1,26 @@
 ## 列表
 
-list是一种可以将多个数值组合在一起的复合数据类型，这些数值可以是不同的数据类型。当然list也可以内嵌包含。相比元组，列表可以在不复制的情况下添加、删除或修改元素。
+list是一种可以将多个数值组合在一起的复合数据类型，这些数值可以是不同的数据类型。当然list也可以内嵌包含。相比元组，列表可以在不复制的情况下添加、删除或修改元素。 `list`也是一个可变的序列。
 
-- len()获取长度。
+- list.append(elem)
+- len(list) 获取列表的长度。比如计算平均值 sum(list) / len(list),sum()属于内建函数。
+- a in list
+- a not in list
+- min(list)
+- max(list)
+- list.count(elem)
+- list.index(elem)
 - 使用方括号来定义，支持索引和切片。对列表进行分片时往往返回一个新的列表。
 - 定义包含单个元素的列表不需要逗号结尾。
+- list.sort() 默认升序的排序操作，可以通过`reverse=True`转换为降序，`key`来指定排序方法。
 - list.sort()和list.reverse()会就地修改列表，不会制作拷贝。
+- sorted(list)，排序，不会修改原字符串
 - list.extend(anotherlist)类似于 list.append(element)，在末尾添加元素，但前者添加整个列表。
+- list.pop(index)，默认移除最后一个元素
+- list.insert(index, elem)
+- list.remove(elem)
+- list.clear()
 
-常见方法
-
- - len(list) 获取列表的长度。比如计算平均值 sum(list) / len(list),sum()属于内建函数。
- - min(list)
- - max(list)
- - list.sort() 默认升序的排序操作，可以通过`reverse=True`转换为降序，`key`来指定排序方法。
-
-
- `list`也是一个可变的序列。常见方法：
-
- - list.append(elem)
- - list.pop(index)，默认移除最后一个元素
- - list.extend(new_list)，合并另一个列表
- - list.insert(index, elem)
- - list.remove(elem)
- - list.clear()
- - list.sort()，排序，会修改原字符串
- - list.reverse()
- - list.count(elem)
- - list.index(elem)
- - a in list
- - a not in list
- - min(list)
- - max(list)
- - sorted(list)，排序，不会修改原字符串
 
 
 ## 创建
@@ -66,7 +54,14 @@ lines = [line.rstrip() for line in open('script1.py') if line[0] == 'p']
 
 *`;`用来在一行代码里面分割不同的代码指令。*
 
-*如何一次性添加多个元素到列表？*
+Q1: 如何一次性添加多个元素到列表？
+
+答：使用`list.extend(anotherlist)`一次性将新的列表添加到原有列表中。使用`list.append(elem)`一次只能够添加一个元素。
+
+Q2：有没有直接通过“+”或“-”来进行列表的删除操作？
+
+答：很遗憾，亲自尝试，并没有。不过在[Python list subtraction operation](https://stackoverflow.com/questions/3428536/python-list-subtraction-operation)给出了两个思路：使用set（支持“-”操作和“|”操作），或者使用列表解析式（`[item for item in x if item not in y]`）。
+
 
 ## 列表拷贝
 
