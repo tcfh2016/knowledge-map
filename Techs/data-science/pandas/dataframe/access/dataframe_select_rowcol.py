@@ -15,6 +15,10 @@ print(df)
 print("按行名、列名选择区块：")
 print(df.loc[['b', 'c'], ['numbers']])
 
+print("按行、列索引选择单个元素：")
+print(df.iloc[1, 1])
+print(df.iloc[1][1])
+
 print("按行、列索引选择区块：")
 print(df.iloc[1:3, 1])
 print(df.iloc[1:3, 1:3])

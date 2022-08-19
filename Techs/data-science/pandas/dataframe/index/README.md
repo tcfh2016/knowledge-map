@@ -43,3 +43,7 @@ df.set_index('day')
 df.index.values.tolist() #ndarray
 list(df.index.values)
 ```
+
+##
+
+参考：https://www.statology.org/pandas-get-index-of-row/
