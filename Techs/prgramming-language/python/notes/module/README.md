@@ -54,6 +54,30 @@ reload(module)
 ...use module.attributes...
 ```
 
+## 模块
+
+模块由一系列相关函数和变量组成，通常存在于同一个文件里。模块用于编写其他程序因此通常没有
+main()函数。如果要使用某个模块里的函数或者变量需要将其 `import`到当前文件中，有如下两种
+方式：
+
+`1. 使用import语句`
+
+```
+import shapes
+
+shapes.square(5)
+```
+
+`2. 使用from ... import *语句`
+
+```
+from shapes import *
+
+square(5)
+```
+
+模块提供了不同的名称空间，因此能够避免命名冲突，但需要尽量避免使用如上第2种方式。
+
 ## 常见问题
 
 ### 如何import没有安装的模块

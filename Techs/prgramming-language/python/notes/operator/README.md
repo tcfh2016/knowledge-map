@@ -37,13 +37,3 @@ Python操作符可以分为如下7类：
 
 - `in`
 - `not in`
-
-# 常见问题
-
-## 1. Python 中是否存在条件表达式？
-
-没有严格的声明，但可以通过`a if condition else b`来模拟。
-
-参考：
-
--[Does Python have a ternary conditional operator?](https://stackoverflow.com/questions/394809/does-python-have-a-ternary-conditional-operator)
