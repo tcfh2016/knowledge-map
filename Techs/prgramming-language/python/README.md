@@ -9,7 +9,9 @@
 
 但是，如果你可能想要在UNIX及WINDOWS系统中都运行文件，经常采用基本的命令行方法非UNIX风格的脚本去运行程序将更简单。
 
-## 内容索引
+## 安装
+
+python distribution 和 Anaconda, Spyder。
 
 
 ## Q&A
