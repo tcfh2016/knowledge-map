@@ -41,7 +41,6 @@ myvar = pd.Series(a, index = ["w", "x", "y", "z"])
 print(myvar)
 
 输出为：
-
 w    1
 x    7
 y    2
