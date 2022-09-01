@@ -1,3 +1,9 @@
+## 什么是CSV
+
+CSV全称为[Comma-separated values](https://en.wikipedia.org/wiki/Comma-separated_values)
+
+
+
 ## 读取csv 调用`to_numeric()`出现`ValueError: Unable to parse string " " at position 0`错误
 
 读取lrb000898.csv, zcfzb000898.csv进行数据清洗、转换没有问题，但读取xjllb000898.csv的时候出现错误:

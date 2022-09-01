@@ -1,3 +1,4 @@
+
 ## 处理csv
 
 使用`index_col`来指定行标签：选择某列作为行标签，默认以从0开始递增的序号作为行标签，比如`df = pd.read_csv("f500.csv", index_col = 0)`就是从f500.csv里面读取数据并且将首列作为index使用。
