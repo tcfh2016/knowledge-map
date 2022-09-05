@@ -1,8 +1,6 @@
 # [多重索引（高级索引）/MultiIndex(advanced indexing)](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html#advanced)
 
-多重索引，也称为层次化索引（Hierarchical index），它可以支持对多维度数据的分析和操作。
-它通常用来进行grouping, selection,  reshaping操作，并且在从一些文件里面导入数据并且准
-备自己的数据集的时候你也通常需要使用多重索引来帮助操作。
+多重索引，也称为层次化索引（Hierarchical index），它可以支持对多维度数据的分析和操作。它通常用来进行grouping, selection,  reshaping操作，并且在从一些文件里面导入数据并且准备自己的数据集的时候你也通常需要使用多重索引来帮助操作。
 
 ## 创建多重索引对象
 
