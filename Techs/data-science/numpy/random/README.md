@@ -71,6 +71,4 @@ np.random.standard_normal(size=(3, 4, 2)) #生成包含3*4*2个随机值的三�
 
 [random.seed(seed=None)](https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.seed.html#numpy.random.seed)
 
-设定随机数生成器的种子，随机数生成算法依据第一个初始值（种子）来进行数字随机，不设置的时
-候默认以当前时间来生成随机数，因此可以保证随机数的随机性。基于相同种子所生成的实际上是伪
-随机序列。
+设定随机数生成器的种子，随机数生成算法依据第一个初始值（种子）来进行数字随机，不设置的时候默认以当前时间来生成随机数，因此可以保证随机数的随机性。基于相同种子所生成的实际上是伪随机序列。
