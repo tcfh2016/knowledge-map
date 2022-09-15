@@ -10,7 +10,7 @@
 - 方法
 
 
-### 字符串搜索
+## 字符串搜索
 
 字符串搜索仅进行完全匹配，你可以传入一个列表来进行多项匹配：
 
@@ -22,7 +22,7 @@ soup.find_all(["a", "b"]) # 查找所有的<a><b>标签
 调用`find_all`返回的类型是`'bs4.element.Tag'`。如果要获取
 
 
-### 正则表达式搜索
+## 正则表达式搜索
 
 正则表达式作为参数则按照正则的`match()`来匹配，下面的代码搜索所有以`b`开头的标签，即会找到`<body>`和`<b>`:
 
@@ -31,7 +31,7 @@ for tag in soup.find_all(re.compile("^b")):
   print(tag.name)
 ```
 
-### find_all
+## find_all
 
 find_all()的定义如下：
 
@@ -45,5 +45,7 @@ find_all( name , attrs , recursive , string , **kwargs )
 data_soup.find_all(attrs={"data-foo": "value"})
 # [<div data-foo="value">foo!</div>]
 ```
+
+*比如我想找到<h1 class="build-caption page-headline">...</h1>这个元素，可以使用soup.find_all(attrs={"class":"build-caption page-headline"}，或者使用soup.find_all(class_ = "build-caption page-headline"))*
 
 使用时还可以使用[`limit`参数](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#limit)，用来控制返回结果的数量，比如`soup.find_all("a", limit=2)`。
