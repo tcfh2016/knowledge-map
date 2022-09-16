@@ -21,3 +21,9 @@ test="false" data-imagesurl="/static/a48c6519/images" data-crumb-header="Jenkins
 参考：
 
 - [Requests: HTTP for Humans](https://requests.readthedocs.io/en/latest/
+
+## 如何消除warning打印
+
+参考：
+
+- [3 Ways to Fix InsecureRequestWarning in Python](https://www.howtouselinux.com/post/insecurerequestwarning-in-python-urllib3-requests)
