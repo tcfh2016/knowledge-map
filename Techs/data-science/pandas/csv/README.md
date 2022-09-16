@@ -23,9 +23,12 @@ df.to_csv(file_name, sep='\t', encoding='utf-8')
 
 DataFrameGroupBy 对象没有`to_csv()`函数，常见的使用是调用min()/sum()等接口返回 group里面的某个值，如此组成新的 DataFrame 对象。
 
+在写入中文时使用`utf-8`的编码方式依然会展示乱码，可以将其设置为`gb2312`来解决乱码问题：
+
 ```
 month_groups.min().reset_index().to_csv("000898_month_min.csv", sep=',', encoding='gb2312')
 ```
+
 
 参考：
 
