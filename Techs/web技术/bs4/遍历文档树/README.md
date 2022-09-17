@@ -21,7 +21,8 @@ from bs4 import BeautifulSoup
 soup = BeautifulSoup(html_doc, 'html.parser')
 ```
 
-### 通过tag名字来访问
+
+## 通过tag名字来访问
 
 操作文档树最简单的方法是指定对应的tag名字：
 
@@ -30,6 +31,7 @@ soup.head  # 获取<head>标签
 soup.title # 获取<title>标签
 soup.body.b # 获取<body>下第一个<b>标签
 ```
+
 
 ### .contents 和 .children
 
@@ -49,6 +51,7 @@ for child in title_tag.children:
   print(child)
 ```
 
-### .text() / .sring()
+
+### .text() / .string()
 
 通过.string()来访问tag中的字符串。
