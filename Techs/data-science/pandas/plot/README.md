@@ -23,14 +23,7 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 在新版本的plotting功能中DataFrame.plot已经被拆分为DataFrame.plot.line(), DataFrame.plot.area()
 等单独的子函数。
 
-## `figsize` 的使用
 
-另外可以通过`figsize `来设置总的大小。
-
-```
-dp = df_for_plot.plot(figsize=(2,2))
-plt.figure(figsize=(2,2))
-```
 
 ## 第二坐标
 
@@ -57,9 +50,11 @@ ax.right_ax.set_ylabel('AB scale')
 - [legend显示](./legend/README.md)
 - [subplot问题](./sub_plot/README.md)
 
-
-### pandas保存图片以inch为单位，但网页中以像素为单位，如何处理？
+## Matplotlib中的“plt”和“ax”到底是什么?
 
 参考：
 
-- [Specifying and saving a figure with exact size in pixels](https://stackoverflow.com/questions/13714454/specifying-and-saving-a-figure-with-exact-size-in-pixels)
+- [What Are the “plt” and “ax” in Matplotlib Exactly?](https://towardsdatascience.com/what-are-the-plt-and-ax-in-matplotlib-exactly-d2cf4bf164a9)
+- [Matplotlib中的“plt”和“ax”到底是什么?](https://zhuanlan.zhihu.com/p/221861683)
+
+

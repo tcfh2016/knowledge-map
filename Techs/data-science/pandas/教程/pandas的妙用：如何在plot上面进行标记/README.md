@@ -71,3 +71,56 @@ df.plot(y='market_cap', figsize=(10,5))
 
 ![](./specify_size_column.png)
 
+
+## 标注
+
+我们在上面已经画出了图形，那么接下来就可以使用[matplotlib.pyplot.annotate](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.annotate.html)，它的完整定义如下：
+
+```
+matplotlib.pyplot.annotate(text, xy, xytext=None, xycoords='data', textcoords=None, arrowprops=None, annotation_clip=None, **kwargs)
+```
+
+几个主要参数如下：
+
+- `text`：想要标注的文本
+- `xy`：标注点的坐标，坐标系统通过后面的`xycoords`参数来指定，默认为'data'
+- `xytext`：标注文本的坐标
+
+这几个参数因为没有默认值，所以是必须要指定的，所以开头先试试这三个参数的使用效果。
+
+既然我现在想要做的是标注市值的最大值和最小值，那么必须先要把最大值、最小值的位置（坐标）找到。还记得在《pandas的妙用：快速定位最大值最小值》已经介绍过的方法吗？我们可以用已有的函数来快速找到对应的位置（坐标）。
+
+```
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']
+
+axesSubplot = df.plot(y='market_cap', figsize=(10,5))
+df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')
+
+y_mc_max = df['market_cap'].max()
+x_mc_max = df['market_cap'].idxmax()
+
+y_mc_min = df['market_cap'].min()
+x_mc_min = df['market_cap'].idxmin()
+
+axesSubplot.annotate(text="最大值", 
+                     xy=(x_mc_max, y_mc_max),
+                     xytext=(x_mc_max, y_mc_max))
+axesSubplot.annotate(text="最小值", 
+                     xy=(x_mc_min, y_mc_min),
+                     xytext=(x_mc_min, y_mc_min))
+```
+
+于是，我们得到了这样一幅图：
+
+![](./first_annotated_plot.png)
+
+有两点需要说明：
+
+1. 中文乱码。标注文本默认不支持中文，会有乱码。可以通过设置`plt.rcParams['font.sans-serif'] = ['SimHei']`（将默认字体设置为黑体）来解决。
+2. x轴坐标，也就是DataFrame的index值不能为字符串类型，否则会提示“Failed to convert value(s) to axis units”的错误，这也是上面代码里面有一行`df.index = pd.to_datetime(df.index, format = '%Y-%m-%d')`的原因：将原来的字符串转换成Timestamp类型。
+
+
+参考：
+
+- [这里](https://matplotlib.org/stable/tutorials/text/annotations.html#id1)。
