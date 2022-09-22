@@ -10,7 +10,7 @@ headers = {
 'User-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW 64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 QIHU 360SE'
 }
 
-proxies = {"http":"http://10.144.1.10:8080"}
+proxies = {"http":"http://10.1.1.10:8080"}
 
 r = requests.get("https://danjuanfunds.com/djapi/index_eva/dj", proxies=proxies, headers=headers)
 #print(r.text)

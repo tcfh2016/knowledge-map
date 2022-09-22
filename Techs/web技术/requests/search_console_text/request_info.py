@@ -5,7 +5,7 @@ import datetime
 import re
 
 proxies = {
-  "http": "https://10.1.1.10:8080",
+  "http": "https://10.144.1.10:8080",
 }
 
 '''
@@ -27,7 +27,7 @@ requests.packages.urllib3.disable_warnings()
 
 url = "https://ece-ci.dynamic.nsn-net.net/job/MASTER/job/GNB/job/UPLANE/job/L2-LO/job/SCT.fuse.asib_abio/32553/console"
 res = requests.get(url, proxies=proxies, verify=False)
-with open("text.txt", "w", encoding="utf-8") as f:
+with open("ci_job.txt", "w", encoding="utf-8") as f:
     f.write(res.text)
 
 bs = BeautifulSoup(res.text, 'html.parser')
@@ -35,3 +35,8 @@ s = bs.find(string=re.compile("\'ZUUL_CHANGE\'"))
 print(s)
 gerrit_id = str(s).split(":")[1].split("'")[1]
 print(gerrit_id)
+
+gerrit_url = "https://gerrit.ext.net.nokia.com/gerrit/c/MN/5G/NB/gnb/+/" + gerrit_id
+g = requests.get(gerrit_url, proxies=proxies, verify=False)
+with open("gerrit.txt", "w", encoding="utf-8") as f:
+    f.write(g.text)
