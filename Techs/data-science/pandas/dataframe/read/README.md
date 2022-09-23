@@ -1,3 +1,15 @@
+## 获取列
+
+通过方括号`[]`，可以将 DataFrame的列获取为一个Series。多列的选取需要将多个列的名称作为列表放在方括号中。
+
+```
+df['Age'] # 选取单列
+df[['Age','Name']] # 选取多列
+df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成，比如‘start time’就无法工作了。
+```
+
+*那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。*
+
 需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种理解方式与C/C++二维数组是不同的。
 
 
@@ -50,32 +62,7 @@ df.loc[:, ['A', 'B']]
 - [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
 - [](https://stackoverflow.com/questions/28754603/indexing-pandas-data-frames-integer-rows-named-columns)
 
-## 获取行列名
 
-通过`df.columns`选中所有列名。通过`df.index`选中所有行名，但获取出来的并不是列表，而是Index对象，定义为`pandas.core.indexes.base.Index`。如果想要将它们提取为列表，那么就需要手动转换，如`list(df.index)`。
-
-Q1: 怎样获取数值索引对应行的名字？
-
-答：只需要将对应索引的行都选出来，选出来的这部分实际上是一个新的dataframe，所以就可以通过它的index得到其行名称，如`list(df.iloc[[0, 1, 3]].index)`表示先选择出第0，1，3行然后将其index转换为list。
-
-参考：
-
-- [How do I get the name of the rows from the index of a data frame?](https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame)
-
-
-## 获取列
-
-通过类似字典标记或属性的方式，可以将 DataFrame的列获取为一个 Series。多列的选取需要指定多个列的名称，切片默认用来选取多行，因此想要在多列选取的时候使用切片必须采用`混合索引/同时选择行和列`的方式，即`obj.ix[val1,val2]`，在val2里使用切片。
-
-```
-df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成，比如‘start time’就无法工作了。
-df['Age'] # 选取单列
-df[['Age','Name']] # 注意多列
-```
-
-一次性指定多个列的名称可以同时选中两列，比如如上例子里面`df['Name', 'Age']`。
-
-*那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。*
 
 ## 获取行
 
@@ -180,6 +167,16 @@ sales_data.reset_index(drop = True)
 - [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
 
 
+Q1: 怎样获取数值索引对应行的名字？
+
+答：只需要将对应索引的行都选出来，选出来的这部分实际上是一个新的dataframe，所以就可以通过它的index得到其行名称，如`list(df.iloc[[0, 1, 3]].index)`表示先选择出第0，1，3行然后将其index转换为list。
+
+参考：
+
+- [How do I get the name of the rows from the index of a data frame?](https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame)
+
+
+
 ## DataFrame遍历
 
 
@@ -263,35 +260,3 @@ for i in range(len(df)) :
 - [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
 
 
-
-## DataFrame 查询
-
-1.判断DataFrame是否为空
-
-```
-if df.empty:
-    print('DataFrame is empty!')
-
-len(df.index) == 0    
-```
-
-参考：
-
-- [How to check whether a pandas DataFrame is empty?](https://stackoverflow.com/questions/19828822/how-to-check-whether-a-pandas-dataframe-is-empty)
-
-2.根据某列的值查询对应的index
-
-因为index是行索引，引起可以借助条件选择的功能选择特定的行，然后再获取结果的index属性：
-
-```
-stocks_df[stocks_df['display_name'] == '洋河股份'].index
-结果为：Index(['002304.XSHE'], dtype='object')
-
-stocks_df[stocks_df['display_name'] == '洋河股份'].index.item()
-结果为：002304.XSHE
-```
-
-参考：
-
-- [Python Pandas: Get index of rows which column matches certain value](https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-which-column-matches-certain-value)
-- [Get index of a row of a pandas dataframe as an integer](https://stackoverflow.com/questions/41217310/get-index-of-a-row-of-a-pandas-dataframe-as-an-integer/41217335)

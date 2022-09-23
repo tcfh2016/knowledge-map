@@ -3,14 +3,9 @@
 直接赋值，如下将DataFrame的index修改为其中的某一列：
 
 ```
-min_max_df.index = min_max_df['日期'] # 之前的'日期'列依然存在
-min_max_df = min_max_df.set_index('日期', drop=True) #
-
-# 这种方式复写之前的index后，索引的名字也不见了。
-# 使用 df.index.name = xx 来写入。
-df.index = [1, 2, 3, 4]
+df.index = df['日期'] # 之前的'日期'列依然存在
+df = df.set_index('日期', drop=True) #
 ```
-
 
 *注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建新的DataFrame。*
 *注2：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
@@ -18,6 +13,7 @@ df.index = [1, 2, 3, 4]
 参考：
 
 - [Remove index name in pandas](https://stackoverflow.com/questions/29765548/remove-index-name-in-pandas)
+
 
 ## 修改列名
 
