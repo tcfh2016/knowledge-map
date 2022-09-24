@@ -1,13 +1,3 @@
-# 常用函数
-
-## [pandas.DataFrame.cumprod](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.cumprod.html)
-
-这个函数是用来计算"cumulative product"，计算的是累乘的值。对于DataFrame调用`df.cumprod()`会逐步迭代每行，然后按照列进行累积的计算，而使用`df.cumprod(axis=1)`则按列迭代，计算行内的累积。
-
-参考：
-
-- [numpy.cumprod() in Python](https://www.geeksforgeeks.org/numpy-cumprod-in-python/)
-
 ## [pandas.DataFrame.groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html)
 
 函数`groupby`是对DataFrame进行分组，这个分组的操作通常仅仅是一系列操作中的排头阵。也就是说，我们在应用`groupby`这个函数不仅是“为了分组而分组”，而是“为了更重要的目的不得不先进行分组”。
