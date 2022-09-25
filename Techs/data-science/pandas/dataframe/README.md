@@ -9,9 +9,13 @@ DataFrame可被看做是由Series组成的字典（共用同一个索引）。
 DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
 
 
+*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
+
+
 ## 属性
 
 - df.shape，显示行、列信息。
+- df.size，返回的是行列相乘的数值
 - df.dtypes，显示行的类型。
 - df.index，获取行标签，Index对象，`list(df.index)`可转成列表。
 - df.columns，获取列标签，Index对象，`list(df.columns)`可转成列表。
@@ -43,3 +47,4 @@ for col in float_df:
 ```
 
 通过`print(df.dtypes)`打印DataFrame各列的类型。
+

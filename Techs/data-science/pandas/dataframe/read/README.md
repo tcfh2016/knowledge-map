@@ -1,4 +1,4 @@
-## 获取列
+## 获取列：方括号`[]`
 
 通过方括号`[]`，可以将 DataFrame的列获取为一个Series。多列的选取需要将多个列的名称作为列表放在方括号中。
 
@@ -13,9 +13,33 @@ df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成�
 需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种理解方式与C/C++二维数组是不同的。
 
 
-## 获取行列对应的值
+## 获取列的另一种方式：`loc()`和`iloc`
 
-1）单元格选取
+通过`loc()`和`iloc`属性我们可以很方便的获取列、行、以及行列对应的值，语法为`loc[行标签, 列标签]`。它们之间的不同之处在于，前者需要使用行列标签，后者需要使用位置索引。
+
+1）获取列
+
+```
+df.loc['a', :] # 获取'a'行
+df.loc[['a', 'b'], :] # 获取'a', 'b'两行
+
+df.loc['a'] # 获取'a'行
+df.loc[['a', 'b']] # 获取'a', 'b'两行
+
+df.iloc[3] # 选择一行
+df.iloc [[3, 5, 7]] # 选择三行
+```
+
+2）获取行
+
+```
+df.loc[:, 'a']  # 获取'a'列
+df.loc[:, ['a', 'b']] # 获取'a', 'b'两列
+
+
+```
+
+3）获取行列
 
 ```
 # 行索引为数字，列索引为字符串
@@ -24,38 +48,13 @@ df['col'].iloc[0] #更快
 
 # 行、列索引均为字符串
 df.loc['row_name']['col_name']
+df.loc['row_name', 'col_name']
+
+data.iloc [[3, 4], [1, 2]] # 选择两行两列
 ```
 
 怎么判断一个单元格是否存在呢？直接通过字符串索引去找：`row in df.index.values and col in df.columns.values`。
 
-
-
-*注：DataFrame的单一行或者列均是Series类型，只不过index不同：DataFrame行的index为DataFrame的columns名称，DataFrame列的index为DataFrame的index*
-
-- Dataframe.[ ] ; This function also known as indexing operator
-- Dataframe.loc[ ] : This function is used for labels.
-- Dataframe.iloc[ ] : This function is used for positions or integer based
-- Dataframe.ix[] : This function is used for both label and integer based
-
-2）块选取
-
-获取某行某列的值仅仅是获取多行多列的值的简化形式。如上最后一种方法已经过时。
-
-```
-
-data["Age"] # 选择列名为Age的一列
-data[["Age", "College", "Salary"]] # 选择列名为Age, College, Salary的三列
-
-data.loc["R.J. Hunter"] # 选择行名为R.J. Hunter的一行
-data.loc[["Avery Bradley", "R.J. Hunter"]] # 选择行名为Avery Bradley, R.J. Hunter的三行
-data.loc[["Avery Bradley", "R.J. Hunter"], ["Team", "Number", "Position"]] # 选择两行三列
-
-data.iloc[3] # 选择一行
-data.iloc [[3, 5, 7]] # 选择三行
-data.iloc [[3, 4], [1, 2]] # 选择两行两列
-
-df.loc[:, ['A', 'B']]
-```
 
 参考：
 
@@ -64,24 +63,7 @@ df.loc[:, ['A', 'B']]
 
 
 
-## 获取行
-
-行的选取有三种方式：`loc`方法、切片和布尔索引（Boolean indexing）。
-
-**1.使用`loc`方法**
-
-使用`loc`方法通常用来进行单行索引，在选择多行时语法上与列有些类似。
-
-```
-df = pd.DataFrame([10, 20, 30, 40],
-                  columns=['numbers'],
-                  index=['a', 'b', 'c', 'd'])
-
-print(df.loc['b'])        # 通过索引访问元素，之前是df.ix['b']，已不推荐使用旧的方法。
-print(df.loc[['a', 'b']]) # 索引'a', 'b'两行。
-```
-
-**2.使用切片**
+## 使用切片
 
 切片支持行名称和行序号来确定范围（*DataFrame仅能用行进行切片*）：
 
@@ -90,7 +72,8 @@ print(df['a':'c'])        # 索引'a', 'b', 'c'三行。
 print(df[0:1])            # 索引'a'一行数据。
 ```
 
-**3.使用布尔索引**
+
+## 使用布尔索引
 
 根据列的条件来进行选择，这种方式是pandas所独有的方式。
 
@@ -174,89 +157,3 @@ Q1: 怎样获取数值索引对应行的名字？
 参考：
 
 - [How do I get the name of the rows from the index of a data frame?](https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame)
-
-
-
-## DataFrame遍历
-
-
-## 三、遍历
-
-1.简单遍历
-
-对于Series, Dataframe的遍历操作如下：
-
-```
-for c in ufo.city:
-  print(c)
-
-for index, row in ufo.interrows():
-  print(index, row.City, row.State) # 打印City, State
-
-```
-
-2.通过多列的值来进行行选取操作
-
-比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
-
-```
-                               002352     600233
-报告日期
-货币资金(万元)               1613112.0   406144.0
-结算备付金(万元)                   0.0        0.0
-拆出资金(万元)                     0.0        0.0
-交易性金融资产(万元)               1444.0       79.0
-衍生金融资产(万元)                  0.0        0.0
-```
-
-学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以对这两列的内容进行求与操作来构建这样的series：
-
-```
-filter_condition = [True] * len(self.balance_df[0]['2018-12-31'])
-for i in range(len(self.args.stock)):
-    s = self.args.stock[i]
-    self.multi_stocks_asset_df[s] = self.balance_df[i]['2018-12-31']
-    filter_condition &= self.multi_stocks_asset_df[s] > 0
-
-df_for_plot = self.multi_stocks_asset_df[filter_condition]
-```
-
-学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
-
-```
-df_for_plot = self.multi_stocks_asset_df[condition1 & condition2]
-```
-
-而对于单列多条件的选取，可以使用简便的方式:
-
-```
-movies[(movies.genre=='Crime') | (movies.genre=='Drama') | (movies.genre=='Action')]
-movies[movies.genre.isin(['Crime', 'Drama', 'Action'])]
-```
-
-查看[How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)知道看起来简单的方案，但是效率似乎比较低。
-
-```
-df = pd.DataFrame({'c1': [10, 11, 12], 'c2': [100, 110, 120]})
-
-for index, row in df.iterrows():
-    print(row['c1'], row['c2'])
-```
-
-好在[Different ways to iterate over rows in Pandas Dataframe](https://www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/)这里有其他方案：
-
-```
-for ind in df.index:
-     print(df['Name'][ind], df['Stream'][ind])
-
-for i in range(len(df)) :
-  print(df.loc[i, "Name"], df.loc[i, "Age"])
-```
-
-
-参考：
-
-- [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
-- [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
-
-
