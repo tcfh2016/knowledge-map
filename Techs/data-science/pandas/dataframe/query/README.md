@@ -30,3 +30,8 @@ stocks_df[stocks_df['display_name'] == '洋河股份'].index.item()
 
 - [Python Pandas: Get index of rows which column matches certain value](https://stackoverflow.com/questions/21800169/python-pandas-get-index-of-rows-which-column-matches-certain-value)
 - [Get index of a row of a pandas dataframe as an integer](https://stackoverflow.com/questions/41217310/get-index-of-a-row-of-a-pandas-dataframe-as-an-integer/41217335)
+
+
+## 怎么判断一个单元格是否存在呢？
+
+直接通过字符串索引去找：`row in df.index.values and col in df.columns.values`。

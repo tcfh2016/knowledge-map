@@ -46,3 +46,20 @@ print (df['col'] == 1).sum()
 参考：
 
 - [count the frequency that a value occurs in a dataframe column](https://stackoverflow.com/questions/22391433/count-the-frequency-that-a-value-occurs-in-a-dataframe-column)
+
+
+## pandas.read_csv 分行统计
+
+按照每个月份、年份进行统计。
+
+```
+df = pd.read_csv("000898.csv", encoding="gb2312", dayfirst=True, usecols = ["日期", "总市值"])
+df["日期"] = pd.to_datetime(df["日期"])
+df["年"] = df["日期"].dt.year
+df["月"] = df["日期"].dt.month
+
+groups = df.groupby(["年", "月"])
+```
+
+- [python pandas extract year from datetime](https://stackoverflow.com/questions/30405413/python-pandas-extract-year-from-datetime-dfyear-dfdate-year-is-not)
+- [Python: Datetime to season](https://stackoverflow.com/questions/44124436/python-datetime-to-season)
