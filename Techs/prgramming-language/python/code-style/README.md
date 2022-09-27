@@ -26,7 +26,7 @@ if (width == 0 and height == 0 and
    color == 'red' and emphasis == 'strong'):
 ```
 
-2）超行的是`with`语句
+2）超行的是`with`语句 或者 if语句
 
 `with`语句换行时需要添加`\`来另起一行，比如：
 
