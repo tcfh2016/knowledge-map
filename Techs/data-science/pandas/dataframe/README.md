@@ -23,8 +23,6 @@ DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
 *使用`len(df)`所打印出来的是df具有的行个数。*
 
 
-
-
 ## 方法
 
 - DataFrame.head() ：默认显示前面5行的数据。
