@@ -16,3 +16,4 @@ total_operating_revenue  total_operating_cost  total_profit  np_parent_company_o
 0              586157056.0           286812384.0   341199296.0               256545872.0
 ```
 
+上面这种方式的“合并”实际上是需要在列的方向上进行连接，可以使用`concat()`函数。由于每个DataFrame的行标签都是“0”，所以需要在连接之前或者连接之后进行更改。
