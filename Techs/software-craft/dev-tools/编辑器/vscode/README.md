@@ -1,7 +1,4 @@
-## VSCODE
-
-
-### 搜索
+## 搜索
 
 搜索函数的时候可能将所有文件的匹配项都显示出来，不过有些时候我们需要过滤掉一些搜索路径，这个时候该如何处理？
 
@@ -10,14 +7,14 @@
 ![](./serach_details.png)
 
 
-### 快捷键
+## 快捷键
 
 1）编辑
 
-列编辑：shift + alt + 鼠标
-control + shift + alt + 方向键
+- 列编辑：shift + alt + 鼠标
+- 列编辑：control + shift + alt + 方向键
 
-代码阅读：
+2）代码阅读：
 
 - `ctrl + left`: 定义跳转
 - `shift + f12`：搜索reference
@@ -25,15 +22,16 @@ control + shift + alt + 方向键
 - `ctrl + shift + o`: 本文件符号搜索
 - `ctrl + p`：搜索文件
 - `ctrl + shift + F`: 全局搜索字符串
-
 - `alt + left`：后退
 - `alt + right`：前进
-
 - `Ctrl+Shift+P`：打开“Command Palette”来访问所有的命令
+
 
 参考：
 
 - [Search features in Visual Studio Code](https://dev.to/codevault/search-features-in-visual-studio-code-2a0c)
+- [VSCode column selection with keyboard](https://stackoverflow.com/questions/43502589/vscode-column-selection-with-keyboard)
+
 
 ## Q&A
 
