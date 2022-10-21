@@ -36,6 +36,7 @@ XPath是专门应用在XML文档里面搜索节点的语言，XPath支持根据i
 
 > You can also look for a link by its text, but be careful! The text must be an exact match! You should also be careful when using XPATH in WebDriver. If there’s more than one element that matches the query, then only the first will be returned. If nothing can be found, a NoSuchElementException will be raised.
 
+
 ## 如何实现精准匹配？
 
 比如在一个html页面里面有class为“inline v-line”和“inline”的两种元素，当使用`find_elements_by_class_name('inline')`来找到所有“inline”的元素的时候会连“inline v-line”一起找出来了：

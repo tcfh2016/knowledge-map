@@ -140,3 +140,56 @@ t: No settings file exists, new profile?" (new NotFoundError("Could not open the
 1632821036666	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
 1632821066187	Marionette	INFO	Stopped listening on port 63283
 JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+1666318181073	geckodriver	INFO	Listening on 127.0.0.1:64253
+1666318184122	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile8LMZ3E"
+1666321882377	geckodriver	INFO	Listening on 127.0.0.1:51896
+1666321885456	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilenANW2t"
+1666321885946	Marionette	INFO	Marionette enabled
+1666321885954	Marionette	INFO	Listening on port 51907
+1666321886131	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilenANW2t\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://login.microsoftonline.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cn.bing.com."
+1666328730823	Marionette	INFO	Stopped listening on port 51907
+6322634354	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileHpmjNL"
+1666322634881	Marionette	INFO	Marionette enabled
+1666322634888	Marionette	INFO	Listening on port 52699
+1666322635559	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileHpmjNL\\search.json.mozlz4", (void 0)))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+1666322679916	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1666323165005	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: timeout
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+1666328731938	Marionette	INFO	Stopped listening on port 52699
+G\\search.json.mozlz4", (void 0)))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+1666322849450	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1666323313558	addons.xpi	ERROR	System addon update list error Error: Failed downloading XML, status: 0, reason: timeout
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 768))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 420))
+1666328545173	Marionette	INFO	Stopped listening on port 52835
+1666328715763	geckodriver	INFO	Listening on 127.0.0.1:57052
+1666328718855	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileXCp0Ge"
+1666328719318	Marionette	INFO	Marionette enabled
+1666328719325	Marionette	INFO	Listening on port 57063
+1666328719471	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileXCp0Ge\\search.json.mozlz4", (void 0)))
+JavaScript error: https://media.ethicalads.io/media/client/v1.4.0/ethicalads.min.js, line 1: Error: No ad placements found.
+1666328726706	Marionette	INFO	Stopped listening on port 57063
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1666328890820	geckodriver	INFO	Listening on 127.0.0.1:57226
+1666328893880	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilebOwBfB"
+1666328894349	Marionette	INFO	Marionette enabled
+1666328894357	Marionette	INFO	Listening on port 57237
+1666328894521	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilebOwBfB\\search.json.mozlz4", (void 0)))
+JavaScript error: https://media.ethicalads.io/media/client/v1.4.0/ethicalads.min.js, line 1: Error: No ad placements found.
+1666328901867	Marionette	INFO	Stopped listening on port 57237
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]

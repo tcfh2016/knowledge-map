@@ -47,12 +47,19 @@ for tag in soup.find_all(re.compile("^b")):
 
 ## string参数
 
-指定搜索的字符串，比如使用`bs.rind(string=re.compile('ZUUL_CHANGE'))`搜索第一个包含`ZUUL_CHANGE`的内容，返回的内容是`NavigableString`的类型。
+指定搜索的字符串，比如使用`bs.find(string=re.compile('ZUUL_CHANGE'))`搜索第一个包含`ZUUL_CHANGE`的内容，返回的内容是`NavigableString`的类型。
 
 如果想在Beautiful Soup之外使用 NavigableString 对象,需要调用 unicode() 方法,将该对象转换成普通的Unicode字符串,否则就算Beautiful Soup已方法已经执行结束,该对象的输出也会带有对象的引用地址，会浪费内存。
 
 *注：在使用`unicode()`的时候碰到了`NameError: name 'unicode' is not defined`的错误，这是因为在python 3.8.2之后unicode()已经不再支持，直接使用`str()`就行了。*
 
+下面的内容使用`bs.find_all(string=re.compile(".*\"https://ece-ci.dynamic.nsn-net.net/job/MASTER/job/GNB/job/UPLANE/job/L2-LO/job/SCT.fuse.asib_abio/.*"))`来查找还找不到，但使用`bs.find_all(string=re.compile(".*https://ece-ci.dynamic.nsn-net.net/job/MASTER/job/GNB/job/UPLANE/job/L2-LO/job/SCT.fuse.asib_abio/.*"))`就能够查找到内容，为什么呢？
+
+```
+ <span id="output" class="style-scope gr-linked-text"><a href="https://ece-ci.dynamic.nsn-net.net/job/MASTER/job/GNB/job/UPLANE/job/L2-LO/job/SCT.fuse.asib_abio/37424/" target="_blank" rel="noopener" class="style-scope gr-linked-text">https://ece-ci.dynamic.nsn-net.net/job/MASTER/job/GNB/job/UPLANE/job/L2-LO/job/SCT.fuse.asib_abio/37424/</a> : CANCELLED</span>
+```
+
+原因应该在于bs里面的搜索并不仅仅是包括tag的纯文本，而是除开tag之外的纯文本，所以我们可以使用`bs.find_all("a", string=re.compile(".*https://ece-ci.dynamic.nsn-net.net/job/MASTER/job/GNB/job/UPLANE/job/L2-LO/job/SCT.fuse.asib_abio/.*"))`来达到目的。
 
 参考：
 

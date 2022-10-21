@@ -40,4 +40,5 @@ res = requests.get(url, proxies=proxies, verify=False)
 
 参考：
 
-- [](https://www.reddit.com/r/learnpython/comments/fa5ms5/requests_vs_selenium/)
+- [Requests vs selenium](https://www.reddit.com/r/learnpython/comments/fa5ms5/requests_vs_selenium/)
+- [请问下 python 中，selenium 请求网页和 request\.get 获取网页的区别？](https://youle.zhipin.com/questions/22a8917e926db5bbtnZ63NS7E1A~.html)

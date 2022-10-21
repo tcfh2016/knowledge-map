@@ -1,0 +1,63 @@
+1666329499826	geckodriver	INFO	Listening on 127.0.0.1:57753
+1666329502884	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileFbRC9y"
+1666329503417	Marionette	INFO	Marionette enabled
+1666329503424	Marionette	INFO	Listening on port 57769
+1666329504243	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileFbRC9y\\search.json.mozlz4", (void 0)))
+1666330893036	Marionette	INFO	Stopped listening on port 57769
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+nette enabled
+1666329683211	Marionette	INFO	Listening on port 57935
+1666329683826	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileRwx98N\\search.json.mozlz4", (void 0)))
+1666329715480	Marionette	INFO	Stopped listening on port 57935
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1666329931994	geckodriver	INFO	Listening on 127.0.0.1:58163
+1666329935133	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofiled35TLV"
+1666329935959	Marionette	INFO	Marionette enabled
+1666329935966	Marionette	INFO	Listening on port 58174
+1666329936314	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofiled35TLV\\search.json.mozlz4", (void 0)))
+1666330896353	Marionette	INFO	Stopped listening on port 58174
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+nette enabled
+1666330061156	Marionette	INFO	Listening on port 58312
+1666330061763	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilePeGjGz\\search.json.mozlz4", (void 0)))
+1666330096512	Marionette	INFO	Stopped listening on port 58312
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1666332886238	geckodriver	INFO	Listening on 127.0.0.1:60353
+1666332889278	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile9XPie0"
+1666332889896	Marionette	INFO	Marionette enabled
+1666332889905	Marionette	INFO	Listening on port 60364
+1666332890670	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile9XPie0\\search.json.mozlz4", (void 0)))
+JavaScript error: https://ece-ci.dynamic.nsn-net.net/static/dc9cb1a9/jsbundles/filter-build-history.js, line 1: TypeError: i is undefined
+1666333110462	Marionette	INFO	Stopped listening on port 60364
+ofile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilejYOmUG"
+1666333020024	Marionette	INFO	Marionette enabled
+1666333020032	Marionette	INFO	Listening on port 60568
+1666333020627	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilejYOmUG\\search.json.mozlz4", (void 0)))
+1666333042770	Marionette	INFO	Stopped listening on port 60568
+1666334385004	geckodriver	INFO	Listening on 127.0.0.1:61568
+1666334388030	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileoOn7Qc"
+1666334388559	Marionette	INFO	Marionette enabled
+1666334388570	Marionette	INFO	Listening on port 61579
+1666334389191	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileoOn7Qc\\search.json.mozlz4", (void 0)))
+1666334411292	Marionette	INFO	Stopped listening on port 61579
+1666335170263	geckodriver	INFO	Listening on 127.0.0.1:62173
+1666335173304	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofiler0yX8r"
+1666335173823	Marionette	INFO	Marionette enabled
+1666335173830	Marionette	INFO	Listening on port 62183
+1666335174424	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofiler0yX8r\\search.json.mozlz4", (void 0)))
+1666335196503	Marionette	INFO	Stopped listening on port 62183
+1666335593159	geckodriver	INFO	Listening on 127.0.0.1:62540
+1666335596229	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile1WoB9K"
+1666335596747	Marionette	INFO	Marionette enabled
+1666335596754	Marionette	INFO	Listening on port 62552
+1666335596903	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile1WoB9K\\search.json.mozlz4", (void 0)))
+1666335619442	Marionette	INFO	Stopped listening on port 62552

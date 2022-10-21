@@ -45,3 +45,36 @@ options参数用来配置浏览器启动时的属性：
 
 - [python+selenium+Chrome options参数](https://www.cnblogs.com/guapitomjoy/p/12150416.html)
 - [Class: Selenium::WebDriver::Firefox::Options](https://www.selenium.dev/selenium/docs/api/rb/Selenium/WebDriver/Firefox/Options.html)
+
+
+## 使用代理（proxy）
+
+可以通过如下方式来配置代理，*值得注意的是，配置端口号的时候一定是整形，比如在network.proxy.http_port后面设定为`'8080'`是错误的，相当于设置的代理没有生效，会造成无法访问的结果。*
+
+```
+profile = webdriver.FirefoxProfile()
+settings = {
+    'network.proxy.type': 1,  # 0: 不使用代理；1: 手动配置代理
+    'network.proxy.http': '10.144.1.10',
+    'network.proxy.http_port': 8080,
+    'network.proxy.ssl': '10.144.1.10',  # https的网站,
+    'network.proxy.ssl_port': 8080,
+}
+
+for key, value in settings.items():
+    profile.set_preference(key, value)
+profile.update_preferences()
+
+driver = webdriver.Firefox(firefox_profile=profile)
+driver.get("http://www.python.org")
+```
+
+
+参考：
+
+- [Running Selenium Webdriver with a proxy in Python](https://stackoverflow.com/questions/17082425/running-selenium-webdriver-with-a-proxy-in-python)
+
+
+## 获取整个页面内容
+
+在打开的页面内容加载完成之后，那么我们可以通过`driver.page_source`获取整个页面内容。
