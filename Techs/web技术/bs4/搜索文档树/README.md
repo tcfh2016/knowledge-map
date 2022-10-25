@@ -44,6 +44,11 @@ for tag in soup.find_all(re.compile("^b")):
 
 *比如我想找到<h1 class="build-caption page-headline">...</h1>这个元素，可以使用soup.find_all(attrs={"class":"build-caption page-headline"}，或者使用soup.find_all(class_ = "build-caption page-headline"))*
 
+为什么上面在按照`class`搜索的时候需要使用到`class_`关键字呢？
+
+bs支持[按CSS搜索tag](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#css)的功能，但因为`class`关键字是Python的保留字，如果使用这个搜索会有语法错误。
+
+
 
 ## string参数
 
@@ -64,3 +69,8 @@ for tag in soup.find_all(re.compile("^b")):
 参考：
 
 - [Error NameError: name 'unicode' is not defined in Python](https://quizdeveloper.com/faq/error-nameerror-name-unicode-is-not-defined-in-python-aid2312)
+
+
+## [find_parents() 和 find_parent()](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#find-parents-find-parent)
+
+`find_parent()`是查找当前节点的父节点，而`find_parents()`是一层一层往上查找。
