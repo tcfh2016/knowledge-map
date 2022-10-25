@@ -193,3 +193,13 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 JavaScript error: https://media.ethicalads.io/media/client/v1.4.0/ethicalads.min.js, line 1: Error: No ad placements found.
 1666328901867	Marionette	INFO	Stopped listening on port 57237
 JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1666329029292	geckodriver	INFO	Listening on 127.0.0.1:57374
+1666329032400	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileiiGGzu"
+1666329032913	Marionette	INFO	Marionette enabled
+1666329032922	Marionette	INFO	Listening on port 57384
+1666329033498	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileiiGGzu\\search.json.mozlz4", (void 0)))
+JavaScript error: https://media.ethicalads.io/media/client/v1.4.0/ethicalads.min.js, line 1: Error: No ad placements found.
+JavaScript error: resource:///actors/FormValidationChild.jsm, line 183: TypeError: this._element is null
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.python.org."
+1666329043957	Marionette	INFO	Stopped listening on port 57384

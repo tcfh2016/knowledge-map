@@ -230,3 +230,129 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
 1666351652333	Marionette	INFO	Stopped listening on port 60026
+1666575956121	geckodriver	INFO	Listening on 127.0.0.1:62724
+1666575959121	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile9YYq4p"
+1666575959651	Marionette	INFO	Marionette enabled
+1666575959659	Marionette	INFO	Listening on port 62735
+1666575960316	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofile9YYq4p\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666576722507	Marionette	INFO	Stopped listening on port 62735
+6576167276	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileosxrEO"
+1666576167828	Marionette	INFO	Marionette enabled
+1666576167838	Marionette	INFO	Listening on port 62934
+1666576168467	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileosxrEO\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666576173844	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1666576807699	Marionette	INFO	Stopped listening on port 62934
+[Parent 13044, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 13044, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+ionette enabled
+1666576373999	Marionette	INFO	Listening on port 63300
+1666576374585	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileWYVItI\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666576810345	Marionette	INFO	Stopped listening on port 63300
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+nette enabled
+1666576663233	Marionette	INFO	Listening on port 63697
+1666576663901	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilemuYr0C\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666576688999	Marionette	INFO	Stopped listening on port 63697
+1666576811734	geckodriver	INFO	Listening on 127.0.0.1:63949
+1666576814790	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileWHcE7N"
+1666576815281	Marionette	INFO	Marionette enabled
+1666576815292	Marionette	INFO	Listening on port 63960
+1666576815453	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileWHcE7N\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1666662091811	Marionette	INFO	Stopped listening on port 63960
+efox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileKjRDcp"
+1666576904285	Marionette	INFO	Marionette enabled
+1666576904293	Marionette	INFO	Listening on port 64096
+1666576904488	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileKjRDcp\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666576910105	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1666576923147	Marionette	INFO	Stopped listening on port 64096
+1666577622237	geckodriver	INFO	Listening on 127.0.0.1:64878
+1666577625275	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileYOX61U"
+1666577625815	Marionette	INFO	Marionette enabled
+1666577625822	Marionette	INFO	Listening on port 64891
+1666577626662	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileYOX61U\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666577643851	Marionette	INFO	Stopped listening on port 64891
+1666577653234	geckodriver	INFO	Listening on 127.0.0.1:64957
+1666577656313	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilev6VBqs"
+1666577656821	Marionette	INFO	Marionette enabled
+1666577656830	Marionette	INFO	Listening on port 64972
+1666577657404	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofilev6VBqs\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666577674861	Marionette	INFO	Stopped listening on port 64972
+1666593511617	geckodriver	INFO	Listening on 127.0.0.1:61352
+1666593514752	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileVMjXDJ"
+1666593515295	Marionette	INFO	Marionette enabled
+1666593515304	Marionette	INFO	Listening on port 61362
+1666593515865	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileVMjXDJ\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.error: (new TypeError("container.editor is undefined", "resource://devtools/client/inspector/markup/markup.js", 1646))
+console.error: (new TypeError("container.editor is undefined", "resource://devtools/client/inspector/markup/markup.js", 1646))
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1666662092978	Marionette	INFO	Stopped listening on port 61362
+\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+JavaScript error: resource://gre/modules/FinderHighlighter.jsm, line 631: TypeError: controller is null
+1666595731292	Marionette	INFO	Stopped listening on port 61459
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+nette enabled
+1666595524580	Marionette	INFO	Listening on port 63707
+1666595525148	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofiletzrqO9\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666595697278	Marionette	INFO	Stopped listening on port 63707
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1666596147078	geckodriver	INFO	Listening on 127.0.0.1:64454
+1666596150135	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileqPzApi"
+1666596150725	Marionette	INFO	Marionette enabled
+1666596150733	Marionette	INFO	Listening on port 64465
+1666596151297	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileqPzApi\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666596167985	Marionette	INFO	Stopped listening on port 64465
+1666596316875	geckodriver	INFO	Listening on 127.0.0.1:64653
+1666596319913	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileW7DtIZ"
+1666596320430	Marionette	INFO	Marionette enabled
+1666596320437	Marionette	INFO	Listening on port 64665
+1666596320586	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\lianbche\\AppData\\Local\\Temp\\rust_mozprofileW7DtIZ\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://gerrit.ext.net.nokia.com."
+1666596338557	Marionette	INFO	Stopped listening on port 64665
