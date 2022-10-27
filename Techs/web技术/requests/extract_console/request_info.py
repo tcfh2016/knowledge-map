@@ -37,6 +37,4 @@ gerrit_id = str(s).split(":")[1].split("'")[1]
 print(gerrit_id)
 
 gerrit_url = "https://gerrit.ext.net.nokia.com/gerrit/c/MN/5G/NB/gnb/+/" + gerrit_id
-g = requests.get(gerrit_url, proxies=proxies, verify=False)
-with open("gerrit.txt", "w", encoding="utf-8") as f:
-    f.write(g.text)
+
