@@ -33,9 +33,9 @@ soup.body.b # 获取<body>下第一个<b>标签
 ```
 
 
-### .contents 和 .children
+## 直接子节点的访问：`.contents` 和 `.children`
 
-.contents属性是将tag的子节点以列表的方式输出。
+.contents属性是将tag的子节点以列表的方式输出:
 
 ```
 head_tag = soup.head # <head><title>The Dormouse's story</title></head>
@@ -44,12 +44,20 @@ title_tag = head_tag.contents[0] # <title>The Dormouse's story</title>
 title_tag.contents # [u'The Dormouse's story']
 ```
 
-.children 可以对tag的子节点进行循环：
+.children 可以对tag的子节点进行循环，这里不能像`tag.contents[0]`这样以列表的方式进行访问。
 
 ```
 for child in title_tag.children:
   print(child)
 ```
+
+*注：这两个方法仅包含tag的直接子节点*
+
+
+## 间接子节点的访问：`.descendants`
+
+`tag.descendants`返回的是一个生成器(generator)对象，如果要像列表一样访问，可以使用`list(tag.descentants)`进行转换.
+
 
 
 ### .text() / .string()

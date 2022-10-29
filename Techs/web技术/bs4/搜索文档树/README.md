@@ -71,6 +71,10 @@ bs支持[按CSS搜索tag](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#css
 - [Error NameError: name 'unicode' is not defined in Python](https://quizdeveloper.com/faq/error-nameerror-name-unicode-is-not-defined-in-python-aid2312)
 
 
-## [find_parents() 和 find_parent()](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#find-parents-find-parent)
+## 父节点和先辈节点们
 
-`find_parent()`是查找当前节点的父节点，而`find_parents()`是一层一层往上查找。
+在[find_parents() 和 find_parent()](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#find-parents-find-parent)里面提到：`find_parent()`是查找当前节点的父节点，而`find_parents()`是一层一层往上查找。
+
+
+## [兄弟节点](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#find-parents-find-parent)
+
