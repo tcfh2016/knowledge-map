@@ -10,6 +10,7 @@ logging打印的日志分5个层级：
 - ERROR
 - CRITICAL
 
+
 ## 基本用法
 
 使用logging功能需要包含`logging`模块，默认的级别是WARNING，默认输出到终端，但可以指向到文件：
@@ -25,6 +26,19 @@ logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBU
 logging.debug('This message should go to the log file')
 ```
 
+
+## 给日志输出添加时间戳
+
+很简单，只需要配置一下`format`和`datefmt`属性。
+
+```
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+```
+
+参考：
+
+- [Print timestamp for logging in Python](https://stackoverflow.com/questions/28330317/print-timestamp-for-logging-in-python)
+- [Python Logging Basic Configurations](https://www.studytonight.com/python/python-logging-configuration)
 
 ## Q&A
 
