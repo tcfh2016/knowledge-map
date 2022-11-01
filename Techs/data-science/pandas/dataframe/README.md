@@ -40,7 +40,7 @@ DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
 *注：调用`to_numeric()`时根据原有数据决定转换为`int64`还是`float64`。*
 
 ```
-for col in float_df:    
+for col in float_df:
     print(pd.to_numeric(float_df[col]))
 ```
 

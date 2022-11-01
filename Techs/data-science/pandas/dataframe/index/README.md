@@ -35,6 +35,14 @@ obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'], fill_value=0)
 df.set_index('day')
 ```
 
+## reset_index
+
+可以使用`reset_index`重设DataFrame的索引。
+
+参考：
+
+- [How to reset index in a pandas dataframe?](https://stackoverflow.com/questions/20490274/how-to-reset-index-in-a-pandas-dataframe)
+
 ## 获取索引为 list
 
 在[Get row-index values of Pandas DataFrame as list? [duplicate]](https://stackoverflow.com/questions/18358938/get-row-index-values-of-pandas-dataframe-as-list)找到了答案：

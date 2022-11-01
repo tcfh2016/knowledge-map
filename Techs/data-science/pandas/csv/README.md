@@ -81,3 +81,8 @@ read_csv可以直接用来读取csv文件，且可以通过不同的参数来完
 ```
 month_groups.min().reset_index().to_csv("000898_month_min.csv", sep=',', encoding='gb2312')
 ```
+
+
+## to_csv()时丢弃行标签和列标签
+
+通过`header=True, index=True`两个参数来控制是否输出header和index。
