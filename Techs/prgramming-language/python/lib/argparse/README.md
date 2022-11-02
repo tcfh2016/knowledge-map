@@ -1,5 +1,4 @@
-`argparse`是python标准库内置的命令行解析模块，类似模块功能的还有`getopt`和`optparse`，
-`argparse`基于`optparse`。
+`argparse`是python标准库内置的命令行解析模块，类似模块功能的还有`getopt`和`optparse`，`argparse`基于`optparse`。
 
 ## 基本概念
 
@@ -8,8 +7,7 @@
 - positional argument : 位置参数，参数的含义与其参数的位置有关。
 - optional argument   : 可选参数。
 
-比如使用`cp src dest`命令时，第一个参数`src`表示要拷贝的源文件，`dest`表示拷贝的目的文
-件。而 `ls -l`命令中的`-l`表示可选参数。
+比如使用`cp src dest`命令时，第一个参数`src`表示要拷贝的源文件，`dest`表示拷贝的目的文件。而 `ls -l`命令中的`-l`表示可选参数。
 
 ## 简单用法
 
@@ -45,22 +43,18 @@ parser.parse_args()
 
 ## 位置参数
 
-位置参数是必须要指定的参数，通过 `add_argument`来添加位置参数，并且可以指定帮助信息，以
-及类型（默认为字符串）。如下的示例是添加一个名为`echo`参数，并且在解析时将其当做`int`类
-型来处理（argparse默认将解析的参数内容都当成字符串类型）。
+位置参数是必须要指定的参数，通过 `add_argument`来添加位置参数，并且可以指定帮助信息，以及类型（默认为字符串）。如下的示例是添加一个名为`echo`参数，并且在解析时将其当做`int`类型来处理（argparse默认将解析的参数内容都当成字符串类型）。
 
 ```
 parser = argparse.ArgumentParser()
 parser.add_argument("echo", help="echo the string you use here.", type=int)
 ```
 
-位置参数是必须要输入的参数，并且argparse会根据参数的位置去解析它，如果在解析命令的时候没
-有得到对应的参数内容，那么会提示错误。
+位置参数是必须要输入的参数，并且argparse会根据参数的位置去解析它，如果在解析命令的时候没有得到对应的参数内容，那么会提示错误。
 
 ## 可选参数
 
-可选参数的添加需要在参数名称前面添加“-”，该参数后面可以跟上参数值，也可以不跟。同样可以
-指定参数的type, action。
+可选参数的添加需要在参数名称前面添加“-”，该参数后面可以跟上参数值，也可以不跟。同样可以指定参数的type, action。
 
 1.默认形式：argparse会解析可选参数后面的参数值。
 
