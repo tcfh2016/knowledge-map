@@ -40,9 +40,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:
 - [Print timestamp for logging in Python](https://stackoverflow.com/questions/28330317/print-timestamp-for-logging-in-python)
 - [Python Logging Basic Configurations](https://www.studytonight.com/python/python-logging-configuration)
 
-## Q&A
-
-- ValueError: Unrecognised argument(s): encoding
+## ValueError: Unrecognised argument(s): encoding
 
 参考[Logging error on run](https://github.com/xZaR3y4p/Img_link_to_local_markdown/issues/2)，这是因为logging.basicConfig()里面的encoding参数是在python 3.9的时候添加的，如果执行的Python版本较低会有这个错误。
 

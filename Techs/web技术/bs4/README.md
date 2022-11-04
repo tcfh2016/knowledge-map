@@ -8,6 +8,7 @@ Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库,它
 - lxml XML 解析器：`BeautifulSoup(markup, ["lxml-xml"])`/`BeautifulSoup(markup, "xml")`
 - html5lib：`BeautifulSoup(markup, "html5lib")`
 
+在[BeautifulSoup Parser](https://lxml.de/elementsoup.html)提到默认使用Python标准库中的`html.parser`。
 
 
 ## 使用方法
