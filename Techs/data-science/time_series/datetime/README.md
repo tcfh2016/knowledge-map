@@ -47,4 +47,11 @@ def month_converter(month):
 
 参考：
 
-- [](https://stackoverflow.com/questions/3418050/how-to-map-month-name-to-month-number-and-vice-versa)
+- [How to map month name to month number and vice versa?](https://stackoverflow.com/questions/3418050/how-to-map-month-name-to-month-number-and-vice-versa)
+
+
+## [日期格式](https://docs.python.org/2/library/time.html#time.strftime)
+
+- %d : Day of the month as a decimal number [01,31].
+- %m : Month as a decimal number [01,12].
+
