@@ -1,4 +1,3 @@
-
 ## mean(), median(), min(), max()
 
 通过`axis`参数来控制平均值操作：
@@ -17,16 +16,16 @@ drinks.mean(axis="columns")
 print(df["YY"].max())
 ```
 
-## DataFrame统计
 
-**1.如何统计DataFrame某列的和？**
+## 统计DataFrame某列的和
 
 `dataframe.sum()`默认对“行”进行求和，即以列为单位求每列对应所有行的和，可以指定坐标轴，
 比如`dataframe.sum(axis=1)`对“列”进行求和，按行为单位求对应所有列的和。
 
 对单一列进行求和可以使用`dataframe['column'].sum()`。
 
-**2.如何统计DataFrame某列相同值的个数？**
+
+## 统计DataFrame某列相同值的个数
 
 ```
 df["category"].value_counts()
