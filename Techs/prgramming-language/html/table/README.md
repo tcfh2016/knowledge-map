@@ -60,6 +60,13 @@ th, td {
 
 - [HTML Tables](https://www.w3schools.com/html/html_tables.asp)
 
+
+## 颜色
+
+`<table bgcolor="color_name | hex_number | rgb_number">`
+`<td style="color:#0000ff">Sustaining : $60.00 USD - yearly</td>`
+
+
 ## 常见问题
 
 ### 如何让表格在页面居中？
