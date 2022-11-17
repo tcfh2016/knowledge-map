@@ -16,3 +16,8 @@ echo ${#str:0:-1} #abce
 ```
 
 或参考[Shell脚本编程之字符串切片](https://www.cnblogs.com/haona_li/p/10334057.html)。
+
+
+参考：
+
+- [How do I split a string on a delimiter in Bash?](https://stackoverflow.com/questions/918886/how-do-i-split-a-string-on-a-delimiter-in-bash)

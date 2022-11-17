@@ -1,3 +1,18 @@
+## [Shell Script](https://www.shellscript.sh/)
+
+Shell脚本，可以简单的理解为“包含一系列命令的文件”，执行它就类似于通过命令行执行多条命令。所以，shell脚本有利于我们将一些事情自动化。
+
+
+单行用`#`。多行用`:'`开始，`'`结束，但这种多行注释方式并不推荐。
+
+
+参考：
+
+- [Writing Shell Scripts](https://linuxcommand.org/lc3_writing_shell_scripts.php)
+- [Way to create multiline comments in Bash?](https://stackoverflow.com/questions/43158140/way-to-create-multiline-comments-in-bash)。
+
+
+
 ## 常见问题
 
 ## `syntax error: unexpected end of file`
