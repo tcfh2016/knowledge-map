@@ -27,7 +27,7 @@ du -h --max-depth=1
 du -s /home/* | sort -nr
 ```
 
-在使用`du`命令进行磁盘统计的时候可能因为权限问题收到很多“”的打印，参考[Exclude all permission denied messages from "du"](https://stackoverflow.com/questions/15141588/exclude-all-permission-denied-messages-from-du)来解决。方法：
+使用`du`命令只有管理员权限才能统计home目录下的磁盘空间，所以普通用户可能因为权限问题收到很多“”的打印，参考[Exclude all permission denied messages from "du"](https://stackoverflow.com/questions/15141588/exclude-all-permission-denied-messages-from-du)来解决。方法：
 
 ```
 du -cBM --max-depth=1 2>&1 | grep -v 'denied' | sort -n 
