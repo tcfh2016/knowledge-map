@@ -2,7 +2,12 @@
 
 ## 注释
 
-注释部分，然后使用`echo`打印出关键信息。
+注释部分，然后使用`echo`打印出关键信息。那如何通过`echo`打印空格或者tab ？
+
+可以使用`echo -e ' \t '`，这里的-e参数表示使能反斜杠的解析。
+
+- [Echo tab characters in bash script](https://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script)
+
 
 ## tracing
 

@@ -1,4 +1,4 @@
-## [Shell Script](https://www.shellscript.sh/)
+## Shell Script
 
 Shell脚本，可以简单的理解为“包含一系列命令的文件”，执行它就类似于通过命令行执行多条命令。所以，shell脚本有利于我们将一些事情自动化。
 
