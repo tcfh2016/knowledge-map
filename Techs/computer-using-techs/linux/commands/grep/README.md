@@ -31,3 +31,18 @@ cat SYSLOG | grep -E 'macps|RX PHY' > SYSLOG_183_MAC_ULPHY.LOG # 多项搜索
 standard input) matches”，其原因是grep识别其为data文件类型，解决方案为添加 `-a`参数。
 
 - [参考](https://unix.stackexchange.com/questions/335716/grep-returns-binary-file-standard-input-matches-when-trying-to-find-a-string)
+
+
+## 如何实现快速查找和替换
+
+使用`grep -rnw . -e 'MAX_NUM_PRACH_PREAMBLE_PROCESSABLE'`完成递归查找。
+
+```
+find /path/to/files -type f -exec sed -i 's/oldstring/new string/g' {} \;
+grep -rl matchstring somedir/ | xargs sed -i 's/string1/string2/g'
+```
+
+`grep -rn '\.psPeerCtrlAddress'`匹配包含'.psPeerCtrlAddress'的文件。
+
+
+- [](https://stackoverflow.com/questions/15402770/how-to-grep-and-replace)
