@@ -34,9 +34,15 @@ test命令是shell内建命令，可以通过`help test`来查看，常用的包
 - -L file: True if file is a symbolic link.
 - -z string: True if string is empty.
 - -n string: True if string is not empty.
-- string1 = string2: True if string1 equals string2.
+- string1 = string2: True if string1 equals string2. 
 - string1 != string2: True if string1 does not equal string2.
+- -a 两个条件同时成立
+- -o 任一条件成立
+- ! 反向状态
 
+*注1：bash中使用一个等号和两个等号效果一样的。按照惯用写法推荐使用两个等号。*
+*注2：之所以[ expression ]在表达式两端用空格是因为方括号使用得频繁，比如通配符、正则都有使用，所以bash语法规定了使用方括号来作判断式的时候要留空。*
+*注3：-a/-o 可以用 &&/|| 来替换，主要区别是前者可以将多个条件写在一个`[]`，后者则是每个条件都需要一个`[]`。*
 
 ## case
 
@@ -45,6 +51,7 @@ test命令是shell内建命令，可以通过`help test`来查看，常用的包
 ```
 case word in
     patterns ) commands ;;
+    *) echo "all others" ;;
 esac
 ```
 
