@@ -8,3 +8,8 @@ if [[ $string == *"My long"* ]]; then
   echo "It's there!"
 fi
 ```
+
+*注：在使用`[ s1 = s2 ]`的时候如果只有单括号，那么s1和s2必须是常量。如果其中之一为变量，那么需要使用`[[ ${s1} = ${s2} ]]`。或者使用`[ "${s1}" = s2 ]`*
+
+- string1 = string2: True if string1 equals string2.
+- string1 != string2: True if string1 does not equal string2.
