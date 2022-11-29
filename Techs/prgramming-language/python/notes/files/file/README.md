@@ -25,23 +25,11 @@ if os.access("myfile", os.R_OK):
 ```
 
 
+## [读文件](./read/README.md)
 
-## 读文件
 
-文件读取可以使用多个方法：
 
-- `myfile.read(size)`：一次读取size个字节，不指定size就读取整个文件
-- `myfile.readline()`：一次仅读取一行
-- `myfile.readlines()`：一次仅读取文件所有行，并保存为一个字符串list
-
-文件的读取支持多种方式，如果要一行一行地扫描一个文本文件，文件迭代器往往是最佳选择：
-
-```
-for line in open('myfile'):
-  print(line, end='')
-```
-
-## 写文件
+## [写文件](./write/README.md)
 
 ```
 lines = (
