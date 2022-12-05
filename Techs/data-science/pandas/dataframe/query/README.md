@@ -35,3 +35,15 @@ stocks_df[stocks_df['display_name'] == '洋河股份'].index.item()
 ## 怎么判断一个单元格是否存在呢？
 
 直接通过字符串索引去找：`row in df.index.values and col in df.columns.values`。
+
+
+## 按照某列是否包含特定字符串
+
+在pandas里面如果要使用字符串来过滤特定的行，那么必须要使用`.str`属性才可以：
+
+```
+df = df[df['code'].str.startswith('*ST')]
+df = df[df['code'].str.find('500') != -1]
+```
+
+如何附加多个条件？使用逻辑表达式即可。如`df = df[df['code'].str.startswith('*ST') & df['code'].str.find('500') != -1]`。
