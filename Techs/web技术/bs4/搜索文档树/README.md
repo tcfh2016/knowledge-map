@@ -1,24 +1,38 @@
 ## [搜索文档树](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id27)
 
-通过点取属性的方式只能获得当前名字的第一个tag:要得到所有的<a>标签,或是通过名字得到比一个tag更多的内容的时候,就需要用到 Searching the tree 中描述的方法,比如: find_all()。find_all()搜索所有tag及其子节点并判断是否符合过滤器的条件，过滤器就是传入`find_all()`的参数。
-
-find_all()的定义如下：
+Beautiful Soup定义了搜索文档树的方法，常用的是`find()`和`find_all()`，两者具有相同的参数：
 
 ```
 find_all( name , attrs , recursive , string , **kwargs )
+find( name , attrs , recursive , string , **kwargs )
 ```
 
-在使用`find_all()`的过程中如果传入单纯的过滤器，比如名字，那么搜索的结果可能包含有过多的内容，此时可以通过其他参数来缩小搜索范围。
+区别在于，`find()`只会返回第一个匹配的记录，而`find_all()`相当于找到所有匹配的内容，因此`soup.find('title')`相当于`soup.find_all('title', limit=1)`。
 
-，有以下几种类型：
 
-- 字符串：即传入字符串参数，比如`find_all('b')`就是查找所有的`<b>`标签。
-- 通过参数定义一个字典参数来搜索包含特殊属性的tag：`data_soup.find_all(attrs={"data-foo": "value"})`。
-- 正则表达式：比如`find_all(re.compile("^b"))`会找到所有以'b'开头的标签，那么`<body>`和`<b>`都会被找到。
-- 列表：比如`find_all(['a', 'b'])`会找到所有`<a>`和`<b>`标签。
-- 方法。
+通过点取属性的方式只能获得当前名字的第一个tag:要得到所有的<a>标签,或是通过名字得到比一个tag更多的内容的时候,就需要用到 Searching the tree 中描述的方法,比如: find_all()。find_all()搜索所有tag及其子节点并判断是否符合过滤器的条件，过滤器就是传入`find_all()`的参数。
 
-使用时还可以使用[`limit`参数](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#limit)，用来控制返回结果的数量，比如`soup.find_all("a", limit=2)`。
+
+*find_all() 方法没有找到目标是返回空列表, find() 方法找不到目标时,返回 None。*
+
+
+## 认识过滤器
+
+使用搜索功能时需要先认识过滤器，“过滤器”是一种比较抽象的叫法，其实就相当于“过滤条件”。在搜索的时候我们可以将特定的过滤条件应用在“tag名称”、“节点的属性”、以及单纯的“字符串”上，换句话说，我们可以按照“tag名称”、“节点的属性”、或者单纯的“字符串”来进行搜索。
+
+举几个例子：
+
+1） 字符串搜索（`name`）
+
+即传入字符串参数，比如`soup.find_all('b')`会查找所有的`<b>`标签。
+
+2） 节点的属性搜索（`attrs`）
+
+`data_soup.find_all(attrs={"data-foo": "value"})`会查找属性为"data-foo"值为"value"的所有节点。
+
+3）方法
+
+定义判断条件是否匹配的方法。
 
 
 ## `name`搜索
@@ -28,25 +42,29 @@ find_all( name , attrs , recursive , string , **kwargs )
 ```
 soup.find_all('b') # 查找所有的<b>标签：[<b>The Dormouse's story</b>]
 soup.find_all(["a", "b"]) # 查找所有的<a><b>标签
+soup.find_all(re.compile("^b")) #会找到所有以'b'开头的标签，那么`<body>`和`<b>`都会被找到。
 ```
 
 调用`find_all`返回的类型是`'bs4.element.Tag'`。
 
-同时，可以在字符串搜索时使用正则。正则表达式作为参数则按照正则的`match()`来匹配，下面的代码搜索所有以`b`开头的标签，即会找到`<body>`和`<b>`:
-
-```
-for tag in soup.find_all(re.compile("^b")):
-  print(tag.name)
-```
+使用时还可以使用[`limit`参数](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#limit)，用来控制返回结果的数量，比如`soup.find_all("a", limit=2)`。
 
 
 ## 属性搜索
 
-*比如我想找到<h1 class="build-caption page-headline">...</h1>这个元素，可以使用soup.find_all(attrs={"class":"build-caption page-headline"}，或者使用soup.find_all(class_ = "build-caption page-headline"))*
+*比如我想找到<h1 class="build-caption page-headline">...</h1>这个元素，可以使用:
 
-为什么上面在按照`class`搜索的时候需要使用到`class_`关键字呢？
+```
+soup.find_all(attrs={"class":"build-caption page-headline"}
+```
 
-bs支持[按CSS搜索tag](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#css)的功能，但因为`class`关键字是Python的保留字，如果使用这个搜索会有语法错误。
+或者使用：
+
+```
+soup.find_all(class_ = "build-caption page-headline"))
+```
+
+为什么上面在按照`class`搜索的时候需要使用到`class_`关键字呢？因为在Beautiful Soup支持[按CSS搜索tag](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#css)的功能，但因为`class`关键字是Python的保留字，如果使用这个搜索会有语法错误。
 
 
 
