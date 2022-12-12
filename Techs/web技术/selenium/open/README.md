@@ -55,10 +55,10 @@ options参数用来配置浏览器启动时的属性：
 profile = webdriver.FirefoxProfile()
 settings = {
     'network.proxy.type': 1,  # 0: 不使用代理；1: 手动配置代理
-    'network.proxy.http': '10.144.1.10',
-    'network.proxy.http_port': 8080,
-    'network.proxy.ssl': '10.144.1.10',  # https的网站,
-    'network.proxy.ssl_port': 8080,
+    'network.proxy.http': 'ip address',
+    'network.proxy.http_port': port,
+    'network.proxy.ssl': 'ip address',  # https的网站,
+    'network.proxy.ssl_port': port,
 }
 
 for key, value in settings.items():

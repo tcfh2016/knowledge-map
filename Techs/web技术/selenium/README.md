@@ -91,3 +91,18 @@ thon\\Python39\\lib', 'C:\\Users\\lianbche\\AppData\\Local\\Programs\\Python\\Py
 - [ImportError: No module named 'selenium'](https://stackoverflow.com/questions/31147660/importerror-no-module-named-selenium)
 - [How can I find where Python is installed on Windows?](https://stackoverflow.com/questions/647515/how-can-i-find-where-python-is-installed-on-windows)
 
+
+## InvalidArgumentException: Message: unexpected end of hex escape
+
+获取gerrit数据的时候出现的异常，其他的没有问题，但偶尔一个会抛出这种问题。
+
+```
+InvalidArgumentException: Message: unexpected end of hex escape at line 1 column 813928
+```
+
+这个问题没有找到答案，网络上提到不同的浏览器的结果不同，FireFox有问题但是Chrome有问题，可能和一些cache之类的有关。
+
+参考：
+
+- [Python Selenuim - InvalidArgumentExpression: unexpected end of hex escape](https://stackoverflow.com/questions/65729386/python-selenuim-invalidargumentexpression-unexpected-end-of-hex-escape)
+- [Selenium driver.page_source InvalidArgumentException](https://stackoverflow.com/questions/73606180/selenium-driver-page-source-invalidargumentexception)
