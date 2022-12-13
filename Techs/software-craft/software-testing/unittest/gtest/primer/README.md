@@ -30,6 +30,36 @@ TEST(FactorialTest, HandlesZeroInput) {
 ```
 
 
+## 使用测试固件（Test Fixtures）
+
+如果你想在多个测试用例之间使用相同的一些数据，比如一些对象的配置。使用测试固件那么需要首先定义它，在其中放入你需要在多个测试用例中使用的变量。
+
+```
+// 用来测试Queue的测试固件：QueueTest，必须要继承 ::testing::Test
+class QueueTest : public ::testing::Test {
+ protected:
+  void SetUp() override {
+     q1_.Enqueue(1);
+     q2_.Enqueue(2);
+     q2_.Enqueue(3);
+  }
+
+  // void TearDown() override {}
+
+  Queue<int> q0_;
+  Queue<int> q1_;
+  Queue<int> q2_;
+};
+```
+
+开始测试，这个时候就需要使用`TEST_F`。每一次用例的执行，都会创建单独的QueueTest的对象：
+
+```
+TEST_F(QueueTest, IsEmptyInitially) {
+  EXPECT_EQ(q0_.size(), 0);
+}
+```
+
 
 ## 参考
 
