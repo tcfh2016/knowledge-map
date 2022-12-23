@@ -29,6 +29,7 @@ find -name "*.js" -not -path "./directory/*"
 find . -name "*.txt" | xargs grep -i "text_pattern"
 
 
+find . -name "*.*pp" -not -path "*/tst/*" | xargs grep  "em_.*("
 
 
 参考：
