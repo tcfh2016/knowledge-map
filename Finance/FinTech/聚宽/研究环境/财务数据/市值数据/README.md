@@ -2,6 +2,17 @@
 
 聚宽提供了`valuation`的数据表，该数据表包含了股本、市值、市盈率、市净率、市销率、市现率等数据，可以有多种获取方式。
 
+- pe_ratio 市盈率(PE, TTM)
+- pe_ratio_lyr 市盈率(PE)
+- pb_ratio 市净率(PB)
+- ps_ratio 市销率(PS, TTM)
+- pcf_ratio 市现率(PCF, 现金净流量TTM)
+
+- code 股票代码
+- turnover_ratio 换手率(%)
+- capitalization 总股本(万股)
+- market_cap 总市值(亿元)
+
 
 ## get_valuation
 
@@ -16,7 +27,14 @@ get_valuation(security, start_date=None, end_date=None, fields=None, count=None)
 
 ## get_fundamentals
 
+```
+get_fundamentals(query_object, date=None, statDate=None)
+```
 
+date和statDate参数只能传入一个:
+
+- 传入date时, 查询指定日期date所能看到的最近(对市值表来说, 最近一天, 对其他表来说, 最近一个季度)的数据, 我们会查找上市公司在这个日期之前(包括此日期)发布的数据, 不会有未来函数。格式为'2015-10-15'。
+- 传入statDate时, 查询statDate指定的季度或者年份的财务数据。季度为‘2015q1’，年份为‘2015’。
 
 ```
 from jqdata import *
