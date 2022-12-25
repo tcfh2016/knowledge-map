@@ -12,6 +12,7 @@
 - [Constructing Database Queries with SQLAlchemy](https://hackersandslackers.com/database-queries-sqlalchemy-orm/)
 - [The Query Object](https://docs.sqlalchemy.org/en/13/orm/query.html#the-query-object)
 
+
 ## filter(criterion)
 
 对数据库的查询指定条件，这些条件相当于select表达式里面的WHERE子句，可以同时指定多个条件。
@@ -20,6 +21,7 @@
 session.query(MyClass).\
     filter(MyClass.name == 'some name', MyClass.id > 5)
 ```
+
 
 ## order_by(criterion)
 
