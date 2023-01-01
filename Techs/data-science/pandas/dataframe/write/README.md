@@ -55,8 +55,20 @@ df.drop(['city', 'state'], axis=1) # 删除'city'和'state'两列。
 
 ```
 del df['newdata']
-del df.newdata # 会提示错误。
+del df.newdata # 会提示错误。n 
 ```
+
+按照制定条件删除，比如删除值小于0所在的行？使用:
+
+```
+df = df[(df > 0).all(axis=1)]
+```
+
+参考：
+
+- [How to delete rows from a pandas DataFrame based on a conditional expression](https://stackoverflow.com/questions/13851535/how-to-delete-rows-from-a-pandas-dataframe-based-on-a-conditional-expression)
+
+
 
 ## 修改行、列
 
