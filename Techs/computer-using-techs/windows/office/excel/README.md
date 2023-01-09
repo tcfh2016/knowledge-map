@@ -23,13 +23,27 @@ https://www.ablebits.com/office-addins-blog/2018/07/18/excel-convert-text-to-num
 
 
 
-## Excel 2016打开csv乱码问题
+## Excel公式保持某个变量不变
 
-2019年3月9日10点20分
-之前从网易财经上下载的企业历年报表数据可以正常显示，但更换电脑之后使用excel2016打开时发现中文会显示乱码。
+https://blog.csdn.net/zhezhebie/article/details/81332977
+正常我们套用一个公式，例如C2=A2*B2，那么拖动公式时必然C3=A3*B3，如果我们希望A2这个值固定不变，只有B列在随着公式变化而变化，那就可以开始时把C2=A2*B2写成C2=$A$2*B2。
 
-解决方案：新建空白excel文件，打开[Data] -> [From Text/CSV] 即可。
 
+## Excel的列显示
+
+2018年10月22日17:22:29
+将列显示为ABCD
+
+https://jingyan.baidu.com/article/a378c960d77615b3282830bd.html
+
+【文件】 - 【公式】 - 【R1C1引用样式】
+
+## Excel智能拷贝
+
+2018年7月4日10:00:12
+怎样进行智能拷贝：不拷贝隐藏部分的内容？
+
+按ctrl + g 弹出【定位】对话框，在【定位条件】中选择“可见单元格”再进行复制拷贝。
 
 
 ## EXCEL的列号
