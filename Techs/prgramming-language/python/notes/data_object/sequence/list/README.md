@@ -75,6 +75,17 @@ areas_copy = list(areas)
 
 使用`for`语句来遍历列表，Python提供了一种极具扩展性的遍历方式使得你可以不用去管被遍历的list中元素的数据类型。
 
+## 逆序遍历
+
+```
+list(reversed(xs))
+xs.reverse() # 修改之前列表
+xs[::-1]
+```
+
+参考：
+
+- [](https://stackoverflow.com/questions/3940128/how-do-i-reverse-a-list-or-loop-over-it-backwards)
 
 ## Q&A
 
