@@ -46,3 +46,11 @@ for col in float_df:
 
 通过`print(df.dtypes)`打印DataFrame各列的类型。
 
+
+## 拷贝一个DataFrame
+
+```
+df_sub_copy = df[0:1].copy()
+```
+
+- [](https://stackoverflow.com/questions/27673231/why-should-i-make-a-copy-of-a-data-frame-in-pandas)
