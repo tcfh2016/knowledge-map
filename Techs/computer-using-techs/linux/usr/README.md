@@ -19,3 +19,17 @@ vb:!!:19005:0:99999:7:::
 # 创建后
 vb:$5$2N7544pq$at9S4JLRZRep/0yWjtN5kp/yAqqauw5lWxlm4JmZAK5:19005:0:99999:7:::
 ```
+
+## sudoers
+
+在使用`sudo apt install git-all`安装git的时候，突然提示：
+
+```
+lbc is not in the sudoers file.  This incident will be reported.
+```
+
+这是因为并非所有人都能够执行`sudo`，而是仅有`/etc/sudoers`内的用户才能够执行这个命令。可以使用`visudo`来给特定账号配置全部或部分的root命令功能。
+
+```
+lbc ALL=(ALL) NOPASSWD:ALL
+```

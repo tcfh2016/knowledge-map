@@ -50,7 +50,7 @@ git remote -v
 
 ## 如何基于本地已有的文件创建新的仓库
 
-首先在github/gitlab上面创建一个新的仓库，然后会有提示命令：
+在github/gitlab上面新建一个新的仓库，会有下面的提示命令，使用它就可以直接在本地新建仓库，然后push到github：
 
 ```
 cd existing_folder

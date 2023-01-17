@@ -1,3 +1,15 @@
+## 安装 
+
+不同的linux版本可能使用不同的命令：
+
+```
+yum install git
+```
+
+参考：
+
+- [PIP Install Git – A Quick Read](https://www.activestate.com/resources/quick-reads/pip-install-git/)
+
 ## 设置代理 / config proxy
 
 这个操作之前用过，但现在基本上国内可以自由访问，使用得也少。为git设定代理使用如下命令：
@@ -12,6 +24,19 @@
 后面两条命令是取消代理设置。
 
 *注：需要同时设置http, https。*
+
+## SSH
+
+首先执行`ssh-keygen -t ed25519 -C "your_email@example.com"`生成新的SSH key。
+
+然后将上面的SSH key添加到ssh-agent，先用`eval "$(ssh-agent -s)"`将ssh-agent启动起来，再使用`ssh-add ~/.ssh/id_ed25519`将SSH Key添加到ssh-agent。
+
+然后将`cat ~/.ssh/id_ed25519.pub`得到的公钥内容添加到github上。
+
+参考：
+
+- [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux)
+- [Adding a new SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?platform=linux)
 
 
 ## 常用操作快速索引
