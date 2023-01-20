@@ -13,6 +13,14 @@
 
 python distribution 和 Anaconda, Spyder。
 
+当前server上有`3.6.8`和`3.8.13`两个版本，执行`python3`默认使用的是`3.6.8`，那么怎么切换到默认为`3.8.13`呢？
+
+```
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.8
+```
+
+- [How to switch between Python 3 versions](https://dev.to/alfchee/how-to-switch-between-python-3-versions-5gh6)
+
 
 ## Q&A
 
