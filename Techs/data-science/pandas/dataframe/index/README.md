@@ -31,6 +31,8 @@ obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'], fill_value=0)
 0  601318.XSHG  2019-12-27    9.8284    2.4153
 ```
 
+直接使用`set_index`重设索引之后并不会在原来的DataFrame里面改动生效。
+
 ```
 df.set_index('day')
 ```
