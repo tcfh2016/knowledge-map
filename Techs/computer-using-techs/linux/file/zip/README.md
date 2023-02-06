@@ -1,4 +1,24 @@
-## zip/unzip
+## zip
+
+通过`zip archive.zip file1 file2 file3`可以一次性压缩多个文件，但怎么写一个循环来批量压缩指定的文件呢？
+
+- `-r`参数是用来压缩整个目录的。
+- `-j`参数忽略压缩文件的原始目录。
+
+请注意下面两者的区别，第一条命令会出现“zip warning: name not matched”的错误，原因在于`zip_files`是一个包含多个文件名的变量，使用`"${zip_files}"`会将这个包含多个文件名的字符串当成单个文件名称，所以会出错。
+
+```
+zip -j "${my_path}/CI_SCT/${filename}.zip" "${zip_files}"
+zip -j "${my_path}/CI_SCT/${filename}.zip" ${zip_files}
+```
+
+参考：
+
+- [How To Zip Multiple Files on Linux](https://devconnected.com/how-to-zip-multiple-files-on-linux/)
+- [zip warning - name not matched](https://stackoverflow.com/questions/46015202/zip-warning-name-not-matched)
+- [zip -j command, what does the -j option mean?](https://stackoverflow.com/questions/2851846/zip-j-command-what-does-the-j-option-mean)
+
+## unzip
 
 ```
 apt-get install unzip
