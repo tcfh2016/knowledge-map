@@ -1,3 +1,12 @@
+## 怎样在行方向上进行合并
+
+```
+
+```
+
+使用`pd.merge(df1, df2, on=['column'])`。
+
+
 ## 怎样merge多个DataFrame数据
 
 比如我有下面三个DataFrame数据，怎么把它们合并在一起：
