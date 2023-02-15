@@ -1,3 +1,16 @@
+
+## valueError: could not convert string to float
+
+
+在使用`m = score['language'].iloc[0:10].mean()`求某列一些行的均值的时候，如果多个单元里面是字符串可能会提示“valueError: could not convert string to float”的错误。
+
+解决方案：
+
+```
+m = score['language'].iloc[0:10].astype(float).mean()
+```
+
+
 ## mean(), median(), min(), max()
 
 通过`axis`参数来控制平均值操作：
