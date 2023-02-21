@@ -87,6 +87,11 @@ xs[::-1]
 
 - [](https://stackoverflow.com/questions/3940128/how-do-i-reverse-a-list-or-loop-over-it-backwards)
 
+
+## 求均值
+
+sum(l) / len(l)
+
 ## Q&A
 
 - 有没有直接通过“+”或“-”来进行列表的删除操作？
