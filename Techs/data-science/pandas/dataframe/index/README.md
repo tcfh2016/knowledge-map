@@ -39,7 +39,22 @@ df.set_index('day')
 
 ## reset_index
 
-可以使用`reset_index`重设DataFrame的索引。
+可以使用`reset_index`重设DataFrame的索引。带上`drop=True`参数就不会保留原来的索引，否则会保留：
+
+```
+    a   b   c
+4  30  30   0
+1  10  10  10
+2  20  20  20
+3  40  40  40
+
+# 不带drop=True的参数
+ index   a   b   c
+0      4  30  30   0
+1      1  10  10  10
+2      2  20  20  20
+3      3  40  40  40
+```
 
 参考：
 

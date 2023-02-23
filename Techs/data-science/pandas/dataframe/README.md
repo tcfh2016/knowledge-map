@@ -30,10 +30,17 @@ DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
 - DataFrame.describe(include=['object']) ：显示非数据列的统计信息，包括count, uniq, top, freq
 
 
-## 获取行列名
+## 列的类型
 
+pandas会根据输入的数据来确定每个列的数据类型，比如一列的数据全是int，那么该列的类型就是int，哪怕其中的一个为float，那么该列为float。
 
-## DataFrame 类型转换
+将特定列进行类型转换：
+
+```
+# convert column "a" to int64 dtype and "b" to complex type
+df = df.astype({"a": int, "b": complex})
+```
+
 
 想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基础上进行转换，使用起来不方便。
 
@@ -46,6 +53,10 @@ for col in float_df:
 
 通过`print(df.dtypes)`打印DataFrame各列的类型。
 
+
+参考：
+
+- [](https://stackoverflow.com/questions/15891038/change-column-type-in-pandas)
 
 ## 拷贝一个DataFrame
 
