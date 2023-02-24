@@ -103,3 +103,10 @@ for key in sorted(D):
   print(key, '=>', D[key])
 ```
 
+## 如何获取第一个键值
+
+```
+ks = list(D.keys())
+ks[0]
+```
+

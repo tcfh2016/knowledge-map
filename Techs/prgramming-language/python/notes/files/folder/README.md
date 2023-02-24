@@ -12,6 +12,31 @@
 os.path.isdir('new_folder')
 ```
 
+## 判断文件夹是否为空
+
+两种方法：
+
+```
+if len(os.listdir('/your/path')) == 0:
+    print("Directory is empty")
+
+if not os.listdir('/your/path'):
+    print("Directory is empty")
+```
+
+因为当目录不存在的时候`listdir`会抛出异常，所以最好先做下保护：
+
+```
+if os.path.isdir(dir_name):
+    if not os.listdir(dir_name):
+        print("Directory is empty")
+```
+
+
+参考：
+
+- [How to check if folder is empty with Python?](https://stackoverflow.com/questions/49284015/how-to-check-if-folder-is-empty-with-python)
+
 
 ## `os.mkdir()`和`os.makedirs()`的区别
 
