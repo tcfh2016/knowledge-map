@@ -22,6 +22,16 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/pytho
 - [How to switch between Python 3 versions](https://dev.to/alfchee/how-to-switch-between-python-3-versions-5gh6)
 
 
+## 查看当前已经安装的模块
+
+```
+help('modules')
+```
+
+参考：
+
+- [How do I get a list of locally installed Python modules?](https://stackoverflow.com/questions/739993/how-do-i-get-a-list-of-locally-installed-python-modules)
+
 ## Q&A
 
 1）模块安装
