@@ -24,8 +24,7 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 等单独的子函数。
 
 
-
-## 第二坐标
+## 设置第二坐标
 
 ```
 ax = df.plot(secondary_y=['A', 'B'])
@@ -39,16 +38,24 @@ ax.right_ax.set_ylabel('AB scale')
 ](https://stackoverflow.com/questions/29767386/xlabel-and-ylabel-out-of-plot-region-cannot-show-completely-in-the-figure)
 - [How do you change the size of figures drawn with matplotlib?](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
 
+
+## 如何保存图形
+
+```
+fig = df.plot(kind='hist', subplots=True, figsize=(6, 6))[0].get_figure()
+plt.tight_layout()
+fig.savefig('test.png')
+```
+
+参考：
+
+- [Saving plots (AxesSubPlot) generated from python pandas with matplotlib's savefig](https://stackoverflow.com/questions/19555525/saving-plots-axessubplot-generated-from-python-pandas-with-matplotlibs-savefi)
+
+
 ## 图表标题
 
 使用其中的`title`参数。
 
-## 常见问题
-
-- [x轴显示](./x_axis/README.md)
-- [y轴显示](./y_axis/README.md)
-- [legend显示](./legend/README.md)
-- [subplot问题](./sub_plot/README.md)
 
 ## Matplotlib中的“plt”和“ax”到底是什么?
 
