@@ -8,6 +8,12 @@ DataFrame的 set_index方法会将其一个或多个列转换为索引，并创�
 
 reset_index方法的作用与 set_index相反，层次化索引被转话为具体列，新的索引默认以0~N的整数索引替代。
 
+## 重设index
+
+```
+df.index = my_list
+```
+
 ## reindex
 
 DataFrame 最初的数据与创建时指定的 index顺序密切相关，通过 reindex方法可以进行重新排列。在使用 reindex()方法时可以指定一些额外选项，比如 fill_value=0 表示对于其中的 NaN的值全填写为 0。
