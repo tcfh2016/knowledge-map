@@ -1,6 +1,6 @@
 ## NaN (Not a Number) 处理
 
-pandas中缺失的数据项会被填写为 NaN，表示缺失或NA值。对于NA的处理包括如下几类：
+pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，用来表示该单元的值是缺失的。对于缺失值的处理包括如下几类：
 
 - 使用`obj.isnull()`，`pd.isnull(cell)`, `obj.notnull()`, `pd.notnull(cell)` 来检查NA。
 - 使用 fillna(), replace() 和 interpolate() 来替换 DataFrame 里面的所有 NA。
@@ -21,6 +21,7 @@ pandas中缺失的数据项会被填写为 NaN，表示缺失或NA值。对于NA
 
 `np.nan`到底是一个什么值？打印出它的类型是`float`，但是np.nan和np.nan并不相等，所以你无法使用`==`来进行比较，而是需要使用`np.isnan(np.nan)`。
 
+不过在[What is the difference between NaN and None?](https://stackoverflow.com/questions/17534106/what-is-the-difference-between-nan-and-none)里提到`np.isnan(p)`对传入的参数有要求，如果是string类型那么会crash，使用`pd.isnull()`则要安全得多。
 
 
 参考：
