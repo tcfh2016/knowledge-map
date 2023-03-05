@@ -87,7 +87,20 @@ df['newdata'] = val
 df.newdata = val
 ```
 
-## 替换
+
+## 替换/replace
+
+最基本的替换功能是是使用`replace`函数，该函数并非默认的inplace函数，如果要对原来的dataframe生效，那么需要传入`inplace=True`参数。
+
+```
+# 对特别列进行操作
+df['colomn name'].replace(src, tar)
+
+# 对整个dataframe进行操作
+df.replace(src, tar)
+```
+
+1）Series
 
 使用`Series.replace()`或者`Series.str.replace()`两者来进行替换，前者默认进行全匹配，后者默认进行子串匹配，不过我们可以使用`Series.replace()`里的正则功能，比如如下的代码将名为index的Series的值里包含'(万元)'替换为空。
 
@@ -95,14 +108,19 @@ df.newdata = val
 index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
 ```
 
+2) DataFrame
+
 对DataFrme也是按照同样操作来进行替换，比如对于某列（对应Series）的操作：
 
 ```
 df.column_name.str.replace('[', '').replace(']', '') # 将column_name列里的'[]'删除。
 df.column_name.str.replace('[\[\]]', '') # 将column_name列里的'[]'删除，使用正则。
 ```
+
 *注：在pandas里面使用字符串的功能，需要通过添加`.str`来完成字符串函数的调用。*
 
+
+3）对多列进行替换
 
 如果我现在的需求是将其中的某些项进行整体替换呢？比如对下面的DataFrame数据，我要将其中code列里面的负数项目都替换为0：
 
@@ -141,6 +159,13 @@ for column in pivot.columns:
 - [Update pandas DataFrame with .str.replace() vs .replace()](https://stackoverflow.com/questions/38117016/update-pandas-dataframe-with-str-replace-vs-replace)
 - [pandas.Series.replace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html)
 - [pandas.Series.str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
-- [How to replace negative numbers in Pandas Data Frame by zero](https://stackoverflow.com/questions/27759084/how-to-replace-negative-numbers-in-pandas-data-frame-by-zero)
+- [How to replace negative numbers in Pandas Data Frame by zero](https://stackoverflow.com/questions/27759084/)how-to-replace-negative-numbers-in-pandas-data-frame-by-zero)
+- [How to replace a value in pandas, with NaN?](https://stackoverflow.com/questions/29247712/how-to-replace-a-value-in-pandas-with-nan)
 
 
+## 按条件替换某列中的部分单元
+
+
+参考：
+
+- [How to Replace Values in Column Based on Condition in Pandas?](https://www.geeksforgeeks.org/how-to-replace-values-in-column-based-on-condition-in-pandas/)
