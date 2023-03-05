@@ -23,7 +23,7 @@ def global_variable():
     name = 'loucy'
 ```
 
-使用可以修改的变量，比如string, list。对于其他需要其他方式
+使用可以修改的变量，比如string, list（只能修改内部的值）。对于其他就需要定义全局变量的方式。
 
 参考：
 

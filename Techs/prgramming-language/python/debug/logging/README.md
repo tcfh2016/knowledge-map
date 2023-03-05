@@ -26,6 +26,10 @@ logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBU
 logging.debug('This message should go to the log file')
 ```
 
+## 配置日志大小
+
+怎么配置日志不能无限制增长？
+
 
 ## 给日志输出添加时间戳
 
