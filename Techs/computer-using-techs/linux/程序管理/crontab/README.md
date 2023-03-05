@@ -4,6 +4,7 @@
 
 由于安全考虑，系统提供了`/etc/cron.allow`和`/etc/cron.deny`两个名单来提供对于用户的控制，只需要在其中添加用户名就可以允许或者拒绝对应用户使用crond服务。不同的用户使用了crontab之后改用户的执行任务都记录到`/var/spool/cron/username`里面，而crond服务执行的每项工作会记录到`/var/log/cron`里面。
 
+
 ## 开始之前
 
 在设置任务之前我们需要先确保`crond`这个服务是否已经开启，这个时候可以通过`systemctl status crond`命令来查看服务的状态，当然还可以通过`systemctl enable crond`/`systemctl restart crond`来开启或者重启该项服务。
@@ -20,6 +21,7 @@
 
 ```
 
+
 ## 设置任务
 
 `crontab`的语法为`crontab [-u username] [-l|-e|-r]`，对应参数：
@@ -33,11 +35,15 @@
 
 添加`#`进行注释。
 
+
 ## 查看日志
 
 crontab的相关日志有两份：1）针对每位用户会创建一个日志，存在于`/var/spool/mail`或者`/var/mail`。2）然后在`/var/log/cron`有cron本身的执行日志。
 
 
+当这个文件满了怎么办？
+
+对于`/var`目录的一些文件无法删除，比如这个目录下面有账户对应的`/var/spool/mail/lianb`，没用办法使用`rm`去删除，但可以使用`> /var/spool/mail/lianb`将其清空。
 
 
 参考：
