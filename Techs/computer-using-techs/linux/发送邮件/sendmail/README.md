@@ -4,13 +4,15 @@
 
 在[How can I add an attachment with Sendmail (limited options)?](https://unix.stackexchange.com/questions/409523/how-can-i-add-an-attachment-with-sendmail-limited-options)里面提到：
 
-> sendmail is not the program to use to create the email, you need something else like mail or mutt to format the email correctly (including encoding the attachment in it) before feeding it to sendmail for delivery. They serve difference purposes: sendmail is an MTA to Transmit emails where mail/mutt are MUAs, that is Mail User Agent to build or view emails. –
-Patrick Mevzek
+> sendmail is not the program to use to create the email, you need something else like mail or mutt to format the email correctly (including encoding the attachment in it) before feeding it to sendmail for delivery. They serve difference purposes: sendmail is an MTA to Transmit emails where mail/mutt are MUAs, that is Mail User Agent to build or view emails. – Patrick Mevzek
 
-简单来说，使用`sendmail`来发送邮件，你需要首先将邮件组织好。那么邮件的组织通常对应着两种情况：
+简单来说，使用`sendmail`来发送邮件，你需要首先将邮件组织好。为什么这里说是“组织好”而不是“编辑好”？
+
+这是因为这里不同于平时使用outlook等邮件客户端来编写邮件，写好正文和收件人，而是要做更多的事情。邮件的组织通常对应着两种情况：
 
 1）将邮件标题、邮件正文编写在同一个文件，使用`/usr/sbin/sendmail -t < generated.html`直接发送。
 2）将邮件标题和邮件正文分开，在发送的时候再进行组装。这种情况常见于需要给邮件添加附件的情况。
+
 
 ## sendmail的简单用法
 
@@ -29,6 +31,7 @@ export BODY="/tmp/email_body.html"
  cat $BODY
 ) | /usr/sbin/sendmail $MAILTO
 ```
+
 
 ## 添加简单的csv
 
@@ -68,6 +71,7 @@ export DATA=$(cat 'Local.csv')
 
 uuencode --base64 $ATTACH $(basename $ATTACH)
 
+
 ## 添加zip
 
 在[sendmail with zip is corrupting first file in the zip](https://stackoverflow.com/questions/50272892/sendmail-with-zip-is-corrupting-first-file-in-the-zip)看到了如果要添加zip类型的附件，需要注意指定`Content-Type`为`application/zip`，并且还需要调用`base64`来完成attach的过程。*另外一个要点是在每个邮件的部分需要添加空行来分割，否则附件解压会出错。*
@@ -104,6 +108,35 @@ export ATTACH="output.zip"
 - [sendmail with attachments](https://www.unix.com/shell-programming-and-scripting/118534-sendmail-attachments.html)
 - [Sendmail Attachment](https://unix.stackexchange.com/questions/223636/sendmail-attachment)
 
+
+## 添加图片
+
+如果要在html邮件里添加图片，那么首先要在邮件正文里面添加html代码，并且需要把图片作为附件添加到邮件。
+
+```
+echo ""
+	echo "--GvXjxJ+pjyke8COw"
+	echo "Content-Type:image/png;"
+	echo "Content-ID: <id_name>"
+	echo "Content-Transfer-encoding:base64"
+	echo "Content-Disposition: inline"
+	/usr/bin/base64 ${unstable_trend_pic_path}
+```
+
+这里面有几个要点：
+
+1) 要设定`Content-ID`，因为需要在html代码中引用它，比如`<img src="cid:id_name>。`
+2）设置`Content-Disposition: inline`，注意为`inline`的方式，如果作为附件那么设置为`attachement`。
+
+
+参考：
+
+- [Unix sendmail - html embed image not working](https://stackoverflow.com/questions/17973076/unix-sendmail-html-embed-image-not-working)
+- [Common MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
+- [Embedding Images in HTML Email: Have the Rules Changed?](https://mailtrap.io/blog/embedding-images-in-html-email-have-the-rules-changed/#Choosing-a-method-of-putting-an-image-in-an-HTML-message)
+
+
+
 ## 收件人列表被截断的问题
 
 我在使用`sendmail`发送邮件的时候，使用`cc="a@BB.com;b@BB.com...`定义了一个比较长的收件人列表，结果邮件发送之后看到收件人的列表被截断了：
@@ -121,3 +154,10 @@ google了许久，对于`254个字符`只找到了RFC里面在定义收件人地
 
 - [VBA 调用 Lotus 发送邮件的收件人长度问题](https://zhiqiang.org/coding/lotus-vba-recepient-no-longer-than-256.html)
 - [What is the maximum length of a valid email address?](https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address)
+
+
+## 无法发送邮件
+
+今天换了服务器，执行相同的脚本但是邮箱里没有收到邮件。
+
+/var/log/maillog

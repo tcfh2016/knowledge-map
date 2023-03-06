@@ -20,3 +20,32 @@
 
 - [Message transfer agent](https://en.wikipedia.org/wiki/Message_transfer_agent)
 - [What is an MTA?](https://mailtrap.io/blog/mail-transfer-agent/)
+
+
+## Content-Type
+
+常见的`Content-Type`如下：
+
+- .csv -> text/csv
+- .doc -> application/msword
+- .docx -> application/vnd.openxmlformats-officedocument.wordprocessingml.document
+- .gz -> application/gzip
+- .htm/.html -> text/html
+- .jpeg/.jpg -> image/jpeg
+- .json -> application/json
+- .mp4 -> video/mp4
+- .png -> image/png
+- .pdf -> application/pdf
+- .ppt -> application/vnd.ms-powerpoint
+- .pptx -> application/vnd.openxmlformats-officedocument.presentationml.presentation
+- .tar -> application/x-tar
+- .txt -> text/plain
+- .xls -> application/vnd.ms-excel
+- .xlsx	-> application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+- .zip -> application/zip
+- .7z -> application/x-7z-compressed
+
+
+参考：
+
+- [Common MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)

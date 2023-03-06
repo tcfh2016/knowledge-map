@@ -1,3 +1,13 @@
+## 安装
+
+如果当前系统没有安装vncserver，也就是你在执行命令时会提示“vncserver: command not found”，那么可以执行`yum install vnc-server`来安装。
+
+但安装完成之后还是启动不了，后面安装`yum install tigervnc-server`之后解决问题。
+
+参考：
+
+- [Installed vncserver, but cannot start it](https://www.linuxquestions.org/questions/linux-newbie-8/installed-vncserver-but-cannot-start-it-4175497246/)
+
 ## 常用命令
 
 - 如果要查询已经创建的vnc session，使用`vncserver -list`

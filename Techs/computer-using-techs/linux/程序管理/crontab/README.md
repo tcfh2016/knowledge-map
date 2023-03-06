@@ -2,7 +2,7 @@
 
 `cron`是linux系统里面的任务调度器，可以用来创建一些周期性执行的任务。在linux系统里面由`crond`这个服务来负责这些例程工作。这个服务即负责系统本身的例行性工作，也可以提供用户添加新的例行性工作（通过`crontab`命令）。
 
-由于安全考虑，系统提供了`/etc/cron.allow`和`/etc/cron.deny`两个名单来提供对于用户的控制，只需要在其中添加用户名就可以允许或者拒绝对应用户使用crond服务。不同的用户使用了crontab之后改用户的执行任务都记录到`/var/spool/cron/username`里面，而crond服务执行的每项工作会记录到`/var/log/cron`里面。
+由于安全考虑，系统提供了`/etc/cron.allow`和`/etc/cron.deny`两个名单来提供对于用户的控制，只需要在其中添加用户名就可以允许或者拒绝对应用户使用crond服务。不同的用户使用了crontab之后该用户的执行任务都记录到`/var/spool/cron/username`里面，而crond服务执行的每项工作会记录到`/var/log/cron`里面。
 
 
 ## 开始之前
@@ -50,3 +50,27 @@ crontab的相关日志有两份：1）针对每位用户会创建一个日志，
 
 - [第十五章、例行性工作排程(crontab)](http://linux.vbird.org/linux_basic/0430cron.php)
 - [How to enable logging for cron on Linux](https://www.techrepublic.com/article/how-to-enable-logging-for-cron-on-linux/)
+
+
+## 配置了任务但是没有执行
+
+调试脚本的时候设定了：
+
+```
+
+```
+
+查看cron的日志`/var/log/cron`发现对应的时间点第2项任务没有执行起来
+
+```
+# 这个run1.sh是能够正常运行的。
+Mar  6 05:59:02 yang-jinyong-dev-rhel7 CROND[44718]: (lianbche) CMD (export DISPLAY=:7 && sh /home/lianbche/auto-scripts/CI_SCT/run1.sh)
+
+# 但这个run2.sh没有运行起来。
+Mar  6 06:59:01 yang-jinyong-dev-rhel7 crond[10247]: (lianbche) PAM ERROR (Authentication service cannot retrieve authentication info)
+Mar  6 06:59:01 yang-jinyong-dev-rhel7 crond[10247]: (lianbche) FAILED to authorize user with PAM (Authentication service cannot retrieve authentication info)
+```
+
+参考：
+
+- [CRON Jobs Fail To Run w/PAM Error](http://www.whitemiceconsulting.com/crondpamerror)

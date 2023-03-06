@@ -1,6 +1,6 @@
 ## 用户管理
 
-linux管理用户的时候是按照用户ID来管理的，每个用户都至少有两个ID：UID和GID，前者是用户ID，后者是群组ID。在查看文件拥有者属性的时候就会去找到`etc/passwd`文件找到对应UID的用户名，从而在显示的时候可以看到用户名和群组。
+linux管理用户的时候是按照用户ID来管理的，每个用户都至少有两个ID：UID和GID，前者是用户ID，后者是群组ID。在查看文件拥有者属性的时候就会去找到`/etc/passwd`文件找到对应UID的用户名，从而在显示的时候可以看到用户名和群组。
 
 在`etc/passwd`文件里面可以查找到用户相关信息，不过这个文件里面除了新的用户还有不少供系统本身使用的账号，比如bin, daemon, adm等等。里面每行是由“账号名称:口令:UID:GID:信息说明:home目录:SHELL”构成。
 
@@ -33,3 +33,11 @@ lbc is not in the sudoers file.  This incident will be reported.
 ```
 lbc ALL=(ALL) NOPASSWD:ALL
 ```
+
+## 查看用户组
+
+执行`groups user_name`查询用户所属的组。
+
+参考：
+
+- [Linux Show The Groups a User Is In](https://www.cyberciti.biz/faq/linux-show-groups-for-user/)
