@@ -106,3 +106,28 @@ InvalidArgumentException: Message: unexpected end of hex escape at line 1 column
 
 - [Python Selenuim - InvalidArgumentExpression: unexpected end of hex escape](https://stackoverflow.com/questions/65729386/python-selenuim-invalidargumentexpression-unexpected-end-of-hex-escape)
 - [Selenium driver.page_source InvalidArgumentException](https://stackoverflow.com/questions/73606180/selenium-driver-page-source-invalidargumentexception)
+
+
+##  invalid argument: can't kill an exited process
+
+在命令行上执行脚本时提示：
+
+```
+ raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: invalid argument: can't kill an exited process
+```
+
+原因在于我是在没有GUI的命令行上面执行脚本，但是脚本里面并没有使用`headless`模式：
+
+```
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+
+options = Options()
+options.headless = True
+driver = webdriver.Firefox(options=options)
+```
+
+参考：
+
+- [WebDriverException: Message: invalid argument: can't kill ...](https://stackoverflow.com/questions/52534658/webdriverexception-message-invalid-argument-cant-kill-an-exited-process-with)
