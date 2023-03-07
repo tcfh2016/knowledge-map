@@ -37,7 +37,22 @@ shell脚本的执行方式分为两种，第一种为采用绝对路径或者相
 - -x 将使用到的脚本内容显示到屏幕上
 
 
-## 常见问题
+## 注释
+
+单行使用`#`，多行使用`<<Block_comment`/`Block_comment`。
+
+参考：
+
+- [Shell Comments](https://bash.cyberciti.biz/guide/Shell_Comments)
+- [Writing Comments in Bash Scripts: Single Line, Inline and Multi-line Comments](https://linuxhandbook.com/comments-bash-script/)
+
+
+## 常用变量
+
+- $USER
+- $HOME
+
+
 
 ## `syntax error: unexpected end of file`
 

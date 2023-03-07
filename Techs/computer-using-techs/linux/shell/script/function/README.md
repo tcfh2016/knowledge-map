@@ -25,7 +25,7 @@ var=$(function_name)
 
 ## 参数
 
-函数的参数类似于“命令行参数”，可以通过$1表示第一个参数，$2表示第二个参数，而$0代表了函数名称。
+函数的参数类似于“命令行参数”，*所以并不需要显示的定义形式参数*，可以直接通过$1表示第一个参数，$2表示第二个参数，而$0代表了函数名称。
 
 ```
 error_exit()
@@ -46,3 +46,21 @@ fi
 参考：
 
 - [An Error Exit Function](https://linuxcommand.org/lc3_wss0140.php)
+
+
+## 返回值
+
+在shell中的函数返回值时，不能像其他编程语言里面那样直接`return ret`，而是要`echo ret`。
+
+```
+get_buildid() {
+  ...
+  echo ${buildid}
+}
+
+build_id=$( get_buildid $1 )
+```
+
+参考：
+
+- [Returning value from called function in a shell script](https://stackoverflow.com/questions/8742783/returning-value-from-called-function-in-a-shell-script)

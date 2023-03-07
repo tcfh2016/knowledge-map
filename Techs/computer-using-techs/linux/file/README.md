@@ -41,6 +41,11 @@ fuser file_name
 [root@localhost ~]# ll -rt
 ```
 
+## 创建文件
+
+`touch`可以创建文件，但是不能创建目录。
+
+
 ## 统计/wc
 
 统计文件的行数。
