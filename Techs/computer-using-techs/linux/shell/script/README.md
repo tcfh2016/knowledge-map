@@ -53,6 +53,33 @@ shell脚本的执行方式分为两种，第一种为采用绝对路径或者相
 - $HOME
 
 
+## 计时
+
+两种方式。第一种：使用DATE
+
+```
+START=$(date +%s)
+...
+END=$(date +%s)
+
+DIFF=$(( $END - $START ))
+echo "It took $DIFF seconds"
+```
+
+
+第二种：使用`SECONDS`变量
+
+```
+start=$SECONDS
+...
+duration=$(( SECONDS - start ))
+
+echo "This run took $duration seconds"
+```
+
+参考：
+
+- [](https://stackoverflow.com/questions/385408/get-program-execution-time-in-the-shell)
 
 ## `syntax error: unexpected end of file`
 
