@@ -41,6 +41,10 @@ with open(file, "rb") as f:
     last = readlastline(f)
 ```
 
+如果文件是空的怎么办？
+
+
+
 参考：
 
 - [What is the most efficient way to get first and last line of a text file?](https://stackoverflow.com/questions/3346430/what-is-the-most-efficient-way-to-get-first-and-last-line-of-a-text-file)
