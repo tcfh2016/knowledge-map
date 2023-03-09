@@ -52,6 +52,19 @@ if os.path.isdir(dir_name):
 所以，如果你要编写在两种系统下都能够正确访问文件系统的代码，那么必须对路径进行拼接，这个时候就需要使用`os.path.join()`，比如通过`os.path.join("", "me", "work")`来拼接对应的操作路径。
 
 
+## 创建多级目录
+
+```
+import os
+path = '/home/dail/first/second/third'
+os.makedirs(path, exist_ok=True)
+```
+
+参考：
+
+- [How can I create directories recursively? ](https://stackoverflow.com/questions/6004073/how-can-i-create-directories-recursively)
+
+
 ## 删除操作
 
 1）`os.remove()`删除单个文件
