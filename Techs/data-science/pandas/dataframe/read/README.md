@@ -6,6 +6,10 @@
 df['Age'] # 选取单列
 df[['Age','Name']] # 选取多列
 df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成，比如‘start time’就无法工作了。
+
+
+df.loc[:, 'a']  # 获取'a'列
+df.loc[:, ['a', 'b']] # 获取'a', 'b'两列
 ```
 
 *那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。*
@@ -13,11 +17,10 @@ df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成�
 需要注意DataFrame的获取是以列优先的，比如dataframe[x]是获取列名为x的对应的Series，这种理解方式与C/C++二维数组是不同的。
 
 
-## 获取列的另一种方式：`loc()`和`iloc`
+## 获取行：`loc()`和`iloc`
 
 通过`loc()`和`iloc`属性我们可以很方便的获取列、行、以及行列对应的值，语法为`loc[行标签, 列标签]`。它们之间的不同之处在于，前者需要使用行列标签，后者需要使用位置索引。
 
-1）获取列
 
 ```
 df.loc['a', :] # 获取'a'行
@@ -30,16 +33,9 @@ df.iloc[3] # 选择一行
 df.iloc [[3, 5, 7]] # 选择三行
 ```
 
-2）获取行
 
-```
-df.loc[:, 'a']  # 获取'a'列
-df.loc[:, ['a', 'b']] # 获取'a', 'b'两列
+## 行列来索引
 
-
-```
-
-3）获取行列
 
 ```
 # 行索引为数字，列索引为字符串
@@ -147,3 +143,15 @@ Q1: 怎样获取数值索引对应行的名字？
 参考：
 
 - [How do I get the name of the rows from the index of a data frame?](https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame)
+
+
+## 遍历行
+
+```
+for index, row in df.iterrows():
+    print(row['c1'], row['c2'])
+```
+
+参考：
+
+- [How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)

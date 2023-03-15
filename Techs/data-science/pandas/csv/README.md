@@ -60,20 +60,6 @@ data = data.drop(columns="area") # 这种方式不需要指定 axis参数。
 [The Pandas DataFrame – loading, editing, and viewing data in Python](https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/)
 
 
-## pandas.read_csv
-
-read_csv可以直接用来读取csv文件，且可以通过不同的参数来完成多样化的操作。第一次尝试读取时出现“UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc8 in position 0: invalid continuation byte”的错误。
-
-在StackOverflow上查找到答案，如上的错误提示是reas_csv默认以'utf-8'的编码方式去读取数据，发现原始文档的编码不匹配，于是指定`encoding="ISO-8859-1"`之后就能够成功读取了，但却发现在打印窗口上的中文不能正常显示，查找[Encodings and Unicode]()之后修改`encoding="gb2312"`之后可以正常读取和显示。
-
-
-- [How to read data using pandas read_csv](https://honingds.com/blog/pandas-read_csv/)
-- [pandas.read_csv](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)
-- [UnicodeDecodeError when reading CSV file in Pandas with Python
-](https://stackoverflow.com/questions/18171739/unicodedecodeerror-when-reading-csv-file-in-pandas-with-python)
-- [Encodings and Unicode](https://docs.python.org/3/library/codecs.html#standard-encodings)
-
-
 ## to_csv()时中文乱码问题
 
 在写入中文时使用`utf-8`的编码方式依然会展示乱码，可以将其设置为`gb2312`来解决乱码问题：
