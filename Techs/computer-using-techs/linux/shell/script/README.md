@@ -2,23 +2,41 @@
 
 Shell脚本，可以简单的理解为“包含一系列命令的文件”，执行它就类似于通过命令行执行多条命令。所以，shell脚本有利于我们将一些事情自动化。
 
+以下是一些基本的使用知识，便于快速入门：
 
-单行用`#`。多行用`:'`开始，`'`结束，但这种多行注释方式并不推荐。
+1）使用`var=value`的形式创建变量，*特别注意等号两边不能有空格*。然后使用`$var`来引用变量，推荐做法是引用变量的时候都加上双括号：`"$foo"`，原因是因为`$var`本身的并不仅仅是引用原有变量的值，而且会把它按照空格拆分为对应的列表，比如`var="hello world"`，使用`$var`拿到的是“hello”和“world”两个单词的列表。
 
-- 使用`var=value`的形式创建变量，*特别注意等号两边不能有空格*。然后使用`$var`来引用变量。
-- 使用替代命令：`$(expression)`，比如`$(date +"%x %r %Z")`会执行`date +"%x %r %Z"`命令。另一种相对较老的版本是用"`expression`"，它和"%(expression)"是等价的。而使用`$((expression))`可以进行数值计算。
-- 使用分号`;`可以将多行代码连接在一行。
-- 如果一行代码内容太多，可以使用`\回车`来扩展至下一行。
+比如你用`[ -d $dir ]`判断dir是不是目录，使用`$dir`就会提示“too many arguments”，正确的方法是使用`"$dir"`。
+
+参考：
+
+- [Why does my shell script choke on whitespace or other special characters?](https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters)
+
+
+2）使用替代命令：`$(expression)`，比如`$(date +"%x %r %Z")`会执行`date +"%x %r %Z"`命令。另一种相对较老的版本是用\`expression\`，它和`%(expression)`是等价的，但是老版本不具备良好的可移植性。
+
+参考：
+
+- [Why does my shell script choke on whitespace or other special characters?](https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters)
+
+3）使用`$((expression))`可以进行数值计算。
+
 - 在shell脚本中，进行算术计算需要特定的算数表达式：`$((oper1 + oper2))`，支持`+ - * / %`。
-- good实践：
-    - 编写表达式的时候可以使用双引号将表达式括起来，避免因为空格导致语法错误。比如`[ $number = "1" ]`可能因为变量number因为没有设置而出现语法错误。
-    - 在脚本结束时使用`exit`来执行退出并设置退出状态，如`exit 0`，`exit 1`。
+
+4）使用分号`;`可以将多行代码连接在一行。
+5）如果一行代码内容太多，可以使用`\回车`来扩展至下一行。
+
+## 好的实践
+
+- 编写表达式的时候可以使用双引号将表达式括起来，避免因为空格导致语法错误。比如`[ $number = "1" ]`可能因为变量number因为没有设置而出现语法错误。
+- 在脚本结束时使用`exit`来执行退出并设置退出状态，如`exit 0`，`exit 1`。
 
 
 参考：
 
 - [Writing Shell Scripts](https://linuxcommand.org/lc3_writing_shell_scripts.php)
 - [Way to create multiline comments in Bash?](https://stackoverflow.com/questions/43158140/way-to-create-multiline-comments-in-bash)。
+- [Why does my shell script choke on whitespace or other special characters?](https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters)
 
 
 ## 执行方式
@@ -39,7 +57,11 @@ shell脚本的执行方式分为两种，第一种为采用绝对路径或者相
 
 ## 注释
 
-单行使用`#`，多行使用`<<Block_comment`/`Block_comment`。
+单行使用`#`，多行可以使用：
+
+- `<<Block_comment`/`Block_comment`。
+- 或者`:'`开始，`'`结束，但这种多行注释方式并不推荐。
+
 
 参考：
 
