@@ -45,12 +45,22 @@ crontab的相关日志有两份：1）针对每位用户会创建一个日志，
 
 对于`/var`目录的一些文件无法删除，比如这个目录下面有账户对应的`/var/spool/mail/lianb`，没用办法使用`rm`去删除，但可以使用`> /var/spool/mail/lianb`将其清空。
 
+很奇怪，`/var/spool/mail/lianb`非常容易慢，本身不过几M的大小但是后面的记录写不进去了，在[参考3]中看到可以在`/var/spool/cron/crontabs/<username>`里面添加配置让输出到特定文件：
+
+```
+# wrong:
+* * * * * /path/to/cronjob
+# correct:
+* * * * * /path/to/cronjob 1>/dev/null 2>/dev/null
+# correct too:
+* * * * * /path/to/cronjob 1>/path/to/logfile 2>/path/to/error-logfile
+```
 
 参考：
 
 - [第十五章、例行性工作排程(crontab)](http://linux.vbird.org/linux_basic/0430cron.php)
 - [How to enable logging for cron on Linux](https://www.techrepublic.com/article/how-to-enable-logging-for-cron-on-linux/)
-
+- [](https://www.unix.com/aix/133978-var-spool-squeue-gets-full-frequently.html)
 
 ## 配置了任务但是没有执行
 
