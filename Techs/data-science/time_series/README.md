@@ -7,11 +7,10 @@
 - pandas提供的 Timestamp/Timedelta基于numpy提供了更为多样化功能。
 
 
-## 时间表示方式
-
 常见的日期格式有字符串、numpy.datetime64和datetime.datetime类型。
 
-1，字符串
+
+## 字符串格式
 
 字符串是一种最简单的表示形式常用来做为日期的输入，因为不同国家使用不同的日期格式，所以定义了专门的时间表示标准ISO 8601来统一日期输入，格式为“YYYY-MM-DD hh:mm:ss.ms”或者“YYYY-MM-DDThh:mm:ss.ms”(numpy的输出使用后一种格式)。但它无法提供基于日期/时间的很多功能，比如：
 
@@ -19,14 +18,17 @@
 - 2019年3月1日下午1点到2019年3月4日上午2年有多少秒
 - 1970年1月1日到2008年12月3日有多少个工作日
 
-2，numpy.datetime64
+
+## numpy.datetime64
 
 numpy.datetime64是以64位的数据来保存日期，其中包含Y, M, W, D, h, m, s, ms, us。一些常见的日期运算包括：
+
 - np.datetime64('2000-11-27') + 2：按天相加的结果为2000-11-29，numpy自动识别日期类型
 - np.datetime64('2000-11') + 2：按天相加的结果为2001-01，numpy自动识别日期类型
 - some_date + np.timedelta64(4, 'M') + np.timedelta64(3, 'D')：使用timedelta64对象
 
-3，datetime
+
+## datetime
 
 datetime是Python内建的日期/时间处理模块，里面包括了date/time/datetime/timedelta/tzinfo/timezone六种对象。
 
@@ -38,7 +40,8 @@ datetime是Python内建的日期/时间处理模块，里面包括了date/time/d
   - now=datetime.now()
 - timedelta是用来计算日期差距的对象
 
-参考：
+
+## 参考
 
 - [numpy.datetime64() method](https://www.geeksforgeeks.org/python-numpy-datetime64-method/)
 - [NumPy Datetime: How to Work with Dates and Times in Python?](https://blog.finxter.com/how-to-work-with-dates-and-times-in-python/)
