@@ -9,6 +9,15 @@ empty_df = pd.DataFrame()
 # 创建一个带列标签的空DataFrame
 col_names = ['A', 'B', 'C', 'D']
 empty_df_with_header = pd.DataFrame(columns=col_names)
+
+# 从空的DataFrame开始添加新列
+df = pd.DataFrame(index=['a', 'b', 'c', 'd'])
+
+df['floats'] = (1.5, 2.5, 3.5, 4.5)
+df['names1'] = ('Yves', 'Guido', 'Felix', 'Francesc')
+df['names2'] = pd.DataFrame(['Yv', 'Gu', 'Fe', 'Fr'],
+                            index=['d', 'a', 'b', 'c']) # 添加新的DataFrame对象。
+print(df)
 ```
 
 ## 其他创建方法
