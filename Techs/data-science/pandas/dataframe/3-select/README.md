@@ -25,6 +25,16 @@ df.iloc[[3, 5, 7]] # 选择三行
 ```
 
 
+## 使用切片
+
+使用切片功能，切片支持行名称和行序号来确定范围（*DataFrame仅能用行进行切片*）：
+
+```
+print(df['a':'c'])        # 索引'a', 'b', 'c'三行。
+print(df[0:1])            # 索引'a'一行数据。
+```
+
+
 ## 选取数据单元
 
 因为索引有标签索引和位置索引两种形式，所以在选取数据单元的时候存在可能的混用情况：
@@ -82,7 +92,7 @@ df = df[df['code'].str.startswith('*ST')]
 df = df[df['code'].str.find('500') != -1]
 ```
 
-如何附加多个条件？使用逻辑表达式即可。如`df = df[df['code'].str.startswith('*ST') & df['code'].str.find('500') != -1]`。
+如何附加多个条件？使用逻辑表达式即可。如`df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`。
 
 
 如果我们想选取所有列均匹配某种条件的所有行的数据，使用`.all(axis=1)`：
@@ -133,3 +143,23 @@ for index, row in df.iterrows():
 df.Age  # 这种方式很简洁，但是如果某个行名由多个单词组成，比如‘start time’就无法工作了。
 df.loc[:, 'a']  # 获取'a'列
 df.loc[:, ['a', 'b']] # 获取'a', 'b'两列
+
+
+
+## Cannot perform 'rand_' with a dtyped...
+
+想根据两列的查询数据来查询满足条件的行时提示“`Cannot perform 'rand_' with a dtyped [float64] array and scalar of type [bool]`”
+
+```
+df = df[df['市盈率(TTM)'] < 5.0 & df['市净率'] < 0.5]
+```
+
+解决方案，在不同条件上加上括号。比如上面的修改为：
+
+```
+df = df[(df['市盈率(TTM)'] < 5.0) & (df['市净率'] < 0.5)]
+```
+
+参考：
+
+- [TypeError: Cannot perform 'rand_' with a dtyped [float64] array and scalar of type [bool]](https://stackoverflow.com/questions/60654781/typeerror-cannot-perform-rand-with-a-dtyped-float64-array-and-scalar-of-ty)
