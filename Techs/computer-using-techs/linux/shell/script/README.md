@@ -114,3 +114,16 @@ echo "This run took $duration seconds"
 - [Bash syntax error: unexpected end of file](https://stackoverflow.com/questions/6366530/bash-syntax-error-unexpected-end-of-file)
 - [Bash script: Unexpected end of file error](https://linuxconfig.org/bash-script-unexpected-end-of-file-error)
 - [【shell】真正解决syntax error:unexpected end of file？](https://www.cnblogs.com/jessepeng/p/12202626.html)
+
+
+## 使用字典
+
+```
+declare -A sounds
+sounds[dog]="Bark"
+sounds[wolf]="Howl"
+```
+
+参考：
+
+- [Is there a way to create key-value pairs in Bash script?](https://stackoverflow.com/questions/14370133/is-there-a-way-to-create-key-value-pairs-in-bash-script)

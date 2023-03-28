@@ -28,3 +28,12 @@ c="${a} ${b}"
 参考：
 
 - [How to concatenate string variables in Bash](https://stackoverflow.com/questions/4181703/how-to-concatenate-string-variables-in-bash)
+
+
+## 删除特定字符串
+
+可以使用字符串替换功能，比如`FOO=${FOO//$WORDTOREMOVE/}`
+
+参考：
+
+- [Remove specific word in variable](https://unix.stackexchange.com/questions/311758/remove-specific-word-in-variable)
