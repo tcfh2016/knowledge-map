@@ -18,28 +18,29 @@ zip -j "${my_path}/CI_SCT/${filename}.zip" ${zip_files}
 - [zip warning - name not matched](https://stackoverflow.com/questions/46015202/zip-warning-name-not-matched)
 - [zip -j command, what does the -j option mean?](https://stackoverflow.com/questions/2851846/zip-j-command-what-does-the-j-option-mean)
 
+
 ## unzip
 
-```
-apt-get install unzip
-```
-
-加压到指定目录：
+如果当前系统中没有`unzip`那么可以使用`apt-get install unzip`来安装。加压常用的参数为：
 
 -j 不处理压缩文件中原有的目录路径。
 -o 不必先询问用户，unzip执行后覆盖原有文件。
 -d<目录> 指定文件解压缩后所要存储的目录。
-[.zip文件] 指定.zip压缩文件。
-[文件] 指定要处理.zip压缩文件中的哪些文件。
 
-unzip -d ./python_package_jack python_package_jack.zip
+如果不是解压所有的文件，而是其中的部分，那么就需要指定zip文件中的文件路径才能正常解压。
 
 ```
+# 将zip解压到指定的目录
+unzip -d ./python_package_jack python_package_jack.zip
+
 # 没有指定压缩包内的路径，无法工作
 unzip -jo output.zip "changes.csv" -d "./get_build"
+
 # 指定路径，可以工作
 unzip -jo output.zip "*/*/changes.csv" -d "./get_build"
 ```
+
+执行`unzip`之后需要删除之前的zip文件，似乎没有命令支持，而是需要另外进行删除操作。
 
 参考：
 
