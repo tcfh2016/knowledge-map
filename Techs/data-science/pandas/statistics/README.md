@@ -60,18 +60,17 @@ print (df['col'] == 1).sum()
 - [count the frequency that a value occurs in a dataframe column](https://stackoverflow.com/questions/22391433/count-the-frequency-that-a-value-occurs-in-a-dataframe-column)
 
 
-## pandas.read_csv 分行统计
+## min()/max()
 
-按照每个月份、年份进行统计。
 
-```
-df = pd.read_csv("000898.csv", encoding="gb2312", dayfirst=True, usecols = ["日期", "总市值"])
-df["日期"] = pd.to_datetime(df["日期"])
-df["年"] = df["日期"].dt.year
-df["月"] = df["日期"].dt.month
+## idxmin()/idxmax()
 
-groups = df.groupby(["年", "月"])
-```
+`idxmax()`和`idxmin`这两个函数用来返回最大值、最小值的索引，先看这两个函数的释义：
 
-- [python pandas extract year from datetime](https://stackoverflow.com/questions/30405413/python-pandas-extract-year-from-datetime-dfyear-dfdate-year-is-not)
-- [Python: Datetime to season](https://stackoverflow.com/questions/44124436/python-datetime-to-season)
+- [pandas.DataFrame.idxmax](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.idxmax.html)
+
+> Return index of first occurrence of maximum over requested axis.
+
+- [pandas.DataFrame.idxmin](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.idxmin.html)
+
+> Return index of first occurrence of minimum over requested axis.
