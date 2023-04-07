@@ -8,6 +8,8 @@ Shell脚本，可以简单的理解为“包含一系列命令的文件”，执
 
 比如你用`[ -d $dir ]`判断dir是不是目录，使用`$dir`就会提示“too many arguments”，正确的方法是使用`"$dir"`。
 
+假设`caseid`是一个变量，要根据变量拼接文件路径，那么如果使用`$caseid_L2STATS.csv`就会有歧义，所以使用"${caseid}_L2STATS.csv"。
+
 参考：
 
 - [Why does my shell script choke on whitespace or other special characters?](https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters)
