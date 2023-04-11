@@ -65,3 +65,19 @@ Python中类型是在运行过程中自动决定的，而不是通过代码声�
 
 - [Initialize parameter of method with default value](https://stackoverflow.com/questions/13075044/initialize-parameter-of-method-with-default-value)
 - [Default Parameter Values in Python](http://effbot.org/zone/default-values.htm)
+
+
+## 判断类型
+
+```
+if isinstance(o, str):
+    # 判断o的类型是不是str或者str的子类
+
+
+if type(o) is str:
+    # 判断o的类型是不是str
+```
+
+参考：
+
+- [](https://stackoverflow.com/questions/152580/whats-the-canonical-way-to-check-for-type-in-python)
