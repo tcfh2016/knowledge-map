@@ -96,11 +96,13 @@ export ATTACH="output.zip"
  echo 'Content-Type: application/zip;'
  echo 'Content-Transfer-Encoding: base64'
  echo "Content-Disposition: attachement; filename=${ATTACH}"
- echo ''
+ echo '' # 这个空行很重要
  base64 ${ATTACH}
  echo '---q1w2e3r4t5--'
 ) | /usr/sbin/sendmail -t
 ```
+
+*非常注意：曾经调试了好几十次为了在邮件里添加一个图片，但是总是出现无法打开的情况。之后发现就是在base64和头之间少了一个空行的缘故。但如果添加zip却并不是必须的*
 
 
 参考：
@@ -115,18 +117,26 @@ export ATTACH="output.zip"
 
 ```
 echo ""
-	echo "--GvXjxJ+pjyke8COw"
-	echo "Content-Type:image/png;"
-	echo "Content-ID: <id_name>"
-	echo "Content-Transfer-encoding:base64"
-	echo "Content-Disposition: inline"
-	/usr/bin/base64 ${unstable_trend_pic_path}
+echo "--GvXjxJ+pjyke8COw"
+echo "Content-Type:image/png;"
+echo "Content-ID: <id_name>"
+echo "Content-Transfer-encoding:base64"
+echo "Content-Disposition: inline"
+/usr/bin/base64 ${unstable_trend_pic_path}
 ```
 
 这里面有几个要点：
 
 1) 要设定`Content-ID`，因为需要在html代码中引用它，比如`<img src="cid:id_name>。`
 2）设置`Content-Disposition: inline`，注意为`inline`的方式，如果作为附件那么设置为`attachement`。
+
+不过上面的代码里面一直调试不成功，之后发现必须在调用base64之前添加空行，即：
+
+```
+echo "Content-Disposition: inline"
+echo ""
+/usr/bin/base64 ${unstable_trend_pic_path}
+```
 
 
 参考：
