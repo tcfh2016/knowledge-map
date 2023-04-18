@@ -11,7 +11,20 @@
 `os`、`os.path`提供了与文件/文件夹操作函数。
 
 
-## 常见问题
+## 读了再复写
+
+在`with open('filename.txt', 'r+') as f`以`r+`模式打开文件时表示对文件又读又写，但如果读完文件之后还要覆盖之前的内容，那么需要重设文件游标，且进行截断操作。不重设游标那么写的内容会跟在后面，不截断那么会保留之前的内容。
+
+```
+>>> f.seek(0)
+>>> f.truncate()
+```
+
+参考：
+
+- [Reading a file and then overwriting it in Python](https://stackoverflow.com/questions/35679358/reading-a-file-and-then-overwriting-it-in-python)
+
+
 
 ### 如何快速得知一个文件的行数
 

@@ -1,7 +1,16 @@
 ## y轴显示问题
 
 
-### 设置Y轴为百分比样式
+## 怎么设置y轴值的范围
+
+使用`df.plot(ylim=(0,200))`就可以。
+
+参考：
+
+- [Setting Yaxis in Matplotlib using Pandas](https://stackoverflow.com/questions/17787366/setting-yaxis-in-matplotlib-using-pandas)
+
+
+## 设置Y轴为百分比样式
 
 ```
 vals = ax.get_yticks()
