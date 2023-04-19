@@ -24,6 +24,25 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 等单独的子函数。
 
 
+## “plt”, “ax”和“fig”
+
+“plt”来自于`import matplotlib.pyplot as plt`，它就是`matplotlib`模块中`pyplot`的简称。
+
+在现实生活中，绘制图形时通常是在图形的载体（比如一张纸）中绘制具体的图形，那么“fig”就是幕布，相当于纸张，而`ax`则是图形对应的坐标轴。
+
+明白了它们之间的大致区别之后，就能够理解下面两句代码的含义了：
+
+```
+fig = df['C&P Composite Index'].plot(figsize=(20, 10)).get_figure()
+ax  = df['C&P Composite Index'].plot(figsize=(20, 10)) 
+```
+
+参考：
+
+- [What Are the “plt” and “ax” in Matplotlib Exactly?](https://towardsdatascience.com/what-are-the-plt-and-ax-in-matplotlib-exactly-d2cf4bf164a9)
+- [Matplotlib中的“plt”和“ax”到底是什么?](https://zhuanlan.zhihu.com/p/221861683)
+
+
 ## 设置第二坐标
 
 ```
@@ -57,11 +76,39 @@ fig.savefig('test.png')
 使用其中的`title`参数。
 
 
-## Matplotlib中的“plt”和“ax”到底是什么?
+
+
+## 设置 grid
+
+可以对网格线进行定义，比如最基本的样式、间隔。
+
+```
+# Major ticks every 20, minor ticks every 5
+major_ticks = np.arange(0, 101, 20)
+minor_ticks = np.arange(0, 101, 5)
+
+ax.set_xticks(major_ticks)
+ax.set_xticks(minor_ticks, minor=True)
+
+# And a corresponding grid
+ax.grid(which='both')
+
+# Or if you want different settings for the grids:
+ax.grid(which='minor', alpha=0.2)
+ax.grid(which='major', alpha=0.5)
+```
+
+测试的时候上面的代码在一个环境里面可行，但是另一个环境里面设置的major的网格线可以正常显示，但是minor显示不出来，之后用在[Pandas: How to display minor grid lines on x-axis in pd.DataFrame.plot()](https://stackoverflow.com/questions/20616754/pandas-how-to-display-minor-grid-lines-on-x-axis-in-pd-dataframe-plot)看到的如下代码才能正常显示：
+
+```
+ax.grid('on', which='minor', alpha=0.2)
+ax.grid('on', which='major', alpha=0.5)
+```
+
+这是因为最新的版本里面配置网格线的`Axes.grid()`函数新增了`visible=None`参数，默认不展示。
 
 参考：
 
-- [What Are the “plt” and “ax” in Matplotlib Exactly?](https://towardsdatascience.com/what-are-the-plt-and-ax-in-matplotlib-exactly-d2cf4bf164a9)
-- [Matplotlib中的“plt”和“ax”到底是什么?](https://zhuanlan.zhihu.com/p/221861683)
-
-
+- [Change grid interval and specify tick labels in Matplotlib](https://stackoverflow.com/questions/24943991/change-grid-interval-and-specify-tick-labels-in-matplotlib)
+- [Pandas: How to display minor grid lines on x-axis in pd.DataFrame.plot()](https://stackoverflow.com/questions/20616754/pandas-how-to-display-minor-grid-lines-on-x-axis-in-pd-dataframe-plot)
+- [matplotlib.axes.Axes.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html#matplotlib-axes-axes-grid)

@@ -1,24 +1,29 @@
-import numpy as np
 import pandas as pd
-import matplotlib
-import matplotlib.pyplot as plt
+import numpy as np
 
-a = np.random.standard_normal((9, 4)).round(6)
-df = pd.DataFrame(a)
+df = pd.read_csv("ex_plot.csv", index_col=0)
+df = df.sort_values(by=['Date'])
+df = df.set_index('Date')
+composite_index_df = df['C&P Composite Index'].tail(31)
+#print(df)
+#fig = df['C&P Composite Index'].plot(figsize=(20, 10)).get_figure()
+ax = composite_index_df.plot(figsize=(20, 10))
 
-df.columns = ['No1', 'No2', 'No3', 'No4'] # 更改列名。
-dates = pd.date_range('2015-1-1', periods=9, freq='M')
-df.index = dates
-print(df)
+# Y轴的grid：Major ticks every 20, minor ticks every 5
+major_ticks = np.arange(50, 151, 20)
+minor_ticks = np.arange(50, 151, 5)
+ax.set_yticks(major_ticks)
+ax.set_yticks(minor_ticks, minor=True)
 
-df.describe()
+# X轴的grid：
+x_ticks = np.arange(0, 31, 5)
+x_ticks_labels = [list(composite_index_df.index)[x] for x in x_ticks]
+ax.set_xticks(x_ticks)
+ax.set_xticklabels(x_ticks_labels)
 
-#%matplotlib inline # IPYTHON里面的魔法函数，此处不可用。
-df.cumsum().plot(lw=2.0)
+ax.grid(which='both')
+ax.grid(which='minor', alpha=0.2)
+ax.grid(which='major', alpha=0.5)
 
-# 为No1列绘图
-df['No1'].cumsum().plot(style='r', lw=2.)
-plt.xlabel('date')
-plt.ylabel('value')
-
-plt.show()
+fig = ax.get_figure()
+fig.savefig('ex_plot.png')

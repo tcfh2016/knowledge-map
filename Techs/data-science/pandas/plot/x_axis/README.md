@@ -1,6 +1,25 @@
-## x轴显示问题
+## 如何调整横坐标样式以显示更多项目
 
-### 使用df.plot函数只显示x lable但是不显示ticks
+如下图，怎么调整横坐标标签显示样式，支持更多的显示。
+
+![](low_x_item_number.png)
+
+```
+asset_plot = self.asset_df.plot()
+asset_plot.set_xticks(range(len(self.asset_df.index)))
+asset_plot.set_xticklabels(self.asset_df.index, rotation=90)
+plt.show()
+```
+
+通过`set_xticks`设定所有的tick数，另外通过`set_xticklabels`设定标签的显示样式。
+
+参考：
+
+- [How to plot a pandas multiindex dataFrame with all xticks](https://stackoverflow.com/questions/21281322/how-to-plot-a-pandas-multiindex-dataframe-with-all-xticks)
+- [Matplotlib:: Not Showing all x-axis data frame variable](https://stackoverflow.com/questions/32572419/matplotlib-not-showing-all-x-axis-data-frame-variable?rq=1)
+
+
+## 使用df.plot函数只显示x lable但是不显示ticks
 
 *注：这个例子是在聚宽上进行的，我在本地测试没有这个问题。*
 
@@ -74,22 +93,3 @@ plt.subplots_adjust(wspace=0.6, hspace=0.6, left=0.1, bottom=0.22, right=0.96, t
 ](https://stackoverflow.com/questions/29767386/xlabel-and-ylabel-out-of-plot-region-cannot-show-completely-in-the-figure)
 - [How do you change the size of figures drawn with matplotlib?](https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib)
 
-### 如何调整横坐标样式以显示更多项目
-
-如下图，怎么调整横坐标标签显示样式，支持更多的显示。
-
-![](low_x_item_number.png)
-
-```
-asset_plot = self.asset_df.plot()
-asset_plot.set_xticks(range(len(self.asset_df.index)))
-asset_plot.set_xticklabels(self.asset_df.index, rotation=90)
-plt.show()
-```
-
-通过`set_xticks`设定所有的tick数，另外通过`set_xticklabels`设定标签的显示样式。
-
-参考：
-
-- [How to plot a pandas multiindex dataFrame with all xticks](https://stackoverflow.com/questions/21281322/how-to-plot-a-pandas-multiindex-dataframe-with-all-xticks)
-- [Matplotlib:: Not Showing all x-axis data frame variable](https://stackoverflow.com/questions/32572419/matplotlib-not-showing-all-x-axis-data-frame-variable?rq=1)
