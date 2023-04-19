@@ -1,4 +1,4 @@
-## DataFrame.plot / 画图
+## [DataFrame.plot](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.html)
 
 pandas 为 DataFrame 提供了专门的绘图函数`plot`，支持多种参数。
 
