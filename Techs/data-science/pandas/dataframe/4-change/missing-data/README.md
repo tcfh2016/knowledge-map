@@ -10,6 +10,8 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 
 如果要测试单个值，那么可以使用`pd.isnull()`或者`pd.notnull()`。
 
+*注意：NaN参与的所有计算都是NaN。*
+
 参考：
 
 - [How to Check If Any Value is NaN in a Pandas DataFrame](https://chartio.com/resources/tutorials/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe/)

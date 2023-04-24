@@ -16,6 +16,10 @@ len(df.index) == 0
 
 直接通过字符串索引去找：`row in df.index.values and col in df.columns.values`。
 
+## 判断值在某列中是否存在
+
+可以使用`if 'C' in df['class'].values`来判断。
+
 
 ## 判断某列是否包含特定字符串
 
@@ -58,9 +62,13 @@ stocks_df[stocks_df['display_name'] == '洋河股份'].index.item()
 
 需求：按照某列的值进行区分。并且分拆到不同的DataFrame里面？
 
-## 第一个问题：怎么知道某列有哪些值？
 
-可以使用`unique()`函数，如`dataframe["column"].unique()`。然后，我们就可以通过条件选择来过滤，从而将一个DataFrame拆分为多个DataFrame。
+## 怎么知道某列有哪些值？
+
+可以使用`unique()`函数，如`dataframe["column"].unique()`或者`pd.unique(1d array-like)`就可以得到一个一维列表。
+
+
+然后，我们就可以通过条件选择来过滤，从而将一个DataFrame拆分为多个DataFrame。
 
 参考：
 
