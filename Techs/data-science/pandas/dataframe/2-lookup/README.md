@@ -27,6 +27,9 @@ memory usage: 160.0+ bytes
 None
 ```
 
+使用`df = df.convert_dtypes()`进行快速数据类型转换。
+
+
 ## 显示更多列/行
 
 在打印出DataFrame时最大的显示行由`pd.options.display.max_rows`和`pd.options.display.min_rows`来控制的，前者默认为60，后者默认为10。它们之间的规则是：
