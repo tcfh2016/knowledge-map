@@ -11,6 +11,7 @@ import time, datetime
 date_str = '2017-10-19'
 fmt = '%Y-%m-%d'
 time_tuple = time.strptime(date_str, fmt)
+
 year, month, day = time_tuple[:3]
 date = datetime.date(year, month, day)
 
