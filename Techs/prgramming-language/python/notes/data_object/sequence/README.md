@@ -38,6 +38,10 @@ list[0:2:1] 指定切片间隔/步长
 
 1. 如何查找列表中某个元素的下标？
 
+```
+["foo", "bar", "baz"].index("bar")
+```
+
 参考：
 
 - [Finding the index of an item in a list](https://stackoverflow.com/questions/176918/finding-the-index-of-an-item-in-a-list)
