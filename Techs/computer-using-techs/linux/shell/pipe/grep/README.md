@@ -45,4 +45,4 @@ grep -rl matchstring somedir/ | xargs sed -i 's/string1/string2/g'
 `grep -rn '\.psPeerCtrlAddress'`匹配包含'.psPeerCtrlAddress'的文件。
 
 
-- [](https://stackoverflow.com/questions/15402770/how-to-grep-and-replace)
+- [How to search and replace using grep](https://stackoverflow.com/questions/15402770/how-to-grep-and-replace)

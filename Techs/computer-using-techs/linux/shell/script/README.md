@@ -8,7 +8,6 @@ Shell脚本，可以简单的理解为“包含一系列命令的文件”，执
 
 比如你用`[ -d $dir ]`判断dir是不是目录，使用`$dir`就会提示“too many arguments”，正确的方法是使用`"$dir"`。
 
-假设`caseid`是一个变量，要根据变量拼接文件路径，那么如果使用`$caseid_L2STATS.csv`就会有歧义，所以使用"${caseid}_L2STATS.csv"。
 
 参考：
 
@@ -39,6 +38,16 @@ Shell脚本，可以简单的理解为“包含一系列命令的文件”，执
 - [Writing Shell Scripts](https://linuxcommand.org/lc3_writing_shell_scripts.php)
 - [Way to create multiline comments in Bash?](https://stackoverflow.com/questions/43158140/way-to-create-multiline-comments-in-bash)。
 - [Why does my shell script choke on whitespace or other special characters?](https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters)
+
+
+## 引用变量时使用`${var}`相比`$var`的好处
+
+正常情况下，使用`$var`来引用变量是可以的，但有些时候这样行不通。
+
+情况下：假设`caseid`是一个变量，要根据变量拼接文件路径
+
+- 使用`$caseid_L2STATS.csv`就会有歧义，应该使用"${caseid}_L2STATS.csv"。
+- 同样的使用`cat f | grep -e "$casename_[0-9]\+_[0-9]\+"`来查找对应的行信息也不行，比如使用`cat f | grep -e "${casename}_[0-9]\+_[0-9]\+"`。
 
 
 ## 执行方式
