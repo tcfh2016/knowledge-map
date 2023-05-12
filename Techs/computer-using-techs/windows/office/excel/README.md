@@ -82,3 +82,12 @@ https://jingyan.baidu.com/article/a378c960d77615b3282830bd.html
 2016年9月2日10:27:15
 1. 数据分析的时候如果数据行太多，那么需要快速删除某些行，怎么操作？
 使用ctrl + shift + 向下箭头，一下就可以选中到末尾了，方便、实用。
+
+## 将`m/d/y`转换为`y-m-d`
+
+如果仅仅选中进行格式转换无法搬到，查找后可以通过【数据】-> 【拆分】里面来进行转换。
+
+参考：
+
+- [excel录入技巧：如何进行日期格式的转换](https://zhuanlan.zhihu.com/p/85613944)
+- [如何在Excel中将日期转换为yYYY-MM-DD格式？](https://zh-cn.extendoffice.com/documents/excel/3289-excel-convert-date-to-yyyy-mm-dd-format.html)
