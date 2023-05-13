@@ -9,6 +9,7 @@
 - `total_profit`：利润总额
 - `net_profit`：净利润
 
+选择单个股票的使用`valuation.code == '000001.XSHE'`，多个的时候使用`valuation.code.in_(['000001.XSHE', '600000.XSHG'])`。
 
 ```
 # 获取多只股票在某一日期的市值, 利润
@@ -18,6 +19,23 @@ df = get_fundamentals(query(
         # 这里不能使用 in 操作, 要使用in_()函数
         valuation.code.in_(['000001.XSHE', '600000.XSHG'])
     ), date='2015-10-15')
+```
+
+## 获得季度利润
+
+```
+# 查询平安银行2014年四个季度的季报, 放到数组中
+q = query(
+        income.statDate,
+        income.code,
+        income.basic_eps,
+        balance.cash_equivalents,
+        cash_flow.goods_sale_and_service_render_cash
+    ).filter(
+        income.code == '000001.XSHE',
+    )
+
+rets = [get_fundamentals(q, statDate='2014q'+str(i)) for i in range(1, 5)]
 ```
 
 
