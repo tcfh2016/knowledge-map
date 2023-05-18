@@ -51,7 +51,9 @@ df.drop('column name', axis=1) # 指定axis=1说明删除列。
 df.drop(['city', 'state'], axis=1) # 删除'city'和'state'两列。
 ```
 
-删除多个行或者列时只需要将所有行/列以列表的形式传入。另外还有一种方法，是使用`del`。删除列时必须通过索引的方式指定，不能通过属性的方式来指定。
+删除多个行或者列时只需要将所有行/列以列表的形式传入，比如`df.drop(df[<some boolean condition>].index)`。更高效的方式是`df = df[df.score > 50]`。
+
+另外还有一种方法，是使用`del`。删除列时必须通过索引的方式指定，不能通过属性的方式来指定。
 
 ```
 del df['newdata']
@@ -90,7 +92,7 @@ df.newdata = val
 
 ## 替换/replace
 
-最基本的替换功能是是使用`replace`函数，该函数并非默认的inplace函数，如果要对原来的dataframe生效，那么需要传入`inplace=True`参数。
+最基本的替换功能是是使用`replace`函数，该函数并非默认的inplace函数，如果要对原来的dataframe生效，那么需要传入`inplace=True`参数。注意这个时候是全字匹配。
 
 ```
 # 对特别列进行操作
@@ -107,6 +109,8 @@ df.replace(src, tar)
 ```
 index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
 ```
+
+*注：`Series.str.replace()`不能添加`inplace=True`。会报“replace() got an unexpected keyword argument 'inplace'”，这是因为使用的不是`pandas.DataFrame.replace()`而是`string.replace`。*
 
 2) DataFrame
 
@@ -161,6 +165,7 @@ for column in pivot.columns:
 - [pandas.Series.str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
 - [How to replace negative numbers in Pandas Data Frame by zero](https://stackoverflow.com/questions/27759084/)how-to-replace-negative-numbers-in-pandas-data-frame-by-zero)
 - [How to replace a value in pandas, with NaN?](https://stackoverflow.com/questions/29247712/how-to-replace-a-value-in-pandas-with-nan)
+- [How to use the replace() method with keyword arguments to replace empty strings](https://stackoverflow.com/questions/50843263/how-to-use-the-replace-method-with-keyword-arguments-to-replace-empty-strings)
 
 
 ## 按条件替换某列中的部分单元
