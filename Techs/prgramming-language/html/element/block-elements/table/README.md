@@ -108,3 +108,13 @@ width: 1200px;
 text-align:right;
 font-size: 12px;
 ```
+
+
+## 让某行居中
+
+先使用`<td colspan="2">cell_value</td>`来定义合并的样式，再使用`text-align: center;`的属性。
+
+
+参考：
+
+- [How to Center the Text in the HTML Table Row](https://www.w3docs.com/snippets/css/how-to-center-the-text-in-html-table-row.html)
