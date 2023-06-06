@@ -25,9 +25,22 @@ session.query(MyClass).\
 
 ## order_by(criterion)
 
-指定针对查询结果的一个或者多个排序条件，默认以升序排列。
+指定针对查询结果的一个或者多个排序条件，默认以升序排列。比如下面的代码是查询指定代码的市盈率和市值数据，并默认按从市值从小到大排序：
+
+
+```
+q = query(
+  valuation.code, valuation.pe_ratio, valuation.market_cap
+).filter(
+  valuation.code.in_(code)
+).order_by(valuation.market_cap)
+```
+
+将`...).order_by(valuation.market_cap)`修改为`...).order_by(valuation.market_cap.desc())`。
 
 参考：
 
+- [沪深港通持股数据](https://www.joinquant.com/help/api/help#name:Stock)
+- [【有用功】Query的简单教程及TTM/同比/环比算法示例](https://www.joinquant.com/view/community/detail/433d0e9ed9fed11fc9f7772eab8d9376)
 - [SQL | ORDER BY](https://www.geeksforgeeks.org/sql-order-by/)
 - [SQLAlchemy ORDER BY DESCENDING?](https://stackoverflow.com/questions/4186062/sqlalchemy-order-by-descending)
