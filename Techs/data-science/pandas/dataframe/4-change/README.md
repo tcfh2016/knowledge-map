@@ -174,3 +174,7 @@ for column in pivot.columns:
 参考：
 
 - [How to Replace Values in Column Based on Condition in Pandas?](https://www.geeksforgeeks.org/how-to-replace-values-in-column-based-on-condition-in-pandas/)
+
+
+## 转换某列的类型
+
