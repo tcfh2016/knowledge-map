@@ -18,6 +18,15 @@ pd.read_csv('data.csv')
 
 ## `usecols`参数
 
+需要注意的是在`usecols`指定的列标签并无法指定顺序，比如原始csv里面的列顺序是`a,b,c`，那么在读取的时候尽管使用`usecols=['b', 'c', 'a']`读取出来的数据列的顺序依然是`a,b,c`。
+
+
+这在官方文档[usecolslist-like or callable, optional](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)里面已经进行过说明，但如果没有碰到过问题是很难留下印象的：
+
+```
+ Element order is ignored, so usecols=[0, 1] is the same as [1, 0]. To instantiate a DataFrame from data with element order preserved use pd.read_csv(data, usecols=['foo', 'bar'])[['foo', 'bar']] for columns in ['foo', 'bar'] order or pd.read_csv(data, usecols=['foo', 'bar'])[['bar', 'foo']] for ['bar', 'foo'] order.
+```
+
 
 ## `codec can't decode byte`
 
