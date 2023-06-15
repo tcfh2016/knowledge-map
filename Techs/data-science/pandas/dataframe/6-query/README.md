@@ -40,6 +40,12 @@ df = df[df['code'].str.find('500') != -1]
 - [How do I get the name of the rows from the index of a data frame?](https://stackoverflow.com/questions/26640145/how-do-i-get-the-name-of-the-rows-from-the-index-of-a-data-frame)
 
 
+## 最大值查询
+
+print(df["score"].max())
+print(df["score"].idxmax())
+
+
 ## 根据某列的值查询对应的index
 
 因为index是行索引，引起可以借助条件选择的功能选择特定的行，然后再获取结果的index属性：

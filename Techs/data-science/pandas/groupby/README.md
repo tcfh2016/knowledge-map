@@ -41,3 +41,30 @@ groups = df.groupby(["年", "月"])
 
 - [python pandas extract year from datetime](https://stackoverflow.com/questions/30405413/python-pandas-extract-year-from-datetime-dfyear-dfdate-year-is-not)
 - [Python: Datetime to season](https://stackoverflow.com/questions/44124436/python-datetime-to-season)
+
+
+## groupby 之后的二维索引怎么访问？
+
+比如下面这样的数据，我怎么能够访问到其中某个元素的值？
+
+```
+               No1       No2       No3       No4
+Quarter Week                                        
+Q1      W1   -3.267340 -1.043383  1.401451 -0.319191
+        W2   -0.087608 -0.265051  0.690872  1.269642
+Q2      W1   -1.837899  0.407558 -1.876288 -1.196136
+        W2    1.251406 -0.362495 -0.845820 -1.403688
+```
+
+以上的数据是按照两列的数据进行groupby之后的结果，这个时候可以通过元组来作为行标签，比如：
+
+```
+# 进行group分类，并求和
+df.groupby(["Quarter", "Week"]).sum()
+
+# 访问其中“No1”求和后的最大值
+groups_sum.loc[groups_sum["No1"].idxmax()]["No1"]
+
+# 或者直接指定也可以
+groups_sum.loc[('Q2', 'W1')]["No1"]
+```
