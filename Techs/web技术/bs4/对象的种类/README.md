@@ -15,7 +15,7 @@ soup = BeautifulSoup('<b class="boldest">Extremely bold</b>')
 
 Tag对象与XML或HTML原生文档中的tag相同，它有很多方法和属性，常见的是`name`和`attributes`，一个Tag对象只有唯一的名字，但可能有多个属性，属性的操作方法与字典相同。
 
-比如我获取了下一面一个tag，命名为d：
+比如我获取了下一面一个tag，赋值给变量`t`：
 
 ```
 <div class="total-stats style-scope gr-file-list">
@@ -24,54 +24,34 @@ Tag对象与XML或HTML原生文档中的tag相同，它有很多方法和属性�
 </div>
 ```
 
-那么`d.name`为：
+那么：
 
-```
-div
-```
-
-那么`d.attrs`为：
-
-```
-{'class': ['total-stats', 'style-scope', 'gr-file-list']}
-```
-
-*注：HTML 4定义了一系列可以包含多个值的属性，在Beautiful Soup中多值属性的返回类型是list。*
-
-
-那么`d['class']`为：
-
-```
-['total-stats', 'style-scope', 'gr-file-list']
-```
-
-那么`d.contents`（tag的.contents属性可以将该tag的子节点以列表的形式输出）为：
+- `t.name`为`div`。
+- `t.attrs`为`{'class': ['total-stats', 'style-scope', 'gr-file-list']`。
+- `t['class']`为：`['total-stats', 'style-scope', 'gr-file-list']`。
+- `t.contents`（tag的.contents属性可以将该tag的子节点以列表的形式输出）为：
 
 ```
 ['\n', <span aria-label="264 lines added" class="added style-scope gr-file-list" tabindex="0"> +264 </span>, '\n', <span aria-label="57 lines removed" class="removed style-scope gr-file-list" tabindex="0"> -57 </span>, '\n']
 ```
 
 
+*注：HTML 4定义了一系列可以包含多个值的属性，在Beautiful Soup中多值属性的返回类型是list。*
+
 
 ## tag下的tag
 
 上面的举例里面我们可以看到在`<div>`下面还有两个`<span>`，那么我如何取得下面的`<span>`呢？
 
-直接通过“点取属性”就可以了，比如：
+直接通过“点取属性”就可以了，比如使用`t.span`就能够获取`<div>`下面的`<span>`，但点取属性有个缺点，那就是只能获取第一个span。这个时候怎么办 ？
 
-```
-d.span  # 点取属性，获取<div>下面的<span>
-```
-
-但点取属性有个缺点，那就是只能获取第一个span。这个时候怎么办？
-
-1) 可以使用`find_all()`来搜索。
+1. 可以使用`find_all()`来搜索。
 
 ```
 d.find_all("span")
 ```
 
-2）可以使用`children`方法。
+2. 可以使用`children`方法。
 
 ```
 for child in d.children:
