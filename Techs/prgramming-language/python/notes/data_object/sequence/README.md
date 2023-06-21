@@ -42,6 +42,8 @@ list[0:2:1] 指定切片间隔/步长
 ["foo", "bar", "baz"].index("bar")
 ```
 
+如果查找不到会抛出异常，所以这里需要使用`elem in list`或者使用`try/execept`来捕获异常。
+
 参考：
 
 - [Finding the index of an item in a list](https://stackoverflow.com/questions/176918/finding-the-index-of-an-item-in-a-list)
