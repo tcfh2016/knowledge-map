@@ -29,6 +29,11 @@ drinks.mean(axis="columns")
 print(df["YY"].max())
 ```
 
+求取均值的时候会自动过滤掉`np.nan`但不会过滤掉0，如果想过滤掉0那么需要提前使用`df.replace(0, np.NaN)`将0替换为np.nan。
+
+参考：
+
+- [mean calculation in pandas excluding zeros](https://stackoverflow.com/questions/33217636/mean-calculation-in-pandas-excluding-zeros)
 
 ## 统计DataFrame某列的和
 
