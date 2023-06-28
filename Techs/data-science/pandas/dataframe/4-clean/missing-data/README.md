@@ -17,11 +17,15 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 - [How to Check If Any Value is NaN in a Pandas DataFrame](https://chartio.com/resources/tutorials/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe/)
 
 
-## `np.nan`与`None`的区别
+## `np.nan`/`np.NaN`与`None`的区别
+
+首先，`np.nan`和`np.NaN`（甚至`np.NAN`，都是别名）实际上是同一个东西，那它们到底是一个什么值？打印出它的类型是`float`，但是np.nan和np.nan并不相等，所以你无法使用`==`来进行比较，`np.nan`本身使用`==`测试也是`False`。
+
+- 使用`np.nan is np.NaN`返回`True`。
+- 使用`np.isnan(np.nan)`返回`True`。
 
 从类型上，`np.nan`的类型是`float`，`None`的类型是`object`，两者从数据类型上是不同的，而从Python的执行效率上讲，object==bad, float==good。
 
-`np.nan`到底是一个什么值？打印出它的类型是`float`，但是np.nan和np.nan并不相等，所以你无法使用`==`来进行比较，而是需要使用`np.isnan(np.nan)`。
 
 不过在[What is the difference between NaN and None?](https://stackoverflow.com/questions/17534106/what-is-the-difference-between-nan-and-none)里提到`np.isnan(p)`对传入的参数有要求，如果是string类型那么会crash，使用`pd.isnull()`则要安全得多。
 
@@ -30,6 +34,7 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 
 - [Why does assert np.nan == np.nan cause an error?](https://stackoverflow.com/questions/44367557/why-does-assert-np-nan-np-nan-cause-an-error)。
 - [What is the difference between NaN and None?](https://stackoverflow.com/questions/17534106/what-is-the-difference-between-nan-and-none)
+- [Difference between np.nan and np.NaN](https://stackoverflow.com/questions/53436339/difference-between-np-nan-and-np-nan)
 
 
 ## 滤除缺失数据：dropna(criteria)
