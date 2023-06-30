@@ -178,3 +178,8 @@ for column in pivot.columns:
 
 ## 转换某列的类型
 
+
+## SettingWithCopyWarning
+
+
+

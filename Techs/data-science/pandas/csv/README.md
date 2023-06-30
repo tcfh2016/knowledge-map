@@ -72,3 +72,12 @@ month_groups.min().reset_index().to_csv("000898_month_min.csv", sep=',', encodin
 ## to_csv()时丢弃行标签和列标签
 
 通过`header=True, index=True`两个参数来控制是否输出header和index。
+
+
+## to_csv()时重排列标签
+
+使用`columns`参数来指定顺序：
+
+```
+data.to_csv('out.csv', columns = ['x1', 'x2', 'x3', 'x4'])
+```
