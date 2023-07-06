@@ -48,3 +48,7 @@ list[0:2:1] 指定切片间隔/步长
 
 ## 如何根据条件查找 ？
 
+
+参考：
+
+- [](https://stackoverflow.com/questions/2361426/get-the-first-item-from-an-iterable-that-matches-a-condition)
