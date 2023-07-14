@@ -64,7 +64,7 @@ th, td {
 
 参考：
 
-- [HTML Tables](https://www.w3schools.com/html/html_tables.asp)
+- [HTML Table Colspan & Rowspan](https://www.w3schools.com/html/html_table_colspan_rowspan.asp)
 
 
 ## 颜色
