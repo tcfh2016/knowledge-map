@@ -27,6 +27,11 @@ pd.read_csv('data.csv')
  Element order is ignored, so usecols=[0, 1] is the same as [1, 0]. To instantiate a DataFrame from data with element order preserved use pd.read_csv(data, usecols=['foo', 'bar'])[['foo', 'bar']] for columns in ['foo', 'bar'] order or pd.read_csv(data, usecols=['foo', 'bar'])[['bar', 'foo']] for ['bar', 'foo'] order.
 ```
 
+如果我不想读取某列，可以使用：
+
+```
+pd.read_csv("sample.csv", usecols=lambda x: x != "name")
+```
 
 ## `codec can't decode byte`
 
@@ -40,3 +45,6 @@ read_csv可以直接用来读取csv文件，且可以通过不同的参数来完
 - [UnicodeDecodeError when reading CSV file in Pandas with Python
 ](https://stackoverflow.com/questions/18171739/unicodedecodeerror-when-reading-csv-file-in-pandas-with-python)
 - [Encodings and Unicode](https://docs.python.org/3/library/codecs.html#standard-encodings)
+
+## 不读取某列
+
