@@ -28,9 +28,22 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/pytho
 help('modules')
 ```
 
+查看版本信息，可以使用每个模块提供的`__version__`属性：
+
+```
+import pandas as pd
+
+pd.__version__
+pd.show_versions() #查看依赖模块的版本
+```
+
+如果安装了pip，那么使用`pip list`或者`pip3 list`可以查看所有安装的模块及对应的版本。
+
 参考：
 
 - [How do I get a list of locally installed Python modules?](https://stackoverflow.com/questions/739993/how-do-i-get-a-list-of-locally-installed-python-modules)
+- [How to find the installed pandas version](https://stackoverflow.com/questions/20612645/how-to-find-the-installed-pandas-version)
+
 
 ## Q&A
 
