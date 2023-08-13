@@ -37,8 +37,3 @@ DataFrame提供了`sort_index()`和`sort_value`分别按照索引和值排序：
 df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
 ```
 
-2.`rank()`
-
-参考：
-
-- [关于pandas的rank()函数的一点认识](https://zhuanlan.zhihu.com/p/87593543)

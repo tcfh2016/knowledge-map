@@ -178,6 +178,19 @@ for column in pivot.columns:
 
 ## 转换某列的类型
 
+使用`.astype(target_type)`来进行。另外可以通过自定义数据转换函数：
+
+```
+def close_convert_func(value: str) -> float:
+
+    if "万元" in value:
+        new_value = value.replace('万元', '0000')
+    else:
+        new_value = value.replace('元', '')
+    return np.float64(new_value)
+
+temp_df['close'] = temp_df['close'].apply(close_convert_func)
+```
 
 ## SettingWithCopyWarning
 

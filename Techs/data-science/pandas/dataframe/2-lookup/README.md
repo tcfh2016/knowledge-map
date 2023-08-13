@@ -82,5 +82,10 @@ pd.set_option('precision', 2)
 ![](print_not_aligned.png)
 
 
+## `rank()`
+
+参考：
+
+- [关于pandas的rank()函数的一点认识](https://zhuanlan.zhihu.com/p/87593543)
 
 
