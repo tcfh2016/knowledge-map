@@ -24,9 +24,7 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/pytho
 
 ## 查看当前已经安装的模块
 
-```
-help('modules')
-```
+进入Python命令行，输入`help('modules')`可以查看当前已经安装好的各个模块。
 
 查看版本信息，可以使用每个模块提供的`__version__`属性：
 
