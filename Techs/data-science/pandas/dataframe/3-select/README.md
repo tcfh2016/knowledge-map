@@ -46,6 +46,8 @@ print(df[0:1])            # 索引'a'一行数据。
 
 使用位置索引的时候比较少，因为如果要使用位置索引那么你还得一个一个去数，这在数据量大的时候是很难办的。
 
+*有些版本，比如pandas 1.3.1 里面，使用df.iloc[x][label]来赋值就不生效。*
+
 参考：
 
 - [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
