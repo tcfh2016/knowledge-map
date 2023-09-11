@@ -17,9 +17,7 @@ range(start, stop) takes two arguments.
 range(start, stop, step) takes three arguments.
 ```
 
-## Q&A
-
-### 怎样反转一个range ？
+## 怎样反转一个range ？
 
 直观的写法是`range(stop - 1, start - 1, -1)`，但是在[Print a list in reverse order with range()?](https://stackoverflow.com/questions/7286365/print-a-list-in-reverse-order-with-range)给出了一个更优美的方式：
 
