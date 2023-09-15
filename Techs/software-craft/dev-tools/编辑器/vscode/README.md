@@ -49,3 +49,7 @@ Bad owner or permissions on C:\\Users\\lianbche/.ssh/config
 上一步设置之后会解决“Bad owner or permissions on”的问题，可以使用powershell直接ssh连接linux服务器，但是在vscode里面会提示新的错误：“EPERM: operation not permitted”，也就是在VsCode里面无法使用ssh连接服务器，其实答案也在上面解决方案的连接里面。
 
 因为上一步“Disable Inheritance”的设置将config文件的所有权限清楚，导致VsCode无法正常使用Windows自带的openssh，解决方案是给文件分配自己可以操作的权限。
+
+
+https://stackoverflow.com/questions/29971600/choose-folders-to-be-ignored-during-search
+https://medium.com/@qjli/daily-dev-tips-102-visual-studio-code-how-to-exclude-folders-from-file-search-751f3aaaf1ec
