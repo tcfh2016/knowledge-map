@@ -29,9 +29,12 @@ email.message.EmailMessage
 - [email - How to Represent an Email Message in Python?](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python)
 - [email.contentmanager: Managing MIME Content](https://docs.python.org/3/library/email.contentmanager.html)
 
-### 发送文本
+
+## 发送文本
 
 ```
+from email.message import EmailMessage
+
 msg = EmailMessage()
 msg.set_content("hello world") # 此时的消息类型为text/plain
 msg['Subject'] = 'say hello'
@@ -52,7 +55,7 @@ email.contentmanager.set_content(msg, <'EmailMessage'>, cte=None, disposition=No
    Add headers and payload to msg:
 ```
 
-### 发送html
+## 发送html
 
 ```
 # Create the base text message.
@@ -88,8 +91,18 @@ msg.add_alternative("""\
 
 邮件格式会从`text/plain`变更为`multipart/alternative`。
 
+## 将多个html写入邮件
 
-### 发送图片附件
+如果想将多个html文件写入邮件正文，调用`msg.set_content(f.read(), 'html')`仅仅会写入最后一个，也就是之前的被后面的覆盖。
+
+解决方案就是提前将多个html文件的代码合并到同一个html文件。
+
+
+## 发送压缩包附件
+
+
+
+## 发送图片附件
 
 继续上面的例子，如果我们使用`add_attachment`来添加附件时，那么邮件的格式会从`text/plain`变更为`multipart/mixed`。
 
@@ -127,7 +140,45 @@ with smtplib.SMTP('localhost') as s:
 转换之后的结构可以参考[Convert a Message to Multipart/Mixed](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python#Example-10:-Convert-a-Message-to-Multipart/Mixed)，简单来说转换之前只有1个EmailMessage，转换之后就是一个嵌套层次：1个EmailMessage里面再包装1个EmailMessage。
 
 
-### 内嵌图片附件
+## 发送图片
+
+我们提到新版本的Python（3.6）引入了[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)，以便通过统一接口来操作各种MIME type类似，前面我们仅仅提到了发送文本的做法，那么发送图片如何处理呢？
+
+在之前的版本，比如大树兄的版本里面发送图片需要手动创建`MIMEMultipart`做为邮件的主体对象，然后分别创建`MIMEText`和`MIMEImage`分别将文本对象和图片对象组合到主体对象中。如果直接使用`EmailMessage`就不需要这么麻烦了，直接调用`add_attachment()`进行添加即可。
+
+```
+msg = MIMEMultipart()
+content = MIMEText(html, _subtype='html', _charset='utf8')
+msg.attach(content)
+for id, pic in picture.items():
+    img = MIMEImage(open(pic, 'rb').read(), _subtype='octet-stream')
+    img.add_header('Content-ID', id)
+    msg.attach(img)
+
+msg = EmailMessage()
+msg.add_attachment(html, subtype='html')
+for id, pic in picture.items():
+    msg.add_attachment(open(pic, 'rb').read(), maintype='image', subtype='png',cid=id)
+```
+
+另外一个知识点，从廖雪峰的[SMTP发送邮件](https://www.liaoxuefeng.com/wiki/1016959663602400/1017790702398272#0)才搞明白`add_alternative()`实际上添加的是一个备选项，比如下面这段代码的意思是先用`set_content()`将邮件正文设置为“text里面的内容”，这种是纯文本；同时也用`add_alternative()`添加一种备选的html格式的正文，如果接收者的邮箱支持html那么默认按照html格式展示html_content，如果不支持那么以纯文本展示text包含的纯文本内容。也就是这添加的两种内容仅仅只会展示一种。
+
+```
+msg = EmailMessage()
+msg.set_content(text)
+msg.add_alternative(html_content, subtype='html')
+```
+
+参考：
+
+- [Python SMTP发送邮件](https://www.runoob.com/python/python-email.html)
+- [email — An email and MIME handling package](https://docs.python.org/3/library/email.html)
+- [email: Examples](https://docs.python.org/3/library/email.examples.html)
+- [Python smtplib模块详解：发送邮件](https://naoketang.com/p/dlr7326xqpog)
+- [SMTP发送邮件](https://www.liaoxuefeng.com/wiki/1016959663602400/1017790702398272#0)
+- [Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies](https://tools.ietf.org/html/rfc2045.html#page-10)
+- [Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types](https://tools.ietf.org/html/rfc2046#page-17)
+
 
 
 ## Legacy API
