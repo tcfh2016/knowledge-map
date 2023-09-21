@@ -14,6 +14,25 @@ Selenium使用对应浏览器的驱动来和浏览器进行交互，比如Firefo
 
 首先需要安装`selenium`，然后需要安装对应浏览器的驱动，比如Firefox的`geckodriver`，这个驱动的安装只需要把对应的exe（Windows系统下）下载下来并将其目录添加到系统PATH中即可。之后便是熟悉库里面各种变量和函数的使用。
 
+## 隐藏模式执行
+
+
+如果执行时不想打开浏览器，那么可以设置`headless`参数：
+
+```
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+options = webdriver.FirefoxOptions()
+options.headless = True
+driver = webdriver.Firefox(options=options)
+
+```
+
+参考：
+
+- [How to hide Firefox window (Selenium WebDriver)?](https://www.tutorialspoint.com/how-to-hide-firefox-window-selenium-webdriver)
+
 
 ## 如何处理"NoSuchElementException"
 

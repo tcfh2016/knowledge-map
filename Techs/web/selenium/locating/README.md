@@ -2,16 +2,7 @@
 
 定位到页面元素的手段比较多，常见是就是下面这些方法：
 
-```
-find_element_by_id
-find_element_by_name
-find_element_by_xpath
-find_element_by_link_text
-find_element_by_partial_link_text
-find_element_by_tag_name
-find_element_by_class_name
-find_element_by_css_selector
-```
+
 
 举个例子，对于下面的输入框元素我们可以通过多种方法来找到它。
 
@@ -36,6 +27,23 @@ XPath是专门应用在XML文档里面搜索节点的语言，XPath支持根据i
 
 > You can also look for a link by its text, but be careful! The text must be an exact match! You should also be careful when using XPATH in WebDriver. If there’s more than one element that matches the query, then only the first will be returned. If nothing can be found, a NoSuchElementException will be raised.
 
+
+## `find_element(By.LINK_TEXT, "link text")`和`find_element_by_link_text`的区别
+
+
+以上两种方法找不到的时候都会抛出异常，所以对于有的页面能够找到有的找不到的时候建议使用`find_elements`，因为该方法返回一个列表，即便找不到也返回空列表，就不需要针对异常进行处理。
+
+
+```
+from selenium.webdriver.common.by import By
+
+for item in driver.find_elements(By.LINK_TEXT, "Expand all"):
+    item.click()
+```
+
+参考：
+
+- [4. Locating Elements](https://selenium-python.readthedocs.io/locating-elements.html)
 
 ## 如何实现精准匹配？
 
@@ -67,3 +75,21 @@ for elem in elems:
     if elem.get_attribute('class') == 'inline':
         elem.click()
 ```
+
+
+## 已经废弃的方法
+
+最开始有如下的方法，后面已经被新的方法替代：
+
+```
+find_element_by_id
+find_element_by_name
+find_element_by_xpath
+find_element_by_link_text
+find_element_by_partial_link_text
+find_element_by_tag_name
+find_element_by_class_name
+find_element_by_css_selector
+```
+
+
