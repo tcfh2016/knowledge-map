@@ -1,6 +1,6 @@
-## [email](https://docs.python.org/3/library/email.html)
+[email](https://docs.python.org/3/library/email.html)
 
-## [email.message](https://docs.python.org/3/library/email.message.html)
+## email.message
 
 一封邮件包含头部和载荷两部分（均可能有多个），对于头部的定义，主要描述在[RFC 5322]()和[RFC 6532]()里面。对于载荷，可能是文本、二进制文件或者结构化的嵌套结构（包括多个Header和多个载荷，即multipart类型）。
 
@@ -25,6 +25,7 @@ email.message.EmailMessage
 
 参考：
 
+- [email.message](https://docs.python.org/3/library/email.message.html)
 - [MIME 类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
 - [email - How to Represent an Email Message in Python?](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python)
 - [email.contentmanager: Managing MIME Content](https://docs.python.org/3/library/email.contentmanager.html)
@@ -57,37 +58,43 @@ email.contentmanager.set_content(msg, <'EmailMessage'>, cte=None, disposition=No
 
 ## 发送html
 
+`email.message`这个模块里面的核心类是[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)。那这个`EmailMessage`又是什么呢？其实这个对象提供了一些函数可以直接添加多种类型的内容，而不用像老的API那样组装邮件内容时需要先创建`MIMEText`, `MIMEImage`或者其他的对象。比如下面是一个发送邮件正文为纯文本的例子：
+
 ```
-# Create the base text message.
-msg.set_content("""\
-Salut!
+import smtplib
+from email.message import EmailMessage
 
-Cela ressemble à un excellent recipie[1] déjeuner.
+msg = EmailMessage()
+msg['From'] = '你的163邮箱地址'
+msg['To'] = '接收者邮箱地址'
+msg['Subject'] = 'Hello world'
+msg.set_content("There you are!")
 
-[1] http://www.yummly.com/recipe/Roasted-Asparagus-Epicurious-203718
-
---Pepé
-""")
-
-# Add the html version.  This converts the message into a multipart/alternative
-# container, with the original text message as the first part and the new html
-# message as the second part.
-asparagus_cid = make_msgid()
-msg.add_alternative("""\
-<html>
-  <head></head>
-  <body>
-    <p>Salut!</p>
-    <p>Cela ressemble à un excellent
-        <a href="http://www.yummly.com/recipe/Roasted-Asparagus-Epicurious-203718">
-            recipie
-        </a> déjeuner.
-    </p>
-    <img src="cid:{asparagus_cid}" />
-  </body>
-</html>
-""".format(asparagus_cid=asparagus_cid[1:-1]), subtype='html')
+mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+mail_server.send_message(msg)
 ```
+
+测试成功之后我决定尝试着发送html网页，于是我先创建了一个最简单的html网页，名称为`display.html`，然后尝试将它的内容读出来再调用`set_content`填充到msg里面，最后发送出去。
+
+```
+import smtplib
+from email.message import EmailMessage
+
+msg = EmailMessage()
+msg['From'] = '你的163邮箱地址'
+msg['To'] = '接收者邮箱地址'
+msg['Subject'] = 'Hello world'
+msg.set_content("There you are!")
+
+mail_server = smtplib.SMTP_SSL('smtp.163.com',port=465)
+mail_server.login('你的163邮箱账号', '你的SMTP授权码')
+with open("display.html") as f:
+    msg.set_content(f.read())
+mail_server.send_message(msg)
+```
+
+我看到的内容并不是展示出来的html内容，而全是代码。问题出在哪里？在网络上进行查找对比之后是因为在`set_context()`的时候没有设置内容格式因此默认当作纯文本格式了，只需要设置`msg.set_content(f.read(), 'html')`就可以。在官方文档[email: Examples](https://docs.python.org/3/library/email.examples.html)的一个例子里面，使用`msg.add_attachment(f.read(), subtype='html')`也是可以成功的。
 
 邮件格式会从`text/plain`变更为`multipart/alternative`。
 
@@ -96,49 +103,6 @@ msg.add_alternative("""\
 如果想将多个html文件写入邮件正文，调用`msg.set_content(f.read(), 'html')`仅仅会写入最后一个，也就是之前的被后面的覆盖。
 
 解决方案就是提前将多个html文件的代码合并到同一个html文件。
-
-
-## 发送压缩包附件
-
-
-
-## 发送图片附件
-
-继续上面的例子，如果我们使用`add_attachment`来添加附件时，那么邮件的格式会从`text/plain`变更为`multipart/mixed`。
-
-```
-add_attachment(*args, content_manager=None, **kw)
-
-    ... If the message is a non-multipart, multipart/related, or multipart/alternative, call make_mixed() and then proceed as above...
-```
-
-代码如下：
-
-```
-# And imghdr to find the types of our images
-import imghdr
-
-msg = EmailMessage()
-msg['Subject'] = 'Our family reunion'
-msg['From'] = me
-msg['To'] = you
-
-# Open the files in binary mode.  Use imghdr to figure out the
-# MIME subtype for each specific image.
-for file in pngfiles:
-    with open(file, 'rb') as fp:
-        img_data = fp.read()
-    msg.add_attachment(img_data, maintype='image',
-                                 subtype=imghdr.what(None, img_data))
-
-with smtplib.SMTP('localhost') as s:
-    s.send_message(msg)
-```
-
-当然，[这里](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python#Example-6:-Add-Attachment-and-Get-Body-Contents-from-Multipart-Mail)也有一个添加图片作为附件的例子，使用了`mimetypes`来判断图片的类型。
-
-转换之后的结构可以参考[Convert a Message to Multipart/Mixed](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python#Example-10:-Convert-a-Message-to-Multipart/Mixed)，简单来说转换之前只有1个EmailMessage，转换之后就是一个嵌套层次：1个EmailMessage里面再包装1个EmailMessage。
-
 
 ## 发送图片
 
@@ -179,6 +143,65 @@ msg.add_alternative(html_content, subtype='html')
 - [Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies](https://tools.ietf.org/html/rfc2045.html#page-10)
 - [Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types](https://tools.ietf.org/html/rfc2046#page-17)
 
+## 发送压缩包附件
+
+使用[email: Examples](https://docs.python.org/3.9/library/email.examples.html#id2)中的一个例子：
+
+```
+import mimetypes
+from email.message import EmailMessage
+
+for filename in os.listdir(directory):
+        path = os.path.join(directory, filename)
+        if not os.path.isfile(path):
+            continue        
+        ctype, encoding = mimetypes.guess_type(path)
+        if ctype is None or encoding is not None:            
+            ctype = 'application/octet-stream'
+        maintype, subtype = ctype.split('/', 1)
+        with open(path, 'rb') as fp:
+            msg.add_attachment(fp.read(),
+                               maintype=maintype,
+                               subtype=subtype,
+                               filename=filename)
+```
+
+## 发送图片附件
+
+继续上面的例子，如果我们使用`add_attachment`来添加附件时，那么邮件的格式会从`text/plain`变更为`multipart/mixed`。
+
+```
+add_attachment(*args, content_manager=None, **kw)
+
+    ... If the message is a non-multipart, multipart/related, or multipart/alternative, call make_mixed() and then proceed as above...
+```
+
+代码如下：
+
+```
+# And imghdr to find the types of our images
+import imghdr
+
+msg = EmailMessage()
+msg['Subject'] = 'Our family reunion'
+msg['From'] = me
+msg['To'] = you
+
+# Open the files in binary mode.  Use imghdr to figure out the
+# MIME subtype for each specific image.
+for file in pngfiles:
+    with open(file, 'rb') as fp:
+        img_data = fp.read()
+    msg.add_attachment(img_data, maintype='image',
+                                 subtype=imghdr.what(None, img_data))
+
+with smtplib.SMTP('localhost') as s:
+    s.send_message(msg)
+```
+
+当然，[这里](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python#Example-6:-Add-Attachment-and-Get-Body-Contents-from-Multipart-Mail)也有一个添加图片作为附件的例子，使用了`mimetypes`来判断图片的类型。
+
+转换之后的结构可以参考[Convert a Message to Multipart/Mixed](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python#Example-10:-Convert-a-Message-to-Multipart/Mixed)，简单来说转换之前只有1个EmailMessage，转换之后就是一个嵌套层次：1个EmailMessage里面再包装1个EmailMessage。
 
 
 ## Legacy API
