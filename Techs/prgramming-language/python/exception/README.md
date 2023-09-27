@@ -9,6 +9,13 @@ except Exception as e:
   logger.error('failed with: '+ str(e))
 ```
 
+如上代码中的`except Exception as e`是有两点说明：
+
+1）`Exception`意指捕获任何异常。
+
+2）将捕获的异常指定变量，以便于在处理的时候打印出异常相关的信息，这时通常可以使用`e.args`来打印出参数值，方便起见对于内建异常都定义了`__str__()`函数来输出相关参数值，所以可以通过`str(e)`来打印。
+
+
 ## 捕获异常
 
 对于异常的处理可以简单分为两类：
@@ -39,7 +46,9 @@ x = 'spam'
 fetcher(x, 4)
 ```
 
-try是复合语句如下所示，先以try作为首行，后紧跟缩进的语句代码，然后是一个或多个except分句来识别要捕获的异常，最后是一个可选的else分支。
+上面的`except IndexError`也可以写得更多彩一些，比如`except (RuntimeError, TypeError, NameError)`。
+
+try复合语句如下所示，先以try作为首行，后紧跟缩进的语句代码，然后是一个或多个except分句来识别要捕获的异常，最后是一个可选的else分支，它负责“没有发生异常时必须要执行的操作”。
 
 ```
 try:
@@ -55,6 +64,8 @@ except:
 else:
   <statements> # 不发生异常时执行
 ```
+
+*注1：一个很自然的疑问是看起来放在else里面的语句其实和直接在except里面一样，那为什么还需要else语句呢？因为这是设计上的全面性。因为python推荐捕获特定的异常而非直接使用except捕获任何异常，所以并不一定每个异常设计里面都有except来捕获所有异常，也就是可能会有异常被忘记捕获导致该执行的操作没有执行。*
 
 在Python 2.5及之后的版本中，可以在同一个try语句中混合finally, except以及else子句。
 
