@@ -56,6 +56,10 @@ email.contentmanager.set_content(msg, <'EmailMessage'>, cte=None, disposition=No
    Add headers and payload to msg:
 ```
 
+*注1：使用抄送的时候直接用msg['Cc'] = address list即可。*
+*注2：邮箱地址需要用列表，比如['address 1', 'address 2'...]，不能用shell里的"address 1;address 2"这种形式。*
+
+
 ## 发送html
 
 `email.message`这个模块里面的核心类是[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)。那这个`EmailMessage`又是什么呢？其实这个对象提供了一些函数可以直接添加多种类型的内容，而不用像老的API那样组装邮件内容时需要先创建`MIMEText`, `MIMEImage`或者其他的对象。比如下面是一个发送邮件正文为纯文本的例子：
