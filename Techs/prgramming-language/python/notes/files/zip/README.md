@@ -45,6 +45,9 @@ zip_ref.close()
 
 - [How to create a zip archive of a directory?](https://stackoverflow.com/questions/1855095/how-to-create-a-zip-archive-of-a-directory)
 
-## 
 
+## 压缩时的目录结构
+
+
+- [zip file and avoid directory structure](https://stackoverflow.com/questions/27991745/zip-file-and-avoid-directory-structure)
 - [Create zip from directory using Python](https://stackoverflow.com/questions/58955341/create-zip-from-directory-using-python)
