@@ -1,3 +1,13 @@
+## 将多列合并为单列时间
+
+=TEXT(TIME($K2,$L2,$M2), "gg:mm:ss")&"."&$N2
+
+=SERIES('L2HI-CU'!$AI$1,'L2HI-CU'!$O:$O,'L2HI-CU'!$AI$2:$AI$75539,1)
+
+参考：
+
+- [Adding Time Values from Separate Hours and Minutes Columns](https://www.exceltip.com/excel-date-time-formulas/adding-time-values-from-separate-hours-and-minutes-columns.html)
+
 ##
 
 - MOD 经常出现的数
