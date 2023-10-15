@@ -11,6 +11,24 @@ DataFrame的获取是以列优先的，`df[x]`是获取列名为x的Series，这
 
 *那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。*
 
+## 不选择某些列
+
+
+不选择单列：
+
+```
+df.loc[:, df.columns!='rebounds']
+```
+
+不选择多列：
+
+```
+df.loc[:, ~df.columns.isin(['rebounds', 'assists'])]
+```
+
+参考：
+
+- [](https://www.statology.org/pandas-exclude-column/)
 
 ## 选取行
 
