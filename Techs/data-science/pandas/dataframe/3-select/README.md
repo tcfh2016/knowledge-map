@@ -5,6 +5,7 @@
 ```
 df['col1_label'] # 选取单列
 df[['col1_label', 'col2_label']] # 选取多列
+df.loc[:, 'col1_label':'col2_label'] # 选取多列
 ```
 
 DataFrame的获取是以列优先的，`df[x]`是获取列名为x的Series，这种理解方式与C/C++二维数组是不同的。
@@ -29,6 +30,14 @@ df.loc[:, ~df.columns.isin(['rebounds', 'assists'])]
 参考：
 
 - [](https://www.statology.org/pandas-exclude-column/)
+
+## 怎样按照某行的条件来挑选列呢？
+
+查了资料，没有找到直接的方法，想了想有两种：
+
+- 使用转置T进行选择
+- 使用列删除
+
 
 ## 选取行
 

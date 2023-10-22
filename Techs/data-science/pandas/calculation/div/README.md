@@ -7,3 +7,7 @@
 ```
 percent_items = percent_items[:].div(percent_items['营业收入(万元)'], axis=0)
 ```
+
+参考：
+
+- [Python | Pandas dataframe.div()](https://www.geeksforgeeks.org/python-pandas-dataframe-div/)
