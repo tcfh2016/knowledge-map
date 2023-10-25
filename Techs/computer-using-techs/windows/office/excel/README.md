@@ -8,9 +8,6 @@
 
 - [Adding Time Values from Separate Hours and Minutes Columns](https://www.exceltip.com/excel-date-time-formulas/adding-time-values-from-separate-hours-and-minutes-columns.html)
 
-##
-
-- MOD 经常出现的数
 
 ## 计算复合增长率
 
@@ -109,3 +106,8 @@ https://jingyan.baidu.com/article/a378c960d77615b3282830bd.html
 
 - [excel录入技巧：如何进行日期格式的转换](https://zhuanlan.zhihu.com/p/85613944)
 - [如何在Excel中将日期转换为yYYY-MM-DD格式？](https://zh-cn.extendoffice.com/documents/excel/3289-excel-convert-date-to-yyyy-mm-dd-format.html)
+
+
+##
+
+- MOD 经常出现的数
