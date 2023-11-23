@@ -10,6 +10,13 @@
 m = score['language'].iloc[0:10].astype(float).mean()
 ```
 
+## 统计某列的某个值有多少次
+
+print(data['name'].value_counts()['sravan'])
+
+参考：
+
+- [](https://www.geeksforgeeks.org/how-to-count-occurrences-of-specific-value-in-pandas-column/)
 
 ## mean(), median(), min(), max()
 
