@@ -15,6 +15,15 @@ for line in open('myfile'):
   print(line, end='')
 ```
 
+## 统计文件行数
+
+```
+num_lines = sum(1 for _ in open('myfile.txt'))
+```
+
+参考：
+
+- [How to get the line count of a large file cheaply in Python](https://stackoverflow.com/questions/845058/how-to-get-the-line-count-of-a-large-file-cheaply-in-python)
 
 ## 如何读取文件第一行和最后一行？
 

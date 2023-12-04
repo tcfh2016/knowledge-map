@@ -110,3 +110,8 @@ ks = list(D.keys())
 ks[0]
 ```
 
+## 如何判断字典是空的
+
+if dict:
+  print("NOT EMPTY")
+
