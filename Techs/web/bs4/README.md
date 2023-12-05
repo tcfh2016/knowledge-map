@@ -1,4 +1,4 @@
-## [Beautiful Soup 4](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/)
+## [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 
 Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库,它能够通过你喜欢的转换器实现惯用的文档导航、查找、修改文档的方式。BS支出如下四种解析器：
@@ -43,3 +43,11 @@ u'example.com'
 
 在碰到“ModuleNotFoundError: No module named 'beautifulsoup4'”的提示时，需要使用`pip install beautifulsoup4`来安装。
 
+
+-  `'geckodriver' executable needs to be in PATH`错误
+
+尽管已经使用`sys.path.append()`来添加了geckodriver所在的path，但是依然不行，使用`export PATH=target_path:${PATH}`之后就可以。
+
+参考：
+
+- [Selenium using Python - Geckodriver executable needs to be in PATH](https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path)
