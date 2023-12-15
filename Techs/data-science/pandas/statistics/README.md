@@ -42,6 +42,12 @@ print(df["YY"].max())
 
 - [mean calculation in pandas excluding zeros](https://stackoverflow.com/questions/33217636/mean-calculation-in-pandas-excluding-zeros)
 
+
+## 求均值时长度超了怎么办？
+
+比如某列的长度为10，但是求均值的范围选到了15？不会计算超出的部分。
+
+
 ## 统计DataFrame某列的和
 
 `dataframe.sum()`默认对“行”进行求和，即以列为单位求每列对应所有行的和，可以指定坐标轴，
