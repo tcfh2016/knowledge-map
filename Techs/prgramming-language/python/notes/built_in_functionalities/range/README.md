@@ -24,3 +24,12 @@ range(start, stop, step) takes three arguments.
 ```
 reversed(range(10))
 ```
+
+## 如果结束位置比起始位置低怎么办？
+
+比如下面的代码，不会有任何输出。
+
+```
+for i in range(0, -5, 1):
+    print(i)
+```

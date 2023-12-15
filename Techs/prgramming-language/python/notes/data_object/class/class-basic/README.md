@@ -33,6 +33,18 @@ class Person(object):
 
 类通过函数为实例提供行为，这些函数会在类中对变量名进行赋值。它们通常称为方法，而且会自动接收第一个特殊参数（self）。
 
+### 析构器
+
+怎么能够正确的回收资源？
+
+本来以为定义了`__init__(self)`，再定义一个`__del__(self)`就可以了，但它们两者的关系并不是C++中的构造器和析构器之间的对应关系。在(Python Gotchas 1: __del__ is not the opposite of __init__)[https://www.algorithm.co.il/programming/python-gotchas-1-__del__-is-not-the-opposite-of-__init__/]里的解释是因为可能在`__init__(self)`的时候会失败，但是依然会调用`__del__(self)`。
+
+
+参考：
+
+- [How do I correctly clean up a Python object?](https://stackoverflow.com/questions/865115/how-do-i-correctly-clean-up-a-python-object)
+
+
 ### 1.设置和取值函数
 
 如下的设置/取值函数支持：
@@ -71,9 +83,9 @@ class C(object):
 另一种方法是对定义的函数进行转换：
 
 ```    
-    def fun(cls, arg1, arg2, ...):
-       ....
-    fun = classmethod(fun)
+def fun(cls, arg1, arg2, ...):
+    ....
+fun = classmethod(fun)
 ```
 
 ### 3.静态方法
