@@ -10,6 +10,8 @@
 
 ## Norms and other numbers
 
+`linalg.norm()`
+
 ## Solving equations and inverting matrices
 
 [numpy.linalg.lstsq(a, b, rcond='warn')](https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq)

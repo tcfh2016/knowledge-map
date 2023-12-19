@@ -12,6 +12,10 @@
 
 - [Normal Distribution](https://www.investopedia.com/terms/n/normaldistribution.asp)
 
+## 标准正态分布
+
+标准正态分布是正态分布的一种特殊情况，其均值（μ）为0，标准差（σ）为1。
+
 ## 对数正态分布
 
 在概率论与统计学中，任意随机变量的对数服从正态分布，则这个随机变量服从的分布称为对数正态分布。

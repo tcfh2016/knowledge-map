@@ -1,5 +1,46 @@
 # [matplotlib.pyplot](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.html)
 
+## 如何移除某个subplot
+
+可以使用`delaxes`函数：
+
+```
+# 创建2行3列共6个subplots
+fig, axes = plt.subplots(2, 3, sharex=True, sharey='row')
+
+# 移除最后一个subplots
+fig.delaxes(axes[1][2])
+```
+
+参考：
+
+- [Delete a subplot](https://stackoverflow.com/questions/14694501/delete-a-subplot)
+
+## subplots之间共享x/y轴坐标
+
+```
+# 如果所有的subplots共享y轴坐标，但是x轴坐标按列共享可以这么做
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(3, 2, sharey=True, sharex='col')
+```
+
+参考：
+
+- [Share axes in matplotlib for only part of the subplots](https://stackoverflow.com/questions/23528477/share-axes-in-matplotlib-for-only-part-of-the-subplots)
+
+
+## 不显示X轴坐标
+
+```
+axs[1, 1].axis("off")
+axs[0, 0].xaxis.set_visible(False)
+```
+
+参考：
+
+- [Turn off axes in subplots](https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots)
+
+
 ## [matplotlib.pyplot.ylim](https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.ylim.html)
 
 设置y坐标轴的极值。在2.x版本和3.x版本在参数名称上不同之处，比如2.x版本：
