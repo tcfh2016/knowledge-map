@@ -9,6 +9,24 @@ class Human(Player):
   pass
 ```
 
+
+## 基类的初始化
+
+
+```
+class SuperClass(object):
+    def __init__(self, x):
+        self.x = x
+        
+class SubClass(SuperClass):
+    def __init__(self, y):
+        super.__init__(y)
+```
+
+参考：
+
+- [How do I initialize the base (super) class?](https://stackoverflow.com/questions/3694371/how-do-i-initialize-the-base-super-class)
+
 ## 1.重载方法
 
 在继承的类中定义一个与超类中同名的属性（数据/方法）会替代超类中的属性，这种重新定义并将
