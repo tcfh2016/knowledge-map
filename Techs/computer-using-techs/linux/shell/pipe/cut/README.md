@@ -20,7 +20,11 @@ ps -ef | grep -i me | cut -d ' ' -f 2 | kill -9
 如上的命令有些时候无法找出完整的进程号，那是对于`A B`进行`cut -d ' ' -f 2`可以取得2，但是如果`A  B`就不行了，因为A和B之间有两个空格，会影响切分后分段的编号，这个时候可以使用`-c`参数：
 
 ```
-ps -ef | grep -i me | cut -c 9,15 | kill -9
+ps -ef | grep -i me | cut -c 9-15 | kill -9
 ```
 
-这样可以按照字符进行切片，解决上面的问题。
+这样可以按照字符进行切片，解决上面的问题。`-c`的参数后面可以跟`9,15`这样指定字符列表，或者用`9-15`来指定字符区间。
+
+参考：
+
+- [](https://www.geeksforgeeks.org/cut-command-linux-examples/)

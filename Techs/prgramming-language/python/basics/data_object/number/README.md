@@ -15,6 +15,12 @@ Python携带的`math`函数库提供了常用的数据处理函数。同时还�
 - 内置函数`int(str, base)`根据指定的进制把字符串转换为一个整数。
 
 
+## 表示法
+
+- `1e-6`：科学计数法
+- `0xFF`：16进制
+- `0b101010`：2进制
+
 ## 浮点数
 
 浮点数（float类型）可以用指数形式来表示，1.23e3表示1.23乘以10的3次方。
@@ -40,13 +46,11 @@ print("f1 = {:.2f}, f2 = {:.2f}".format(round(f1,2), round(f2,2)))
 - [How to use the Python Round method – with examples](https://stackoverflow.com/questions/70882733/how-to-display-two-decimal-points-in-python-when-a-number-is-perfectly-divisibl)
 - [round](https://python-reference.readthedocs.io/en/latest/docs/functions/round.html)
 
-## bytes
+## 整数除法
 
-`bytes`类提供了不可变的序列，里面的值必须是介于0~255的整书。但`bytearray`提供了一个可变的序列。常见方法：
+使用`//`来进行整数除法，返回比结果小的最大整数。
 
-- bytes_array.count(byte)
-- bytes_array.index(byte)
-- bytes_array.append(byte)
-- bytes_array.remove(byte)
-- bytes_array.insert(index, byte)
-- bytes_array.pop(byte)
+```
+11/4 = 2.75
+11//4 = 2
+```

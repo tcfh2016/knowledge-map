@@ -2,7 +2,6 @@
 
 list是一种可以将多个数值组合在一起的复合数据类型，这些数值可以是不同的数据类型。当然list也可以内嵌包含。相比元组，列表可以在不复制的情况下添加、删除或修改元素。 `list`也是一个可变的序列。
 
-
 ## 方法
 
 - a in list
@@ -16,8 +15,8 @@ list是一种可以将多个数值组合在一起的复合数据类型，这些�
 - list.append(6) # 在末尾添加1个元素
 - list.extend([7, 8]) # 在末尾添加多个元素
 - list_a + list_b # 将两个列表进行合并
-- list.remove(elem) # 将最开始找到的元素删除
-- list.pop(index) # 删除对应索引位置的元素，并返回该元素的值
+- list.remove(elem) # 将最开始找到的元素删除，*按值匹配，找不到报错*
+- list.pop(index) # 删除对应索引位置的元素，并返回该元素的值，`del l[index]`删除对应位置的元素
 - list.clear() # 清除所有元素
 - list.sort() 默认升序的排序操作，可以通过`reverse=True`转换为降序，`key`来指定排序方法。
 - list.sort()和list.reverse()会就地修改列表，不会制作拷贝。
@@ -55,8 +54,13 @@ a = [gauss(1.5, 2) for i in range(1000000)]
 lines = [line.rstrip() for line in open('script1.py') if line[0] == 'p']
 ```
 
+## 查找
 
-## 列表拷贝
+用`in`和`not in`来测试某个元素是否在列表中。
+
+用`index`查找某个元素在列表中的位置，没有找到会报`ValueError`错。
+
+## 拷贝
 
 直接通过“=”来拷贝列表那么拷贝变量和被拷贝变量都指向相同的对象，
 
@@ -71,11 +75,11 @@ areas_copy = list(areas)
 ```
 
 
-## 遍历操作（Excursion）
+## 遍历（Excursion）
 
 使用`for`语句来遍历列表，Python提供了一种极具扩展性的遍历方式使得你可以不用去管被遍历的list中元素的数据类型。
 
-## 逆序遍历
+逆序遍历：
 
 ```
 list(reversed(xs))
@@ -87,13 +91,15 @@ xs[::-1]
 
 - [](https://stackoverflow.com/questions/3940128/how-do-i-reverse-a-list-or-loop-over-it-backwards)
 
+## 删除
+
+有没有直接通过“+”或“-”来进行列表的删除操作？
+
+答：很遗憾，亲自尝试，并没有。不过在[Python list subtraction operation](https://stackoverflow.com/questions/3428536/python-list-subtraction-operation)给出了两个思路：使用set（支持“-”操作和“|”操作），或者使用列表解析式（`[item for item in x if item not in y]`）。
+
 
 ## 求均值
 
 sum(l) / len(l)
 
-## Q&A
 
-- 有没有直接通过“+”或“-”来进行列表的删除操作？
-
-答：很遗憾，亲自尝试，并没有。不过在[Python list subtraction operation](https://stackoverflow.com/questions/3428536/python-list-subtraction-operation)给出了两个思路：使用set（支持“-”操作和“|”操作），或者使用列表解析式（`[item for item in x if item not in y]`）。

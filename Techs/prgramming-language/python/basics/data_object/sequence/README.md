@@ -5,6 +5,17 @@
 需要留意的是，尽管序列操作是通用的，但方法不通用。一条简明的法则是这样的：可作用于多种类型的通用型操作都是以内置函数或表达式的形式出现的（比如len(X), x[0]），但类型特定的操作是以方法调用的形式出现的（比如string.upper()）。你可以通过dir来查看对象支持的所有方法，并使用help来查找帮助信息。
 
 
+## bytes
+
+`bytes`类提供了不可变的序列，里面的值必须是介于0~255的整书。但`bytearray`提供了一个可变的序列。常见方法：
+
+- bytes_array.count(byte)
+- bytes_array.index(byte)
+- bytes_array.append(byte)
+- bytes_array.remove(byte)
+- bytes_array.insert(index, byte)
+- bytes_array.pop(byte)
+
 ## 索引
 
 序列的索引是按照从最前面的偏移量进行编码的，也就是从0开始，第一项索引为0，第二项索引为1，依次类推。

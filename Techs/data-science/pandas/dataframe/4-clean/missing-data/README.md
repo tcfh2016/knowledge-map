@@ -60,6 +60,14 @@ print(s.dropna(axis=1)) # 删除含有NaN的全部行
   - 传入参数`axis=1`来指示对于列的操作。
 
 
+## 仅仅删除某列值为空的数据
+
+
+参考：
+
+- [Deleting DataFrame row in Pandas based on column value](https://stackoverflow.com/questions/18172851/deleting-dataframe-row-in-pandas-based-on-column-value)
+
+
 ## 填充缺失数据：fillna(new_value)
 
 在大多数情况下，fillna方法是填充缺失数据的主要函数。

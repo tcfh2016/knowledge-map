@@ -9,17 +9,18 @@
 
 常见方法：
 
+- d.get(key, default=None) # 返回键key对应的值，如果不存在那么返回None
 - a.update(b) # 将b中的键值去更新a，不存在则存入，存在则刷新
 - len(dict) #获取size
 - d.pop('a') # 删除键'a'对应的记录，并返回值
 - del d['a'] # 删除键'a'对应的记录
 - a = b.copy()
-- a.clear()
-- key_list = a.keys()
-- value_list = a.values()
+- d.clear()
 - key in dict
 - key not in dict
-
+- d.keys() # 返回由所有键组成的列表
+- d.values() # 返回由所有值组成的列表
+- d.items() # 返回由所有值值对元组组成的列表
 
 ## 创建
 
@@ -32,6 +33,7 @@ color = dict()
 
 # 初始化的字典
 color = {'red':1, 'blue':2, 'green':3}
+color = dict([('red':1), ('blue':2), ('green':3)])
 
 # 
 key_list = [1, 2, 3]
@@ -45,8 +47,7 @@ d = dict(mapping)
 ```
 data = {k: [] for k in range(2)}
 
-dictLists = {key: [] for key in ["xcg", "bsd", ...]}
-dictLists = dict((key, []) for key in ["xcg", "bsd", ...]) #python2.x
+d = {key: [] for key in ["xcg", "bsd", ...]}
 ```
 
 参考：
@@ -55,9 +56,9 @@ dictLists = dict((key, []) for key in ["xcg", "bsd", ...]) #python2.x
 - [Most efficient way to create a dictionary of empty lists in Python?](https://stackoverflow.com/questions/10852345/most-efficient-way-to-create-a-dictionary-of-empty-lists-in-python)
 
 
-## 字典的访问
+## 访问
 
-访问字典的时候可以在1）在方括号（[]）中指定键，或者2）使用get方法指定键对值进行引用。前者获取一个不存在的键值会反馈`KeyError`错误，后者返回`None`但是没有错误。
+访问字典的时候可以在方括号`[]`中指定键，或者使用`get`方法指定键对值进行引用。前者获取一个不存在的键值会反馈`KeyError`错误，后者返回`None`但是没有错误。
 
 我们能够通过给新的键赋值来扩展字典。避免该错误的一个技巧就是使用in关系表达式进行测试。
 
@@ -84,7 +85,7 @@ for kv in d.items():
   pass
 ```
 
-## 字典的修改
+## 修改
 
 在使用`=`对字典进行修改时，如果键存在于字典中，就会对相应的值进行修改，否则，新的键和值就会被添加到字典中。
 
