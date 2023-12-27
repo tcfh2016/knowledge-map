@@ -4,6 +4,14 @@
 
 ## Matrix and vector products
 
+矩阵的运算有自己的规则，和`ndarray`之间一对一的运算是不同的。比如`[[1, 2] ,[3, 4]]`和`[[5, 6] ,[7, 8]]`两个相乘：
+
+- 如果是`ndarray`，那么得到`[[ 5 12], [21 32]]`。
+- 如果是`matrix`，那么得到`[[19 22], [43 50]]`。
+
+A.I 表示 A 矩阵的逆矩阵。
+
+
 ## Decompositions
 
 ## Matrix eigenvalues
