@@ -56,6 +56,12 @@ d = {key: [] for key in ["xcg", "bsd", ...]}
 - [Most efficient way to create a dictionary of empty lists in Python?](https://stackoverflow.com/questions/10852345/most-efficient-way-to-create-a-dictionary-of-empty-lists-in-python)
 
 
+## 字典解析
+
+```
+{k:v for (k,v) in zip(keys, values)}
+```
+
 ## 访问
 
 访问字典的时候可以在方括号`[]`中指定键，或者使用`get`方法指定键对值进行引用。前者获取一个不存在的键值会反馈`KeyError`错误，后者返回`None`但是没有错误。

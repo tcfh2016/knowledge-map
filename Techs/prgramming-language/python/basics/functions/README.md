@@ -34,12 +34,44 @@ def global_variable():
 
 函数参数包括“位置参数”和“关键字参数”两种，两者同时出现时“位置参数”必须写在前面。
 
-关键字参数可以以类似“参数名=值”这样的形式，使用关键字指定参数值，常在指定函数的默认值时使用。
+“位置参数”的意思就是按照声明的定义来访问，而“关键字参数”是以类似“参数名=值”这样指定参数的形式，使用关键字指定参数值，常在指定函数的默认值时使用。
 
 python里不支持按值传递，所有的参数都是按引用传递。只不过在函数里面对于参数值的更改是不生效的。
 
 默认参数的定义与C中一样。
 
+## 不定长参数
 
+使用`*args`仅仅支持不定长的位置参数，获取到的`args`是一个元组：
+
+```
+def add(x, *args):
+    total = x
+    for arg in args:
+        total += arg
+    return total
+```
+
+使用`**args`可以支持关键字参数，获取到的`args`是一个字典：
+
+```
+def add(x, **kargs):
+    total = x
+    for arg, value in kargs.items():
+        total += value
+    return total
+```
+
+## 返回值
+
+返回值可以没有，也可以有一个或者多个。当返回多个时，多个参数会拼成一个元组返回。
+
+```
+def div(a, b):
+    value = a // b
+    remain = a % b
+
+    return value, remain
+```
 
 

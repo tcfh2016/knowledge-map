@@ -10,54 +10,6 @@
 
 `os`、`os.path`提供了与文件/文件夹操作函数。
 
-
-## 读了再复写
-
-在`with open('filename.txt', 'r+') as f`以`r+`模式打开文件时表示对文件又读又写，但如果读完文件之后还要覆盖之前的内容，那么需要重设文件游标，且进行截断操作。不重设游标那么写的内容会跟在后面，不截断那么会保留之前的内容。
-
-```
->>> f.seek(0)
->>> f.truncate()
-```
-
-参考：
-
-- [Reading a file and then overwriting it in Python](https://stackoverflow.com/questions/35679358/reading-a-file-and-then-overwriting-it-in-python)
-
-
-
-### 如何快速得知一个文件的行数
-
-```
-num_lines = sum(1 for line in open('myfile.txt'))
-```
-
-参考：
-
-- [How to get line count of a large file cheaply in Python?](https://stackoverflow.com/questions/845058/how-to-get-line-count-of-a-large-file-cheaply-in-python)
-
-### 如何在写入文件的时候携带格式化参数
-
-现准备好格式化好了的string，再写入。
-
-参考：
-
-- [](https://realpython.com/python-string-formatting/)
-
-### 如何仅读取文件开头或者结尾几行？
-
-有时候调试需要打印文件内容，如果文件内容较多则会刷屏，没有shell里面直接`head`那样的内容，可以通过控制打印的行数来控制：
-
-```
-with open("file.txt", 'r') as f:
-  cnt = 0
-  for line in f:
-    cnt += 1
-    if (cnt > 5):
-      break
-    print(line)
-```
-
 ## 参考阅读
 
 - [Miscellaneous operating system interfaces](https://docs.python.org/2.7/library/os.html)

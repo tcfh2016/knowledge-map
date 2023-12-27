@@ -2,6 +2,10 @@
 
 模块是Python里最高级别的程序组织单元，它将程序代码和数据封装起来以便重用。每一个文件都是一个模块，并且模块导入其他模块之后就可以使用导入模块定义的变量名。在模块导入时，模块文件的全局作用域变成了模块对象的命名空间（即导入给予了对模块的全局作用域中的变量名的读取权）。
 
+模块用于编写其他程序因此通常没有main()函数。如果要使用某个模块里的函数或者变量需要将其 `import`到当前文件中，import时Python会执行一遍模块中的所有内容。
+
+## 设计上的考虑
+
 一个Python程序包括了多个含有Python语句的文本文件，程序由一个主体的、顶层文件，配合零个或多个支持文件。顶层文件（又称为脚本）包含了程序的主要控制流程，模块文件就是工具库，前者使用后者定义的工具，后者可能还使用其他模块定义的工具。
 
 模块术语的变化：
@@ -11,9 +15,7 @@
 - 有些人将“模块”这个说法应用于被另一个文件所导入的文件。
 
 
-## 编写模块代码
-
-### 模块的创建
+## 模块的创建
 
 任何以.py为后缀名的Python文件都被自动认为是Python模块。当一个模块被导入时，Python会把内部模块名映射到外部文件名，也就是通过把模块搜索路径中的目录路径加在前面，而.py或其他后缀名添加在后边。
 
@@ -40,7 +42,7 @@ import和from是可执行的语句，而不是编译期间的声明，它们可�
 模块程序代码默认只在导入时执行一次，要强制模块代码重新载入并运行，得调用reload内置函数，这里面的过程如下：
 
 - 在模块第一次导入（通过import或者from语句）时，该模块被加载并执行；
-- 之后的导入只会使用已经加载的模块对象，而不会重载或执行文件的代码；
+- 之后的导入只会使用已经加载的模块对象，而不会重载或执行文件的代码（为了效率考虑）；
 - reload函数会强制已加载的模块代码重新执行。
 
 在重载之前模块一定是已经预先成功导入的。reload是Python的内置函数不是语句，因此在语法上小有不同：
@@ -54,33 +56,21 @@ reload(module)
 ...use module.attributes...
 ```
 
-## 模块
+## `__name__`属性
 
-模块由一系列相关函数和变量组成，通常存在于同一个文件里。模块用于编写其他程序因此通常没有
-main()函数。如果要使用某个模块里的函数或者变量需要将其 `import`到当前文件中，有如下两种
-方式：
+查阅 StackOverFlow，得知`__name__`是每个源代码文件在执行时均有的隐式变量，当它被当做程序执行时，该变量设置为`__main__`，当它被当做模块引入其他文件中时该变量设置为`模块名称`。
 
-`1. 使用import语句`
+所以，有时候我们想将一个.py文件既当作脚本，又能当作模块用，这个时候可以使用`__name__`这个属性。
 
-```
-import shapes
 
-shapes.square(5)
-```
+`if __name__ == "__main__"`判断当前该py文件的执行是否以脚本的方式？
 
-`2. 使用from ... import *语句`
+参考：
 
-```
-from shapes import *
+- [What does if __name__ == “__main__”: do?](https://stackoverflow.com/questions/419163/what-does-if-name-main-do)
+- [Python学习手册, 第27章：更多实例，P653]()
 
-square(5)
-```
-
-模块提供了不同的名称空间，因此能够避免命名冲突，但需要尽量避免使用如上第2种方式。
-
-## 常见问题
-
-### 如何import没有安装的模块
+## 如何import没有安装的模块
 
 比如你需要在.py文件中import pandas，但是当前pandas并没有安装，但是在某个目录有可以使用的pandas模块，是否有办法直接使用它？
 
@@ -89,7 +79,7 @@ import sys
 sys.path.append('/home/lianbche/python_package_jack')
 ```
 
-### import 模块之后为什么无法直接使用模块中的变量 ？
+## import 模块之后为什么无法直接使用模块中的变量 ？
 
 参考如下代码，会出现 `AttributeError: module 'tkinter' has no attribute 'messagebox'`
 的错误。
@@ -127,7 +117,7 @@ tkinter.messagebox.showwarning()
 - [Why do I need to import tkinter.messagebox but don't need to import tkinter.Tk() after importing tkinter?](https://stackoverflow.com/questions/56268474/why-do-i-need-to-import-tkinter-messagebox-but-dont-need-to-import-tkinter-tk/56268994#56268994)
 
 
-### 如何import上层目录？
+## 如何import上层目录？
 
 比如在tst目录下面的loan_type_compare.py文件引用了上层目录的capital.py和loan.py，那么该如何编写import语句：
 
@@ -162,3 +152,18 @@ ValueError: attempted relative import beyond top-level package
 
 - 《Python学习手册》第五部分：模块
 - [beyond top level package error in relative import](https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import)
+
+# 'module' object has no attribute......
+
+```
+Traceback (most recent call last):
+  File "bin2text.py", line 31, in <module>
+    main()
+  File "bin2text.py", line 27, in main
+    par = parser.Parser(cfg)
+AttributeError: 'module' object has no attribute 'Parser'
+```
+这种错误出现常见两种情况：
+
+- 对应的模块里面确实没有需要的方法或者变量。
+- 自己定义了与Python库重名的模块，导致名称覆盖。

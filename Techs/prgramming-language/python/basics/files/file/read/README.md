@@ -1,4 +1,3 @@
-
 ## 读文件
 
 常用方法：
@@ -13,6 +12,15 @@
 ```
 for line in open('myfile'):
   print(line, end='')
+```
+
+## 读文件
+
+```
+# 判断文件是否可用
+if os.access("myfile", os.R_OK):
+  with open("myfile") as fp:
+    return fp.read()
 ```
 
 ## 统计文件行数
