@@ -66,20 +66,21 @@ print(df[0:1])            # 索引'a'一行数据。
 
 因为索引有标签索引和位置索引两种形式，所以在选取数据单元的时候存在可能的混用情况：
 
-- 行、列索引均为字符串，可以用`df.loc['row_label']['col_label']`或者`df.loc['row_label', 'col_label']`。
-- 行、列索引均为位置索引，可以用`data.iloc [[3, 4], [1, 2]]`选择两行两列。
-- 行索引为数字，列索引为字符串，可以用`df.iloc[0]['col']`或者`df['col'].iloc[0]`。
+- 行、列索引均为字符串，可以用`df.loc['row_label', 'col_label']`或者`df.loc['row_label']['col_label']`。或者`df.at['row_label', 'col_label']`
+- 行索引或列索引为位置索引时，可以用`df.iloc[0]['col']`/`df.iloc[0][1]`或者`df['col'].iloc[0]`。
 
 
 使用位置索引的时候比较少，因为如果要使用位置索引那么你还得一个一个去数，这在数据量大的时候是很难办的。
 
-*有些版本，比如pandas 1.3.1 里面，使用df.iloc[x][label]来赋值就不生效。*
+*注1：有些版本，比如pandas 1.3.1 里面，使用df.iloc[x][label]来赋值就不生效。*
+*注2：`at`方法赋值的时候会进行隐式类型转换，比如原来的列是`int`，赋值的是`float`，会执行`float -> int`转换。*
+*注3：为了方便起见，在使用`loc`的时候采用`[]`的写作方法，使用`iloc`的时候采用`[][]`数组形式的方法。*
 
 参考：
 
 - [Indexing and Selecting Data with Pandas](https://www.geeksforgeeks.org/indexing-and-selecting-data-with-pandas/)
 - [Indexing Pandas data frames: integer rows, named columns](https://stackoverflow.com/questions/28754603/indexing-pandas-data-frames-integer-rows-named-columns)
-
+- [pandas .at versus .loc](https://stackoverflow.com/questions/37216485/pandas-at-versus-loc)
 
 ## 布尔索引
 
@@ -119,10 +120,10 @@ pandas里面如果要使用字符串来过滤特定的行，那么必须要使�
 ```
 df = df[df['code'].str.startswith('*ST')]
 df = df[df['code'].str.find('500') != -1]
+df = df[df['code'].isin([...])]
 ```
 
 如何附加多个条件？使用逻辑表达式即可。如`df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`。
-
 
 如果我们想选取所有列均匹配某种条件的所有行的数据，使用`.all(axis=1)`：
 
@@ -152,8 +153,6 @@ sales_data.reset_index(drop = True)
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
 - [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
 - [How to select cells greater than a value in a multi-index Pandas dataframe?](https://stackoverflow.com/questions/32731498/how-to-select-cells-greater-than-a-value-in-a-multi-index-pandas-dataframe)
-
-
 
 ## 遍历行
 

@@ -13,7 +13,6 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 *注意：NaN参与的所有计算都是NaN。*
 *使用`mys.isnull().all()`来判断一列是否全是NaN。*
 
-
 参考：
 
 - [How to Check If Any Value is NaN in a Pandas DataFrame](https://chartio.com/resources/tutorials/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe/)
@@ -45,11 +44,9 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 
 ```
 from pandas import Series, DataFrame
-import pandas as pd
-import numpy as np # NaN 在numpy里定义，因此使用NaN需要先import numpy。
 
 s = Series([1, np.NaN, 3.2, np.NaN, 7])
-print(s.dropna()) # 删除含有NaN的全部行
+print(s.dropna()) # 删除含有NaN的全部行，注意Series是单列多行的数据，而非单行
 print(s.dropna(axis=1)) # 删除含有NaN的全部行
 ```
 

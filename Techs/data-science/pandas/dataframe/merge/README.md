@@ -11,29 +11,11 @@
 
 理解清楚两者之间的差别之后，就能够理解`join`参数通常是在`axis=0`既以X轴进行纵向连接的时候使用，横向连接因为轴是纵轴，通常是相等的，所以不需要。
 
-### 纵向连接
+## 纵向连接
 
 ```
 pd.concat([df3, df4], axis=0, join='inner', ignore_index=True)
 ```
-
-### 横向连接
-
-同样，使用`pd.concat()`也可以进行横向连接，此时需要将`axis`参数设置为`1`。横向连接之后列的数量会增加，
-
-```
-pd.concat([df1, df2], axis=1)
-```
-
-
-## pd.merge()
-
-怎样在行方向上进行合并：
-
-使用`pd.merge(df1, df2, on=['column'])`。
-
-
-## 怎样merge多个DataFrame数据
 
 比如我有下面三个DataFrame数据，怎么把它们合并在一起：
 
@@ -53,11 +35,30 @@ total_operating_revenue  total_operating_cost  total_profit  np_parent_company_o
 
 上面这种方式的“合并”实际上是需要在列的方向上进行连接，可以使用`concat()`函数。由于每个DataFrame的行标签都是“0”，所以需要在连接之前或者连接之后进行更改。
 
+## 横向连接
+
+同样，使用`pd.concat()`也可以进行横向连接，此时需要将`axis`参数设置为`1`。横向连接之后列的数量会增加，
+
+```
+pd.concat([df1, df2], axis=1)
+```
+
+
+## pd.merge()，类似数据库中的`join`操作
+
+怎样在行方向上进行合并：
+
+使用`pd.merge(df1, df2, on=['column'])`。
+
 
 ## 怎样往已有DataFrame里面添加一行？
 
 ```
 df.loc[len(df.index)] = ['Amy', 89, 93] 
+
+# 先构造Series
+s = pd.Series(['new2', 2, 2], index=df.columns)
+df_new = df.append(s, ignore_index=True)
 ```
 
-- [](https://www.geeksforgeeks.org/how-to-add-one-row-in-an-existing-pandas-dataframe/)
+- [How to add one row in an existing Pandas DataFrame?](https://www.geeksforgeeks.org/how-to-add-one-row-in-an-existing-pandas-dataframe/)

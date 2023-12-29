@@ -24,6 +24,12 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 等单独的子函数。
 
 
+## 绘图风格
+
+```
+plt.style.use('ggplot')
+```
+
 ## “plt”, “ax”和“fig”
 
 “plt”来自于`import matplotlib.pyplot as plt`，它就是`matplotlib`模块中`pyplot`的简称。
