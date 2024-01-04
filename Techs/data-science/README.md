@@ -38,6 +38,10 @@
 ## 决策
 
 
+## 配色
+
+- [colorbrewer](https://colorbrewer2.org/#type=qualitative&scheme=Accent&n=6)
+
 ## 参考 
 
 - [](https://apis.baidu.com/)

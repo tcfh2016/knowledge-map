@@ -118,13 +118,11 @@ ax = fig.gca(projection='polar') # 获取当前极坐标轴
 ## 使用两个y坐标轴来显示两个数量级数据集的展示
 
 ```
-np.random.seed(2000)
-y = np.random.standard_normal((20, 2))
-print(y)
-
 fig = plt.figure(figsize=(7, 4)) # 设置图形大小
 
 ax1 = fig.subplots()
+np.random.seed(2000)
+y = np.random.standard_normal((20, 2))
 plt.plot(y[:, 0], 'b', lw=1.5, label='1st')
 plt.plot(y[:, 0], 'ro') # 设置颜色为红色，样式为圆形。
 plt.legend(loc=8)
@@ -137,8 +135,24 @@ plt.ylabel('value 2nd') # 第二个y坐标
 
 plt.grid(True) # 添加网格
 plt.axis('tight') # 调整坐标宽度
-plt.xlabel('index') # 设置x轴标签
-plt.ylabel('value') # 设置x轴标签
-plt.title('A Simple Plot') # 设置图形标题
-plt.show()
+```
+
+## 设置线形
+
+通过给定参数的方式：`plot(x, y, linewidth=1.5)`，或者先返回一个plot对象`line = plot(x, y)`，再给该对象设置`line.set_linewidth(1.5)`。
+
+## 颜色和背景色
+
+颜色通过`color`来设置，可以设置HTML颜色的名字或者十六进制字符串，也可以传入归一化到[0, 1]的RGB元组。
+
+背景色通过`matplotlib.pyplot.axes()`或者`axisbg`参数来设置。
+
+## 曲线间填充
+
+matplotlib库允许我们对曲线间或者曲线下面的区域填充颜色，这样就可以显示那部分区域的值。
+
+```
+ax.plot(x, y1, x, y2, color='black')
+ax.fill_between(x, y1, y2, where=y2>=y1, facecolor='darkblue', interpolate=True)
+ax.fill_between(x, y1, y2, where=y2<=y1, facecolor='deeppink', interpolate=True)
 ```
