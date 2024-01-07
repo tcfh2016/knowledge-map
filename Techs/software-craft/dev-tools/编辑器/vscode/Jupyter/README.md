@@ -25,3 +25,15 @@
 - [Jupyter Notebook Kernels: How to Add, Change, Remove](https://queirozf.com/entries/jupyter-kernels-how-to-add-change-remove)
 - [ipython的简单介绍以及相关用法](https://zhuanlan.zhihu.com/p/75045335)
 - [installing python and locating kernels should stop after certain amount of time](https://github.com/microsoft/vscode-jupyter/issues/10617)
+
+## python interactive window
+
+今天想在mac上连接云服务器调试代码，另一台电脑可以直接进入interactive 调试模式，也就是对于一个py文件，右键会有一个菜单：
+
+![](./interactive_option.png)
+
+但在mac上没有。之后搜索发现，尽管上同一台服务器，但是因为使用的vscode不同，因此需要重新在mac的vscode上安装`python`, `jupyter`等插件。
+
+参考：
+
+- [Python Interactive window](https://code.visualstudio.com/docs/python/jupyter-support-py)
