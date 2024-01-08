@@ -31,11 +31,17 @@ df.loc[:, ~df.columns.isin(['rebounds', 'assists'])]
 
 - [](https://www.statology.org/pandas-exclude-column/)
 
-## 怎样按照某行的条件来挑选列呢？
+## 选择特定的行
+
 
 查了资料，没有找到直接的方法，想了想有两种：
 
 - 使用转置T进行选择
+
+```
+selected_columns = df.loc[:, df.columns.str.contains('NewYork')]
+```
+
 - 使用列删除
 
 
