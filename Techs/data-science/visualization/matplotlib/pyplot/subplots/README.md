@@ -50,6 +50,21 @@ plt.plot(y) # 画第二幅子图
 - [matplotlib.pyplot.subplot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot)
 
 
+## 将多个dataframe画在子图里面
+
+```
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(nrows=2, ncols=2)
+
+df1.plot(ax=axes[0,0])
+df2.plot(ax=axes[0,1])
+```
+
+参考：
+
+- [How to plot multiple dataframes in subplots](https://stackoverflow.com/questions/22483588/how-to-plot-multiple-dataframes-in-subplots)
+
 ## 如何移除某个subplot
 
 可以使用`delaxes`函数：
