@@ -64,13 +64,31 @@ crontab的相关日志有两份：1）针对每位用户会创建一个日志，
 
 ## 配置了任务但是没有执行
 
-调试脚本的时候设定了：
+首先要查看服务是否正常启动，正常启动的例子：
 
 ```
-
+[lbc]$ systemctl status crond
+● crond.service - Command Scheduler
+   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2024-01-16 18:51:53 CST; 1 day 15h ago
+ Main PID: 43692 (crond)
+   Memory: 2.5M
+   CGroup: /system.slice/crond.service
+           └─43692 /usr/sbin/crond -n
 ```
 
-查看cron的日志`/var/log/cron`发现对应的时间点第2项任务没有执行起来
+启动失败的例子，如果启动失败那么是无法开展正常的定时器服务的：
+
+```
+[lbc]$ systemctl status crond
+● crond.service - Command Scheduler
+   Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+   Active: failed (Result: signal) since Tue 2024-01-16 14:56:35 CST; 1 day 19h ago
+  Process: 2554 ExecStart=/usr/sbin/crond -n $CRONDARGS (code=killed, signal=KILL)
+ Main PID: 2554 (code=killed, signal=KILL)
+```
+
+如果正常但是仍旧没有启动，那么可以查看cron的日志`/var/log/cron`发现对应的时间点第2项任务没有执行起来：
 
 ```
 # 这个run1.sh是能够正常运行的。

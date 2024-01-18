@@ -14,7 +14,7 @@ export PATH=$PATH:my_own_path
 
 - `export`是告诉shell让后面的命令对该shell所有子进程生效。
 - `alias name=value`给长的命令创建短的别名，比如`alias l='ls -l'`。
-
+- `w -h`查看登入用户的信息
 
 
 

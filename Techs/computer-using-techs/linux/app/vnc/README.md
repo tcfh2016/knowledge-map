@@ -11,7 +11,7 @@
 ## 常用命令
 
 - 如果要查询已经创建的vnc session，使用`vncserver -list`
-
+- 删除某个session，使用`vncserver -kill :5`
 
 参考：
 

@@ -39,18 +39,21 @@ Shell脚本，可以简单的理解为“包含一系列命令的文件”，执
 - [Way to create multiline comments in Bash?](https://stackoverflow.com/questions/43158140/way-to-create-multiline-comments-in-bash)。
 - [Why does my shell script choke on whitespace or other special characters?](https://unix.stackexchange.com/questions/131766/why-does-my-shell-script-choke-on-whitespace-or-other-special-characters)
 
+## 变量的使用
 
-## 引用变量时使用`${var}`相比`$var`的好处
+常用变量：
 
-正常情况下，使用`$var`来引用变量是可以的，但有些时候这样行不通。
+- $USER
+- $HOME
 
-情况下：假设`caseid`是一个变量，要根据变量拼接文件路径
+
+引用变量时使用`${var}`相比`$var`的好处：正常情况下，使用`$var`来引用变量是可以的，但有些时候这样行不通。情况下：假设`caseid`是一个变量，要根据变量拼接文件路径
 
 - 使用`$caseid_L2STATS.csv`就会有歧义，应该使用"${caseid}_L2STATS.csv"。
 - 同样的使用`cat f | grep -e "$casename_[0-9]\+_[0-9]\+"`来查找对应的行信息也不行，比如使用`cat f | grep -e "${casename}_[0-9]\+_[0-9]\+"`。
 
 
-## 执行方式
+## 执行shell脚本
 
 shell脚本的执行方式分为两种，第一种为采用绝对路径或者相对路径的执行方式；另一种是使用`source`命令。两种区别如下：
 
@@ -65,6 +68,11 @@ shell脚本的执行方式分为两种，第一种为采用绝对路径或者相
 - -v 在执行script前，先将脚本内容显示到屏幕上
 - -x 将使用到的脚本内容显示到屏幕上
 
+## export $DISPLAY
+
+参考：
+
+- []()
 
 ## 注释
 
@@ -80,10 +88,6 @@ shell脚本的执行方式分为两种，第一种为采用绝对路径或者相
 - [Writing Comments in Bash Scripts: Single Line, Inline and Multi-line Comments](https://linuxhandbook.com/comments-bash-script/)
 
 
-## 常用变量
-
-- $USER
-- $HOME
 
 
 ## 计时
