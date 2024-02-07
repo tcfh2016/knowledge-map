@@ -43,6 +43,12 @@ pd.show_versions() #查看依赖模块的版本
 - [How to find the installed pandas version](https://stackoverflow.com/questions/20612645/how-to-find-the-installed-pandas-version)
 
 
+## `ModuleNotFoundError: No module named 'pkg_resources'`
+
+使用`Python 3.9.9`好长一段时间了，经常使用pandas来画图，但突然有一天就开始提示`ModuleNotFoundError: No module named 'pkg_resources'`的错误。
+
+
+
 ## Q&A
 
 1）模块安装
