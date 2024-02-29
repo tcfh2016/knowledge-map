@@ -1,23 +1,10 @@
 ## json
 
+JSON全称为“Java Script Object Notation”，是web应用之间进行数据存储与传输的常见格式。
 
+参考：
 
-## 将字典转换为json
-
-在使用`json.dumps()`的时候如果不指定`indent=4`参数那么所有记录都在一行，指定之后则会另起一行并缩进，有利于阅读。
-
-```
-#方式一：
-employee_dict = {'id': '09', 'name': 'Nitin', 'department': 'Finance'}
-json_object = json.dumps(employee_dict, indent=4)
-with open("sample.json", "w") as outfile:
-    outfile.write(json_object)   
-
-#方式二：
-with open("sample.json", "w") as outfile:     
-    json.dump(dictionary, outfile)    
-```
-
+- [How to Best Work with JSON in Python](https://towardsdatascience.com/how-to-best-work-with-json-in-python-2c8989ff0390)
 
 
 ## 读取json文件
@@ -32,6 +19,33 @@ with open('sample.json', 'r') as openfile:
 
 文件为空的时候不能读取。
 
+注：`load()`是从JSON文件读取，`loads()`是从JSON字符串读取，`read_json()`直接将读取的内容转换为DataFrame。
+
 参考：
 
 - [Python JSON](https://www.geeksforgeeks.org/python-json/)
+
+## 访问
+
+读取为字典后就是按照字典的访问方式来访问，对于内嵌的结构需要多访问几层，比如：
+
+```
+json_object['level1_key'][level2_index]['level3_key']
+```
+
+## 将字典转换为json
+
+在使用`json.dumps()`的时候如果不指定`indent=4`参数那么所有记录都在一行，指定之后则会另起一行并缩进，有利于阅读。
+
+```
+#方式一：
+employee_dict = {'id': '09', 'name': 'Nitin', 'department': 'Finance'}
+
+json_object = json.dumps(employee_dict, indent=4)
+with open("sample.json", "w") as outfile:
+    outfile.write(json_object)   
+
+#方式二：
+with open("sample.json", "w") as outfile:     
+    json.dump(employee_dict, outfile, indent=2)    
+```
