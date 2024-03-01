@@ -37,3 +37,30 @@
 参考：
 
 - [Python Interactive window](https://code.visualstudio.com/docs/python/jupyter-support-py)
+
+## 更换kernel
+
+因为当前3.9.9版本无法画图，提示错误。所以按照[](https://www.geeksforgeeks.org/how-to-update-python-on-windows/)里面的步骤重新从Python官方网站上安装了`3.12.1`版本。
+
+再从[Manage Jupyter Kernels in VS Code](https://code.visualstudio.com/docs/datascience/jupyter-kernel-management)里面选择了新版本的Python，不过提示：
+
+![](./prompt_install_ipykernel.png)
+
+VSCODE安装没有成功，提示如下命令：
+
+```
+Running cells with 'c:\Users\lianbche\AppData\Local\Programs\Python\Python312\python.exe' requires the ipykernel package.
+Run the following command to install 'ipykernel' into the Python environment. 
+Command: 'c:/Users/lianbche/AppData/Local/Programs/Python/Python312/python.exe -m pip install ipykernel -U --user --force-reinstall
+```
+
+执行`c:/Users/lianbche/AppData/Local/Programs/Python/Python312/python.exe -m pip --proxy 1.1.1.1:8080 install ipykernel -U --user --force-reinstall`来安装，提示安装成功：
+
+```
+[notice] A new release of pip is available: 23.2.1 -> 24.0
+[notice] To update, run: C:\Users\lianbche\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
+```
+
+安装完执行Python，又提示“ModuleNotFoundError: No module named 'pandas'”，于是又仿照`c:/Users/lianbche/AppData/Local/Programs/Python/Python312/python.exe -m pip --proxy 1.1.1.1:8080 install pandas`来安装。
+
+再安装了`matplotlib`就可以了。
