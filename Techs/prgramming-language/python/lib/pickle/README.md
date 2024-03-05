@@ -1,6 +1,5 @@
 在将Python对象写入磁盘的时候通常会使用`pickle` 用来支持序列化操作。
 
-# 方法
 
 ## pickle.dump(obj, file)
 

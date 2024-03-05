@@ -80,3 +80,26 @@ df = pd.read_csv('data.csv', encoding='ISO-8859-1')
 
 - [UnicodeDecodeError when reading CSV file in Pandas with Python
 ](https://stackoverflow.com/questions/18171739/unicodedecodeerror-when-reading-csv-file-in-pandas-with-python)
+
+
+## 远程读取认证
+
+从网络链接读取csv的时候可能涉及到认证，这个时候可以使用`read_csv()`里面的`storage_options`参数，不过这个参数是后面`1.2`版本新增的，旧版本里就没有。
+
+```
+pd.read_csv('https://clutch-hz.dynamic.nsn-net.net/jenkins/view/Tools/job/Tools.dashboard.run_5g_gerrit/lastSuccessfulBuild/artifact/src/changes.csv',
+            storage_options={'Authorization': b'Basic %s' % b64encode(bytes('{}:{}'.format(my_dict['key'], my_dict['value']), 'utf-8'))})
+```
+
+另一种方式是
+
+```
+```
+
+不过这种方式可能会遇到“Unable to Get Local Issuer Certificate”的问题，可以通过传递`verify=False`参数来解决。
+
+参考：
+
+- [](https://stackoverflow.com/questions/33039327/handling-http-authentication-when-accesing-remote-urls-via-pandas)
+- [Pandas: How to read an online CSV file that requires authentication](https://www.slingacademy.com/article/pandas-how-to-read-an-online-csv-file-that-requires-authentication/)
+- [Python Requests Unable to Get Local Issuer Certificate](https://tech.sadaalomma.com/python/python-requests-unable-to-get-local-issuer-certificate/)

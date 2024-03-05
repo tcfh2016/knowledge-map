@@ -1,0 +1,11 @@
+{
+  "apple": {
+    "size": 7,
+    "color": "red",
+    "level1": {
+      "level2": {
+        "level3": 1000
+      }
+    }
+  }
+}

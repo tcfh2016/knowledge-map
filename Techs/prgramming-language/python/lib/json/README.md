@@ -2,9 +2,29 @@
 
 JSON全称为“Java Script Object Notation”，是web应用之间进行数据存储与传输的常见格式。
 
+JSON的格式简单，是以“key-value”形式的对象来存储数据，这些对象使用`{}`包括起来。`value`的格式相比XML来说更少，只支持字符串、数字、布尔型和对象这集中类型。在JSON存储的时候稍复杂点的结果为：
+
+- 嵌套对象，也就是一个`value`包含有多个对象。
+- 对象数组，将多个对象存放在`[]`里面，通常作为某个`key`对应的`value`。
+
 参考：
 
 - [How to Best Work with JSON in Python](https://towardsdatascience.com/how-to-best-work-with-json-in-python-2c8989ff0390)
+
+
+## JSONPath
+
+`JSONPath`是JSON对应的查询语言，类似于XML的`XPath`。一个`JSONPath`表达式（由`$`, `[]`或者`.`组成）可以定位到一个JSON结构中的某个元素或者元素集合。
+
+- $.store.book[0].title
+- $['store']['book'][0]['title']
+- ['store']['book'][0]['title']
+
+`$`表示根对象/数组，可以忽略。
+
+参考：
+
+- [JSON Tutorial Part-4 | How To Retrieve Data from JSON using JSON Path | JSON Path Expressions](https://www.youtube.com/watch?v=kP73mR9PX6w)
 
 
 ## 读取json文件
@@ -12,25 +32,28 @@ JSON全称为“Java Script Object Notation”，是web应用之间进行数据�
 读取出来默认是`dict`类型：
 
 ```
+import json
+
 with open('sample.json', 'r') as openfile:
-    # Reading from json file
+    # reading file contents and parse it as json format
     json_object = json.load(openfile)
 ```
 
-文件为空的时候不能读取。
-
-注：`load()`是从JSON文件读取，`loads()`是从JSON字符串读取，`read_json()`直接将读取的内容转换为DataFrame。
+*注1：文件为空的时候不能读取。*
+*注2：`load()`是从JSON文件读取，`loads()`是从JSON字符串读取，`read_json()`直接将读取的内容转换为DataFrame。*
 
 参考：
 
 - [Python JSON](https://www.geeksforgeeks.org/python-json/)
+
 
 ## 访问
 
 读取为字典后就是按照字典的访问方式来访问，对于内嵌的结构需要多访问几层，比如：
 
 ```
-json_object['level1_key'][level2_index]['level3_key']
+j['level1_key'][level2_index]['level3_key']
+j.get('level1_key').get(level2_index).get('level3_key')
 ```
 
 ## 将字典转换为json
