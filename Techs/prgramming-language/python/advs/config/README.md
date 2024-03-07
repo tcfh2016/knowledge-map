@@ -27,7 +27,18 @@ with open('config.ini', 'w') as configfile:
   config.write(configfile)
 ```
 
-
 参考：
 
 - [Managing Configuration Files in Python: A Comprehensive Guide to Reading, Writing, and Updating config.ini Files](https://www.linkedin.com/pulse/managing-configuration-files-python-comprehensive-guide-niwate/)
+
+
+## 检查是否存在
+
+```
+has_section(section)
+config.has_option(section, option)
+```
+
+参考：
+
+- [Python ConfigParser Checking existence of both Section and Key Value](https://stackoverflow.com/questions/21057478/python-configparser-checking-existence-of-both-section-and-key-value)
