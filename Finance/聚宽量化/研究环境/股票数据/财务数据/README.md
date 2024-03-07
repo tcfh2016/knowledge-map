@@ -1,4 +1,11 @@
-## 财务指标
+## 财务数据
+
+财务数据的参考文档在[这里](https://www.joinquant.com/help/api/help#Stock:%E8%8E%B7%E5%8F%96%E5%8D%95%E5%AD%A3%E5%BA%A6%E5%B9%B4%E5%BA%A6%E8%B4%A2%E5%8A%A1%E6%95%B0%E6%8D%AE)，查询接口是`get_fundamentals()`：
+
+```
+get_fundamentals(query_object, date=None, statDate=None)
+```
+
 
 财务指标的数据，存放在`indicator`表中。可以可以使用get_fundamentals() 的statDate参数查询年度数据。
 
@@ -12,9 +19,23 @@ df = get_fundamentals(query(
     ), statDate=year)
 ```
 
-## 参考
+参考
 
 - [财务指标数据](https://www.joinquant.com/help/api/help#Stock:%E8%B4%A2%E5%8A%A1%E6%8C%87%E6%A0%87%E6%95%B0%E6%8D%AE)
+
+
+## 资产负债表
+
+```
+q = query(
+        balance.cash_equivalents,
+        cash_flow.goods_sale_and_service_render_cash
+    ).filter(
+        income.code == '000001.XSHE',
+    )
+
+ret = get_fundamentals(q, statDate='2014')
+```
 
 ## 利润数据
 
