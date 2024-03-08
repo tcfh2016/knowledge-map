@@ -1,3 +1,19 @@
+## 修改确认：`git add`
+
+
+如果想在执行`git add`的时候不添加一些文件，那么可以：
+
+- `git add -- . ':!path'`
+- 先执行`git add .`，再执行`git reset -- path`回退
+- 创建`.gitignore`然后将对应的文件或者路径添加进去
+
+参考：
+
+- [](https://www.freecodecamp.org/news/gitignore-file-how-to-ignore-files-and-folders-in-git/)
+
+
+## 修改提交
+
 ## 移植修改
 
 要将其他分支的修改移植到本地分支，有三种方法：
