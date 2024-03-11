@@ -1,13 +1,26 @@
-## gmock
-
-参考：
-
-- [gMock Cookbook](http://google.github.io/googletest/gmock_cook_book.html)
+## [gMock Cookbook](http://google.github.io/googletest/gmock_cook_book.html)
 
 
-## "Uninteresting mock function call"错误
+## Mock Classes
 
-据网络上查找到的资料，这个信息的出现是因为“你已经定义了mock函数”，但是没有“为它指定expectation”所以在调用到这个mock函数的时候就进行默认处理，但是这个信息会打印出来。
+Mock类的作用就是用来打桩的，也就是说如果你当前在测试类A，该类依赖于类B，那么你通常需要给类B创建对应的Mock类，来更好的测试类A。
+
+创建Mock类和普通类一样，在定义该类的成员方法时需要使用宏`MOCK_METHOD`来产生对应的Mock方法。
+
+```
+class MyMock {
+ public:
+  MOCK_METHOD(ReturnType, MethodName, (Args...));
+  MOCK_METHOD(ReturnType, MethodName, (Args...), (Specs...));
+};
+```
+
+`MOCK_METHOD`是在2018年新引入的宏，在这之前使用的是`MOCK_METHODn`系列宏。这个系列有专门针对`const`方法，类模板等等不同的宏，比如`MOCK_CONST_METHOD1`, `MOCK_METHOD1_T`, `MOCK_CONST_METHOD1_T`, `MOCK_METHOD1_WITH_CALLTYPE`等等，但新的宏`MOCK_METHOD`可以满足所有这些需求。
+
+
+## EXPECT_CALL
+
+`EXPECT_CALL`是一种预期被调用到的声明，如果你已经定义了mock函数，但是没有为它声明被调用到的预期，一旦该mock函数被调用那么就成了“uninteresting call”。
 
 比如，下面的代码会打印出“Uninteresting mock function call - returning default value”的信息：
 
@@ -41,6 +54,8 @@ TEST(TestForMyClass, TestRetVal)
   EXPECT_EQ(obj3.retValue(), 3);
 }
 ```
+
+如果想屏蔽这些警告信息，可以使用`NiceMock<MockFoo>`，而如果使用`StrictMock<MockFoo>`那么任何“uninteresting call”会导致用例失败。
 
 
 参考：
