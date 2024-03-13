@@ -1,4 +1,4 @@
-## 代理
+## 配置代理
 
 配置代理有两种方法：一、为任意请求提供proxies参数；二、通过环境变量设定HTTP_PROXY和HTTPS_PROXY配置代理。
 
@@ -48,6 +48,20 @@ proxies = {
 }
 ```
 
-## 参考
+参考
 
 - [代理](https://2.python-requests.org//zh_CN/latest/user/advanced.html#proxies)
+
+
+## `[SSL: CERTIFICATE_VERIFY_FAILED]`问题
+
+使用requests访问https的时候提示`[SSL: CERTIFICATE_VERIFY_FAILED]`的错误，解决方法，传入`verify=False`参数：
+
+```
+res = requests.get(url, proxies=proxies, verify=False)
+```
+
+参考：
+
+- [4 Ways to fix SSL: CERTIFICATE_VERIFY_FAILED in Python](https://www.howtouselinux.com/post/ssl-certificate_verify_failed-in-python)
+- [Python Requests throwing SSLError](https://stackoverflow.com/questions/10667960/python-requests-throwing-sslerror)

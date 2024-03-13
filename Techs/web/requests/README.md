@@ -20,20 +20,6 @@ requests 是基于Python的第三方HTTP库，用来请求网络资源。
 
 当我们获得了整个页面的内容之后，还需要进一步解析，而这些解析工作就可以使用其他的python库来完成，比如`Beautiful Soup`。
 
-
-## `[SSL: CERTIFICATE_VERIFY_FAILED]`
-
-使用requests访问https的时候提示`[SSL: CERTIFICATE_VERIFY_FAILED]`的错误，解决方法，传入`verify=False`参数：
-
-```
-res = requests.get(url, proxies=proxies, verify=False)
-```
-
-参考：
-
-- [4 Ways to fix SSL: CERTIFICATE_VERIFY_FAILED in Python](https://www.howtouselinux.com/post/ssl-certificate_verify_failed-in-python)
-- [Python Requests throwing SSLError](https://stackoverflow.com/questions/10667960/python-requests-throwing-sslerror)
-
 ## `requests`和`selenium`的区别？
 
 `requests`只是简单第从一个给定的地址获取整个网页的数据，但是现在的网页数据越来越多的使用javascript，这些脚本会跟随网页浏览者的行为而自动加载，这就使得单纯使用`requests`无法获取到期望的整个网页的数据。而`selenium`用来模仿浏览者行为的函数库，你能够使用它来浏览和操作网页，就如真人一样。也就是说，使用`selenium`能够获取到的数据会比`requests`更全。

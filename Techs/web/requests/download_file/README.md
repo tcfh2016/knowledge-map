@@ -23,12 +23,3 @@ def download_file(url):
 
     return local_filename
 ```
-
-## `AttributeError: __exit__` 问题
-
-前天使用上面的代码下载还可以但是，今天对于`with requests.get(url, stream=True) as r:`这一行会提示`AttributeError: __exit__`的错误。之后对比发现，正常时是用`python 3.x`执行，该错误是使用了`python 2.x`来执行。
-
-
-## `ssl.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:877)`
-
-采用如上方法二下载文件，之前一直运行良好，但今天突然出现`ssl.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:877)`错误。
