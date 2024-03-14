@@ -17,8 +17,8 @@ requests 是基于Python的第三方HTTP库，用来请求网络资源。
 - 通过`r.json()`可以获取到该对象的json形式。
 - 通过`r.status_code`获得返回的错误码，整形表示。
 
-
 当我们获得了整个页面的内容之后，还需要进一步解析，而这些解析工作就可以使用其他的python库来完成，比如`Beautiful Soup`。
+
 
 ## `requests`和`selenium`的区别？
 
@@ -30,3 +30,10 @@ requests 是基于Python的第三方HTTP库，用来请求网络资源。
 
 - [Requests vs selenium](https://www.reddit.com/r/learnpython/comments/fa5ms5/requests_vs_selenium/)
 - [请问下 python 中，selenium 请求网页和 request\.get 获取网页的区别？](https://youle.zhipin.com/questions/22a8917e926db5bbtnZ63NS7E1A~.html)
+
+
+## 如何消除warning打印
+
+参考：
+
+- [3 Ways to Fix InsecureRequestWarning in Python](https://www.howtouselinux.com/post/insecurerequestwarning-in-python-urllib3-requests)
