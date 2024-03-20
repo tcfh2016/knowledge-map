@@ -55,3 +55,12 @@ def month_converter(month):
 - %d : Day of the month as a decimal number [01,31].
 - %m : Month as a decimal number [01,12].
 
+
+## 时区转换
+
+先将时间对象存储为`datetime`格式，再调用`astimezone`进行转换：
+
+```
+dt = datetime.datetime.strptime('2024 Mar 19 3:01 PM', '%Y %b %d %I:%M %p') 
+dt.astimezone(datetime.timezone.utc)
+```
