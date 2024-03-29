@@ -1,9 +1,18 @@
-## [gMock Cookbook](http://google.github.io/googletest/gmock_cook_book.html)
+## 为什么 gMock？
+
+首先在单元测试场景下面通常隔离一些被测试类的依赖，比如如果你当前在测试类A，该类依赖于类B，测试A的时候并不需要完整的类B对象。而一个“Mock对象”就是实现了一个真实对象的相同接口，并且在执行的过程中能够方便的检查它被怎样使用，比如调用了几次，传递了什么参数等等很细致的行为。
+
+从“Mock对象”的作用上，它是有别于以往的一些“桩函数”的，后者类似“Fack对象”，比如仅仅只是实现了一个空的接口，但实际上它相比前者更加机械。
+
+`gMock`就是针对C++单元测试的库，提供“Mock对象”的创建和使用，它是`googletest`的一部分。
+
+参考：
+
+- [gMock for Dummies](http://google.github.io/googletest/gmock_for_dummies.html)
+- [gMock Cookbook](http://google.github.io/googletest/gmock_cook_book.html)
 
 
 ## Mock Classes
-
-Mock类的作用就是用来打桩的，也就是说如果你当前在测试类A，该类依赖于类B，那么你通常需要给类B创建对应的Mock类，来更好的测试类A。
 
 创建Mock类和普通类一样，在定义该类的成员方法时需要使用宏`MOCK_METHOD`来产生对应的Mock方法。
 
