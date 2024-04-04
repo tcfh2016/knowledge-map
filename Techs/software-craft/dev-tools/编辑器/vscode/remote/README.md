@@ -21,7 +21,7 @@
 
 ![](ssh-link-status.png)
 
-其次是设置ssh publickey，因为每次认证输入用户名密码比较麻烦。所以需要在远程服务器上添加客户端的publickey。在[这里](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)找到了将客户端的publickey添加到远端服务器上的方式，最简单的方案是将客户端的id_rsa.pub里面的内容拷贝到服务器上的authorized_keys里面（如果没有就新建一个）。但执行后发现如下错误：
+其次是设置ssh publickey，因为每次认证输入用户名密码比较麻烦。所以需要在远程服务器上添加客户端的publickey。在[这里](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)找到了将客户端的publickey添加到远端服务器上的方式，最简单的方案是将客户端的id_rsa.pub里面的内容拷贝到服务器上的authorized_keys里面（如果没有就新建一个，`~/.ssh/authorized_keys`）。但执行后发现如下错误：
 
 ```
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -36,9 +36,20 @@ lianbche@ip_address's password:
 
 在[Windows SSH: Permissions for 'private-key' are too open](https://superuser.com/questions/1296024/windows-ssh-permissions-for-private-key-are-too-open)找到答案，解决方式和上面的问题类似，也即是将`C:\Users\lianbche\.ssh\id_rsa`的权限先disable inheritance并删除所有的权限，然后仅仅给自己分配full control的权限即可。
 
+
+如果已经配置了公钥但是还是提示输入用户名密码，那么需要去修改`/etc/ssh/sshd_config`里面的配置，将`PasswordAuthentication yes`修改为`no`。让该修改生效还需要执行`sudo systemctl restart ssh`来重启ssh服务。
+
+之后再次连接发现还是不成功，提示“Permission denied (publickey,gssapi-keyex,gssapi-with-mic)”，按照参考链接中的文章设置了下面权限才成功了。
+
+```
+#chmod 700 ~/.ssh
+#chmod 644 ~/.ssh/authorized_keys
+```
+
 其他参考：
 
 - [Remote development over SSH](https://code.visualstudio.com/docs/remote/ssh-tutorial)
+- [ssh免密码登录Permission denied (publickey,gssapi-keyex,gssapi-with-mic) 的解决方案！](https://www.cnblogs.com/xubing-613/p/6844564.html)
 
 ## Q&A
 
