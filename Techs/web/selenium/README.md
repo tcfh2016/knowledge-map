@@ -14,6 +14,12 @@ Selenium使用对应浏览器的驱动来和浏览器进行交互，比如Firefo
 
 首先需要安装`selenium`，然后需要安装对应浏览器的驱动，比如Firefox的`geckodriver`，这个驱动的安装只需要把对应的exe（Windows系统下）下载下来并将其目录添加到系统PATH中即可。之后便是熟悉库里面各种变量和函数的使用。
 
+Linux下面将``放到`/usr/bin`或者`/usr/local/bin`下面。
+
+第一次使用的时候提示"WebDriverException: Message: Process unexpectedly closed with status 255"。
+
+按照[]()提示从`https://download.mozilla.org/?product=firefox-latest&os=linux`下载Firefox。
+
 ## 隐藏模式执行
 
 

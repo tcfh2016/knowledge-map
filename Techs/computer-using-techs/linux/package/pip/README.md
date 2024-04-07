@@ -11,3 +11,11 @@ pip install --upgrade --force-reinstall xlrd
 pip --proxy http://127.0.0.1:6152 install matplotlib
 pip3 --proxy http://127.0.0.1:6152 install matplotlib
 ```
+
+## centos
+
+centos下安装软件：
+
+```
+yum install -y python3
+```
