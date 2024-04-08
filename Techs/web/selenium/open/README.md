@@ -78,3 +78,23 @@ driver.get("http://www.python.org")
 ## 获取整个页面内容
 
 在打开的页面内容加载完成之后，那么我们可以通过`driver.page_source`获取整个页面内容。
+
+## 等待方式
+
+方式一：
+
+```
+from time import sleep()
+sleep(3)
+```
+
+方式二：
+
+```
+driver = webdriver.Chrome()
+driver.implicitly_wait(20)
+```
+
+参考：
+
+- [Selenium设置元素等待的三种方式](https://www.cnblogs.com/paleDream/articles/17644574.html)
