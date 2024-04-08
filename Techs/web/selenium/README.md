@@ -16,12 +16,22 @@ Selenium使用对应浏览器的驱动来和浏览器进行交互，比如Firefo
 
 Linux下面将``放到`/usr/bin`或者`/usr/local/bin`下面。
 
-第一次使用的时候提示"WebDriverException: Message: Process unexpectedly closed with status 255"。
+第一次使用的时候提示"WebDriverException: Message: Process unexpectedly closed with status 255"。在阅读[Usage]()提示从`https://download.mozilla.org/?product=firefox-latest&os=linux`过程中意识到还没有下载Firefox。
 
-按照[]()提示从`https://download.mozilla.org/?product=firefox-latest&os=linux`下载Firefox。
+安装好了之后发现有新的错误：“WebDriverException: Message: Process unexpectedly closed with status 1”，在StackOverFlow上找到了答案：要使用headless模式。
+
+```
+opts = webdriver.FirefoxOptions()
+opts.add_argument("--headless")
+```
+
+参考：
+
+- [Usage](https://firefox-source-docs.mozilla.org/testing/geckodriver/Usage.html#Running-Firefox-in-an-container-based-package)
+- [Webdriver Exception:Process unexpectedly closed with status: 1](https://stackoverflow.com/questions/46809135/webdriver-exceptionprocess-unexpectedly-closed-with-status-1)
+
 
 ## 隐藏模式执行
-
 
 如果执行时不想打开浏览器，那么可以设置`headless`参数：
 
@@ -38,6 +48,7 @@ driver = webdriver.Firefox(options=options)
 参考：
 
 - [How to hide Firefox window (Selenium WebDriver)?](https://www.tutorialspoint.com/how-to-hide-firefox-window-selenium-webdriver)
+- [Firefox specific functionality](https://www.selenium.dev/documentation/webdriver/browsers/firefox/)
 
 
 ## 如何处理"NoSuchElementException"
@@ -57,8 +68,23 @@ driver = webdriver.Firefox(options=options)
 selenium.common.exceptions.WebDriverException: Message: 'geckodriver' executable needs to be in PATH.
 ```
 
-通过在调用`webdriver.Firefox()`的时候使用`executable_path`参数来解决。
+通过在调用`webdriver.Firefox()`的时候使用`executable_path`参数来解决。不过从4.10.0版本之后删除了该参数，所以需要下面这种方式来完成：
 
+```
+from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+
+service = Service(executable_path="PATH_TO_GECKODRIVER")
+options = webdriver.FirefoxOptions()
+driver = webdriver.Firefox(service=service, options=options)
+
+driver.quit()
+```
+
+参考：
+
+- [How To Set Firefox Path In Selenium](https://robots.net/software-and-applications/browsers-and-extensions/how-to-set-firefox-path-in-selenium/)
+- [](https://stackoverflow.com/questions/76802588/python-selenium-unexpected-keyword-argument-executable-path)
 
 ## “ModuleNotFoundError: No module named 'selenium'”
 
