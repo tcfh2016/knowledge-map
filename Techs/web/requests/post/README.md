@@ -1,3 +1,11 @@
+## 使用`post`方式获取数据
+
+
+
+餐考：
+
+- [11. requests.post()函数访问网页(小白入门)](https://zhuanlan.zhihu.com/p/639765581)
+
 ## 登录验证
 
 使用`requests`去登录网站，首先要获取POST请求提交的URL以及填写用户名和密码对应的属性。
