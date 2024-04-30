@@ -69,3 +69,8 @@ pd.show_versions() #查看依赖模块的版本
 
 - [让 pip 走代理](https://www.logcg.com/archives/1914.html)
 
+## 升级bip
+
+```
+ C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
+```

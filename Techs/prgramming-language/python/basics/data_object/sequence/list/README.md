@@ -60,6 +60,7 @@ lines = [line.rstrip() for line in open('script1.py') if line[0] == 'p']
 
 用`index`查找某个元素在列表中的位置，没有找到会报`ValueError`错。
 
+
 ## 拷贝
 
 直接通过“=”来拷贝列表那么拷贝变量和被拷贝变量都指向相同的对象，
@@ -101,5 +102,3 @@ xs[::-1]
 ## 求均值
 
 sum(l) / len(l)
-
-
