@@ -1,6 +1,6 @@
 ## 基金tick数据
 
-基金tick数据的数据就是交易数据，没3秒一次快照。
+基金tick数据的数据就是交易数据，每3秒一次快照。
 
 ```
 get_ticks(security,end_dt,start_dt,count, fields, skip)

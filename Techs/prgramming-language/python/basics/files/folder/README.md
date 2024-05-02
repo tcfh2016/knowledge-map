@@ -8,6 +8,7 @@
 - os.mkdir(p) 创建文件夹。
 - os.path.join 
 
+
 ```
 os.path.isdir('new_folder')
 ```
@@ -85,3 +86,15 @@ os.makedirs(path, exist_ok=True)
 参考：
 
 - [How do I delete a file or folder in Python?](https://stackoverflow.com/questions/6996603/how-do-i-delete-a-file-or-folder-in-python)
+
+## 返回上级目录
+
+```
+from pathlib import Path
+path = Path("/here/your/path/file.txt")
+print(path.parent.absolute())
+```
+
+参考：
+
+- [How do I get the parent directory in Python?](https://stackoverflow.com/questions/2860153/how-do-i-get-the-parent-directory-in-python)

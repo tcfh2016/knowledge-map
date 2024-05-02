@@ -15,4 +15,4 @@
 
 ## 获取单只基金信息：`get_security_info(code)`
 
-得到对象的属性都具有如上的display_name, namme, start_date, end_date, type等。
+得到对象为`Security`，属性为如上的`display_name`, `name`, `start_date`, `end_date`, `type`等。
