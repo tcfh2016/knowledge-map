@@ -14,6 +14,7 @@ df
 1  Falcon      370.0
 2  Parrot       24.0
 3  Parrot       26.0
+
 df.groupby(['Animal']).mean()
         Max Speed
 Animal
@@ -24,23 +25,6 @@ Parrot       25.0
 参考：
 
 - [Group By: split-apply-combine](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
-
-
-## groupby
-
-按照每个月份、年份进行统计。
-
-```
-df = pd.read_csv("000898.csv", encoding="gb2312", dayfirst=True, usecols = ["日期", "总市值"])
-df["日期"] = pd.to_datetime(df["日期"])
-df["年"] = df["日期"].dt.year
-df["月"] = df["日期"].dt.month
-
-groups = df.groupby(["年", "月"])
-```
-
-- [python pandas extract year from datetime](https://stackoverflow.com/questions/30405413/python-pandas-extract-year-from-datetime-dfyear-dfdate-year-is-not)
-- [Python: Datetime to season](https://stackoverflow.com/questions/44124436/python-datetime-to-season)
 
 
 ## groupby 之后的二维索引怎么访问？

@@ -20,3 +20,9 @@ ax.set_yticklabels(['{:,.2%}'.format(x) for x in vals])
 参考：
 
 - [Format y axis as percent](https://stackoverflow.com/questions/31357611/format-y-axis-as-percent)
+
+## 设置Y轴刻度
+
+```
+ax.set_yticks([0, 5, 10, 15, 20, 25, 30])
+```

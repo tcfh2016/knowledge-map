@@ -64,3 +64,18 @@ def month_converter(month):
 dt = datetime.datetime.strptime('2024 Mar 19 3:01 PM', '%Y %b %d %I:%M %p') 
 dt.astimezone(datetime.timezone.utc)
 ```
+
+## 提取年份、月份
+
+```
+df = pd.read_csv('sample_data.csv',parse_dates=True)
+
+df['date'] = pd.to_datetime(df['date'])
+df['year'] = df['date'].dt.year
+df['month'] = df['date'].dt.month
+```
+
+参考：
+
+- [python pandas extract year from datetime](https://stackoverflow.com/questions/30405413/python-pandas-extract-year-from-datetime-dfyear-dfdate-year-is-not)
+- [Python: Datetime to season](https://stackoverflow.com/questions/44124436/python-datetime-to-season)
