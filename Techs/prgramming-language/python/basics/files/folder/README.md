@@ -3,15 +3,26 @@
 - os.getcwd() 返回当前工作目录的名称。
 - os.listdir(p) 返回一个字符串列表，包含路径p指定的文件夹下所有的文件和文件夹名称。
 - os.chdir(p) 将当前工作目录切换至p。
-- os.path.isdir(p) 判断当前p是否为文件夹。
-- os.path.isfile(p) 判断当前p是否为文件。
 - os.mkdir(p) 创建文件夹。
-- os.path.join 
+- os.path.join()
+- os.path.isdir(p) 判断当前p是否为文件夹。
+- os.path.dirname(p) 获得对应p所在的目录，绝对路径
+- os.path.isfile(p) 判断当前p是否为文件。
+- os.path.realpath(p) 返回绝对路径
 
 
 ```
 os.path.isdir('new_folder')
 ```
+
+## 获得脚本执行时的目录
+
+可以先通过`os.path.realpath(__file__)`来得到绝对路径，再通过`os.path.dirname()`来获得脚本路径：
+
+```
+os.path.dirname(os.path.realpath(__file__))
+```
+
 
 ## 判断文件夹是否为空
 

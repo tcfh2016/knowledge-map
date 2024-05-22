@@ -77,3 +77,8 @@ pd.show_versions() #查看依赖模块的版本
 ```
  C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
 ```
+
+## 技巧
+
+- 使用`os.path.dirname(os.path.realpath(__file__))`来得到脚本执行时的绝对路径。
+- 使用`sys.path.append(path)`来添加搜索路径。
