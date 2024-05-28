@@ -9,11 +9,8 @@
 - os.path.dirname(p) 获得对应p所在的目录，绝对路径
 - os.path.isfile(p) 判断当前p是否为文件。
 - os.path.realpath(p) 返回绝对路径
+- os.path.splitext(p) 分离文件名和扩展名
 
-
-```
-os.path.isdir('new_folder')
-```
 
 ## 获得脚本执行时的目录
 

@@ -47,14 +47,26 @@ pd.show_versions() #查看依赖模块的版本
 
 使用`Python 3.9.9`好长一段时间了，经常使用pandas来画图，但突然有一天就开始提示`ModuleNotFoundError: No module named 'pkg_resources'`的错误。
 
-## 检测当前系统是Windows, Linux还是Mac
+## 区分操作系统
 
+有三种方式可以用来区分当前的操作系统，更推荐使用`platform.system()`因为它可以返回更加通用的名字。
 
+```
+sys.platform
+# 'win32'  # could be 'linux', 'linux2, 'darwin', 'freebsd8' etc
 
+os.name
+# 'nt'  # for Linux and Mac it prints 'posix'
 
-## Q&A
+# platform.system()
+'Windows' # For Linux it prints 'Linux'. For Mac, it prints `'Darwin'
+```
 
-1）模块安装
+参考：
+
+- [](https://stackoverflow.com/questions/1854/how-to-identify-which-os-python-is-running-on/58071295)
+
+## 模块安装
 
 使用matplotlib画线，本地测试无法找到该模块，那么可以使用 `pip3 install matplotlib`先安装。
 
@@ -68,9 +80,30 @@ pd.show_versions() #查看依赖模块的版本
 
 210922: 今天安装selenium，使用`pip3 --porxy http://127.0.0.1:6152 install selenium`成功，使用`pip3 --proxy 127.0.0.1:6152 install selenium`提示没有指定scheme，指定https提示“ValueError: check_hostname requires server_hostname”错误。
 
+进入Python命令行，输入`help('modules')`可以查看当前已经安装好的各个模块。
+
+
+- [How do I get a list of locally installed Python modules?](https://stackoverflow.com/questions/739993/how-do-i-get-a-list-of-locally-installed-python-modules)
+- [让 pip 走代理](https://www.logcg.com/archives/1914.html)
+
+
+## 模块版本
+
+查看版本信息，可以使用每个模块提供的`__version__`属性：
+
+```
+import pandas as pd
+
+pd.__version__
+pd.show_versions() #查看依赖模块的版本
+```
+
+如果安装了pip，那么使用`pip list`或者`pip3 list`可以查看所有安装的模块及对应的版本。
+
 参考：
 
-- [让 pip 走代理](https://www.logcg.com/archives/1914.html)
+- [How to find the installed pandas version](https://stackoverflow.com/questions/20612645/how-to-find-the-installed-pandas-version)
+
 
 ## 升级bip
 
