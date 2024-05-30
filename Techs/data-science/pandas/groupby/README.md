@@ -98,3 +98,6 @@ new_df = new_df.reset_index()
 
 - [pandas.DataFrame.transform](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.transform.html)
 - [Group by: split-apply-combine](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
+
+## 将不同的`groupby`结果对齐到坐标轴
+

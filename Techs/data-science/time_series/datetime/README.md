@@ -34,12 +34,12 @@ now = datetime(year, month, day)
 
 ## 月份的日期转换
 
-可以使用`strftime`来进行转换：
-
-
-或者：
+可以使用`strftime`来进行转换，或者自定义函数：
 
 ```
+>>> import datetime
+>>> datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 def month_converter(month):
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     return months.index(month) + 1
@@ -48,6 +48,7 @@ def month_converter(month):
 参考：
 
 - [How to map month name to month number and vice versa?](https://stackoverflow.com/questions/3418050/how-to-map-month-name-to-month-number-and-vice-versa)
+- [Python datetime to string without microsecond component](https://stackoverflow.com/questions/7999935/python-datetime-to-string-without-microsecond-component)
 
 
 ## [日期格式](https://docs.python.org/2/library/time.html#time.strftime)
