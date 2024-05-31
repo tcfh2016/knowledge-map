@@ -47,6 +47,9 @@ pd.show_versions() #查看依赖模块的版本
 
 使用`Python 3.9.9`好长一段时间了，经常使用pandas来画图，但突然有一天就开始提示`ModuleNotFoundError: No module named 'pkg_resources'`的错误。
 
+## 检测当前系统是Windows, Linux还是Mac
+
+
 
 
 ## Q&A

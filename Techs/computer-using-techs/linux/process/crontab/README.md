@@ -40,6 +40,7 @@
 
 crontab的相关日志有两份：1）针对每位用户会创建一个日志，存在于`/var/spool/mail`或者`/var/mail`。2）然后在`/var/log/cron`有cron本身的执行日志。
 
+*注：在`Ubuntu`和`Debian`上位于`/var/log/syslog`, 在`CentOS`上位于`/var/log/cron`。*
 
 当这个文件满了怎么办？
 
@@ -60,7 +61,7 @@ crontab的相关日志有两份：1）针对每位用户会创建一个日志，
 
 - [第十五章、例行性工作排程(crontab)](http://linux.vbird.org/linux_basic/0430cron.php)
 - [How to enable logging for cron on Linux](https://www.techrepublic.com/article/how-to-enable-logging-for-cron-on-linux/)
-- [](https://www.unix.com/aix/133978-var-spool-squeue-gets-full-frequently.html)
+- [Where is the cron / crontab log?](https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log)
 
 ## 配置了任务但是没有执行
 
@@ -92,13 +93,24 @@ crontab的相关日志有两份：1）针对每位用户会创建一个日志，
 
 ```
 # 这个run1.sh是能够正常运行的。
-Mar  6 05:59:02 yang-jinyong-dev-rhel7 CROND[44718]: (lianbche) CMD (export DISPLAY=:7 && sh /home/lianbche/auto-scripts/CI_SCT/run1.sh)
+Mar  6 05:59:02 rhel7 CROND[44718]: (lianbche) CMD (export DISPLAY=:7 && sh /home/lianbche/auto-scripts/CI_SCT/run1.sh)
 
 # 但这个run2.sh没有运行起来。
-Mar  6 06:59:01 yang-jinyong-dev-rhel7 crond[10247]: (lianbche) PAM ERROR (Authentication service cannot retrieve authentication info)
-Mar  6 06:59:01 yang-jinyong-dev-rhel7 crond[10247]: (lianbche) FAILED to authorize user with PAM (Authentication service cannot retrieve authentication info)
+Mar  6 06:59:01 rhel7 crond[10247]: (lianbche) PAM ERROR (Authentication service cannot retrieve authentication info)
+Mar  6 06:59:01 rhel7 crond[10247]: (lianbche) FAILED to authorize user with PAM (Authentication service cannot retrieve authentication info)
 ```
 
 参考：
 
 - [CRON Jobs Fail To Run w/PAM Error](http://www.whitemiceconsulting.com/crondpamerror)
+
+
+## 任务日志
+
+```
+* * * * * myjob.sh >> /var/log/myjob.log 2>&1
+```
+
+参考：
+
+- [How to log cron jobs?](https://stackoverflow.com/questions/4811738/how-to-log-cron-jobs)

@@ -9,7 +9,7 @@ stock_zh_valuation_baidu_df = ak.stock_zh_valuation_baidu(symbol="002044", indic
 print(stock_zh_valuation_baidu_df)
 ```
 
-如果要同时获得多个指标，那么就需要多次获取在拼接起来：
+`period`可以取{"近一年", "近三年", "近五年", "近十年", "全部"}。如果要同时获得多个指标，那么就需要多次获取在拼接起来：
 
 ```
 indicator_dfs = []
@@ -30,7 +30,7 @@ stock_hk_valuation_baidu_df = ak.stock_hk_valuation_baidu(symbol="02358", indica
 print(stock_hk_valuation_baidu_df)
 ```
 
-获取多个需要拼接：
+`period`可以取{"近一年", "近三年", "近五年", "近十年", "全部"}，多个估值指标需要拼接：
 
 ```
 indicator_dfs = []
