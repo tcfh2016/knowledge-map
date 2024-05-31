@@ -47,7 +47,7 @@ from pandas import Series, DataFrame
 
 s = Series([1, np.NaN, 3.2, np.NaN, 7])
 print(s.dropna()) # 删除含有NaN的全部行，注意Series是单列多行的数据，而非单行
-print(s.dropna(axis=1)) # 删除含有NaN的全部行
+print(s.dropna(axis=1)) # 删除含有NaN的全部列
 ```
 
 然而，对于DataFrame调用 dropna的处理更复杂一些，因为它会默认丢弃所有包含缺失值的行。此时有两种调整方法：
@@ -59,6 +59,10 @@ print(s.dropna(axis=1)) # 删除含有NaN的全部行
 
 ## 仅仅删除某列值为空的数据
 
+```
+df = df[df.line_race != 0]
+df = df[df.line_race.notnull()]
+```
 
 参考：
 

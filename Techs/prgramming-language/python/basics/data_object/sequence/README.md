@@ -56,7 +56,7 @@ list[0:2:1] 指定切片间隔/步长
 
 - [Finding the index of an item in a list](https://stackoverflow.com/questions/176918/finding-the-index-of-an-item-in-a-list)
 
-## 如何根据条件查找 ？
+## 如何根据条件找到第一个满足条件的元素 ？
 
 
 ```
@@ -67,3 +67,5 @@ next((x for x in the_iterable if x > 3), default_value) # 找不到返回default
 参考：
 
 - [Get the first item from an iterable that matches a condition](https://stackoverflow.com/questions/2361426/get-the-first-item-from-an-iterable-that-matches-a-condition)
+
+

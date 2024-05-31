@@ -41,7 +41,7 @@ u'example.com'
 
 - `ModuleNotFoundError: No module named 'beautifulsoup4'`错误
 
-在碰到“ModuleNotFoundError: No module named 'beautifulsoup4'”的提示时，需要使用`pip install beautifulsoup4`来安装。
+在碰到“ModuleNotFoundError: No module named 'beautifulsoup4'”的提示时，需要使用`pip install beautifulsoup4`来安装。如果需要代理使用``pip3 --proxy ip:port install pandas`安装。
 
 
 -  `'geckodriver' executable needs to be in PATH`错误

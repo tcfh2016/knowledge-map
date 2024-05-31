@@ -19,6 +19,9 @@ requests 是基于Python的第三方HTTP库，用来请求网络资源。
 
 当我们获得了整个页面的内容之后，还需要进一步解析，而这些解析工作就可以使用其他的python库来完成，比如`Beautiful Soup`。
 
+```
+soup = BeautifulSoup(r.text, 'html.parser')
+```
 
 ## `requests`和`selenium`的区别？
 
