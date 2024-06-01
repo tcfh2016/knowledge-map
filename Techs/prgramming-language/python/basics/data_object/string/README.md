@@ -13,7 +13,7 @@
 
 字符串本身带有大量的函数：
 
-- 测试函数，如s.isalnum()。
+- 测试函数，如`s.isalnum()`, `s.endswith(chs)`。
 - 搜索函数，如s.find('substring')，s.rfind('substring')。*未找到返回-1* 或者 s.index('substring')
 - 改变大小写的函数，如s.lower()。（注：创建新的字符串，原字符串并未更改。）
 - 格式设置函数，如'{0} likes {1}'.format('jack', 'icecream')。
@@ -22,6 +22,7 @@
 - 替换函数，如s.replace(sou, tar)。*生成新的字符串*
 - 其他函数，如s.count(c), s.join(sequence)。
 - 转换工具，如int("42"), str(42), float("1.5")。
+- endswith
 
 ## 字符串格式化
 
