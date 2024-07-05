@@ -160,6 +160,13 @@ sales_data.reset_index(drop = True)
 - [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
 - [How to select cells greater than a value in a multi-index Pandas dataframe?](https://stackoverflow.com/questions/32731498/how-to-select-cells-greater-than-a-value-in-a-multi-index-pandas-dataframe)
 
+
+## 布尔索引的问题
+
+有时候通过`df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`的方式不一定找得到匹配的行，可能原因：
+
+- 原始数据里面有无效值`NaN`，然后使用`df['code'].str.find('500') != -1]`也会返回`True`因为对于`NaN`来说也是成立的：调用find()返回NaN，NaN != -1成立。
+
 ## 遍历行
 
 ```

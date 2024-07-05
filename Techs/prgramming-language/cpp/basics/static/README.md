@@ -26,8 +26,6 @@ void go( int x ) {
 }
 ```
 
-## 应用场景分析
-
 ## static data member
 
 1.初始化
@@ -41,6 +39,9 @@ public:
 int X::i = 0; // definition outside class declaration
 ```
 
+以上这种较为复杂的定义方式已经在`C++17`里面得到了优化，因为你可以使用`inline`关键字直接在类里面定义的时候初始化这个变量，比如上面变量`i`的定义可以写成`static inline int i = 0`。
+
 参考：
 
 - [How to initialize a static const member in C++?](https://stackoverflow.com/questions/3531060/how-to-initialize-a-static-const-member-in-c?rq=1)
+- [How do inline variables work?](https://stackoverflow.com/questions/38043442/how-do-inline-variables-work)
