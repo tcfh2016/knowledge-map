@@ -20,6 +20,10 @@ vb:!!:19005:0:99999:7:::
 vb:$5$2N7544pq$at9S4JLRZRep/0yWjtN5kp/yAqqauw5lWxlm4JmZAK5:19005:0:99999:7:::
 ```
 
+## 修改用户密码
+
+使用`root`账户使用`passwd user_name`可以直接修改密码。
+
 ## sudoers
 
 在使用`sudo apt install git-all`安装git的时候，突然提示：
