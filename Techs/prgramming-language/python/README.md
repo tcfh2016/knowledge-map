@@ -115,3 +115,7 @@ pd.show_versions() #查看依赖模块的版本
 
 - 使用`os.path.dirname(os.path.realpath(__file__))`来得到脚本执行时的绝对路径。
 - 使用`sys.path.append(path)`来添加搜索路径。
+
+## 查错
+
+- 安装`pylint`，通过`pylint script.py`来查询错误

@@ -74,4 +74,9 @@ def div(a, b):
     return value, remain
 ```
 
+## 函数中的函数
+
+参考：
+
+- [Python Inner Functions: What Are They Good For?](https://realpython.com/inner-functions-what-are-they-good-for/)
 
