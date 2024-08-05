@@ -111,3 +111,6 @@ https://jingyan.baidu.com/article/a378c960d77615b3282830bd.html
 ##
 
 - MOD 经常出现的数
+
+## 怎么将一列转换为数字
+
