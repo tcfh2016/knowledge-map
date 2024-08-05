@@ -1,4 +1,73 @@
-## pd.concat()
+## 类型转换
+
+pandas会根据输入的数据来确定每个列的数据类型，比如一列的数据全是int，那么该列的类型就是int，哪怕其中的一个为float，那么该列为float。
+
+将特定列进行类型转换：
+
+```
+# convert column "a" to int64 dtype and "b" to complex type
+df = df.astype({"a": int, "b": complex})
+```
+
+
+想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基础上进行转换，使用起来不方便。
+
+*注：调用`to_numeric()`时根据原有数据决定转换为`int64`还是`float64`。*
+
+```
+for col in float_df:
+    print(pd.to_numeric(float_df[col]))
+```
+
+通过`print(df.dtypes)`打印DataFrame各列的类型。
+
+
+参考：
+
+- [Change column type in pandas](https://stackoverflow.com/questions/15891038/change-column-type-in-pandas)
+
+## 重命名
+
+1）修改行名
+
+直接赋值，如下将DataFrame的index修改为其中的某一列：
+
+```
+df.index = df['日期'] # 之前的'日期'列依然存在
+df = df.set_index('日期', drop=True) #
+```
+
+*注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建新的DataFrame。*
+*注2：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
+
+参考：
+
+- [Remove index name in pandas](https://stackoverflow.com/questions/29765548/remove-index-name-in-pandas)
+
+
+2）修改列名
+
+两种方式：直接赋值和调用 rename方法：
+
+```
+df.columns = ['price'] # 用等长的列表来覆盖之前的列名
+df.rename(columns=lambda x:x.replace('$',''), inplace=True)
+df.rename(columns={'a':'b'}, inplace=True) # 将'a'重命名为'b'，可以支持多列的重命名。
+```
+
+另外在read_csv()的时候可以修改读取数据的列名：
+
+```
+ufo = pd.read_csv(name_file, names=ufo_cols, header=0) # 不指定header，直接使用自
+定义ufo_cols作为列名。
+```
+
+
+## 修改值
+
+
+
+## 合并操作
 
 使用`pd.concat()`函数来完成多个DataFrame的连接操作，主要的参数为`axis`, `join`和`ignore_index`：
 
