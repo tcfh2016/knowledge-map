@@ -1,5 +1,8 @@
 
-Tkinter 是使用 python 进行窗口视窗设计的模块。具有简单、跨平台的特性。
+Python有不少的GUI框架，但只有`Tkinter`是内置在Python标准库当中的，它使用所运行的操作系统来渲染可视化组件，具有简单、跨平台的特性。
+
+当然，`Tkinter`看起来有点过时，不够绚丽。所以，在选用具体的框架的时候，可以根据项目的特性选择对应的框架。
+
 
 # 问题列表
 
@@ -18,3 +21,4 @@ tkinter.messagebox.showinfo(title='',message='')#提示信息对话窗
 
 - [Tkinter messagebox without window?](https://stackoverflow.com/questions/17280637/tkinter-messagebox-without-window)
 - [TkInter message box](https://pythonspot.com/tk-message-box/)
+- [Python GUI Programming With Tkinter](https://realpython.com/python-gui-tkinter/)
