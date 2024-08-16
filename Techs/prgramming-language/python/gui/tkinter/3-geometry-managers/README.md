@@ -9,7 +9,7 @@ TKinter可以用`pack()`、`.place()`和`.grid()`来进行布局管理，每个w
 - `fill`，指定填充的方向，水平为`tk.X`，垂直为`tk.Y`，或者`tk.BOTH`。
 - `side`，`tk.TOP`,`tk.BOTTOM`,`tk.LEFT`,`tk.RIGHT`。不指定都是居中显示。
 - `expand`，设置为Ture，在调整窗口大小的时候会自动扩展。
-- `padx=5, pady=5`，给控件周围设置间距
+- `padx=5, pady=5`，给控件周围设置间距，`ipadx=5, ipady=5`给空间内部设置间距
 
 控件的顺序和调用`pack()`的顺序有关。
 
@@ -21,11 +21,11 @@ TKinter可以用`pack()`、`.place()`和`.grid()`来进行布局管理，每个w
 
 ## `grid()`
 
-`grid()`的布局是将整个window或Frame划分为行列形式的多个单元，然后通过行列的索引来布局。
+`grid(row=i, column=j)`的布局是将整个window或Frame划分为行列形式的多个单元，然后通过行列的索引来布局。
 
 各个单元之间的间隔可以进行填充，分“内部填充”和“外部填充”：
 
-- internal padding
+- internal padding：`ipadx=5, ipady=5`
 - external padding: `padx=5, pady=5`
 
 要让window能够在改变大小的时候进行自适应，需要通过`columnconfigure(index, weight, minsize)`和`rowconfigure()`来进行配置：
@@ -35,3 +35,15 @@ TKinter可以用`pack()`、`.place()`和`.grid()`来进行布局管理，每个w
 - minsize，行高或者列宽的最小值
 
 单元格里面的内容默认居中显示，可以通过`sticky`参数来设置，取值为“n/N”, "e/E"，“s/S”和“w/W”，并且可以组合使用。
+
+```
+window.columnconfigure(i, weight=1, minsize=75)
+window.rowconfigure(i, weight=1, minsize=50)
+
+frame = tk.Frame(
+            master=window,
+            relief=tk.RAISED,
+            borderwidth=1
+        )
+frame.grid(row=i, column=j, padx=5, pady=5, sticky="n")
+```

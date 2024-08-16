@@ -32,11 +32,14 @@ label = tk.Label(
 
 这种设置的好处是空间的大小会和程序运行的系统对齐，看起来会更加协调。
 
+`Label`中的文本默认居中对齐，如果要实现其他对齐方式可以通过`anchor`或者`justify`属性（多行情况）。
+
 
 参考：
 
 - [HTML color names](https://htmlcolorcodes.com/color-names/)
 - [Python GUI Programming With Tkinter](https://realpython.com/python-gui-tkinter/)
+- [How to justify text in label in Tkinter](https://stackoverflow.com/questions/37318060/how-to-justify-text-in-label-in-tkinter)
 
 ## `Button`
 
@@ -81,7 +84,20 @@ entry = tk.Entry(fg="yellow", bg="blue", width=50)
 
 可以通过给`Frame`的`relief`属性和`borderwidth `来配置边框效果：`tk.FLAT`,`tk.SUNKEN`,`tk.RAISED`,`tk.GROOVE`和`tk.RIDGE`。
 
+注：`Frame`的大小默认仅仅包裹住在其中的所有控件就行了，如果你想实现下面这样的效果将两个按钮现实在后面，一定需要进行填充操作。
 
+![](./need_fill.png)
+
+否则两个按钮就在中间了。
+
+```
+frame_button.pack(fill=tk.X, ipadx=5, ipady=5)
+button_submit = tk.Button(master=frame_button, text="Submit")
+button_submit.pack(side=tk.RIGHT, ipadx=10, padx=10)
+
+button_clear = tk.Button(master=frame_button, text="Clear")
+button_clear.pack(side=tk.RIGHT, ipadx=10)
+```
 
 参考：
 

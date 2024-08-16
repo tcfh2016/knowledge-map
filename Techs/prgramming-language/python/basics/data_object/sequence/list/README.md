@@ -78,7 +78,21 @@ areas_copy = list(areas)
 
 ## 遍历（Excursion）
 
-使用`for`语句来遍历列表，Python提供了一种极具扩展性的遍历方式使得你可以不用去管被遍历的list中元素的数据类型。
+使用`for`语句来遍历列表，Python提供了一种极具扩展性的遍历方式使得你可以不用去管被遍历的list中元素的数据类型。遍历的方式有三种：
+
+```
+# 方式一：仅关心列表内容
+for elem in list:
+    #...
+
+# 方式二：关心列表索引
+for idx in range(len(list)):
+    #...
+
+# 方式三：仅关心列表索引和内容
+for idx, text in enumerate(labels):
+    #...
+```
 
 逆序遍历：
 
