@@ -34,7 +34,7 @@ TKinter可以用`pack()`、`.place()`和`.grid()`来进行布局管理，每个w
 - weight，默认为0，1为同步增长，2为双倍增长
 - minsize，行高或者列宽的最小值
 
-单元格里面的内容默认居中显示，可以通过`sticky`参数来设置，取值为“n/N”, "e/E"，“s/S”和“w/W”，并且可以组合使用。
+布局的空间如何展示在单元格里（默认居中），可以通过`sticky`参数来设置，取值为“n/N”, "e/E"，“s/S”和“w/W”，并且可以组合使用。
 
 ```
 window.columnconfigure(i, weight=1, minsize=75)

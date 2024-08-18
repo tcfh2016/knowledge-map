@@ -17,7 +17,15 @@ window.withdraw()
 tkinter.messagebox.showinfo(title='',message='')#提示信息对话窗
 ```
 
-# 参考
+## APP开发方法论
+
+第一步：设计
+
+- 明确APP需要哪些控件
+- 控件的布局
+
+
+## 参考
 
 - [Tkinter messagebox without window?](https://stackoverflow.com/questions/17280637/tkinter-messagebox-without-window)
 - [TkInter message box](https://pythonspot.com/tk-message-box/)
