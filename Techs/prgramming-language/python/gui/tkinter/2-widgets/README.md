@@ -102,3 +102,26 @@ button_clear.pack(side=tk.RIGHT, ipadx=10)
 参考：
 
 - [Additional Resources](https://realpython.com/python-gui-tkinter/#additional-resources)
+
+## `Separator`
+
+第一次尝试使用分割线碰到无法垂直展示在整个窗口上的问题，原因在于窗口的布局使用了`grid()`的方式之后，布局`Separator`也只能使用这个方式，只不过它只能够对其到某个单元，如：
+
+```
+separator = ttk.Separator(master=window, orient='vertical')
+separator.grid(row=1, column=1, sticky="nswe")
+```
+
+![](./separator_notgood.png)
+
+可以使用`rowspan=2`可以达到想要的效果：
+
+```
+separator.grid(row=0, column=1, rowspan=2, sticky="nswe")
+```
+
+![](./separator_rowspan.png)
+
+参考：
+
+- [](https://pythonguides.com/python-tkinter-separator/)
