@@ -31,6 +31,15 @@ matplotlib.pyplot.plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 - `plt.plot(x, y, format)`：`format`为图形格式
 - `plt.plot(x1, y1, format1, x2, y2, format2)`：画两条线
 
+如果要画多条线那么需要多次调用`plt.plot(x, y)`，如果要使用第二坐标那么设置也不同：
+
+```
+fig, ax1 = plt.subplots()
+
+ax2 = ax1.twinx()
+ax1.plot(x, y1, 'g-')
+ax2.plot(x, y2, 'b-')
+```
 
 颜色：
 
@@ -78,7 +87,8 @@ matplotlib.pyplot.plot(*args, scalex=True, scaley=True, data=None, **kwargs)
 参考：
 
 - [matplotlib.pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
-
+- [Plot multiple line graphs from a dataframe using Matplotlib](https://stackoverflow.com/questions/70995638/plot-multiple-line-graphs-from-a-dataframe-using-matplotlib)
+- [](https://stackoverflow.com/questions/14762181/adding-a-y-axis-label-to-secondary-y-axis-in-matplotlib)
 
 ## matplotlib.pyplot.ylim
 

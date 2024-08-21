@@ -210,3 +210,20 @@ git show SHA-1 -- path
 
 - [透過rebase -i, reset, revert還原某個commit的方法](http://rubyist.marsz.tw/blog/2012-01-17/git-reset-and-revert-to-rollback-commit/)
 - [Git blame — prior commits?](https://stackoverflow.com/questions/5098256/git-blame-prior-commits)
+
+## 创建`pull request`
+
+1）对于仓库没有写权限
+
+- step1：先`fork`原仓库"A"，得到自己的克隆仓库"clone-A"
+- step2：修改本地克隆的仓库
+- step3：将修改推送到"clone-A"
+- step4: 创建`pull request`
+    - 将`pull request`和`issue`关联，自动方式是在request的描述里面使用关键字：`Fixes octo-org/octo-repo#100`
+
+2）对于仓库有写权限
+
+参考：
+
+- [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+- [Linking a pull request to an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
