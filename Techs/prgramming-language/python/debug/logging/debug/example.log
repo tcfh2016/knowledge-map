@@ -1,2 +1,7 @@
 DEBUG:root:This message should go to the log file
-DEBUG:root:This message should go to the log file
+DEBUG:root:execution failed with {}
+Traceback (most recent call last):
+  File "<ipython-input-8-8a9ef54030f1>", line 8, in <module>
+    x = 10 / 0
+        ~~~^~~
+ZeroDivisionError: division by zero
