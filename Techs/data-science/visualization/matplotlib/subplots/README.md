@@ -1,3 +1,28 @@
+## 现实和隐式的方式
+
+用显式的方式画多个子区的时候需要单独访问不同的`Axes`对象，比如下面代码里面的`axs[0]`, `axs[1]`：
+
+```
+import matplotlib.pyplot as plt
+
+fig, axs = plt.subplots(1, 2)
+axs[0].plot([1, 2, 3], [0, 0.5, 0.2])
+axs[1].plot([3, 2, 1], [0, 0.5, 0.2])
+```
+
+用隐式的方式画子区的时候使用`pyplot.plot()`会自动跟踪上一次的绘图元素，所以看起来代码相同：
+
+```
+plt.subplot(1, 2, 1)
+plt.plot([1, 2, 3], [0, 0.5, 0.2]) #第一次调用plt.plot()
+plt.subplot(1, 2, 2)
+plt.plot([3, 2, 1], [0, 0.5, 0.2]) #第二次调用plt.plot()，相同的语句
+```
+
+参考：
+
+- [Why be explicit?](https://matplotlib.org/stable/users/explain/figure/api_interfaces.html#why-be-explicit)
+
 ## 图形（figure）和子区（subplots）
 
 图形对应到现实生活中类似于“画板”，在这个“画板”上可以分割为多个“子区”来画不同的图形。

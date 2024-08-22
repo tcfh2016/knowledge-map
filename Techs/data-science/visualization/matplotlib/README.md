@@ -10,15 +10,6 @@
 
 - [Purpose of “%matplotlib inline”](https://stackoverflow.com/questions/43027980/purpose-of-matplotlib-inline)
 
-## 图标元素
-
-Matplotlib 中的基本图标包括以下元素：
-
-- x轴和y轴：水平和垂直的轴线。
-- x轴和y轴刻度：刻度标示坐标轴的分隔，包括最小刻度和最大刻度。
-- x轴和y轴刻度标签：表示特定坐标轴的值。
-- 绘图区域：实际绘图的区域。
-
 
 ## 双坐标的问题
 
@@ -60,27 +51,6 @@ plt.yticks([-1, 0, +1],
 ```
 
 这里标题中的`$..`是利用`matplotlib`对`LaTex`表达式的支持，可以在Python格式化字符中加入了数学符号。
-
-## 坐标轴设置
-
-调用`plt.axis(xmin, xmax, ymin, ymax)`来设置坐标轴的范围。如果不设置，matploblib会自动使用能够容纳数据集的最小值。
-
-```
-matplotlib.rcParams['axes.unicode_minus']=False
-
-l = [-1, 1, -10, 10]
-plt.axis(l)
-```
-
-
-##  坐标轴标签
-
-```
-plt.xlabel('radians')
-plt.ylabel('amplitude', fontsize='large') # 设置字体大小
-plt.title('Sin(x)')
-plt.grid() # 显示网格
-```
 
 
 ## 坐标轴标签上显示负号(minus sign)

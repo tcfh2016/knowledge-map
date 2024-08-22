@@ -1,3 +1,18 @@
+## `ax.plot()`和`plt.plot()`的区别
+
+调用方式上的区别：
+
+- `ax.plot()`：显示的创建`Figure`和`Axes`，然后在`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
+- `plt.plot()`：使用`matplotlib.pyplot`来隐式的创建`Figure`和`Axes`，更方便一点。推荐演示的时候使用。
+
+
+**特别注意：在GUI中必须直接使用`Matplotlib`的API，而非使用`pylab/pyplot`相关的接口**
+
+参考：
+
+- [The explicit and the implicit interfaces](https://matplotlib.org/stable/users/explain/quick_start.html#the-explicit-and-the-implicit-interfaces)
+- [Embedding Matplotlib in graphical user interfaces](https://matplotlib.org/stable/gallery/user_interfaces/index.html#user-interfaces)
+
 ## 柱状图 / 直方图
 
 直方图通常被用于可视化数据的分布，谈论直方图的时候会涉及一些术语，比如`bin`代表一定间隔下数据点频率的垂直矩形，`bin`以固定的间隔创建。
