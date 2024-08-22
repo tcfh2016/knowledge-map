@@ -19,6 +19,31 @@ Matplotlib 中的基本图标包括以下元素：
 - x轴和y轴刻度标签：表示特定坐标轴的值。
 - 绘图区域：实际绘图的区域。
 
+
+## 双坐标的问题
+
+下面代码能够正常显示双坐标：
+
+```
+fig = plt.figure(figsize=(7, 4)) # 设置图形大小
+ax1 = fig.subplots()
+
+plt.plot(df['总市值'], 'b', lw=1.5, label='1ab')
+plt.legend(loc=8)
+
+ax2 = ax1.twinx()
+plt.plot(df['市盈率(TTM)'], 'g', lw=1.5, label='2ab')
+plt.legend(loc=0)
+plt.ylabel('value 2nd')
+```
+
+但是如果修改为下面这样就不行了：
+
+```
+from matplotlib.figure import Figure
+fig = Figure(figsize=(8, 4), dpi=100)
+```
+
 ## 图标设置
 
 ```
