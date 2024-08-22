@@ -88,7 +88,7 @@ ax2.plot(x, y2, 'b-')
 
 - [matplotlib.pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 - [Plot multiple line graphs from a dataframe using Matplotlib](https://stackoverflow.com/questions/70995638/plot-multiple-line-graphs-from-a-dataframe-using-matplotlib)
-- [](https://stackoverflow.com/questions/14762181/adding-a-y-axis-label-to-secondary-y-axis-in-matplotlib)
+- [Adding a y-axis label to secondary y-axis in matplotlib](https://stackoverflow.com/questions/14762181/adding-a-y-axis-label-to-secondary-y-axis-in-matplotlib)
 
 ## matplotlib.pyplot.ylim
 
