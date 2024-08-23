@@ -2,9 +2,8 @@
 
 调用方式上的区别：
 
-- `ax.plot()`：显示的创建`Figure`和`Axes`，然后在`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
-- `plt.plot()`：使用`matplotlib.pyplot`来隐式的创建`Figure`和`Axes`，更方便一点。推荐演示的时候使用。
-
+- `ax.plot()`：属于显示绘图的接口，需要首先用其他接口创建`Figure`和`Axes`，再在`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
+- `plt.plot()`：使用`matplotlib.pyplot`会隐式的创建`Figure`和`Axes`，更方便一点。推荐演示的时候使用。
 
 **特别注意：在GUI中必须直接使用`Matplotlib`的API，而非使用`pylab/pyplot`相关的接口**
 
@@ -56,8 +55,13 @@ matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=Non
 其中`s`表示大小，默认单位1的大小为1/72英寸的平方，`c`表示颜色深浅的标记值。散点图可以可以作为更高级的多维数据可视化的基础，比如绘制散点图矩阵（ scatter plot matrix ）。
 
 ```
+# 隐式调用
 plt.scatter(x, y, size, color)
-plt.colorbar(); # 显示颜色条
+plt.colorbar()
+
+# 显式调用
+fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
+ax.scatter(x, y, size, color)
 ```
 
 参考：

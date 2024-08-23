@@ -11,9 +11,9 @@
 在调用`Matplotlib`函数库来绘图时有两种方式：
 
 - 显示接口，通过OO的方式一步一步创建`Figure`，`Axes`等需要的绘图元素；
-- 隐式接口，通过`Matplotlib.pyplot`一次性创建必须的绘图元素，并且自动跟踪上一次使用的`Figure`，`Axes`（解释了双坐标时候均只需要使用`plt.plot()`）。
+- 隐式接口，通过`Matplotlib.pyplot`创建必须的绘图元素，并且自动跟踪上一次使用的`Figure`，`Axes`（解释了双坐标时候均只需要使用`plt.plot()`）。
 
-比如，下面是一个例子展示两者的差别：
+比如，下面是一个例子展示两者的差别（注：不管是显示的方式还是隐式的方式，对于`Figure`，`Axes`等主要绘图元素都可以通过`pyplot.subplots()`来创建）：
 
 ```
 import matplotlib.pyplot as plt
@@ -99,9 +99,76 @@ plt.title("Simple Plot") #接口差别
 plt.legend()
 ```
 
-## 
+## 图标设置
+
+```
+plt.title("$\sin$ 和 $\cos$ 函数") # 定义标题
+
+plt.xlim(-3.0, 3.0) # 设置 x 轴的范围
+plt.ylim(-1.0, 1.0) # 设置 y 轴的范围
+
+# 在特定值处设置记号
+plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
+          [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
+plt.yticks([-1, 0, +1],
+          [r'$-1$', r'$0$', r'$+1$'])
+```
+
+这里标题中的`$..`是利用`matplotlib`对`LaTex`表达式的支持，可以在Python格式化字符中加入了数学符号。
+
+
+## 坐标轴标签上显示负号(minus sign)
+
+matplotlib默认以Unicode的形式来展示“-”，但是当你将有些图示的语系变更之后可能导致无法在坐标轴上显示出“-”，比如如下为了在图形中显示中文添加了`matplotlib.rcParams['font.sans-serif'] = ['SimHei']`从而导致无法正常显示"-"，添加如下代码关闭默认的显示形式之后可以正常显示：
+
+```
+# matplotlib.rcParams['font.sans-serif'] = ['SimHei']
+matplotlib.rcParams['axes.unicode_minus'] = False
+```
+
+![](./pyplot/can_show_minus_sign.PNG)
 
 参考：
+
+- [Unicode minus](https://matplotlib.org/gallery/api/unicode_minus.html)
+
+## 坐标轴显示乱码(支持中文)？
+
+使用如下命令打印出matplotlib能够支持的系统字体：
+
+```
+fonts = sorted([f.name for f in matplotlib.font_manager.fontManager.ttflist])
+
+for i in fonts:
+    print(i)
+```
+
+再设定图形使用的字体：
+
+```
+plt.rcParams['font.family']=['STFangsong']
+```
+
+## 轴线移动到正中央
+
+```
+ax = plt.gca()
+
+# 将右边和顶部的轴隐藏起来
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+
+# 将底部和左边的轴移动到 0 的位置
+ax.spines['bottom'].set_position(('data',0))
+ax.spines['left'].set_position(('data',0))
+
+# 将刻度移动到对应的位置
+ax.xaxis.set_ticks_position('bottom')
+ax.yaxis.set_ticks_position('left')
+```
+
+## 参考
+
 
 - [Quick start guide](https://matplotlib.org/stable/users/explain/quick_start.html)
 - [Introduction to Figures](https://matplotlib.org/stable/users/explain/figure/figure_intro.html)
