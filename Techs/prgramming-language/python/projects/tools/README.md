@@ -1,6 +1,6 @@
 # [python-beginner-projects](https://github.com/Mrinank-Bhowmick/python-beginner-projects)
 
-一些零散的针对这些初学项目的学习笔记。
+工具类。
 
 ## Adjactive_compartive_superlative
 
@@ -35,3 +35,16 @@ Python中自带的图形库。
 
 ## Alarm Clock
 
+一个简便闹钟。
+
+## audioconverter
+
+使用`pydub`库来完成音频文件的格式转换。
+
+## AudioBook
+
+有声书，使用`PyPDF2`来读取PDF文件，然后使用`pyttsx3`来进行朗读。
+
+## AudioRecorder
+
+使用`speech_recognition`来录音。
