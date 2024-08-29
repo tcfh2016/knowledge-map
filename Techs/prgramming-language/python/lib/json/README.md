@@ -72,3 +72,7 @@ with open("sample.json", "w") as outfile:
 with open("sample.json", "w") as outfile:     
     json.dump(employee_dict, outfile, indent=2)    
 ```
+
+
+## json_normalize
+
