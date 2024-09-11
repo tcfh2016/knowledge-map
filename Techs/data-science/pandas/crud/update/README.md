@@ -1,6 +1,6 @@
 ## 类型转换
 
-pandas会根据输入的数据来确定每个列的数据类型，比如一列的数据全是int，那么该列的类型就是int，哪怕其中的一个为float，那么该列为float。
+pandas会根据输入的数据来确定每个列的数据类型，比如一列的数据全是int，那么该列的类型就是int，哪怕其中的一个为float，那么该列为float。可以通过`print(df.dtypes)`打印DataFrame各列的类型。
 
 将特定列进行类型转换：
 
@@ -8,7 +8,6 @@ pandas会根据输入的数据来确定每个列的数据类型，比如一列�
 # convert column "a" to int64 dtype and "b" to complex type
 df = df.astype({"a": int, "b": complex})
 ```
-
 
 想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基础上进行转换，使用起来不方便。
 
@@ -19,33 +18,25 @@ for col in float_df:
     print(pd.to_numeric(float_df[col]))
 ```
 
-通过`print(df.dtypes)`打印DataFrame各列的类型。
+另外可以通过自定义数据转换函数：
 
+```
+def close_convert_func(value: str) -> float:
+    if "万元" in value:
+        new_value = value.replace('万元', '0000')
+    else:
+        new_value = value.replace('元', '')
+    return np.float64(new_value)
+
+temp_df['close'] = temp_df['close'].apply(close_convert_func)
+```
 
 参考：
 
 - [Change column type in pandas](https://stackoverflow.com/questions/15891038/change-column-type-in-pandas)
 
-## 重命名
 
-1）修改行名
-
-直接赋值，如下将DataFrame的index修改为其中的某一列：
-
-```
-df.index = df['日期'] # 之前的'日期'列依然存在
-df = df.set_index('日期', drop=True) #
-```
-
-*注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建新的DataFrame。*
-*注2：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
-
-参考：
-
-- [Remove index name in pandas](https://stackoverflow.com/questions/29765548/remove-index-name-in-pandas)
-
-
-2）修改列名
+## 修改列名
 
 两种方式：直接赋值和调用 rename方法：
 
@@ -65,6 +56,115 @@ ufo = pd.read_csv(name_file, names=ufo_cols, header=0) # 不指定header，直�
 
 ## 修改值
 
+1）直接赋值
+
+修改整列直接通过赋值的方式修改（添加），将列表或数组赋值给某列时，其长度必须跟DataFrame的长度匹配：
+
+```
+df['numbers'] = 1.0
+
+val = Series([-1, -2, -3, -4], index=['b', 'a', 'c', 'd'])
+df['newdata'] = val
+```
+
+2）使用`replace()`
+
+可以使用字典来定义需要修改的映射关系，然后使用`replace()`或者`map()`：
+
+```
+df_copy['City'].replace('New York', 'NY', inplace=True)
+
+di = {0: "A", 2: "B"}
+df.replace({"col1": di})
+df['col1'].replace(di, inplace=True)
+df['col1'].map(di)
+```
+
+3）使用`apply()`：
+
+```
+def square(x):
+   return x ** 2
+
+df.col1 = df.col1.apply(square)
+```
+
+参考：
+
+- [Remap values in pandas column with a dict, preserve NaNs](https://stackoverflow.com/questions/20250771/remap-values-in-pandas-column-with-a-dict-preserve-nans)
+- [How to Replace Values on Specific Columns in Pandas](https://saturncloud.io/blog/how-to-replace-values-on-specific-columns-in-pandas/)
+
+
+## 替换/replace
+
+1）全替换、部分替换
+
+最基本的替换功能是是使用`replace`函数，该函数并非默认的inplace函数，如果要对原来的dataframe生效，那么需要传入`inplace=True`参数。注意这个时候是全字匹配。
+
+```
+# 对特别列进行操作
+df['colomn name'].replace(src, tar)
+
+# 对整个dataframe进行操作
+df.replace(src, tar)
+```
+
+如果要实现“部分文本匹配”，可以在pandas里面使用字符串的功能，需要通过添加`.str`来完成字符串函数的调用：
+
+```
+df.column_name.str.replace('[', '').replace(']', '') # 将column_name列里的'[]'删除。
+df.column_name.str.replace('[\[\]]', '') # 将column_name列里的'[]'删除，使用正则。
+
+index = index.replace(to_replace='\(万元\)', value=' ', regex=True)
+```
+
+
+*注：`Series.str.replace()`不能添加`inplace=True`。会报“replace() got an unexpected keyword argument 'inplace'”，这是因为使用的不是`pandas.DataFrame.replace()`而是`string.replace`。*
+
+
+2）自定义替换
+
+如果我现在的需求是将其中的某些项进行整体替换呢？比如对下面的DataFrame数据，我要将其中code列里面的负数项目都替换为0：
+
+```
+    code        003816.XSHE  600011.XSHG     ...       600795.XSHG  601991.XSHG
+day           
+2020-04-22      15.5246      60.4374     ...           21.2415      36.9854
+2020-04-23      15.4712      60.7252     ...           21.1363      36.8118
+2020-04-24      15.3645      60.1496     ...           21.0312      36.2909
+2020-04-27      15.4179      60.4374     ...           21.0312      36.8118
+2020-04-28      15.1511      59.4301     ...           20.8209      35.9436
+2020-04-29      16.8520      59.5740     ...           20.8209      36.1172
+2020-04-30      16.9711      60.7252     ...         -139.6440      29.5116
+2020-05-06      17.0306      60.7252     ...         -138.9422      29.5116
+2020-05-07      16.9711      62.4520     ...         -138.9422      29.3737
+2020-05-08      17.3879      62.0203     ...         -138.9422      29.6495
+```
+
+一种方法是遍历每列数据，然后对其中的每个值应用map函数进行替换：
+
+```
+def func(value):
+    if value < 0:
+        return 0
+    else:
+        return value
+
+for column in pivot.columns:
+    pivot[column] = list(map(func, pivot[column]))
+```
+
+但最简单的方案却是`pivot[pivot < 0] = 0`。
+
+参考：
+
+- [Update pandas DataFrame with .str.replace() vs .replace()](https://stackoverflow.com/questions/38117016/update-pandas-dataframe-with-str-replace-vs-replace)
+- [pandas.Series.replace](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.replace.html)
+- [pandas.Series.str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html#pandas.Series.str)
+- [How to replace negative numbers in Pandas Data Frame by zero](https://stackoverflow.com/questions/27759084/)how-to-replace-negative-numbers-in-pandas-data-frame-by-zero)
+- [How to replace a value in pandas, with NaN?](https://stackoverflow.com/questions/29247712/how-to-replace-a-value-in-pandas-with-nan)
+- [How to use the replace() method with keyword arguments to replace empty strings](https://stackoverflow.com/questions/50843263/how-to-use-the-replace-method-with-keyword-arguments-to-replace-empty-strings)
+- [How to Replace Values in Column Based on Condition in Pandas?](https://www.geeksforgeeks.org/how-to-replace-values-in-column-based-on-condition-in-pandas/)
 
 
 ## 合并操作

@@ -1,17 +1,14 @@
-
-## DataFrame的列
-
-DataFrame的 set_index方法会将其一个或多个列转换为索引，并创建一个新的 DataFrame。默认情况下那些列会从 DataFrame中移除，但也可以将其保留下来。
-
-reset_index方法的作用与 set_index相反，层次化索引被转话为具体列，新的索引默认以0~N的整数索引替代。
-
 ## 重设index
 
 ```
 df.index = my_list
+df.index = df['日期'] # 之前的'日期'列依然存在
 ```
 
 ## set_index：将特定列设为索引
+
+DataFrame的 set_index方法会将其一个或多个列转换为索引，并创建一个新的 DataFrame。默认情况下那些列会从 DataFrame中移除，但也可以将其保留下来。
+
 
 将如下数据的day作为新的index如何处理？
 
@@ -24,13 +21,25 @@ df.index = my_list
 0  601318.XSHG  2019-12-27    9.8284    2.4153
 ```
 
-直接使用`set_index`重设索引之后并不会在原来的DataFrame里面改动生效。
+直接使用`set_index`重设索引之后并不会在原来的DataFrame里面改动生效。该函数默认参数`drop=True`，如果像保留之前的列可将其设置为`False`。
 
 ```
 df.set_index('day')
 ```
 
+*注1：DataFrame的set_index函数会将一个或多个列转换为行索引，并创建新的DataFrame。*
+*注2：Index 对象是不可修改的。因此df.index[1] = 'c'会提示错误。*
+
+参考：
+
+- [Remove index name in pandas](https://stackoverflow.com/questions/29765548/remove-index-name-in-pandas)
+
+
+
 ## reset_index
+
+reset_index方法的作用与 set_index相反，层次化索引被转话为具体列，新的索引默认以0~N的整数索引替代。
+
 
 可以使用`reset_index`重设DataFrame的索引。带上`drop=True`参数就不会保留原来的索引，否则会保留：
 

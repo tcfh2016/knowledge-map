@@ -85,7 +85,7 @@ stocks_df[stocks_df['display_name'] == '洋河股份'].index.item()
 
 参考：
 
-- [](https://stackoverflow.com/questions/21441259/pandas-groupby-range-of-values)
+- [Pandas Groupby Range of Values](https://stackoverflow.com/questions/21441259/pandas-groupby-range-of-values)
 
 
 ## 遍历
@@ -103,7 +103,7 @@ for index, row in ufo.interrows():
 
 ```
 
-2.通过多列的值来进行行选取操作
+## 通过多列的值来进行行选取操作
 
 比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
 
