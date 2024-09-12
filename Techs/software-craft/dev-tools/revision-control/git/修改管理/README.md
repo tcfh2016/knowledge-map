@@ -227,3 +227,17 @@ git show SHA-1 -- path
 
 - [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 - [Linking a pull request to an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
+
+## git tag
+
+创建标签有两种形式：轻量级标签和注释标签。
+
+```
+git tag v1.4
+
+git tag -a v1.4 -m "my version 1.4"
+```
+
+参考：
+
+- [2.6 Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)

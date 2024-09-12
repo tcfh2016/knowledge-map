@@ -7,8 +7,7 @@ git clone git@XXX.com:lte/remote_repository.git
 git clone https://XXX.com/remote_repository.git
 ```
 
-无论哪种方式均需进行用户名、密码验证，你可以通过配置SSH Key来简化验证过程。当连接可用，
-但是验证失败时，会提示如下失败。此时可以通过确认用户名密码是否正确以及添加SSH Key来解决。
+无论哪种方式均需进行用户名、密码验证，你可以通过配置SSH Key来简化验证过程。当连接可用，但是验证失败时，会提示如下失败。此时可以通过确认用户名密码是否正确以及添加SSH Key来解决。
 
 ```
 Cloning into 'repository'...
