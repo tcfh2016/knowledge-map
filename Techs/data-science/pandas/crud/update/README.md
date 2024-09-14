@@ -35,6 +35,18 @@ temp_df['close'] = temp_df['close'].apply(close_convert_func)
 
 - [Change column type in pandas](https://stackoverflow.com/questions/15891038/change-column-type-in-pandas)
 
+## `inplace`
+
+```
+df[col].replace('a', 'b', inplace=True) #将过时
+
+df[col] = df[col].replace('a', 'b')
+df.replace({'col':{'a':'b'}})
+```
+
+参考：
+
+- [](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.replace.html)
 
 ## 修改列名
 
