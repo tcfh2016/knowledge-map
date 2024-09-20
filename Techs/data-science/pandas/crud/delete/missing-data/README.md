@@ -18,6 +18,13 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 - [How to Check If Any Value is NaN in a Pandas DataFrame](https://chartio.com/resources/tutorials/how-to-check-if-any-value-is-nan-in-a-pandas-dataframe/)
 
 
+## NaN 的显示
+
+使用`pd.read_csv()`读取csv时，有时候尽管某列是`object`类型，也就是有值的单元格类型为`str`，但是空的单元格类型却是`float`，在表格里面显示为`NaN`，打印出来显示为`nan`。
+
+如果用这些`NaN`值去匹配，比如`df['c'].str.find('abc') != -1`都会为`True`。如果要使用字符匹配，必须要先填充这些无效值。
+
+
 ## `np.nan`/`np.NaN`与`None`的区别
 
 首先，`np.nan`和`np.NaN`（甚至`np.NAN`，都是别名）实际上是同一个东西，那它们到底是一个什么值？打印出它的类型是`float`，但是np.nan和np.nan并不相等，所以你无法使用`==`来进行比较，`np.nan`本身使用`==`测试也是`False`。
@@ -78,3 +85,8 @@ df = df[df.line_race.notnull()]
   - 传入`inplace=True`在现有对象上进行修改。
 
 碰到一个问题：在将某一列转换为`int`类型的时候，有些是`NaN`便会失败。
+
+
+## 参考
+
+- [Working with missing data](https://pandas.pydata.org/docs/user_guide/missing_data.html)

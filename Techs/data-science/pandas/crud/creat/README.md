@@ -27,6 +27,11 @@ print(df)
 - 序列，包括元组、列表。一维的数据作为列，二维的数据行列和DataFrame对应。
 - 字典。默认以key作为列标签
 
-## 常见问题
+## 增加行列
 
+在某个DataFrame里面添加一列必须使用`[]`操作符，`此时应保证Series和DataFrame具有相同的index`
+
+```
+df['numbers'] = series
+```
 
