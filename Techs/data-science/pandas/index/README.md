@@ -96,6 +96,18 @@ df.index[df['column_name']==value].tolist()
 
 层次化索引使你可以在一个轴上拥有多个（两个以上）索引级别，让你能够以低纬度形式处理高维度数据。
 
+
+```
+#选择第一层索引为“bar”，第二层索引为“two”的这一行
+df.loc[("bar", "two")] 
+
+#选择第一层索引为“bar”，第二层索引为“two”的这一行，第“A”列的单元格
+df.loc[("bar", "two"), "A"] 
+
+
+
+```
+
 ## 日期索引
 
 ```
@@ -106,3 +118,6 @@ ts_utc = ts.tz_localize('UTC') # 标准时间
 ts_utc.tz_convert('US/Eastern') # 改变时区
 ```
 
+## 参考
+
+- [Indexing and selecting data](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-and-selecting-data)
