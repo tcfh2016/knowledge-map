@@ -22,7 +22,7 @@
 - 替换函数，如s.replace(sou, tar)。*生成新的字符串*
 - 其他函数，如s.count(c), s.join(sequence)。
 - 转换工具，如int("42"), str(42), float("1.5")。
-- endswith
+- `s.startswith()`或者`s.endswith()`
 
 ## 字符串格式化
 

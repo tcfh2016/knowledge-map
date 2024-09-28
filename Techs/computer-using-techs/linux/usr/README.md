@@ -45,3 +45,16 @@ lbc ALL=(ALL) NOPASSWD:ALL
 参考：
 
 - [Linux Show The Groups a User Is In](https://www.cyberciti.biz/faq/linux-show-groups-for-user/)
+
+## 修改文件的权限
+
+使用`chown ubuntu:ubuntu index`
+
+```
+drwxrwxr-x   2 ubuntu ubuntu  4096 Apr  8 14:16 hooks
+-rw-r-----   1 root   root   13392 Sep 28 17:15 index
+```
+
+参考：
+
+- [Chown Command in Linux (File Ownership)](https://linuxize.com/post/linux-chown-command/)
