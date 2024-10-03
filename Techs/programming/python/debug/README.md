@@ -27,6 +27,9 @@ SyntaxError: invalid syntax
 python -m py_compile script.py
 ```
 
+也可以安装`pylint`，通过`pylint script.py`来查询错误
+
+
 第二步：使用调试工具，比如PDB和logging。
 
 

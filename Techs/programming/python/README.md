@@ -9,9 +9,31 @@
 
 但是，如果你可能想要在UNIX及WINDOWS系统中都运行文件，经常采用基本的命令行方法非UNIX风格的脚本去运行程序将更简单。
 
-## 安装
 
-python distribution 和 Anaconda, Spyder。
+## 安装和`pip`工具
+
+搭建Python开发的安装方式有如下几种：
+
+1. 直接下载Python
+2. 安装集成开发环境：`PyCharm`
+3. 安装数据分析标准环境：`anaconda`
+4. 安装文学式开发工具：`Jupyter Notebook`
+5. 安装`IPython`
+
+安装好Python开发环境之后，如果要安装其他依赖的包可以使用`pip`，这是一个通用的Python包管理工具。而`pip3`只是为了区分Python 2.x和Python 3.x而做了一些区分，如果电脑上仅仅安装了Python 3.x那么`pip`和`pip3`是一样的。
+
+`pip`在安装Python的时候会自动安装，如果要升级执行下面的命令：
+
+```
+ C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
+```
+
+参考：
+
+- [安装python3后使用pip和pip3的区别是什么？](https://www.cnblogs.com/yymn/p/9353518.html)
+
+
+## 切换Python版本
 
 当前server上有`3.6.8`和`3.8.13`两个版本，执行`python3`默认使用的是`3.6.8`，那么怎么切换到默认为`3.8.13`呢？
 
@@ -43,29 +65,6 @@ pd.show_versions() #查看依赖模块的版本
 - [How to find the installed pandas version](https://stackoverflow.com/questions/20612645/how-to-find-the-installed-pandas-version)
 
 
-## `ModuleNotFoundError: No module named 'pkg_resources'`
-
-使用`Python 3.9.9`好长一段时间了，经常使用pandas来画图，但突然有一天就开始提示`ModuleNotFoundError: No module named 'pkg_resources'`的错误。
-
-## 区分操作系统
-
-有三种方式可以用来区分当前的操作系统，更推荐使用`platform.system()`因为它可以返回更加通用的名字。
-
-```
-sys.platform
-# 'win32'  # could be 'linux', 'linux2, 'darwin', 'freebsd8' etc
-
-os.name
-# 'nt'  # for Linux and Mac it prints 'posix'
-
-# platform.system()
-'Windows' # For Linux it prints 'Linux'. For Mac, it prints `'Darwin'
-```
-
-参考：
-
-- [](https://stackoverflow.com/questions/1854/how-to-identify-which-os-python-is-running-on/58071295)
-
 ## 模块安装
 
 使用matplotlib画线，本地测试无法找到该模块，那么可以使用 `pip3 install matplotlib`先安装。
@@ -87,35 +86,28 @@ os.name
 - [让 pip 走代理](https://www.logcg.com/archives/1914.html)
 
 
-## 模块版本
+## 区分操作系统
 
-查看版本信息，可以使用每个模块提供的`__version__`属性：
+有三种方式可以用来区分当前的操作系统，更推荐使用`platform.system()`因为它可以返回更加通用的名字。
 
 ```
-import pandas as pd
+sys.platform
+# 'win32'  # could be 'linux', 'linux2, 'darwin', 'freebsd8' etc
 
-pd.__version__
-pd.show_versions() #查看依赖模块的版本
+os.name
+# 'nt'  # for Linux and Mac it prints 'posix'
+
+# platform.system()
+'Windows' # For Linux it prints 'Linux'. For Mac, it prints `'Darwin'
 ```
-
-如果安装了pip，那么使用`pip list`或者`pip3 list`可以查看所有安装的模块及对应的版本。
 
 参考：
 
-- [How to find the installed pandas version](https://stackoverflow.com/questions/20612645/how-to-find-the-installed-pandas-version)
+- [How to identify which OS Python is running on](https://stackoverflow.com/questions/1854/how-to-identify-which-os-python-is-running-on/58071295)
 
-
-## 升级bip
-
-```
- C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
-```
 
 ## 技巧
 
 - 使用`os.path.dirname(os.path.realpath(__file__))`来得到脚本执行时的绝对路径。
 - 使用`sys.path.append(path)`来添加搜索路径。
 
-## 查错
-
-- 安装`pylint`，通过`pylint script.py`来查询错误

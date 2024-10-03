@@ -32,6 +32,9 @@ DataFrame每列的数据类型可以通过`print(df.dtypes)`显示出来。
 - df.describe(include=['object']) ：显示非数据列的统计信息，包括count, uniq, top, freq
 - df.sample(n) : 随机显示n行数据，默认显示1行
 
+也可以使用`to_string()`来全部输出整个DataFrame的内容。
+
+
 ## 数据类型
 
 可以通过`df.dtypes`查看各列的类型，通过`df.info()`函数可以查看更详细的内容。
@@ -62,26 +65,6 @@ None
 ```
 
 使用`df = df.convert_dtypes()`进行快速数据类型转换。
-
-
-## 显示更多列/行
-
-在打印出DataFrame时最大的显示行由`pd.options.display.max_rows`和`pd.options.display.min_rows`来控制的，前者默认为60，后者默认为10。它们之间的规则是：
-
-- 如果max_rows足以显示整个df的行数，那么显示所有的行。
-- 如果max_rows不足以显示整个df的行数，那么显示min_rows行。
-
-你可以调整这两个参数：
-
-```
-import pandas as pd
-
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
-```
-
-也可以使用`to_string()`来全部输出整个DataFrame的内容。
 
 
 ## 取消科学计数法的格式
