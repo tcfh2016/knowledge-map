@@ -1,35 +1,19 @@
-## [pandas.DataFrame.groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html)
+# [pandas.DataFrame.groupby](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html)
 
 函数`groupby`是对DataFrame进行分组，这个分组的操作通常仅仅是一系列操作中的排头阵。也就是说，我们在应用`groupby`这个函数不仅是“为了分组而分组”，而是“为了更重要的目的不得不先进行分组”。
 
-比如，下面的例子展示的是求取每组分组的均值。在这个例子里面我们分组不是目的，而求取每个分组才是目的。
-
 ```
-df = pd.DataFrame({'Animal': ['Falcon', 'Falcon',
-                              'Parrot', 'Parrot'],
-                   'Max Speed': [380., 370., 24., 26.]})
-df
-   Animal  Max Speed
-0  Falcon      380.0
-1  Falcon      370.0
-2  Parrot       24.0
-3  Parrot       26.0
-
-df.groupby(['Animal']).mean()
-        Max Speed
-Animal
-Falcon      375.0
-Parrot       25.0
+df.groupby(by=None, axis=0)
 ```
 
-参考：
+调用`groupby()`之后的返回值是`groupby`对象，不能直接打印，而是需要调用针对每个分组的计算函数，比如：
 
-- [Group By: split-apply-combine](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
+- `df.groupby(col).sum()`：每个分组的和
 
 
-## groupby 之后的二维索引怎么访问？
+## 多列分组
 
-比如下面这样的数据，我怎么能够访问到其中某个元素的值？
+如果要根据多列来分组，使用`df.groupby([col1, col2]).sum()`即可，那groupby 之后的二维索引怎么访问？
 
 ```
                No1       No2       No3       No4
@@ -52,6 +36,42 @@ groups_sum.loc[groups_sum["No1"].idxmax()]["No1"]
 # 或者直接指定也可以
 groups_sum.loc[('Q2', 'W1')]["No1"]
 ```
+
+
+## 用字典来定义分组
+
+有时候想将多个列的数据统计在一起，那么可以用字典来定义好对应关系：
+
+```
+my_dict = {
+        A : I
+        B : I
+        C : J
+}
+
+df.groupby(my_dict, axis=1).sum()
+df.T.groupby(my_dict).sum()
+```
+
+该操作
+
+## 使用聚合函数`agg`
+
+聚合函数可以一次性统计不同组的不同统计项：
+
+```
+# 进行group分类，并求和
+df.groupby(["Quarter", "Week"]).sum()
+
+# 进行group分类，并求取每列、每个group的均值和合
+df.groupby(["Quarter", "Week"]).agg(['mean', 'sum'])
+
+# 进行group分类，并求取列col1每个group的均值和合，以及列col2每个group的均值
+df.groupby(["Quarter", "Week"]).agg({col1:['mean', 'sum'], col2:['mean']})
+```
+
+
+# 转换
 
 ## 将`GroupBy`对象转换为`DataFrame`
 

@@ -1,6 +1,11 @@
+# 常用统计
 
-## valueError: could not convert string to float
-
+- 求和：`df.sum(axis=0, skipna=1)`，`df[col].sum(axis=0, skipna=1)`
+- 求均值：`df.mean(axis=0, skipna=1)`
+- 最大值：`df.max(axis=0, skipna=1)`，对应`idxmax()`返回最大值的索引
+- 最小值：`df.min(axis=0, skipna=1)`，对应`idxmin()`返回最小值的索引
+- 中位数：`df.median(axis=0, skipna=1)`
+- 众数：`df.mode(axis=0, skipna=1)`，即出现最多的数
 
 在使用`m = score['language'].iloc[0:10].mean()`求某列一些行的均值的时候，如果多个单元里面是字符串可能会提示“valueError: could not convert string to float”的错误。
 
@@ -10,85 +15,77 @@
 m = score['language'].iloc[0:10].astype(float).mean()
 ```
 
-## 统计某列的某个值有多少次
+
+注：
+
+1. 默认对“行”进行运算，即以列为单位求每列对应所有行的和。`axis=1`代表逐列优先，按行为单位求对应所有列的和。
+2. `skipna = 1`表示跳过缺失值的处理，并非将其替换为`0`来处理。
+
+
+# 其他统计
+
+## 方差、标准差
+
+方差用于衡量一组数据的离散程度，即各组数据与它们平均数的差的平方。方差越小说明数据波动越小。
+
+```
+df.var(axis=None, skipna=True)
+```
+
+*注：pandas中计算的方差为无偏样本方差（方差和/样本数-1），numpy中的为样本方差（方差和/样本数）。*
+
+标准差又称“均方差”，是方差的平方根。使得比较的量纲一致。
+
+
+## 分位数
+
+分位数也称“分位点”，以概率为依据将数据分割为几个等份，常用的有中位数（二分位）、四分位数、百分位数等。
+
+```
+df.quantile(q=0.5, axis=0)
+```
+
+
+## 某个值出现次数
 
 print(data['name'].value_counts()['sravan'])
 
 参考：
 
-- [](https://www.geeksforgeeks.org/how-to-count-occurrences-of-specific-value-in-pandas-column/)
-
-## mean(), median(), min(), max()
-
-通过`axis`参数来控制平均值操作：
-
-```
-drinks.mean(axis=0) # 求取每列的平均值，求值的方向为从上到下
-drinks.mean(axis="index")
-
-drinks.mean(axis=1) # 求取每行的平均值，求值的方向为从左至右
-drinks.mean(axis="columns")
-```
-
-可以指定对应列来求取某列的最大值:
-
-```
-print(df["YY"].max())
-```
-
-求取均值的时候会自动过滤掉`np.nan`但不会过滤掉0，如果想过滤掉0那么需要提前使用`df.replace(0, np.NaN)`将0替换为np.nan。
-
-参考：
-
-- [mean calculation in pandas excluding zeros](https://stackoverflow.com/questions/33217636/mean-calculation-in-pandas-excluding-zeros)
-
-
-## 求均值时长度超了怎么办？
-
-比如某列的长度为10，但是求均值的范围选到了15？不会计算超出的部分。
-
-
-## 统计DataFrame某列的和
-
-`dataframe.sum()`默认对“行”进行求和，即以列为单位求每列对应所有行的和，可以指定坐标轴，
-比如`dataframe.sum(axis=1)`对“列”进行求和，按行为单位求对应所有列的和。
-
-对单一列进行求和可以使用`dataframe['column'].sum()`。
-
-
-## 统计DataFrame某列相同值的个数
-
-```
-df["category"].value_counts()
-
-df = pd.DataFrame({'a':list('abssbab')})
-df.groupby('a').count()
-
-输出：
-b    3
-a    2
-s    2
-
-
-print (df['col'] == 1).sum()
-```
-
-参考：
-
+- [How to Count Occurrences of Specific Value in Pandas Column?](https://www.geeksforgeeks.org/how-to-count-occurrences-of-specific-value-in-pandas-column/)
 - [count the frequency that a value occurs in a dataframe column](https://stackoverflow.com/questions/22391433/count-the-frequency-that-a-value-occurs-in-a-dataframe-column)
 
 
-## min()/max()
+# 数据格式化
+
+## 设置小数位数
+
+使用`round()`函数来设置：
+
+```
+# 保留两位小数
+df.round(decimals=2)`
+
+# A1列保留一位小数，A2列保留两位小数
+df.round({'A1':1, 'A2':2})
+```
+
+另外可以通过自定义函数，比如`df.applymap(lambda x : '%.2f'%x)`，这种方式处理后数据类型变为`object`，后续计算需要将数据类型转换过来。
 
 
-## idxmin()/idxmax()
+## 设置百分比
 
-`idxmax()`和`idxmin`这两个函数用来返回最大值、最小值的索引，先看这两个函数的释义：
+通过自定义函数对数据进行格式处理：
 
-- [pandas.DataFrame.idxmax](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.idxmax.html)
+```
+df[col].apply(lambda x : format(x, '.2%'))
 
-> Return index of first occurrence of maximum over requested axis.
+df[col].map(lambda x : format(x, '.2%'))
+```
 
-- [pandas.DataFrame.idxmin](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.idxmin.html)
 
-> Return index of first occurrence of minimum over requested axis.
+## 设置千分位
+
+```
+df[col].apply(lambda x:format(int(x), ','))
+```
