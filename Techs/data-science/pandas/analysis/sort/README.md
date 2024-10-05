@@ -57,6 +57,16 @@ DataFrame提供了`sort_index()`和`sort_value`分别按照索引和值排序：
 df1 = frame.sort_values(axis=0, by="clumn_name",ascending=False)
 ```
 
+## `rank()`
+
+排序时如果碰到了相同的元素，那么该怎么排呢？这个时候就需要使用到`rank(method = "first", ascending=False)`：
+
+- `average`：默认值，平均排名
+- `min`：最小值排名
+- `max`：最大值排名
+- `first`：原始数据中出现的顺序来排
+- `dense`：密集排名
+
 
 ## 参考
 

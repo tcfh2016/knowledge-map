@@ -7,10 +7,20 @@
 ```
 df.drop([0,1], axis=0, inplace=True) # 删除index为0，1的行。
 df.drop('column name', axis=1) # 指定axis=1说明删除列。
+
+df.drop(['city', 'state']) # 删除'city'和'state'两行。
 df.drop(['city', 'state'], axis=1) # 删除'city'和'state'两列。
+
+df.drop(index="area", inplace=True) # 这种方式不需要指定 axis参数。
+df.drop(columns="area", inplace=True) # 这种方式不需要指定 axis参数。
 ```
 
-删除多个行或者列时只需要将所有行/列以列表的形式传入，比如`df.drop(df[<some boolean condition>].index)`。更高效的方式是`df = df[df.score > 50]`。
+删除多个行或者列时只需要将所有行/列以列表的形式传入，比如`df.drop(df[<some boolean condition>].index)`。其中的过程分两步：
+
+- Step 1 过滤出对应的行: df_age_negative = df[ df['Age'] < 0 ]
+- Step 2 调用drop进行删除: df = df.drop(df_age_negative.index, axis=0)
+
+更高效的方式是`df = df[df.score > 50]`。
 
 另外还有一种方法，是使用`del`。删除列时必须通过索引的方式指定，不能通过属性的方式来指定。
 
@@ -28,46 +38,18 @@ df = df[(df > 0).all(axis=1)]
 参考：
 
 - [How to delete rows from a pandas DataFrame based on a conditional expression](https://stackoverflow.com/questions/13851535/how-to-delete-rows-from-a-pandas-dataframe-based-on-a-conditional-expression)
-
-
-## pandas.read_csv 删除行或列
-
-从DataFrame删除行时需要使用drop函数，删除对应行需要指定index并且axis设定为“0”，删除列时需要指定列名且axis设定为“1”。
-
-```
-data = data.drop([0,1,2], axis=0)
-
-data = data.drop("Area", axis=1)
-data = data.drop(columns="area") # 这种方式不需要指定 axis参数。
-```
-
-如果需要删除满足某些条件的行，分两步走：
-
-- Step 1 过滤出对应的行: df_age_negative = df[ df['Age'] < 0 ]
-- Step 2 调用drop进行删除: df = df.drop(df_age_negative.index, axis=0)
-
-参考：
-
-[How to drop a list of rows from Pandas dataframe?](https://stackoverflow.com/questions/14661701/how-to-drop-a-list-of-rows-from-pandas-dataframe)
-[The Pandas DataFrame – loading, editing, and viewing data in Python](https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/)
+- [How to drop a list of rows from Pandas dataframe?](https://stackoverflow.com/questions/14661701/how-to-drop-a-list-of-rows-from-pandas-dataframe)
+- [The Pandas DataFrame – loading, editing, and viewing data in Python](https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/)
 
 
 # 缺失值
 
-## NaN (Not a Number) 处理
+缺失值指的是由于某种原因导致数据为空，常见的处理方式有四种：不处理、删除、填充或替换、插值。
 
-pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，用来表示该单元的值是缺失的。对于缺失值的处理包括如下几类：
-
-- 使用`obj.isnull()`，`pd.isnull(cell)`, `obj.notnull()`, `pd.notnull(cell)` 来检查NA。
 - 使用 fillna(), replace() 和 interpolate() 来替换 DataFrame 里面的所有 NA。
 - 使用 dropna() 将包含有 NA的行和列删除。
 
-对于Series/DataFrame对象来说，`obj.isnull()`返回一个boolean类型的Series对象，如果我们仅想检查该Series是否包含有缺失值直接使用`obj.isnull().values.any()`即可。使用`obj.isnull().sum()`可以针对按照Series维度进行缺失数据的统计，而后面再加个.sum()即`obj.isnull().sum().sum()`可以统计出整个DataFrame的缺失值个数。
-
-如果要测试单个值，那么可以使用`pd.isnull()`或者`pd.notnull()`。
-
-*注意：NaN参与的所有计算都是NaN。*
-*使用`mys.isnull().all()`来判断一列是否全是NaN。*
+pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，用来表示该单元的值是缺失的。
 
 参考：
 
@@ -79,6 +61,19 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 有时候通过`df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`的方式不一定找得到匹配的行，可能原因：
 
 原始数据里面有无效值`NaN`，然后使用`df['code'].str.find('500') != -1]`也会返回`True`因为对于`NaN`来说也是成立的：调用find()返回NaN，NaN != -1成立。
+
+
+## 查看缺失值
+
+可以使用`df.info()`打印出每列的非空值数量，对比是否相等。另外可以使用`obj.isnull()`，`pd.isnull(cell)`, `obj.notnull()`, `pd.notnull(cell)` 来检查NA。
+
+- 测试单个值，使用`pd.isnull()`或者`pd.notnull()`。
+- 对于Series/DataFrame对象来说，`obj.isnull()`/`obj.notnull()`返回一个boolean类型的Series对象，
+
+如果我们仅想检查该Series是否包含有缺失值直接使用`obj.isnull().values.any()`即可。使用`obj.isnull().sum()`可以针对按照Series维度进行缺失数据的统计，而后面再加个.sum()即`obj.isnull().sum().sum()`可以统计出整个DataFrame的缺失值个数。
+
+*注意：NaN参与的所有计算都是NaN。*
+*使用`mys.isnull().all()`来判断一列是否全是NaN。*
 
 
 ## NaN 的显示
@@ -108,7 +103,7 @@ pandas中缺失的数据项会被填写为`NaN`，它仅仅是一个占位符，
 - [Difference between np.nan and np.NaN](https://stackoverflow.com/questions/53436339/difference-between-np-nan-and-np-nan)
 
 
-## 滤除缺失数据：dropna(criteria)
+## 删除缺失数据：dropna(criteria)
 
 对于一个 Series, dropna返回一个仅含非空数据和索引值的 Series:
 
@@ -122,9 +117,10 @@ print(s.dropna(axis=1)) # 删除含有NaN的全部列
 
 然而，对于DataFrame调用 dropna的处理更复杂一些，因为它会默认丢弃所有包含缺失值的行。此时有两种调整方法：
 
-  - 传入`how = all`，丢弃全为NA的那些行；
-  - 传入`thresh=3`来设定丢弃的标准，个数是有效值的个数，有效值不达标的丢弃；
-  - 传入参数`axis=1`来指示对于列的操作。
+- `df.dropna(inplace=True)`删除所有包含缺失值的行
+- 传入`how = all`，丢弃全为NA的那些行；
+- 传入`thresh=3`来设定丢弃的标准，个数是有效值的个数，有效值不达标的丢弃；
+- 传入参数`axis=1`来指示对于列的操作。
 
 
 ## 仅仅删除某列值为空的数据
@@ -143,11 +139,11 @@ df = df[df.line_race.notnull()]
 
 在大多数情况下，fillna方法是填充缺失数据的主要函数。
 
-  - df.fillna(0)将所有NaN更改为0。
-  - df.fillna({1:0.5, 2:-1})将对应列的NaN填充为对应的值，用`axis=1`来指示不同的轴。
-  - 传入`inplace=True`在现有对象上进行修改。
-
-碰到一个问题：在将某一列转换为`int`类型的时候，有些是`NaN`便会失败。
+- df.fillna(0)将所有NaN更改为0。
+- df.fillna({1:0.5, 2:-1})将对应列的NaN填充为对应的值，用`axis=1`来指示不同的轴。
+- 传入`inplace=True`在现有对象上进行修改。
+- `df[col].fillna(method='ffill')`，用上一个有效值填充缺失值
+- `df[col].fillna(method='bfill')`，用下一个有效值填充缺失值
 
 
 ## 参考
