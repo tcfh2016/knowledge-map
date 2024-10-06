@@ -124,9 +124,12 @@ ValueError: Unable to parse string " " at position 0
 
 - [pandas.to_numeric - find out which string it was unable to parse](https://stackoverflow.com/questions/40790031/pandas-to-numeric-find-out-which-string-it-was-unable-to-parse)
 
+## read_table
+
+read_table()与read_csv的区别在于后者默认读取以‘,’作为分隔符的文件，前者需要显示指定分隔符。
+
 
 # 写CSV
-
 
 ## 处理csv
 
@@ -135,14 +138,8 @@ ValueError: Unable to parse string " " at position 0
 使用`header`来指定列标签。
 
 ```
-import pandas as pd
+df.to_csv(path_or_buf=None, sep=',', columns=None, header=True, index=True)
 ```
-
-
-## read_table
-
-read_table()与read_csv的区别在于后者默认读取以‘,’作为分隔符的文件，前者需要显示指定分隔符。
-
 
 ## to_csv()时中文乱码问题
 

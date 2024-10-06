@@ -112,7 +112,26 @@ df.col1 = df.col1.apply(square)
 - [How to Replace Values on Specific Columns in Pandas](https://saturncloud.io/blog/how-to-replace-values-on-specific-columns-in-pandas/)
 
 
-# 合并
+# 组合
+
+## 合并：`df.merge()`
+
+类似数据库中的`join`操作，是将两个df在“行的方向”上进行合并，合并的时候要指定相同的参考索引。
+
+```
+df.merge(right, on=None, how='inner', left_index=False, right_index=False)
+```
+
+- `on=[col]`：指定合并时参考列
+- `how=left`：左连接，默认并集
+- `left_index=True`：让df保持所有行列数据
+
+
+## 连接：`pd.concat`
+
+```
+pandas.concat(objs, axis=0, join='outer', ignore_index=False)
+```
 
 使用`pd.concat()`函数来完成多个DataFrame的连接操作，主要的参数为`axis`, `join`和`ignore_index`：
 
@@ -125,29 +144,34 @@ df.col1 = df.col1.apply(square)
 
 理解清楚两者之间的差别之后，就能够理解`join`参数通常是在`axis=0`既以X轴进行纵向连接的时候使用，横向连接因为轴是纵轴，通常是相等的，所以不需要。
 
-## 纵向连接
+### 纵向连接
+
+比如我有下面三个DataFrame数据，怎么把它们在列的方向上进行连接：
 
 ```
-pd.concat([df3, df4], axis=0, join='inner', ignore_index=True)
+    a   b   c
+0  91  45  18
+1  67  73   4
+    a   b   c
+0  56  70  37
+1  92  34  68
+    a   b   c
+0  33  91   7
+1  40  38  37
 ```
 
-比如我有下面三个DataFrame数据，怎么把它们合并在一起：
+执行`pd.concat([df1, df2, df3])`之后的结果为（如果不需要保留之前的index，只需要设置`ignore_index=True`即可）：
 
 ```
-# 2010年
-total_operating_revenue  total_operating_cost  total_profit  np_parent_company_owners
-0              444756672.0           216138608.0   217983440.0               163337936.0
-
-# 2011年
-   total_operating_revenue  total_operating_cost  total_profit  np_parent_company_owners
-0              504532160.0           223844592.0   297411680.0               222218576.0
-
-# 2012年
-   total_operating_revenue  total_operating_cost  total_profit  np_parent_company_owners
-0              586157056.0           286812384.0   341199296.0               256545872.0
+a	b	c
+0	91	45	18
+1	67	73	4
+0	56	70	37
+1	92	34	68
+0	33	91	7
+1	40	38	37
 ```
 
-上面这种方式的“合并”实际上是需要在列的方向上进行连接，可以使用`concat()`函数。由于每个DataFrame的行标签都是“0”，所以需要在连接之前或者连接之后进行更改。
 
 ## 横向连接
 
@@ -156,13 +180,6 @@ total_operating_revenue  total_operating_cost  total_profit  np_parent_company_o
 ```
 pd.concat([df1, df2], axis=1)
 ```
-
-
-## pd.merge()，类似数据库中的`join`操作
-
-怎样在行方向上进行合并：
-
-使用`pd.merge(df1, df2, on=['column'])`。
 
 
 # 转换
@@ -226,3 +243,21 @@ df = df.join(df['地址'].str.split(' ', expand = Ture))
 - `df.stack(level=-1, dropna=True)`：将原来的列索引转换为内层的行索引
 - `df.unstack(level=-1, fill_value=None)`：stack的逆操作
 - `df.pivot(index=None, columns=None, values=None)`：指定行、列、和值
+
+
+## DataFrame转换为字典
+
+```
+DataFrame.to_dict(orient='dict', *, into=<class 'dict'>, index=True)
+```
+
+`orient`常用的选项：
+
+- `dict`默认项，转换为` {column -> {index -> value}}`
+- `list`，转换为` {column -> [values]}`
+- `records`，转换为`[{column -> value}, … , {column -> value}]`
+
+
+参考：
+
+- [pandas.DataFrame.to_dict](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_dict.html)

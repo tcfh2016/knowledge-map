@@ -55,3 +55,15 @@
 在使用`df.to_excel("test.xls")`的时候提示`No module named 'xlwt'`，这是因为在保存xls格式文件的时候需要`xlwt`模块，安装这个模块之后会提示：
 
 > FutureWarning: As the xlwt package is no longer maintained, the xlwt engine will be removed in a future version of pandas. This is the only engine in pandas that supports writing in the xls format. Install openpyxl and write to an xlsx file instead. You can set the option io.excel.xls.writer to 'xlwt' to silence this warning. While this option is deprecated and will also raise a warning, it can be globally set and the warning suppressed.
+
+# 导出Excel
+
+使用`df.to_excel(file_name, sheet_name='name')`，将df到处到excel中的'name'sheet，默认为`Sheet1`
+
+如果要到处到多个sheet，那么需要首先使用`pd.ExcelWriter`打开一个Excel文件再操作：
+
+```
+work = pd.ExcelWriter('out.excel')
+df1.to_excel(work, sheet_name='df1')
+df2.to_excel(work, sheet_name='df2')
+```
