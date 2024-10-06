@@ -1,68 +1,12 @@
-## 类型转换
+# 修改
 
-pandas会根据输入的数据来确定每个列的数据类型，比如一列的数据全是int，那么该列的类型就是int，哪怕其中的一个为float，那么该列为float。可以通过`print(df.dtypes)`打印DataFrame各列的类型。
-
-将特定列进行类型转换：
-
-```
-# convert column "a" to int64 dtype and "b" to complex type
-df = df.astype({"a": int, "b": complex})
-```
-
-想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基础上进行转换，使用起来不方便。
-
-*注：调用`to_numeric()`时根据原有数据决定转换为`int64`还是`float64`。*
-
-```
-for col in float_df:
-    print(pd.to_numeric(float_df[col]))
-```
-
-另外可以通过自定义数据转换函数：
-
-```
-def close_convert_func(value: str) -> float:
-    if "万元" in value:
-        new_value = value.replace('万元', '0000')
-    else:
-        new_value = value.replace('元', '')
-    return np.float64(new_value)
-
-temp_df['close'] = temp_df['close'].apply(close_convert_func)
-```
-
-参考：
-
-- [Change column type in pandas](https://stackoverflow.com/questions/15891038/change-column-type-in-pandas)
-
-## `inplace`
-
-```
-df[col].replace('a', 'b', inplace=True) #将过时
-
-df[col] = df[col].replace('a', 'b')
-df.replace({'col':{'a':'b'}})
-```
-
-参考：
-
-- [](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.replace.html)
 
 ## 修改列名
-
-两种方式：直接赋值和调用 rename方法：
 
 ```
 df.columns = ['price'] # 用等长的列表来覆盖之前的列名
 df.rename(columns=lambda x:x.replace('$',''), inplace=True)
 df.rename(columns={'a':'b'}, inplace=True) # 将'a'重命名为'b'，可以支持多列的重命名。
-```
-
-另外在read_csv()的时候可以修改读取数据的列名：
-
-```
-ufo = pd.read_csv(name_file, names=ufo_cols, header=0) # 不指定header，直接使用自
-定义ufo_cols作为列名。
 ```
 
 
@@ -79,33 +23,6 @@ val = Series([-1, -2, -3, -4], index=['b', 'a', 'c', 'd'])
 df['newdata'] = val
 ```
 
-2）使用`replace()`
-
-可以使用字典来定义需要修改的映射关系，然后使用`replace()`或者`map()`：
-
-```
-df_copy['City'].replace('New York', 'NY', inplace=True)
-
-di = {0: "A", 2: "B"}
-df.replace({"col1": di})
-df['col1'].replace(di, inplace=True)
-df['col1'].map(di)
-```
-
-3）使用`apply()`：
-
-```
-def square(x):
-   return x ** 2
-
-df.col1 = df.col1.apply(square)
-```
-
-参考：
-
-- [Remap values in pandas column with a dict, preserve NaNs](https://stackoverflow.com/questions/20250771/remap-values-in-pandas-column-with-a-dict-preserve-nans)
-- [How to Replace Values on Specific Columns in Pandas](https://saturncloud.io/blog/how-to-replace-values-on-specific-columns-in-pandas/)
-
 
 ## 替换/replace
 
@@ -119,6 +36,12 @@ df['colomn name'].replace(src, tar)
 
 # 对整个dataframe进行操作
 df.replace(src, tar)
+
+# 使用字典来定义需要修改的映射关系，然后使用`replace()`或者`map()`：
+di = {0: "A", 2: "B"}
+df.replace({"col1": di})
+df['col1'].replace(di, inplace=True)
+df['col1'].map(di)
 ```
 
 如果要实现“部分文本匹配”，可以在pandas里面使用字符串的功能，需要通过添加`.str`来完成字符串函数的调用：
@@ -145,12 +68,6 @@ day
 2020-04-23      15.4712      60.7252     ...           21.1363      36.8118
 2020-04-24      15.3645      60.1496     ...           21.0312      36.2909
 2020-04-27      15.4179      60.4374     ...           21.0312      36.8118
-2020-04-28      15.1511      59.4301     ...           20.8209      35.9436
-2020-04-29      16.8520      59.5740     ...           20.8209      36.1172
-2020-04-30      16.9711      60.7252     ...         -139.6440      29.5116
-2020-05-06      17.0306      60.7252     ...         -138.9422      29.5116
-2020-05-07      16.9711      62.4520     ...         -138.9422      29.3737
-2020-05-08      17.3879      62.0203     ...         -138.9422      29.6495
 ```
 
 一种方法是遍历每列数据，然后对其中的每个值应用map函数进行替换：
@@ -179,7 +96,23 @@ for column in pivot.columns:
 - [How to Replace Values in Column Based on Condition in Pandas?](https://www.geeksforgeeks.org/how-to-replace-values-in-column-based-on-condition-in-pandas/)
 
 
-## 合并操作
+
+## 使用`apply()`：
+
+```
+def square(x):
+   return x ** 2
+
+df.col1 = df.col1.apply(square)
+```
+
+参考：
+
+- [Remap values in pandas column with a dict, preserve NaNs](https://stackoverflow.com/questions/20250771/remap-values-in-pandas-column-with-a-dict-preserve-nans)
+- [How to Replace Values on Specific Columns in Pandas](https://saturncloud.io/blog/how-to-replace-values-on-specific-columns-in-pandas/)
+
+
+# 合并
 
 使用`pd.concat()`函数来完成多个DataFrame的连接操作，主要的参数为`axis`, `join`和`ignore_index`：
 
@@ -232,14 +165,64 @@ pd.concat([df1, df2], axis=1)
 使用`pd.merge(df1, df2, on=['column'])`。
 
 
-## 怎样往已有DataFrame里面添加一行？
+# 转换
+
+## 类型转换
+
+pandas会根据输入的数据来确定每个列的数据类型，比如一列的数据全是int，那么该列的类型就是int，哪怕其中的一个为float，那么该列为float。可以通过`print(df.dtypes)`打印DataFrame各列的类型。
+
+将特定列进行类型转换：
 
 ```
-df.loc[len(df.index)] = ['Amy', 89, 93] 
-
-# 先构造Series
-s = pd.Series(['new2', 2, 2], index=df.columns)
-df_new = df.append(s, ignore_index=True)
+# convert column "a" to int64 dtype and "b" to complex type
+df = df.astype({"a": int, "b": complex})
 ```
 
-- [How to add one row in an existing Pandas DataFrame?](https://www.geeksforgeeks.org/how-to-add-one-row-in-an-existing-pandas-dataframe/)
+想将整个 DataFrame的值转换为float类型进行计算，尝试`pd.to_numeric(m)`发现只能够转换单维的数据。如果要转换所有列，那么需要使用循环，然而这种方式会返回新的对象，不是在原对象基础上进行转换，使用起来不方便。
+
+*注：调用`to_numeric()`时根据原有数据决定转换为`int64`还是`float64`。*
+
+```
+for col in float_df:
+    print(pd.to_numeric(float_df[col]))
+```
+
+另外可以通过自定义数据转换函数：
+
+```
+def close_convert_func(value: str) -> float:
+    if "万元" in value:
+        new_value = value.replace('万元', '0000')
+    else:
+        new_value = value.replace('元', '')
+    return np.float64(new_value)
+
+temp_df['close'] = temp_df['close'].apply(close_convert_func)
+```
+
+参考：
+
+- [Change column type in pandas](https://stackoverflow.com/questions/15891038/change-column-type-in-pandas)
+
+
+## 一列转换为多列：`split()`和`join()`
+
+```
+# expand参数代表分割后是否转换为DataFrame，默认False
+series = df['地址'].str.split(' ', expand = Ture)
+df['省'] = series[0]
+df['市'] = series[1]
+df['区'] = series[2]
+
+# 与join()结合
+df = df.join(df['地址'].str.split(' ', expand = Ture))
+```
+
+
+## 行列转换
+
+用pandas处理数据时，经常需要对行列进行转换或重拍，主要使用stack, unstack和pivot方法：
+
+- `df.stack(level=-1, dropna=True)`：将原来的列索引转换为内层的行索引
+- `df.unstack(level=-1, fill_value=None)`：stack的逆操作
+- `df.pivot(index=None, columns=None, values=None)`：指定行、列、和值
