@@ -1,4 +1,4 @@
-## matplotlib.pyplot
+# matplotlib.pyplot
 
 `matplotlib.pyplot`提供了一些列类似于MATLAB的函数集合。常见设置：
 
@@ -18,7 +18,8 @@ plt.show()
 
 - [Pyplot tutorial](https://matplotlib.org/stable/tutorials/pyplot.html)
 
-## matplotlib.pyplot.plot
+
+## `pyplot.plot()`
 
 该函数的原型为：
 
@@ -40,6 +41,11 @@ ax2 = ax1.twinx()
 ax1.plot(x, y1, 'g-')
 ax2.plot(x, y2, 'b-')
 ```
+
+
+## 线条样式
+
+通过`plt.plot(x, y, color='r', linestyle='--')`设置线条的样式和颜色。
 
 颜色：
 
@@ -84,13 +90,46 @@ ax2.plot(x, y2, 'b-')
 |||Vline marker|
 
 
+通过给定参数的方式：`plot(x, y, linewidth=1.5)`，或者先返回一个plot对象`line = plot(x, y)`，再给该对象设置`line.set_linewidth(1.5)`。
+
+
 参考：
 
 - [matplotlib.pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
 - [Plot multiple line graphs from a dataframe using Matplotlib](https://stackoverflow.com/questions/70995638/plot-multiple-line-graphs-from-a-dataframe-using-matplotlib)
 - [Adding a y-axis label to secondary y-axis in matplotlib](https://stackoverflow.com/questions/14762181/adding-a-y-axis-label-to-secondary-y-axis-in-matplotlib)
 
-## matplotlib.pyplot.ylim
+
+## 标记样式
+
+“标记”就是线条上面的数据点，可以通过`plt.plot(x, y, marker='r', mfc='b')`设置线条的样式和颜色。标记形状：
+
+- `.`：点标记
+- `,`：像素标记
+- `o`：实心圆标记
+- `v`：倒山角标记
+...
+
+
+# 常规设置
+
+## 设置画布
+
+```
+matplotlib.pyplot.figure(num=None, figsize=None, dpi=None, facecolor=None, edgecolor=None, frameon=True)
+```
+
+- `num`：图形编号或名称
+- `figsize`：设置画布宽高，尺寸单位为“英寸”
+- `dpi`：绘图对象的分辨率，默认为80
+- `facecolor`：背景颜色
+- `edgecolor`：边框颜色
+- `frameon`：是否显示边框
+
+
+## 设置坐标轴
+
+matplotlib.pyplot.ylim
 
 设置y坐标轴的极值。在2.x版本和3.x版本在参数名称上不同之处，比如2.x版本：
 
@@ -109,6 +148,7 @@ ylim(bottom, top)     # set the ylim to bottom, top
 参考:
 
 - [matplotlib.pyplot.ylim - 2.1.0](https://matplotlib.org/2.1.0/api/_as_gen/matplotlib.pyplot.ylim.html)
+
 
 ## matplotlib.pyplot.gca
 
@@ -147,15 +187,32 @@ plt.grid(True) # 添加网格
 plt.axis('tight') # 调整坐标宽度
 ```
 
-## 设置线形
 
-通过给定参数的方式：`plot(x, y, linewidth=1.5)`，或者先返回一个plot对象`line = plot(x, y)`，再给该对象设置`line.set_linewidth(1.5)`。
+# 设置`RcParams`
 
-## 颜色和背景色
+平常对于`RcParams`的设置是通过`plt.rcParams['font.sans-serif'] = ['SimHei']`这种快捷的方式来设置的。
 
-颜色通过`color`来设置，可以设置HTML颜色的名字或者十六进制字符串，也可以传入归一化到[0, 1]的RGB元组。
+```
+import matplotlib.pyplot as plt
 
-背景色通过`matplotlib.pyplot.axes()`或者`axisbg`参数来设置。
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False`
+```
+
+更完整的方式是：
+
+```
+import matplotlib as mpl
+
+mpl.rcParams['font.sans-serif'] = ['SimHei']
+mpl.rcParams['axes.unicode_minus'] = False`
+```
+
+参考：
+
+- [matplotlib.RcParams](https://matplotlib.org/stable/api/matplotlib_configuration_api.html#matplotlib.RcParams)
+- [Customizing Matplotlib with style sheets and rcParams](https://matplotlib.org/stable/users/explain/customizing.html)
+
 
 ## 曲线间填充
 

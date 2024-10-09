@@ -32,6 +32,7 @@ plt.plot([1, 2, 3, 4], [0, 0.5, 1, 0.2])
 - [The explicit and the implicit interfaces](https://matplotlib.org/stable/users/explain/quick_start.html#the-explicit-and-the-implicit-interfaces)
 - [Matplotlib Application Interfaces (APIs)](https://matplotlib.org/stable/users/explain/figure/api_interfaces.html#api-interfaces)
 
+
 ## `Figure`
 
 这是一个`Figure`的示意图，包括了多种绘图元素：
@@ -48,6 +49,7 @@ fig, ax = plt.subplots()       # a figure with a single Axes
 fig, axs = plt.subplots(2, 2)  # a figure with a 2x2 grid of Axes  
 ```
 
+
 ## `plt.Figure`和`matplotlib.Figure`的区别
 
 这里没有`plt.Figure`这个类型，只是`plt.figure()`这个接口。
@@ -61,6 +63,7 @@ fig, axs = plt.subplots(2, 2)  # a figure with a 2x2 grid of Axes
 参考：
 
 - [Embedding in Tk](https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.html#embedding-in-tk)
+
 
 ## `Axes`和`Axis`
 
@@ -77,6 +80,7 @@ matplotlib.rcParams['axes.unicode_minus']=False
 l = [-1, 1, -10, 10]
 plt.axis(l)
 ```
+
 
 ## `Axess`标签
 
@@ -119,22 +123,9 @@ plt.yticks([-1, 0, +1],
 这里标题中的`$..`是利用`matplotlib`对`LaTex`表达式的支持，可以在Python格式化字符中加入了数学符号。
 
 
-## 坐标轴标签上显示负号(minus sign)
+## 显示中文和负号(minus sign)
 
-matplotlib默认以Unicode的形式来展示“-”，但是当你将有些图示的语系变更之后可能导致无法在坐标轴上显示出“-”，比如如下为了在图形中显示中文添加了`matplotlib.rcParams['font.sans-serif'] = ['SimHei']`从而导致无法正常显示"-"，添加如下代码关闭默认的显示形式之后可以正常显示：
-
-```
-# matplotlib.rcParams['font.sans-serif'] = ['SimHei']
-matplotlib.rcParams['axes.unicode_minus'] = False
-```
-
-![](./pyplot/can_show_minus_sign.PNG)
-
-参考：
-
-- [Unicode minus](https://matplotlib.org/gallery/api/unicode_minus.html)
-
-## 坐标轴显示乱码(支持中文)？
+1）中文显示
 
 使用如下命令打印出matplotlib能够支持的系统字体：
 
@@ -148,8 +139,24 @@ for i in fonts:
 再设定图形使用的字体：
 
 ```
-plt.rcParams['font.family']=['STFangsong']
+matplotlib.rcParams['font.sans-serif'] = ['SimHei']
+matplotlib.rcParams['font.family']=['STFangsong']
 ```
+
+2）显示负号
+
+matplotlib默认以Unicode的形式来展示“-”，但是当你将有些图示的语系变更之后可能导致无法在坐标轴上显示出“-”，比如如下为了在图形中显示中文添加了`matplotlib.rcParams['font.sans-serif'] = ['SimHei']`从而导致无法正常显示"-"，添加如下代码关闭默认的显示形式之后可以正常显示：
+
+```
+matplotlib.rcParams['axes.unicode_minus'] = False
+```
+
+![](./pyplot/can_show_minus_sign.PNG)
+
+参考：
+
+- [Unicode minus](https://matplotlib.org/gallery/api/unicode_minus.html)
+
 
 ## 轴线移动到正中央
 
