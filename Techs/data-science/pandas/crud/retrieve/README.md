@@ -1,11 +1,3 @@
-# 需要特别留意
-
-## 为什么一定要提前处理好`NaN`
-
-有时候通过`df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`的方式不一定找得到匹配的行，可能原因：
-
-原始数据里面有无效值`NaN`，然后使用`df['code'].str.find('500') != -1]`也会返回`True`因为对于`NaN`来说也是成立的：调用find()返回NaN，NaN != -1成立。
-
 
 # 遍历
 
@@ -33,7 +25,15 @@ for i in range(len(df)) :
 - [How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)
 
 
-# 选择
+# 选取
+
+在Dataframe里面选取数据时，使用`loc`和`iloc`属性：
+
+- `df.loc[]`，以行列标签作为参数，当只有一个参数时，默认选取对应行。
+- `df.iloc[]`，以行列位置索引作为参数，当只有一个参数时，默认选取对应行。
+- `df[col]`，默认列优先
+
+*注：特别理解一下“运用loc(), iloc()只有一个参数时行优先”，就能够明白为什么多行的选择需要通过`df.loc[[a, b, c]]`这种嵌套列表的形式了。*
 
 ## 选取列
 
@@ -228,7 +228,7 @@ sales_data.reset_index(drop = True)
 
 使用位置索引的时候比较少，因为如果要使用位置索引那么你还得一个一个去数，这在数据量大的时候是很难办的。
 
-*注1：有些版本，比如pandas 1.3.1 里面，使用df.iloc[x][label]来赋值就不生效。*
+*注1：有些版本，比如pandas 1.3.1 里面，使用df.iloc[x][label]来赋值不生效。*
 *注2：`at`方法赋值的时候会进行隐式类型转换，比如原来的列是`int`，赋值的是`float`，会执行`float -> int`转换。*
 *注3：为了方便起见，在使用`loc`的时候采用`[]`的写作方法，使用`iloc`的时候采用`[][]`数组形式的方法。*
 
