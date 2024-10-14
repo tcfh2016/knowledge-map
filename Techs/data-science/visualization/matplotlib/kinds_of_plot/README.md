@@ -2,7 +2,7 @@
 
 调用方式上的区别：
 
-- `ax.plot()`：属于显示绘图的接口，需要首先用其他接口创建`Figure`和`Axes`，再在`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
+- `ax.plot()`：属于显示绘图的接口，需要首先用其他接口创建`Figure`和`Axes`，再用`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
 - `plt.plot()`：使用`matplotlib.pyplot`会隐式的创建`Figure`和`Axes`，更方便一点。推荐演示的时候使用。
 
 **特别注意：在GUI中必须直接使用`Matplotlib`的API，而非使用`pylab/pyplot`相关的接口**
@@ -11,6 +11,7 @@
 
 - [The explicit and the implicit interfaces](https://matplotlib.org/stable/users/explain/quick_start.html#the-explicit-and-the-implicit-interfaces)
 - [Embedding Matplotlib in graphical user interfaces](https://matplotlib.org/stable/gallery/user_interfaces/index.html#user-interfaces)
+
 
 ## 柱状图 / 直方图
 

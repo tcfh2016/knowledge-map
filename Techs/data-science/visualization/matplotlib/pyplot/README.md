@@ -102,6 +102,14 @@ matplotlib.pyplot.grid(visible=None, which='major', axis='both', **kwargs)
 - [matplotlib.pyplot.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.grid.html)
 
 
+## 设置图表与画布边缘距离
+
+绘制图表可能因为x轴、y轴标题与画布边缘距离太近显示不全，可以通过如下函数来调整：
+
+```
+subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=None)
+```
+
 # 使用`pyplot.plot()`
 
 该函数的原型为：
