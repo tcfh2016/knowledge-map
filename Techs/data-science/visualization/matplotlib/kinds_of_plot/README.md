@@ -13,7 +13,39 @@
 - [Embedding Matplotlib in graphical user interfaces](https://matplotlib.org/stable/gallery/user_interfaces/index.html#user-interfaces)
 
 
-## 柱状图 / 直方图
+## 折线图
+
+折线图可以显示随时间变化的数据，是最常见的图形：
+
+```
+matplotlib.pyplot.plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+
+# 方式一
+plot(x1, y1, 'bo')
+plot(x2, y2, 'go')
+
+# 方式二
+plot(x1, y1, 'g^', x2, y2, 'g-')
+```
+
+参考：
+
+- [matplotlib.pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
+
+
+## 柱状图
+
+又称长条图，柱形图，是一种以长方形的长度为变量的统计图表。
+
+
+```
+matplotlib.pyplot.bar(x, height, width=0.8)
+```
+
+在多柱形图的时候，如果有n个柱子，那么每个柱子的宽度要小于`1/n`，否则会出现重叠。
+
+
+## 直方图
 
 直方图通常被用于可视化数据的分布，谈论直方图的时候会涉及一些术语，比如`bin`代表一定间隔下数据点频率的垂直矩形，`bin`以固定的间隔创建。
 
