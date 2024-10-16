@@ -81,7 +81,7 @@ if not 'f' in D:
 for key in d:
   pass
 
-for value in d:
+for value in d.values():
   pass
 
 for key,value in d.items():
