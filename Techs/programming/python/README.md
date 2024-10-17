@@ -28,9 +28,16 @@
  C:\Users\user\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip
 ```
 
+为不同Python版本安装package执行：
+
+```
+C:\Users\lianbche\AppData\Local\Programs\Python\Python312\python.exe -m pip --proxy ip:port install xlrd
+```
+
 参考：
 
 - [安装python3后使用pip和pip3的区别是什么？](https://www.cnblogs.com/yymn/p/9353518.html)
+- [Install a module using pip for specific python version](https://stackoverflow.com/questions/10919569/install-a-module-using-pip-for-specific-python-version)
 
 
 ## 切换Python版本

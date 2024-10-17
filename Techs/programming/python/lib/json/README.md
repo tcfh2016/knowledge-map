@@ -7,6 +7,12 @@ JSON的格式简单，是以“key-value”形式的对象来存储数据，这�
 - 嵌套对象，也就是一个`value`包含有多个对象。
 - 对象数组，将多个对象存放在`[]`里面，通常作为某个`key`对应的`value`。
 
+常用函数：
+
+- json.load(json_file)
+- json.loads(json_string)
+
+
 参考：
 
 - [How to Best Work with JSON in Python](https://towardsdatascience.com/how-to-best-work-with-json-in-python-2c8989ff0390)
@@ -46,6 +52,18 @@ with open('sample.json', 'r') as openfile:
 
 - [Python JSON](https://www.geeksforgeeks.org/python-json/)
 
+## 从字符串读取
+
+```
+employee_string = '{"first_name": "Michael", "last_name": "Rodgers", "department": "Marketing"}'
+
+#convert string to  object
+json_object = json.loads(employee_string)
+```
+
+参考：
+
+- [](https://www.freecodecamp.org/news/python-json-how-to-convert-a-string-to-json/)
 
 ## 访问
 

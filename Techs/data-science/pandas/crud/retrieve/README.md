@@ -60,7 +60,7 @@ df.loc[:, df.columns!='rebounds']
 不选择多列：
 
 ```
-df.loc[:, ~df.columns.isin(['rebounds', 'assists'])]
+df.loc[:, df.columns[~df.columns.isin(['rebounds', 'assists'])]]
 ```
 
 参考：

@@ -2,7 +2,7 @@
 
 调用方式上的区别：
 
-- `ax.plot()`：属于显示绘图的接口，需要首先用其他接口创建`Figure`和`Axes`，再在`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
+- `ax.plot()`：属于显示绘图的接口，需要首先用其他接口创建`Figure`和`Axes`，再用`Axes`对象上调用绘图接口。推荐在复杂的场景使用。
 - `plt.plot()`：使用`matplotlib.pyplot`会隐式的创建`Figure`和`Axes`，更方便一点。推荐演示的时候使用。
 
 **特别注意：在GUI中必须直接使用`Matplotlib`的API，而非使用`pylab/pyplot`相关的接口**
@@ -12,7 +12,40 @@
 - [The explicit and the implicit interfaces](https://matplotlib.org/stable/users/explain/quick_start.html#the-explicit-and-the-implicit-interfaces)
 - [Embedding Matplotlib in graphical user interfaces](https://matplotlib.org/stable/gallery/user_interfaces/index.html#user-interfaces)
 
-## 柱状图 / 直方图
+
+## 折线图
+
+折线图可以显示随时间变化的数据，是最常见的图形：
+
+```
+matplotlib.pyplot.plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+
+# 方式一
+plot(x1, y1, 'bo')
+plot(x2, y2, 'go')
+
+# 方式二
+plot(x1, y1, 'g^', x2, y2, 'g-')
+```
+
+参考：
+
+- [matplotlib.pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
+
+
+## 柱状图
+
+又称长条图，柱形图，是一种以长方形的长度为变量的统计图表。
+
+
+```
+matplotlib.pyplot.bar(x, height, width=0.8)
+```
+
+在多柱形图的时候，如果有n个柱子，那么每个柱子的宽度要小于`1/n`，否则会出现重叠。
+
+
+## 直方图
 
 直方图通常被用于可视化数据的分布，谈论直方图的时候会涉及一些术语，比如`bin`代表一定间隔下数据点频率的垂直矩形，`bin`以固定的间隔创建。
 
