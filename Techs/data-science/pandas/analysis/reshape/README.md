@@ -5,11 +5,15 @@
 - `df.stack(level=-1, dropna=True)`/`df.unstack(level=-1, fill_value=None)`：将列、行索引互相转换
 - `df.pivot(index=None, columns=None, values=None)`：将某列的值分散到一个或多个类别
 
+一点思考：
+
+1. 有时候一个数据表包含有很多列的数据，而数据透视能够更好地比较三列之间的关系。因此可以将两列分别对应到行、列、和值这样的三维关系。
+2. 但对于数据可视化而言，输入的数据大多只需要两列，所以很多时候要将多列的数据堆叠为单列（`stack()`/`melt()`），以便将所有需要可视化的数据整理称两列。
+
 
 ## 使用透视对象来塑型
 
-数据在很多时候是按照“堆叠”的方式（stacked/record）存储，比如下面这种形式，对于date和variable
-列来说它们都有重复的条目：
+数据在很多时候是按照“堆叠”的方式（stacked/record）存储，比如下面这种形式，对于`date`和`variable`列来说它们都有重复的数据：
 
 ```
    date       variable     value
@@ -17,19 +21,9 @@
 1  2000-01-04        A -0.282863
 2  2000-01-05        A -1.509059
 3  2000-01-03        B -1.135632
-4  2000-01-04        B  1.212112
-5  2000-01-05        B -0.173215
-6  2000-01-03        C  0.119209
-7  2000-01-04        C -1.044236
-8  2000-01-05        C -0.861849
-9  2000-01-03        D -2.104569
-10 2000-01-04        D -0.494929
-11 2000-01-05        D  1.071804
 ```
 
-而DataFrame的`pivot()`可以基于这些数据形成新的视图，这个过程我们可以称为“数据透视”。比
-如我们可以将`date列的内容`作为新的index，将`variable列的内容`作为新的columns，将`value
-列的内容`作为新的值，可以这么做：
+而DataFrame的`pivot()`可以基于这些数据形成新的视图，这个过程我们可以称为“数据透视”。比如我们可以将`date列的内容`作为新的index，将`variable列的内容`作为新的columns，将`value列的内容`作为新的值，可以这么做：
 
 ```
 pivot = df.pivot(index='date', columns='variable', values='value')
@@ -53,9 +47,6 @@ date
 3  foo  two  small  3  5 # I-3
 4  foo  two  small  3  6 # I-3 重复
 5  bar  one  large  4  6
-6  bar  one  small  5  8
-7  bar  two  small  6  9
-8  bar  two  large  7  9
 ```
 
 
@@ -67,13 +58,11 @@ date
 
 ## 使用stacking/unstacking来塑型
 
-与`pivot()`相关的两个函数是Series和DataFrame都支持的`stack()/unstack()`，它们主要用来
-支持MultiIndex。
+与`pivot()`相关的两个函数是Series和DataFrame都支持的`stack()/unstack()`，它们主要用来支持MultiIndex。
 
 1.`stack()`：将列标签"压缩"为行标签。
 
-如果列标签只有单一的index，那么压缩为Series。如果列标签是MultiIndex，那么压缩为DataFrame。
-你也可以选择压缩哪个level，那么这个level列标签堆叠为当前DataFrame的MultiIndex。
+如果列标签只有单一的index，那么压缩为Series。如果列标签是MultiIndex，那么压缩为DataFrame。你也可以选择压缩哪个level，那么这个level列标签堆叠为当前DataFrame的MultiIndex。
 
 比如：
 
@@ -85,9 +74,7 @@ bar   one     0.721555 -0.706771
 baz   one    -0.424972  0.567020
       two     0.276232 -1.087401
 
-如上DataFrame由MultiIndex索引，A, B属于同一level的列标签，在stack之后这一level的所有
-列全部被压缩/stack为MultiIndex的新的level做为last level（之前的last level是second,现
-是一个未命名的last level）。
+如上DataFrame由MultiIndex索引，A, B属于同一level的列标签，在stack之后这一level的所有列全部被压缩/stack为MultiIndex的新的level做为last level（之前的last level是second,现是一个未命名的last level）。
 
 first  second
 bar    one     A    0.721555
@@ -101,8 +88,7 @@ baz    one     A   -0.424972
 ```
 
 
-2.`unstack()`：将行标签（默认last level）透视为列标签，你可以选择将MultiIndex中的哪一
-层进行透视，可以填写下表（比如0，1..），也可以是名称（比如'first', 'second'...）。
+2.`unstack()`：将行标签（默认last level）透视为列标签，你可以选择将MultiIndex中的哪一层进行透视，可以填写下表（比如0，1..），也可以是名称（比如'first', 'second'...）。
 
 比如：
 

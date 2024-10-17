@@ -236,6 +236,31 @@ df = df.join(df['地址'].str.split(' ', expand = Ture))
 ```
 
 
+## 运算
+
+怎么根据多列的数据来生成新列？
+
+
+```
+def myfunc(row):
+    ... 
+    return row[col1] + row[col2] + row[col3]
+
+df['new_col'] = df.apply(myfunc, axis=1)
+```
+
+如果仅仅根据单列的数据来判断：
+
+```
+df[reason] = df['col'].apply(lambda x: myfunc(x, reason))
+```
+
+参考：
+
+- [The complete guide to creating columns based on multiple conditions in a Pandas DataFrame](https://medium.com/@michalwesleymnach/the-complete-guide-to-create-columns-based-on-multiple-conditions-in-pandas-dataframes-eedf2c0392a6)
+- [How to create new columns derived from existing columns](https://pandas.pydata.org/docs/getting_started/intro_tutorials/05_add_columns.html)
+
+
 ## 行列转换
 
 用pandas处理数据时，经常需要对行列进行转换或重拍，主要使用stack, unstack和pivot方法：
