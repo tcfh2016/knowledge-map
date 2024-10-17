@@ -66,6 +66,19 @@ df = pd.read_csv('data.csv', skiprows=2)
 ```
 
 
+## 将读取的csv的index转换为`DateTimeIndex`
+
+```
+df = pd.read_csv('上证指数241101-250615.csv', index_col=0)
+df.index = pd.to_datetime(df.index)
+```
+
+
+参考：
+
+- [How to specify the `dtype` of index when read a csv file to `DataFrame`?](https://stackoverflow.com/questions/29792865/how-to-specify-the-dtype-of-index-when-read-a-csv-file-to-dataframe)
+
+
 ## `codec can't decode byte`
 
 read_csv可以直接用来读取csv文件，且可以通过不同的参数来完成多样化的操作。第一次尝试读取时出现“UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc8 in position 0: invalid continuation byte”的错误。
