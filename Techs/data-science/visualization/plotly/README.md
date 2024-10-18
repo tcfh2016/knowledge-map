@@ -45,8 +45,8 @@ fig.update_layout(legend=dict(
     orientation="h",
     entrywidth=70,
     yanchor="bottom",
-    y=1.02,
     xanchor="right",
+    y=1.02,
     x=1
 ))
 ```
@@ -62,6 +62,61 @@ fig.update_layout(legend=dict(
 - [Legends in Python](https://plot.ly/python/legend/)
 - [](https://plotly.com/python/reference/layout/)
 
+
+## `plotly.express`
+
+参考：
+
+- [plotly.express: high-level interface for data visualization](https://plotly.com/python-api-reference/plotly.express.html)
+
+
+## `go.Scatter`
+
+```
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=random_x, y=random_y0,
+                    mode='lines',
+                    name='lines'))
+fig.add_trace(go.Scatter(x=random_x, y=random_y1,
+                    mode='lines+markers',
+                    name='lines+markers'))
+fig.add_trace(go.Scatter(x=random_x, y=random_y2,
+                    mode='markers', name='markers'))
+
+fig.show()
+```
+
+## subplots
+
+对于`make_subplots()`的使用：
+
+- `shared_xaxes=True`，共享x轴
+
+
+
+```
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(rows=3, cols=1)
+
+fig.append_trace(go.Scatter(
+    x=[3, 4, 5],
+    y=[1000, 1100, 1200],
+), row=1, col=1)
+
+fig.append_trace(go.Scatter(
+    x=[2, 3, 4],
+    y=[100, 110, 120],
+), row=2, col=1)
+
+fig.update_layout(height=600, width=600, title_text="Stacked Subplots", legend)
+fig.show()
+```
+
+参考：
+
+- [](https://plot.ly/python/subplots/)
 
 ## 参考：
 
