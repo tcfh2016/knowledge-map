@@ -11,6 +11,8 @@ C:\Users\lianbche\AppData\Local\Programs\Python\Python312\python.exe -m pip --pr
 - 更美观的图形：背景、坐标轴标签自然分散
 - 更灵活：指定`color`自动给不同的值附上颜色，并不需要指定具体的颜色
 
+之所以觉得使用`plotly`比原始的`matplotlib`好是因为它做了一些封装，比如如果在画散点图的时候指定`color`必须要是具体的颜色值，但是`plotly`可以直接将不同的值映射为不同的颜色并显示图例。
+
 
 ## VSCODE
 
@@ -27,7 +29,7 @@ fig.write_html('first_figure.html', auto_open=True)
 如果需要将图形显示在Jupyter notebook里面，需要先安装`ipywidgets`，`nbformat`。
 
 
-# 绘图
+# 设置
 
 ## 大小
 
@@ -63,6 +65,8 @@ fig.update_layout(legend=dict(
 - [](https://plotly.com/python/reference/layout/)
 
 
+# 绘图
+
 ## `plotly.express`
 
 参考：
@@ -91,7 +95,6 @@ fig.show()
 对于`make_subplots()`的使用：
 
 - `shared_xaxes=True`，共享x轴
-
 
 
 ```
