@@ -51,9 +51,9 @@ lianbche@ip_address's password:
 - [Remote development over SSH](https://code.visualstudio.com/docs/remote/ssh-tutorial)
 - [ssh免密码登录Permission denied (publickey,gssapi-keyex,gssapi-with-mic) 的解决方案！](https://www.cnblogs.com/xubing-613/p/6844564.html)
 
-## Q&A
+# Q&A
 
-1）安装远程插件失败后如何进行手动安装？
+## 安装远程插件失败后如何进行手动安装？
 
 今天尝试通过远端开发来调试脚本，在浏览Python代码的时候VSCODE提示remote安装Python插件，尝试安装的时候发现timeout并提示手动安装。
 
@@ -66,3 +66,15 @@ lianbche@ip_address's password:
 ![](./install_from_VSIX.PNG)
 
 然后定位到下载的vsix文件，安装即可。
+
+
+## 换台PC登录出现“SSH Failed Permission Denied (publickey,gssapi-keyex,gssapi-with-mic)”
+
+更换PC之后登录服务器，尽管输入了正确的密码还是会失败，并提示“SSH Failed Permission Denied (publickey,gssapi-keyex,gssapi-with-mic)”的错误。在参考1中找到了灵感，其实这个提示并非密码错误，而可能和权限相关。
+
+然后查看`.ssh/authorized_keys`里面的key是之前老PC的公钥，之后将新PC的公钥（`C:\Users\UserName\.ssh\id_rsa.pub`）拷贝到authorized_keys之后问题解决。
+
+
+参考：
+
+1. [How to Fix SSH Failed Permission Denied (publickey,gssapi-keyex,gssapi-with-mic)](https://phoenixnap.com/kb/ssh-permission-denied-publickey)
