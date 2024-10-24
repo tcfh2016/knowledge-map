@@ -35,7 +35,7 @@ plot(x1, y1, 'g^', x2, y2, 'g-')
 
 ## 柱状图
 
-又称长条图，柱形图，是一种以长方形的长度为变量的统计图表。
+又称长条图，柱形图，是一种以长方形的长度为变量的统计图表。*通常用于较小的数据集分析*。
 
 
 ```
@@ -47,11 +47,11 @@ matplotlib.pyplot.bar(x, height, width=0.8)
 
 ## 直方图
 
-直方图通常被用于可视化数据的分布，谈论直方图的时候会涉及一些术语，比如`bin`代表一定间隔下数据点频率的垂直矩形，`bin`以固定的间隔创建。
+直方图，又称质量分布图，由一系列高度不等的纵向条纹或线段表示数据分布的情况，是数值数据分布的精确图形表示，是连续变量的概率分布的估计。*注：这里“概率分布的估计”的意思是一个很大的不同，也就是它依赖的是单变量数据集，针对这个单变量的数据集进行的概率分布统计。*
 
 直方图经常被用在图像处理软件中作为可视化图像属性（如给定颜色通道上光的分布）的一种方式，还可以应用在计算机视觉算法来检测峰值，用来辅助进行边缘检测、图像分割等。
 
-柱状图有着很多的参数：
+直方图会涉及新的概念，比如`bin`代表一定间隔下数据点频率的垂直矩形，`bin`以固定的间隔创建。柱状图有着很多的参数：
 
 ```
 plt.hist(x, bins=10, range=None, normed=False, weights=None, cumulative=False,bottom=None, histtype='bar', align='mid', orientation='vertical', rwidth=None,log=False, color=None, label=None, stacked=False, hold=None, **kwargs)
@@ -77,9 +77,9 @@ plt.hist(x, bins=10, range=None, normed=False, weights=None, cumulative=False,bo
 
 ## 散点图
 
-散点图能够标记出两个变量之间的相关关系（ correlation ），尤其是对于非线性关系的数据。
+散点图能够标记出两个变量之间的相关关系（ correlation ），尤其是对于非线性关系的数据，在线性回归分析中可以对这些数据进行拟合。
 
-可以用`pyplot.scatter`来画散点图，效果和使用`pyplot.plot`指定`o`的样式一样。该函数的正式声明如下：
+用`pyplot.scatter`来画散点图，效果和使用`pyplot.plot`指定`o`的样式一样。该函数的正式声明如下：
 
 ```
 matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, *, edgecolors=None, plotnonfinite=False, data=None, **kwargs)
@@ -97,9 +97,12 @@ fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
 ax.scatter(x, y, size, color)
 ```
 
+*注：散点图和折线图类似，不同之处在于散点图各个点之间不会按照前后关系连接起来。Matplotlib绘制散点图用plot和scatter函数都可以实现。*
+
 参考：
 
 - [matplotlib.pyplot.scatter](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html)
+
 
 ## 饼图
 

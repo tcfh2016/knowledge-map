@@ -224,6 +224,46 @@ legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
 ```
 
 
+
+## 刻度
+
+刻度是图形的一部分，由刻度定位器（tick locator，指定刻度所在的位置）和刻度格式器（tick formatter，指定刻度显示的样式）组成。
+
+刻度有主刻度（major ticks）和次刻度（minor ticks），默认不显示次刻度。主刻度和次刻度可以被独立地指定位置和格式化。
+
+```
+ax = plt.gca() # 获取当前的坐标轴
+ax.locator_params(tight=True, nbins = 10) # 将视图设置为紧密，并将最大刻度间隔数设置为10
+```
+
+## 日期刻度
+
+```
+import matplotlib as mpl
+
+ax = gca() # 获取当前得坐标轴
+ax.plot_date(dates, values, linestyle='-', marker='') # 用时间数据来绘制图像
+
+date_format = mpl.dates.DateFormatter('%Y-%m-%d') # 指定时间的格式
+ax.xaxis.set_major_formatter(date_format) # 应用时间的格式
+
+# 自动设置日期标签格式，默认情况下，将标签旋转30度，使用rotate这个参数指定不同的旋转度，使用bottom 这个参数为日期标签提供更多空间
+fig.autofmt_xdate()
+```
+
+
+## 不显示X轴坐标
+
+```
+axs[1, 1].axis("off")
+axs[0, 0].xaxis.set_visible(False)
+```
+
+参考：
+
+- [Turn off axes in subplots](https://stackoverflow.com/questions/25862026/turn-off-axes-in-subplots)
+
+
 ## 参考
 
 
