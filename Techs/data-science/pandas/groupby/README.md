@@ -83,6 +83,7 @@ df1.groupby([ "Name", "City"] ).count().reset_index()
 
 - [Converting a Pandas GroupBy multiindex output from Series back to DataFrame](https://stackoverflow.com/questions/10373660/converting-a-pandas-groupby-multiindex-output-from-series-back-to-dataframe)
 
+
 ## `transform`的作用
 
 下面的数据记录了什么时候（sfn/slot）消息进来的时间（in）和处理完成的时间（out），它们的值都是相对于当前slot的偏移。现在的需求是要求每个slot里面消息处理的总时间：
@@ -119,5 +120,15 @@ new_df = new_df.reset_index()
 - [pandas.DataFrame.transform](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.transform.html)
 - [Group by: split-apply-combine](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
 
-## 将不同的`groupby`结果对齐到坐标轴
+# 分组操作
+
+## 不同的列应用不同的函数
+
+```
+grouped.agg({"C": "sum", "D": lambda x: np.std(x, ddof=1)})
+```
+
+参考：
+
+- [Applying different functions to DataFrame columns](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#applying-different-functions-to-dataframe-columns)
 
