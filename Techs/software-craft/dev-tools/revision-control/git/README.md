@@ -137,8 +137,13 @@ error: cannot stat 'cplane/cu/cp_ue...and_PLMN_MP_at_HO.parameters': Filename to
 - [fatal: your current branch appears to be broken](https://stackoverflow.com/questions/57580891/fatal-your-current-branch-appears-to-be-broken)
 
 
-###
+### `Bad server host key: Invalid key length `
 
-https://jasonkayzk.github.io/2019/10/10/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Git%E6%97%B6push-pull%E8%B6%85%E6%97%B6-%E4%BB%A5%E5%8F%8AGithub%E8%AE%BF%E9%97%AE%E6%85%A2%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/
+突然在服务器上无法更新git仓库，总是提示下面这个错误：
 
-https://segmentfault.com/a/1190000037797501
+```
+Bad server host key: Invalid key length 
+fatal: Could not read from remote repository.
+```
+
+解决方案是将`~/.ssh/known_hosts`里面有关gerrit地址删除，重新更新。
