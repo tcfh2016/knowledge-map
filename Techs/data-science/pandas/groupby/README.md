@@ -53,9 +53,8 @@ df.groupby(my_dict, axis=1).sum()
 df.T.groupby(my_dict).sum()
 ```
 
-该操作
 
-## 使用聚合函数`agg`
+# 聚合：`agg`
 
 聚合函数可以一次性统计不同组的不同统计项：
 
@@ -71,22 +70,45 @@ df.groupby(["Quarter", "Week"]).agg({col1:['mean', 'sum'], col2:['mean']})
 ```
 
 
-# 转换
+## 内建聚合函数
 
-## 将`GroupBy`对象转换为`DataFrame`
+- `first()`：获取每个分组里面第一个元素的值
+- `last()`：获取每个分组里面最后一个元素的值
+- `max()`：获取每个分组里面最大元素
+- `mean()`：获取每个分组的均值
+
+
+
+## 不同的列应用不同的函数
 
 ```
-df1.groupby([ "Name", "City"] ).count().reset_index()
+grouped.agg({"C": "sum", "D": lambda x: np.std(x, ddof=1)})
 ```
 
 参考：
 
-- [Converting a Pandas GroupBy multiindex output from Series back to DataFrame](https://stackoverflow.com/questions/10373660/converting-a-pandas-groupby-multiindex-output-from-series-back-to-dataframe)
+- [Applying different functions to DataFrame columns](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#applying-different-functions-to-dataframe-columns)
 
 
-## `transform`的作用
+## 使用`apply()`应用自定义函数
 
-下面的数据记录了什么时候（sfn/slot）消息进来的时间（in）和处理完成的时间（out），它们的值都是相对于当前slot的偏移。现在的需求是要求每个slot里面消息处理的总时间：
+```
+def custom_calc(group):
+    group['Value_Ratio'] = group['Value1'].sum() / group['Value2'].sum()
+    return group
+
+result = df.groupby('Category').apply(custom_calc)
+print(result)
+```
+
+
+# 变换：`transform`
+
+`transform`是比较特别的。
+
+它虽然是一种基于分组的操作，但操作的结果会仍旧显示在分组之前的DataFrame上，而不是直接应用在分组的GroupBy对象上。所以它的使用场景是将变换之后的结果添加到原始DataFrame上。
+
+举个例子：下面的数据记录了什么时候（sfn/slot）消息进来的时间（in）和处理完成的时间（out），它们的值都是相对于当前slot的偏移。现在的需求是要求每个slot里面消息处理的总时间：
 
 ```
 sfn,slot,in,out
@@ -120,15 +142,25 @@ new_df = new_df.reset_index()
 - [pandas.DataFrame.transform](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.transform.html)
 - [Group by: split-apply-combine](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
 
-# 分组操作
 
-## 不同的列应用不同的函数
+## 不足之处
+
+针对每个分组，我需要参考每个分组里面多个列来进行运算，但是transform只能够针对单列进行操作，无法参考多列。
+
+这个时候只能够按照分组应用`apply()`。
+
+
+# 转换
+
+## 将`GroupBy`对象转换为`DataFrame`
 
 ```
-grouped.agg({"C": "sum", "D": lambda x: np.std(x, ddof=1)})
+df1.groupby([ "Name", "City"] ).count().reset_index()
 ```
 
 参考：
 
-- [Applying different functions to DataFrame columns](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html#applying-different-functions-to-dataframe-columns)
+- [Converting a Pandas GroupBy multiindex output from Series back to DataFrame](https://stackoverflow.com/questions/10373660/converting-a-pandas-groupby-multiindex-output-from-series-back-to-dataframe)
+
+
 
