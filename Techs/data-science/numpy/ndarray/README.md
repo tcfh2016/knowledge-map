@@ -1,6 +1,11 @@
-## [The N-dimensional array (ndarray)](https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html)
+# `ndarry`
 
 `ndarry`是一个存放相同类型元素的多维容器，每个数组都有一个`shape`表示各个维度大小的元组，和一个`dtype`来说明数组数据的类型的对象。
+
+`ndarry`可以通过`array`函数进行，它接受一切序列型的对象产生对应的NumPy数组。创建的时候可以通过`dtype`参数来指定类型。
+
+- [ndarray]((https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html))
+
 
 ## 属性
 
@@ -9,33 +14,59 @@
 - `data.dtype`：dtype('float64')，即数组元素的类型
 - `data.ndim`：秩，即轴的数量或维度的数量
 
-## 创建
 
-`ndarry`可以通过`array`函数进行，它接受一切序列型的对象产生对应的NumPy数组。创建的时候可以通过`dtype`参数来指定类型。
+# 简单数组
 
-- np.zeros([3,4])：生成3x4元素值为 0 的数组
-- np.ones([3,4])：生成3x4元素值为 1 的数组
-- np.eye(5)：生成5x5的对角数组
-- np.linspace(0, 90, 10)：生成等间隔的数组
-- np.arange(0, 90, 10)：生成等间隔的数组，*注意区分`range()`和`arange()`。*
+创建一维、二维数组，可以直接使用`np.array()`来创建，比如：
 
 ```
-# 方式一：传入常规单维或多维数组
-data = [3, 2.2, 1.3]
-arr = np.array(data, dtype=np.float32)
-
-# 方式二：使用zeros/ones/empty的便捷方法
-arr1 = np.zeros(10) # 创建全0或全1的ndarray
-arr2 = np.ones(10)  # 创建全0或全1的ndarray
-arr = np.empty((2, 3)) # 创建没有任何具体值的数组（初始化随机值）
-
-# 方式三：使用range
-arr = np.arange(15)
+np.array([1, 2, 3])
+np.array([[1, 2, 3], [4, 5, 6]])
 ```
+
+在创建时可以通过`dtype`参数指定特定类型，NumPy支持比Python更多的类型，比如：
+
+```
+np.array([[1, 2, 3], [4, 5, 6]], dtype=float)
+```
+
+
+## 数组复制
+
+通过另外一个数组来创建时，默认`copy = True`。
+
+```
+simple_arr2 = np.array(simple_arr1, copy=False)
+```
+
+
+# 多维数组
+
+
+## 便捷创建
+
+- `np.empty((2, 3))` 创建没有任何具体值的数组（初始化随机值）
+- `np.zeros([3,4])`：生成3x4元素值为0的数组
+- `np.ones([3,4])`：生成3x4元素值为1的数组
+- `np.full([3,4], 9)`：生成3x4元素值为1的数组
+- `np.arange(0, 90, 10)`：生成等间隔的数组，第3个参数为“步长”
+- `np.linspace(0, 90, 10)`：生成等间隔的数组，第3个参数为“个数”
+- `np.eye(5)`：生成5x5的对角数组
+
 
 参考：
 
 - [numpy.zeros(shape, dtype=float, order='C')](https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html)
+
+
+## 随机数
+
+- `np.random.rand(5)`：随机生成0~1之间的一维数组
+- `np.random.rand(2, 5)`：随机生成0~1之间的二位数组
+- `np.random.randn(2, 5)`：随机生成满足正态分布的二位数组
+- `np.random.randint(low, high, size)`：随机生成一定范围内的随机数
+- `np.random.normal(loc, scale, size)`：随机生成均值为loc，标准差为scale的随机数
+
 
 ## 修改
 
@@ -82,6 +113,7 @@ array([1, 2, 3, 4])
 
 - [numpy.ndarray.flatten](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.flatten.html)
 
+
 ## 选择
 
 Numpy的一维数组和Python的列表类似，区别在于narray的切片是原始视图，这意味着数据不会被复制，任何修改都会直接反应到原数组上。其中的考虑与NumPy用于处理大量数据需要的性能、内存约束有关。
@@ -117,6 +149,7 @@ a[:2, 1:]
 a[1,:2]
 ```
 
+
 ## 判断
 
 用`all`和`any`来判断
@@ -134,6 +167,7 @@ numpy.allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False)[source]
 - [np.allclose(np.array(a), np.array(b))](https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html)
 
 
+
 ## 运算
 
 `ndarry`的运算不需要使用循环就能够进行批量运算（矢量化）：
@@ -142,6 +176,7 @@ numpy.allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False)[source]
 - ndarray与标量的算术运算会将对应标量的运算广播到所有元素：`arr * 3`
 - 大小不同的ndarray之间也会进行广播
 
+
 ## 矩阵
 
 使用`np.mat()`来将`ndarray`转换为`matrix`。
@@ -149,3 +184,5 @@ numpy.allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False)[source]
 ```
 A = np.mat(a)
 ```
+
+
