@@ -45,10 +45,10 @@ simple_arr2 = np.array(simple_arr1, copy=False)
 
 ## 便捷创建
 
-- `np.empty((2, 3))` 创建没有任何具体值的数组（初始化随机值）
+- `np.empty([2, 3])` 创建没有任何具体值的数组（初始化随机值）
 - `np.zeros([3,4])`：生成3x4元素值为0的数组
 - `np.ones([3,4])`：生成3x4元素值为1的数组
-- `np.full([3,4], 9)`：生成3x4元素值为1的数组
+- `np.full([3,4], 9)`：生成3x4元素值为9的数组
 - `np.arange(0, 90, 10)`：生成等间隔的数组，第3个参数为“步长”
 - `np.linspace(0, 90, 10)`：生成等间隔的数组，第3个参数为“个数”
 - `np.eye(5)`：生成5x5的对角数组
@@ -57,6 +57,17 @@ simple_arr2 = np.array(simple_arr1, copy=False)
 参考：
 
 - [numpy.zeros(shape, dtype=float, order='C')](https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html)
+
+
+## 从已有数据创建
+
+- `np.asarray(a)`：从已有列表、元组创建
+- `np.frombuffer(buffer)`：从字符串中创建
+- `np.fromiter(iterable)`：从可迭代对象创建
+- `np.empty_like(prototype)`：创建与给定数组相同维度和数据类型但未初始化的数组
+- `np.zeros_like(prototype)`：创建与给定数组相同维度和数据类型但以0填充的数组
+- `np.ones_like(prototype)`：创建与给定数组相同维度和数据类型但以1填充的数组
+- `np.ones_like(a, fill_like)`：创建与给定数组相同维度和数据类型但以给定值`fill_like`填充的数组
 
 
 ## 随机数
@@ -68,7 +79,58 @@ simple_arr2 = np.array(simple_arr1, copy=False)
 - `np.random.normal(loc, scale, size)`：随机生成均值为loc，标准差为scale的随机数
 
 
-## 修改
+# 数组运算
+
+`ndarry`的运算不需要使用循环就能够进行批量运算（矢量化）。
+
+- 大小相等的ndarray之间的任何算术运算都会将运算应用到元素级：`arr1 * arr2`，或者`np.multiply(arr1, arr2)`。
+- ndarray与标量的算术运算会将对应标量的运算广播到所有元素：`arr * 3`。
+- 大小不同的ndarray之间也会进行广播。
+
+
+## 算术运算
+
+## 比较运算
+
+
+
+# 数组选择
+
+Numpy的一维数组和Python的列表类似，区别在于narray的切片是原始视图，这意味着数据不会被复制，任何修改都会直接反应到原数组上。其中的考虑与NumPy用于处理大量数据需要的性能、内存约束有关。
+
+1）单元素选择
+
+二维数组中索引对应的是一维数组，可以对各个元素进行递归访问。除此之外选择单个元素的时候可以按如下方式进行：
+
+```
+arr2d = np.array([[1,2,3], [4,5,6], [7,8,9]])
+
+arr2d[0][2]
+arr2d[0,2]
+```
+
+2）批量选择
+
+```
+arr = np.arange(10)
+arr[5:8] = 12
+# 输出 array([0,1,2,3,4,12,12,12,8,9])
+
+# 判断数组中元素大于10的元素赋值为 -10 
+a[a > 10] = -10
+```
+
+3）使用切片
+
+使用切片时可以在一个轴或多个轴上进行切片，使用“,”来分隔不同轴上的切片：
+
+```
+a[:2, 1:]
+a[1,:2]
+```
+
+
+# 数组修改
 
 1）修改值
 
@@ -114,41 +176,6 @@ array([1, 2, 3, 4])
 - [numpy.ndarray.flatten](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.flatten.html)
 
 
-## 选择
-
-Numpy的一维数组和Python的列表类似，区别在于narray的切片是原始视图，这意味着数据不会被复制，任何修改都会直接反应到原数组上。其中的考虑与NumPy用于处理大量数据需要的性能、内存约束有关。
-
-1）单元素选择
-
-二维数组中索引对应的是一维数组，可以对各个元素进行递归访问。除此之外选择单个元素的时候可以按如下方式进行：
-
-```
-arr2d = np.array([[1,2,3], [4,5,6], [7,8,9]])
-
-arr2d[0][2]
-arr2d[0,2]
-```
-
-2）批量选择
-
-```
-arr = np.arange(10)
-arr[5:8] = 12
-# 输出 array([0,1,2,3,4,12,12,12,8,9])
-
-# 判断数组中元素大于10的元素赋值为 -10 
-a[a > 10] = -10
-```
-
-3）使用切片
-
-使用切片时可以在一个轴或多个轴上进行切片，使用“,”来分隔不同轴上的切片：
-
-```
-a[:2, 1:]
-a[1,:2]
-```
-
 
 ## 判断
 
@@ -165,16 +192,6 @@ numpy.allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False)[source]
 参考：
 
 - [np.allclose(np.array(a), np.array(b))](https://docs.scipy.org/doc/numpy/reference/generated/numpy.allclose.html)
-
-
-
-## 运算
-
-`ndarry`的运算不需要使用循环就能够进行批量运算（矢量化）：
-
-- 大小相等的ndarray之间的任何算术运算都会将运算应用到元素级：`arr1 * arr2`，或者`np.multiply(arr1, arr2)`
-- ndarray与标量的算术运算会将对应标量的运算广播到所有元素：`arr * 3`
-- 大小不同的ndarray之间也会进行广播
 
 
 ## 矩阵
