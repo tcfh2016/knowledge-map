@@ -2,12 +2,14 @@
 
 - `a.sum(axis=None)`：对数组中某轴或者全部元素求和，零长度的和为0。用`sum(a)`按列求和。
 - `a.mean(axis=None)`：算术平均值，零长度的数组平均值为NaN
+- `a.average()`：加权平均值
+- `a.median()`：计算数组的中位数
 - `a.std(axis=None)`, `a.var(axis=None)`：标准差和方法
 - `a.min(axis=None)`, `a.max(axis=None)`：最小值和最大值
 - `a.argmin(axis=None)`, `a.argmax(axis=None)`：最小、最大元素的索引
 - `a.prod(axis=None)`：求积
-- `a.cumsum`：所有元素的累计和
-- `a.cumprod`：所有元素的累计积
+- `a.cumsum()`：所有元素的累计和
+- `a.cumprod()`：所有元素的累计积
 
 上面函数中，指定`axis=0`表示按列求和，`axis=1`表示按行求和，`axis=-1`表示按最后一维求和。
 
