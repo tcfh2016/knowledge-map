@@ -24,11 +24,11 @@ DataFrame.plot(x=None, y=None, kind='line', ax=None, subplots=False, sharex=None
 等单独的子函数。
 
 
-## 绘图风格
+## 绘图设置
 
-```
-plt.style.use('ggplot')
-```
+- 风格：`plt.style.use('ggplot')`
+- 标题：使用其中的`title`参数。
+
 
 ## “plt”, “ax”和“fig”
 
@@ -77,13 +77,6 @@ fig.savefig('test.png')
 - [Saving plots (AxesSubPlot) generated from python pandas with matplotlib's savefig](https://stackoverflow.com/questions/19555525/saving-plots-axessubplot-generated-from-python-pandas-with-matplotlibs-savefi)
 
 
-## 图表标题
-
-使用其中的`title`参数。
-
-
-
-
 ## 设置 grid
 
 可以对网格线进行定义，比如最基本的样式、间隔。
@@ -118,3 +111,14 @@ ax.grid('on', which='major', alpha=0.5)
 - [Change grid interval and specify tick labels in Matplotlib](https://stackoverflow.com/questions/24943991/change-grid-interval-and-specify-tick-labels-in-matplotlib)
 - [Pandas: How to display minor grid lines on x-axis in pd.DataFrame.plot()](https://stackoverflow.com/questions/20616754/pandas-how-to-display-minor-grid-lines-on-x-axis-in-pd-dataframe-plot)
 - [matplotlib.axes.Axes.grid](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html#matplotlib-axes-axes-grid)
+
+
+## 柱状图
+
+```
+DataFrame.plot.bar(x=None, y=None, **kwargs)
+```
+
+参考：
+
+- [pandas.DataFrame.plot.bar](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.bar.html)

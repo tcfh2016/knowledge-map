@@ -13,6 +13,10 @@ C:\Users\lianbche\AppData\Local\Programs\Python\Python312\python.exe -m pip --pr
 
 之所以觉得使用`plotly`比原始的`matplotlib`好是因为它做了一些封装，比如如果在画散点图的时候指定`color`必须要是具体的颜色值，但是`plotly`可以直接将不同的值映射为不同的颜色并显示图例。
 
+参考：
+
+- [Getting Started with Plotly in Python](https://plot.ly/python/getting-started/)
+
 
 ## VSCODE
 
@@ -29,45 +33,27 @@ fig.write_html('first_figure.html', auto_open=True)
 如果需要将图形显示在Jupyter notebook里面，需要先安装`ipywidgets`，`nbformat`。
 
 
-# 设置
-
-## 大小
-
-可以通过`width`和`height`，默认宽700像素，高450像素：
-
-```
-fig.update_layout(autosize=<VALUE>)
-
-```
-
-## 图例
-
-```
-fig.update_layout(legend=dict(
-    orientation="h",
-    entrywidth=70,
-    yanchor="bottom",
-    xanchor="right",
-    y=1.02,
-    x=1
-))
-```
-
-- `xref`/`yref`，宽度和高度是以绘图区（`paper`）还是整个幕布（`container`）参考
-- `x`/`y`，设置相对`xref`/`yref`的位置，取值在0~1，默认值0.5
-- `xanchor`，设置标题相对于`x`的距离，取值："auto" | "left" | "center" | "right"
-
-
-
-参考：
-
-- [Legends in Python](https://plot.ly/python/legend/)
-- [](https://plotly.com/python/reference/layout/)
-
-
 # 绘图
 
 ## `plotly.express`
+
+基本的效果：
+
+```
+import plotly.express as px
+
+fig = px.scatter(x=df['a'], y=df['b'], color=df['c'])
+#相同效果：fig = px.scatter(df, x='a', y='b', color='c') 
+
+fig.show()
+```
+
+稍微进一步的划分，使用`facet_row`和`facet_col`来按照其他列画出多个子图：
+
+```
+px.scatter(cu_fc, x='seconds', y='unsentGtpPackets', color='ueIdCuE1Cp', 
+                 facet_col='bearerGroupId', facet_row='bearerId')
+```
 
 参考：
 
@@ -119,8 +105,41 @@ fig.show()
 
 参考：
 
-- [](https://plot.ly/python/subplots/)
+- [Subplots in Python](https://plot.ly/python/subplots/)
 
-## 参考：
 
-- [Getting Started with Plotly in Python](https://plot.ly/python/getting-started/)
+# 设置
+
+## 大小
+
+可以通过`width`和`height`，默认宽700像素，高450像素：
+
+```
+fig.update_layout(autosize=<VALUE>)
+
+```
+
+## 图例
+
+```
+fig.update_layout(legend=dict(
+    orientation="h",
+    entrywidth=70,
+    yanchor="bottom",
+    xanchor="right",
+    y=1.02,
+    x=1
+))
+```
+
+- `xref`/`yref`，宽度和高度是以绘图区（`paper`）还是整个幕布（`container`）参考
+- `x`/`y`，设置相对`xref`/`yref`的位置，取值在0~1，默认值0.5
+- `xanchor`，设置标题相对于`x`的距离，取值："auto" | "left" | "center" | "right"
+
+
+
+参考：
+
+- [Legends in Python](https://plot.ly/python/legend/)
+- [Python Figure Reference: layout](https://plotly.com/python/reference/layout/)
+

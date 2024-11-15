@@ -37,13 +37,28 @@ plot(x1, y1, 'g^', x2, y2, 'g-')
 
 又称长条图，柱形图，是一种以长方形的长度为变量的统计图表。*通常用于较小的数据集分析*。
 
+```
+matplotlib.pyplot.bar(x, height, width=0.8, bottom=None, *, align='center', data=None, **kwargs)
+```
 
-```
-matplotlib.pyplot.bar(x, height, width=0.8)
-```
+1. 基本柱形图
+
+基本柱形图就体现简单的两列数据，一列作为x轴，一列作为y轴。
+
+2. 多柱形图
+
+展现超过2列的数据，比如除去x轴那列数据之外，其他的都展示为柱条。
+
+3. 堆叠柱形图
+
+画堆叠柱形图的时候必须画多次，并且要计算堆叠的位置。看起来不如使用`df.plot()`来画方便。
 
 在多柱形图的时候，如果有n个柱子，那么每个柱子的宽度要小于`1/n`，否则会出现重叠。
 
+
+参考：
+
+- [Stacked bar chart](https://matplotlib.org/stable/gallery/lines_bars_and_markers/bar_stacked.html)
 
 ## 直方图
 

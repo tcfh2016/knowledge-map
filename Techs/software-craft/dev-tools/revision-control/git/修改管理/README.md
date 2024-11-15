@@ -176,16 +176,16 @@ git diff SHA-OLD SHA-NEW --name-only path_from_curr_directory # 查看old到new�
 如果不带有`--name-only`，那么会输出所有的修改内容。然而，如果我们想搜索两个版本之间的commit信息那么需要使用`git log`:*这种方式好像不能对比commit，只能限制时间段*
 
 ```
-git log SHA-OLD SHA-NEW --name-only path_from_curr_directory # 查看old到new的提交信息，仅显示指定路径的提交
-git log --stat SHA-OLD SHA-NEW --name-only path_from_curr_directory # 同上，但包括文件的修改
+git log SHA-OLD..SHA-NEW --name-only path_from_curr_directory # 查看old到new的提交信息，仅显示指定路径的提交
+git log --stat SHA-OLD..SHA-NEW --name-only path_from_curr_directory # 同上，但包括文件的修改
 ```
 
 另外需要使用`--pretty=format`参数来格式化提交信息：
 
 ```
-git log --pretty=%H SHA-OLD SHA-NEW --name-only path_from_curr_directory # 仅显示SHA
-git log --pretty=%s SHA-OLD SHA-NEW --name-only path_from_curr_directory # 仅显示标题
-git log --pretty=%h-%ad-%s SHA-OLD SHA-NEW --name-only path_from_curr_directory # 显示SHA-日期-标题
+git log --pretty=%H SHA-OLD..SHA-NEW --name-only path_from_curr_directory # 仅显示SHA
+git log --pretty=%s SHA-OLD..SHA-NEW --name-only path_from_curr_directory # 仅显示标题
+git log --pretty=%h-%ad-%s SHA-OLD..SHA-NEW --name-only path_from_curr_directory # 显示SHA-日期-标题
 ```
 
 参考：https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2#log_options

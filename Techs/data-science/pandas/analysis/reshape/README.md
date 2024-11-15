@@ -13,6 +13,8 @@
 
 ## 使用透视对象来塑型
 
+1）`pivot()`
+
 数据在很多时候是按照“堆叠”的方式（stacked/record）存储，比如下面这种形式，对于`date`和`variable`列来说它们都有重复的数据：
 
 ```
@@ -37,7 +39,16 @@ date
 2000-01-05 -1.509059 -0.173215 -0.861849  1.071804
 ```
 
-如果数据透视形成的新的对象的index/column不是唯一的，那么需要使用`pivot_table()`（ 需要指定聚合函数，默认`aggfunc='mean'`）。比如下面这些数据，如果我们以A内容作为新的index, C内容作为新的column，D内容作为新的值，那么将会遇到重复的值，这个时候`pivot()`会报错。
+
+2）`pivot_table()`
+
+如果数据透视形成的新的对象的index/column不是唯一的，那么需要使用`pivot_table()`，需要指定聚合函数，默认`aggfunc=mean`。
+
+```
+pandas.pivot_table(data, values=None, index=None, columns=None, aggfunc='mean', fill_value=None, margins=False, dropna=True, margins_name='All', observed=<no_default>, sort=True)
+```
+
+比如下面这些数据，如果我们以A内容作为新的index, C内容作为新的column，D内容作为新的值，那么将会遇到重复的值，这个时候`pivot()`会报错。
 
 ```
      A    B      C  D  E
@@ -48,6 +59,8 @@ date
 4  foo  two  small  3  6 # I-3 重复
 5  bar  one  large  4  6
 ```
+
+对于`aggfunc`其他可选的还有`sum`, `min`, `max`。但这些是基于数值类型的，如果要统计次数，可以使用`size`（使用`count`对于超过3列的dataframe会多出更多的统计项）。
 
 
 参考：

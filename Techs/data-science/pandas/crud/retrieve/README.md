@@ -25,7 +25,7 @@ for i in range(len(df)) :
 - [How to iterate over rows in a DataFrame in Pandas](https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas)
 
 
-# 选取
+# 选取列
 
 在Dataframe里面选取数据时，使用`loc`和`iloc`属性：
 
@@ -34,8 +34,6 @@ for i in range(len(df)) :
 - `df[col]`，默认列优先
 
 *注：特别理解一下“运用loc(), iloc()只有一个参数时行优先”，就能够明白为什么多行的选择需要通过`df.loc[[a, b, c]]`这种嵌套列表的形式了。*
-
-## 选取列
 
 列的选取是DataFrame最基本的操作，使用方括号`[]`，将 DataFrame的列获取为一个Series。多列的选取需要将多个列的名称作为列表放在方括号中。
 
@@ -48,6 +46,7 @@ df.loc[:, 'col1_label':'col2_label'] # 选取多列
 DataFrame的获取是以列优先的，`df[x]`是获取列名为x的Series，这种理解方式与C/C++二维数组是不同的。
 
 *那么如何将某列转换为`list`类型呢？可以通过`df['Age'].values.tolist()`或者直接`list(df['Age'])`也可以。*
+
 
 ## 不选择某些列
 
@@ -68,7 +67,7 @@ df.loc[:, df.columns[~df.columns.isin(['rebounds', 'assists'])]]
 - [How to Exclude Columns in Pandas (With Examples)](https://www.statology.org/pandas-exclude-column/)
 
 
-## 选取行
+# 选取行
 
 通过`loc()`和`iloc`属性用于获取行或行列对应的值。它们之间的不同之处在于，前者需要使用行列标签，后者需要使用位置索引。
 
@@ -87,6 +86,7 @@ print(df['a':'c'])        # 索引'a', 'b', 'c'三行。
 print(df[0:1])            # 索引'a'一行数据。
 ```
 
+
 ## 选择特定的行
 
 查了资料，没有找到直接的方法，可以使用转置T进行选择：
@@ -95,53 +95,8 @@ print(df[0:1])            # 索引'a'一行数据。
 selected_columns = df.loc[:, df.columns.str.contains('NewYork')]
 ```
 
-## 通过多列的值来过滤行
 
-比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
-
-```
-                               002352     600233
-报告日期
-货币资金(万元)               1613112.0   406144.0
-结算备付金(万元)                   0.0        0.0
-拆出资金(万元)                     0.0        0.0
-交易性金融资产(万元)               1444.0       79.0
-衍生金融资产(万元)                  0.0        0.0
-```
-
-学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以对这两列的内容进行求与操作来构建这样的series：
-
-```
-filter_condition = [True] * len(self.balance_df[0]['2018-12-31'])
-for i in range(len(self.args.stock)):
-    s = self.args.stock[i]
-    self.multi_stocks_asset_df[s] = self.balance_df[i]['2018-12-31']
-    filter_condition &= self.multi_stocks_asset_df[s] > 0
-
-df_for_plot = self.multi_stocks_asset_df[filter_condition]
-```
-
-学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
-
-```
-df_for_plot = self.multi_stocks_asset_df[condition1 & condition2]
-```
-
-而对于单列多条件的选取，可以使用简便的方式:
-
-```
-movies[(movies.genre=='Crime') | (movies.genre=='Drama') | (movies.genre=='Action')]
-movies[movies.genre.isin(['Crime', 'Drama', 'Action'])]
-```
-
-*特别需要注意的是使用多个条件进行布尔索引的时候，每个条件都要用`()`括起来。*
-
-参考：
-- [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
-- [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
-- [TypeError: Cannot perform 'rand_' with a dtyped [float64] array and scalar of type [bool]](https://stackoverflow.com/questions/60654781/typeerror-cannot-perform-rand-with-a-dtyped-float64-array-and-scalar-of-ty)
-
-## 按某列的值选择数据
+## 按某列的值选择
 
 1）按值
 
@@ -186,9 +141,57 @@ df = df[df['code'].str.find('500') != -1]
 df = df[df['code'].isin([...])]
 ```
 
-如何附加多个条件？使用逻辑表达式即可。如`df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`。
+3）多个条件
 
-如果我们想选取所有列均匹配某种条件的所有行的数据，使用`.all(axis=1)`：
+如何附加多个条件？使用逻辑表达式即可。如：
+
+- `df = df[(df['code'].str.startswith('*ST')) & (df['code'].str.find('500') != -1])`。
+- `df[(df.genre == 'Crime') | (df.genre == 'Drama') | (df.genre == 'Action')]`
+- `df[df.genre.isin(['Crime', 'Drama', 'Action'])]`
+
+*特别需要注意的是使用多个条件进行布尔索引的时候，每个条件都要用`()`括起来。*
+
+
+参考：
+
+- [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
+- [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
+- [How to select cells greater than a value in a multi-index Pandas dataframe?](https://stackoverflow.com/questions/32731498/how-to-select-cells-greater-than-a-value-in-a-multi-index-pandas-dataframe)
+
+
+## 按多列的值选择
+
+比如如下数据，我要将“所有列内容都小于某个值”的那些行删除掉，改如何操作？
+
+```
+                               002352     600233
+报告日期
+货币资金(万元)               1613112.0   406144.0
+结算备付金(万元)                   0.0        0.0
+拆出资金(万元)                     0.0        0.0
+交易性金融资产(万元)               1444.0       79.0
+衍生金融资产(万元)                  0.0        0.0
+```
+
+学习了DataSchool的一个视频，知道通过条件选择的原理来自于构建一个bolean的Series，因此可以对这两列的内容进行求与操作来构建这样的series：
+
+```
+filter_condition = [True] * len(self.balance_df[0]['2018-12-31'])
+for i in range(len(self.args.stock)):
+    s = self.args.stock[i]
+    self.multi_stocks_asset_df[s] = self.balance_df[i]['2018-12-31']
+    filter_condition &= self.multi_stocks_asset_df[s] > 0
+
+df_for_plot = self.multi_stocks_asset_df[filter_condition]
+```
+
+学习了另外一个视频之后，才知道通过多列来进行选择需要使用`&`或者`|`将条件进行逻辑计算，即便如此，如要根据多列（事前未知）来进行选取依然需要使用如上代码实例里的方式。
+
+```
+df_for_plot = self.multi_stocks_asset_df[condition1 & condition2]
+```
+
+如果我们想选取所有列均匹配某种条件的数据，使用`.all(axis=1)`：
 
 ```
 In [9]: df
@@ -211,20 +214,19 @@ Out[11]:
 sales_data.reset_index(drop = True)
 ```
 
+
 参考：
-
 - [How do I filter rows of a pandas DataFrame by column value?](https://www.youtube.com/watch?v=2AFGPdNn4FM)
-- [How to filter Pandas Dataframe rows which contains any string from a list?](https://stackoverflow.com/questions/55941100/how-to-filter-pandas-dataframe-rows-which-contains-any-string-from-a-list)
-- [How to select cells greater than a value in a multi-index Pandas dataframe?](https://stackoverflow.com/questions/32731498/how-to-select-cells-greater-than-a-value-in-a-multi-index-pandas-dataframe)
+- [How do I apply multiple filter criteria to a pandas DataFrame?](https://www.youtube.com/watch?v=YPItfQ87qjM)
+- [TypeError: Cannot perform 'rand_' with a dtyped [float64] array and scalar of type [bool]](https://stackoverflow.com/questions/60654781/typeerror-cannot-perform-rand-with-a-dtyped-float64-array-and-scalar-of-ty)
 
 
-## 选取数据单元
+# 选取数据单元
 
 因为索引有标签索引和位置索引两种形式，所以在选取数据单元的时候存在可能的混用情况：
 
 - 行、列索引均为字符串，可以用`df.loc['row_label', 'col_label']`或者`df.loc['row_label']['col_label']`。或者`df.at['row_label', 'col_label']`
 - 行索引或列索引为位置索引时，可以用`df.iloc[0]['col']`/`df.iloc[0][1]`或者`df['col'].iloc[0]`。
-
 
 使用位置索引的时候比较少，因为如果要使用位置索引那么你还得一个一个去数，这在数据量大的时候是很难办的。
 
