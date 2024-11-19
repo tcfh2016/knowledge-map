@@ -58,6 +58,61 @@ px.scatter(cu_fc, x='seconds', y='unsentGtpPackets', color='ueIdCuE1Cp',
 参考：
 
 - [plotly.express: high-level interface for data visualization](https://plotly.com/python-api-reference/plotly.express.html)
+- [Plotly Python Open Source Graphing Library Basic Charts](https://plotly.com/python/basic-charts/)
+
+
+## 折线图
+
+```
+fig = px.line(df, x="year", y="lifeExp", color='country')
+fig.show()
+```
+
+
+## 柱状图
+
+
+1）基本的柱状图
+
+最基本的柱状图，传入对应的dataframe，然后指定两列作为x和y轴：
+
+```
+import plotly.express as px
+
+fig = px.bar(df, x='year', y='pop')
+fig.show()
+```
+
+与`df.plot.bar()`的区别：
+
+- `df.plot.bar()`不会对指定的数据列进行聚合处理，比如x轴对应列里面有重复元素，`df.plot.bar()`不会去重，但`px.bar()`会去重，然后y轴的列会堆叠展示。
+
+
+2）堆叠的柱状图
+
+如果有多列的数据，也就是想在二维的柱状图体现出另外第三维的数据，那么可以通过更多的参数，比如这里多用了`color`参数：
+
+```
+fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
+fig.show()
+```
+
+如果要将多列堆叠在一起，那么用参数`y`来指定多列（如果单列展示堆叠，可以通过`color`参数来指定）：
+
+```
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
+fig.show()
+```
+
+3）多柱形图
+
+使用`barmode = 'group'`来设定多柱状图。或者改由`px.histogram()`来绘制。
+
+参考：
+
+- [Bar Charts in Python](https://plotly.com/python/bar-charts/)
+- [Plotly Express Wide-Form Support in Python](https://plotly.com/python/wide-form/)
+- [Plotly Express Arguments in Python](https://plotly.com/python/px-arguments/)
 
 
 ## `go.Scatter`
@@ -116,8 +171,13 @@ fig.show()
 
 ```
 fig.update_layout(autosize=<VALUE>)
+fig = px.bar(df_bar, x='country', y='in', color='fruit', width=600, height=400)
 
 ```
+
+- `width=600, height=400`：设置大小
+- `labels={'pop':'population of Canada'`：修改标签，从默认的`pop`更改为`population of Canada`
+
 
 ## 图例
 
