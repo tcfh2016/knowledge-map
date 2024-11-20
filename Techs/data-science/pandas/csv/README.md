@@ -175,3 +175,19 @@ month_groups.min().reset_index().to_csv("000898_month_min.csv", sep=',', encodin
 ```
 data.to_csv('out.csv', columns = ['x1', 'x2', 'x3', 'x4'])
 ```
+
+# Q&A
+
+## `ParserError: Error tokenizing data`
+
+读取csv的时候碰到`ParserError: Error tokenizing data. C error: Expected 29 fields in line 2995, saw 57`，查了一下原因是其中有些异常行。
+
+可以使用`on_bad_lines='warn'`打印出在哪一行，或者使用`skip`跳过异常行：
+
+```
+data = pd.read_csv('file1.csv', on_bad_lines='skip')
+```
+
+参考：
+
+- [pandas.parser.CParserError: Error tokenizing data](https://stackoverflow.com/questions/18039057/pandas-parser-cparsererror-error-tokenizing-data)
