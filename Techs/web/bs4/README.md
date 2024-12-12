@@ -36,6 +36,21 @@ u'example.com'
 
 如果要将获取到的soup对象保存到文件里面，需要使用到[格式化输出](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id48)
 
+```
+print(soup.prettify())
+```
+
+## 解析器
+
+```
+BeautifulSoup(markup, "lxml")
+BeautifulSoup(markup, "xml")
+```
+
+参考：
+
+-[Installing a parser](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser)
+
 
 ## 常见问题
 

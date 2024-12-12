@@ -131,6 +131,18 @@ fig.add_trace(go.Scatter(x=random_x, y=random_y2,
 fig.show()
 ```
 
+参考：
+
+- [Line Plot with go.Scatter](https://plotly.com/python/graph-objects/)
+
+
+## treadline
+
+参考：
+
+- [Linear and Non-Linear Trendlines in Python](https://plotly.com/python/linear-fits/)
+- [Adding Trendline on Plotly Scatterplot](https://stackoverflow.com/questions/65135524/adding-trendline-on-plotly-scatterplot)
+
 ## subplots
 
 对于`make_subplots()`的使用：
@@ -154,7 +166,9 @@ fig.append_trace(go.Scatter(
     y=[100, 110, 120],
 ), row=2, col=1)
 
-fig.update_layout(height=600, width=600, title_text="Stacked Subplots", legend)
+fig.update_layout(height=600, width=600, title_text="Stacked Subplots")
+fig.update_xaxes(title_text="slot", row=2, col=1)
+
 fig.show()
 ```
 

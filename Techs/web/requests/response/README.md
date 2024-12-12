@@ -1,3 +1,5 @@
+# Connect
+
 ## 配置代理
 
 配置代理有两种方法：一、为任意请求提供proxies参数；二、通过环境变量设定HTTP_PROXY和HTTPS_PROXY配置代理。
@@ -65,3 +67,18 @@ res = requests.get(url, proxies=proxies, verify=False)
 
 - [4 Ways to fix SSL: CERTIFICATE_VERIFY_FAILED in Python](https://www.howtouselinux.com/post/ssl-certificate_verify_failed-in-python)
 - [Python Requests throwing SSLError](https://stackoverflow.com/questions/10667960/python-requests-throwing-sslerror)
+
+# Response
+
+## JSON 
+
+```
+res = requests.get(url, verify=False)
+
+if res.status_code == 200:
+    df = pd.DataFrame(res.json()['artifacts'])
+```
+
+## 参考
+
+- [JSON Response Content](https://requests.readthedocs.io/en/latest/user/quickstart/#json-response-content)

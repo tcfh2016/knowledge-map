@@ -7,13 +7,13 @@ CSV全称为[Comma-separated values](https://en.wikipedia.org/wiki/Comma-separat
 
 read_csv()函数的相关参数：
 
-- index_col，指定要读取csv中的哪一列作为行标签
-- header，指定要读取csv中的哪一行作为列标签
-- sep，指定分隔符，默认以','去分割各个字段，其他通过`sep = "|"`指定
-- names，指定各列名称
-- usecols，可以传入“列名称列表”或者“列索引列表”来指定导入对应的列。
-- dtype，导入时指定列的类型
-- dayfirst
+- `index_col`，指定要读取csv中的哪一列作为行标签
+- `header`，指定要读取csv中的哪一行作为列标签
+- `sep`，指定分隔符，默认以','去分割各个字段，其他通过`sep = "|"`指定
+- `names`，指定各列名称
+- `usecols`，可以传入“列名称列表”或者“列索引列表”来指定导入对应的列。
+- `dtype`，导入时指定列的类型
+- `dayfirst`
 - `encoding='gbk'`，设置编码格式为'gbk'。
 
 
