@@ -48,3 +48,11 @@ Python中自带的图形库。
 ## AudioRecorder
 
 使用`speech_recognition`来录音。
+
+## DearBagPlayer
+
+一个基于`Dear PyGui`开发的`rosbag`播放器。`rosbag`是一种机器人操作系统中存储机器人行为的数据格式。
+
+参考：
+
+- [DearBagPlayer](https://github.com/Magic-wei/DearBagPlayer)

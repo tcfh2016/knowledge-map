@@ -7,3 +7,14 @@
 1. [Qt versus Wx: How do two of the most popular Python frameworks compare?](https://opensource.com/article/17/4/pyqt-versus-wxpython)
 2. [Which Python GUI library should you use?](https://www.pythonguis.com/faq/which-python-gui-library/)
 3. [Building Your Own Python Data Visualization Desktop App](https://blog.devgenius.io/building-your-own-python-data-visualization-desktop-app-f82dd1f9b2ed)
+
+## GUI框架的选择
+
+问了下ChatGPT:
+
+- For Beginners: Start with Tkinter for simplicity.
+- For Professional Applications: Use PyQt or wxPython.
+- For Mobile and Cross-Platform Apps: Go with Kivy.
+- For Data Science Dashboards: Choose Streamlit.
+- For High-Performance Visualizations: Try Dear PyGui.
+
