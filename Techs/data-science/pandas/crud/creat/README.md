@@ -86,6 +86,12 @@ salary_list = data["Salary"].tolist()
 这个问题在[Constructing pandas DataFrame from values in variables gives “ValueError: If using all scalar values, you must pass an index”](https://stackoverflow.com/questions/17839973/constructing-pandas-dataframe-from-values-in-variables-gives-valueerror-if-usi)里面有讨论，而解决方法是可以先创建Series，再转换为dataframe。
 
 
+## 创建时指定类型
+
+```
+df = pd.DataFrame(data, dtype='float')
+```
+
 ## 增加行列
 
 在某个DataFrame里面添加一列必须使用`[]`操作符，`此时应保证Series和DataFrame具有相同的index`
