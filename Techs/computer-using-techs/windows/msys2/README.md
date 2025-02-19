@@ -12,7 +12,16 @@ msys2的操作共下面几步：
 
 这一步的时候碰到了代理问题，仿照[How to easily set a proxy after installing MSYS2 on Windows 7 ?](https://sourceforge.net/p/msys2/discussion/general/thread/96099494/)里面的方式到"C:\msys64\etc"里面将代理的设置添加到了profile文件里面，然后执行上面命令可以正常更新。
 
+```
+# Proxy Setting
+export HTTP_PROXY="IpAddress:Port" # Like: 127.0.0.1:1477
+export HTTPS_PROXY=$HTTP_PROXY
+export http_proxy=$HTTP_PROXY
+export https_proxy=$HTTP_PROXY
+```
+
 ![](run-pacman-syu.png)
+
 
 3. 执行`pacman -Su`更新其他软件包数据库
 
@@ -26,3 +35,4 @@ msys2的操作共下面几步：
 - [Installing the latest version of mingw-w64 on Windows](https://stackoverflow.com/questions/61497394/installing-the-latest-version-of-mingw-w64-on-windows)
 - [How to install MinGW-w64 and MSYS2?](https://stackoverflow.com/questions/30069830/how-to-install-mingw-w64-and-msys2)
 - [MSYS2](https://www.msys2.org/)
+- [MSYS2 - How to set proxy settings in msys2](https://gist.github.com/vheidari/cf7be91dcc522c388488552a59e22049)

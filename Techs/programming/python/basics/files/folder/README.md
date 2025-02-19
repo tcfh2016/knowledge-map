@@ -47,13 +47,6 @@ if os.path.isdir(dir_name):
 - [How to check if folder is empty with Python?](https://stackoverflow.com/questions/49284015/how-to-check-if-folder-is-empty-with-python)
 
 
-## `os.mkdir()`和`os.makedirs()`的区别
-
-前者仅创建单层目录，后者可以根据路径创建多层目录。
-
-- [What is different between makedirs and mkdir of os?](https://stackoverflow.com/questions/13819496/what-is-different-between-makedirs-and-mkdir-of-os)
-
-
 ## 为什么需要`os.path.join()` ？
 
 这是因为在不同操作系统下对应的文件路径是不同的，比如Linux下面是`/home/me/work`这种形式，但是在Windows下面则是`C:\Users\me\work`这种形式。
@@ -63,15 +56,21 @@ if os.path.isdir(dir_name):
 
 ## 创建多级目录
 
+`os.mkdir()`仅创建单层目录，`os.makedirs()`可以根据路径创建多层目录。
+
 ```
 import os
 path = '/home/dail/first/second/third'
 os.makedirs(path, exist_ok=True)
 ```
 
+`exist_ok`参数默认为`False`，如果文件目录已经存在那么会报错，抛出`OSError`。
+
 参考：
 
 - [How can I create directories recursively? ](https://stackoverflow.com/questions/6004073/how-can-i-create-directories-recursively)
+- [What is different between makedirs and mkdir of os?](https://stackoverflow.com/questions/13819496/what-is-different-between-makedirs-and-mkdir-of-os)
+
 
 
 ## 删除操作
