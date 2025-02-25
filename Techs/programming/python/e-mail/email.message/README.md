@@ -1,6 +1,6 @@
 [email](https://docs.python.org/3/library/email.html)
 
-## email.message
+# email.message
 
 一封邮件包含头部和载荷两部分（均可能有多个），对于头部的定义，主要描述在[RFC 5322]()和[RFC 6532]()里面。对于载荷，可能是文本、二进制文件或者结构化的嵌套结构（包括多个Header和多个载荷，即multipart类型）。
 
@@ -31,7 +31,9 @@ email.message.EmailMessage
 - [email.contentmanager: Managing MIME Content](https://docs.python.org/3/library/email.contentmanager.html)
 
 
-## 发送文本
+# 文本
+
+## text/plain
 
 ```
 from email.message import EmailMessage
@@ -64,7 +66,7 @@ email.contentmanager.set_content(msg, <'EmailMessage'>, cte=None, disposition=No
 
 - [How to send mail with To, CC and BCC?](https://stackoverflow.com/questions/1546367/how-to-send-mail-with-to-cc-and-bcc)
 
-## 发送html
+## html
 
 `email.message`这个模块里面的核心类是[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)。那这个`EmailMessage`又是什么呢？其实这个对象提供了一些函数可以直接添加多种类型的内容，而不用像老的API那样组装邮件内容时需要先创建`MIMEText`, `MIMEImage`或者其他的对象。比如下面是一个发送邮件正文为纯文本的例子：
 
@@ -106,13 +108,14 @@ mail_server.send_message(msg)
 
 邮件格式会从`text/plain`变更为`multipart/alternative`。
 
-## 将多个html写入邮件
+## 多个html
 
 如果想将多个html文件写入邮件正文，调用`msg.set_content(f.read(), 'html')`仅仅会写入最后一个，也就是之前的被后面的覆盖。
 
 解决方案就是提前将多个html文件的代码合并到同一个html文件。
 
-## 发送图片
+
+# 图片
 
 我们提到新版本的Python（3.6）引入了[EmailMessage](https://docs.python.org/3/library/email.message.html#email.message.EmailMessage)，以便通过统一接口来操作各种MIME type类似，前面我们仅仅提到了发送文本的做法，那么发送图片如何处理呢？
 
@@ -151,30 +154,9 @@ msg.add_alternative(html_content, subtype='html')
 - [Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies](https://tools.ietf.org/html/rfc2045.html#page-10)
 - [Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types](https://tools.ietf.org/html/rfc2046#page-17)
 
-## 发送压缩包附件
 
-使用[email: Examples](https://docs.python.org/3.9/library/email.examples.html#id2)中的一个例子：
 
-```
-import mimetypes
-from email.message import EmailMessage
-
-for filename in os.listdir(directory):
-        path = os.path.join(directory, filename)
-        if not os.path.isfile(path):
-            continue        
-        ctype, encoding = mimetypes.guess_type(path)
-        if ctype is None or encoding is not None:            
-            ctype = 'application/octet-stream'
-        maintype, subtype = ctype.split('/', 1)
-        with open(path, 'rb') as fp:
-            msg.add_attachment(fp.read(),
-                               maintype=maintype,
-                               subtype=subtype,
-                               filename=filename)
-```
-
-## 发送图片附件
+## 图片附件
 
 继续上面的例子，如果我们使用`add_attachment`来添加附件时，那么邮件的格式会从`text/plain`变更为`multipart/mixed`。
 
@@ -212,7 +194,31 @@ with smtplib.SMTP('localhost') as s:
 转换之后的结构可以参考[Convert a Message to Multipart/Mixed](https://coderzcolumn.com/tutorials/python/email-how-to-represent-an-email-message-in-python#Example-10:-Convert-a-Message-to-Multipart/Mixed)，简单来说转换之前只有1个EmailMessage，转换之后就是一个嵌套层次：1个EmailMessage里面再包装1个EmailMessage。
 
 
-## Legacy API
+# 压缩包附件
+
+使用[email: Examples](https://docs.python.org/3.9/library/email.examples.html#id2)中的一个例子：
+
+```
+import mimetypes
+from email.message import EmailMessage
+
+for filename in os.listdir(directory):
+        path = os.path.join(directory, filename)
+        if not os.path.isfile(path):
+            continue        
+        ctype, encoding = mimetypes.guess_type(path)
+        if ctype is None or encoding is not None:            
+            ctype = 'application/octet-stream'
+        maintype, subtype = ctype.split('/', 1)
+        with open(path, 'rb') as fp:
+            msg.add_attachment(fp.read(),
+                               maintype=maintype,
+                               subtype=subtype,
+                               filename=filename)
+```
+
+
+# Legacy API
 
 - [email.mime](https://docs.python.org/3/library/email.mime.html?highlight=mimetext#email.mime.text.MIMEText)
 
