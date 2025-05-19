@@ -211,6 +211,11 @@ git show SHA-1 -- path
 git cherry-pick SHA-OLD..SHA-NEW --no-commit
 ```
 
+## 将其他修改里面的个别文件复制过来
+
+```
+git checkout source-branch -- path/to/file.txt
+```
 
 ## 查阅修改记录 / git blame
 
