@@ -36,8 +36,7 @@ git reset SHA-0
 git reset --hard SHA-0
 ```
 
-假设本地修改在`git commit`之后的提交记录为SHA-1，它前一个提交为SHA-0，那么使用前一个命
-令可以将SHA-1的修改回退到`unstaged`状态。后一个命令会直接删除SHA-1的修改。
+假设本地修改在`git commit`之后的提交记录为SHA-1，它前一个提交为SHA-0，那么使用前一个命令可以将SHA-1的修改回退到`unstaged`状态。后一个命令会直接删除SHA-1的修改。
 
 如果要更新具体文件：
 
@@ -263,3 +262,8 @@ git tag -a v1.4 -m "my version 1.4"
 参考：
 
 - [2.6 Git Basics - Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging)
+
+
+## git clean
+
+移除还没有被`git add`的文件或者目录：`git clean -fd path/to/dir/`。其中的`-f`代表强制，`-d`代表删除目录。

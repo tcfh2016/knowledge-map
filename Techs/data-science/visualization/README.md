@@ -2,7 +2,7 @@
 
 数据的可视化能将复杂的统计数字变得简单化、通俗化、形象化，便于理解和比较。
 
-Python中可用的图形库有多个，比如`Matplotlib`, `Seaborn`, `Plotly`, `Pyecharts`，其中的`Pyecharts`用来支持Baddu开发的JS图形库`Echart`。
+Python中可用的图形库有多个，比如`Matplotlib`, `Seaborn`, `Plotly`, `Pyecharts`，其中的`Pyecharts`用来支持Baidu开发的JS图形库`Echart`。
 
 - `Matplotlib`产生的图形仅仅是图片，无法进行交互。但`Pyecharts`更美观，且支持交互。
 - `Seaborn`是对`Matplotlib`的封装，有更容易使用的API来画图，但图形本身还是比较原始。
