@@ -139,6 +139,7 @@ pandas里面如果要使用字符串来过滤特定的行，那么必须要使�
 df = df[df['code'].str.startswith('*ST')]
 df = df[df['code'].str.find('500') != -1]
 df = df[df['code'].isin([...])]
+df = df[~df['code'].isin([...])]
 ```
 
 3）多个条件
